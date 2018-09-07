@@ -1,0 +1,3 @@
+<view>
+  <button bindtap='LVOne'>新手学渣</button>
+</view>

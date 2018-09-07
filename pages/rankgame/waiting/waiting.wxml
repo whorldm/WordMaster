@@ -1,0 +1,4 @@
+<view>
+  <view style='font-size: 30px;text-align: center'>{{second}}</view>
+  <button style='margin: 100rpx auto' bindtap='startGame'>{{text}}</button>
+</view>

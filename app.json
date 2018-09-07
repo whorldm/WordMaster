@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/rankgame/startgame/startgame",
+    "pages/index/index",
+    "pages/rankgame/rankhome/rankhome",
+    "pages/rankgame/waiting/waiting"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  }
+}

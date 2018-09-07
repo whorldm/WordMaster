@@ -46,7 +46,8 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
   //#endregion 随机填充算法
 
   //#region 百度语音合成
-  var IMEI, filePath, tokenFromBaidu;
+  var IMEI, tokenFromBaidu;
+  var filePath;
 
   //初始化百度语音合成模块
   function initBaiduVoiceModule(){
@@ -152,4 +153,9 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
     }
   }
   
-  export {randomFill, initBaiduVoiceModule, playVoiceByInputText, testAPI}
+  module.exports = {
+    randomFill, 
+    initBaiduVoiceModule, 
+    playVoiceByInputText, 
+    testAPI
+  }

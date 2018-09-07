@@ -1,4 +1,4 @@
-import {randomFill, initBaiduVoiceModule, playVoiceByInputText, testAPI} from "./utils/assistant"
+var assistant = require("./utils/assistant");
 //app.js
 App({
   onLaunch: function () {
@@ -84,7 +84,7 @@ App({
       }
     })
 
-    testAPI();
+    assistant.testAPI();
   },
   globalData: {
     userInfo: null,

@@ -127,9 +127,9 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
     setTimeout(playVoiceByInputText, 1000, ["小鸡 chicken run"]); //根据文本播放合成后的声音 
 
     //测试随机填充算法
-    var arrayToFill = new Array(100); //存放单词数据的二维数组
+    var arrayToFill = new Array(10); //存放单词数据的二维数组
     for(var i = 0, l1 = arrayToFill.length; i <= l1 - 1; ++i){
-      arrayToFill[i] = new Array(100);
+      arrayToFill[i] = new Array(10);
       for(var j = 0, l2 = arrayToFill[i].length; j <= l2 - 1; ++j){
         arrayToFill[i][j] = {};
       }
@@ -145,6 +145,7 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
 
 
     randomFill(arrayToFill, row, column, allWords); //随机将单词填入二维数组，并记录每个单词对应翻译的数组索引
+    console.log(arrayToFill);
     
     for(var i = 0, l1 = row; i <= l1 - 1; ++i){ //打印测试
       for(var j = 0, l2 = column; j <= l2 - 1; ++j){

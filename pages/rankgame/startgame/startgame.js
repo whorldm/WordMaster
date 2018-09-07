@@ -1,6 +1,6 @@
 const app = getApp();
 
-var mockWordList = [{ 'bed': '床' }, { 'room': '房间' }, { 'moon': '月亮' }, { 'sun': '太阳' }, { 'star': '星星' }, { 'phone': '手机' }];
+// var mockWordList = [{ 'bed': '床' }, { 'room': '房间' }, { 'moon': '月亮' }, { 'sun': '太阳' }, { 'star': '星星' }, { 'phone': '手机' }];
 var mockWordGrid = [
   [{ key: 'A', value: '床' }, { key: 'B', value: 'moon' }, { key: 'C', value: 'sun' }],
   [{ key: 'D', value: '星星' }, { key: 'E', value: 'room' }, { key: 'F', value: 'phone' }],

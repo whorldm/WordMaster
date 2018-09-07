@@ -53,8 +53,9 @@ Page({
         arrayToFill[i][j] = {};
       }
     }
+    // console.log(allWords);
     assistant.randomFill(arrayToFill, this.data.row, this.data.col, allWords);
-    console.log(arrayToFill)
+    // console.log(arrayToFill)
     this.setData({
       wordGrid: arrayToFill
     })

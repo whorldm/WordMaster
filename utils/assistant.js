@@ -3,6 +3,10 @@ var maxLengthOfHandleArray = 100;
 var handleArray = null;
 
 function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
+  console.log(arrayToFill)
+  console.log(arrayRow)
+  console.log(arrayColumn);
+  console.log(allWords)
     var allWordsCount = arrayRow * arrayColumn;
     if(handleArray == null){
       handleArray = new Array(maxLengthOfHandleArray);
@@ -33,10 +37,15 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
       }
       else{
         elementToFill.wordData = allWords[Math.floor(counterForAllWords / 2)].right;
-        var leftWord = arrayToFill[leftWordPosition.row][leftWordPosition.column].wordData;
-        var rightWord = elementToFill.wordData;
-        leftWord.pairIndex = {row : whichPosition.row, column : whichPosition.column};
-        rightWord.pairIndex = {row : leftWordPosition.row, column : leftWordPosition.column};
+        // var leftWord = arrayToFill[leftWordPosition.row][leftWordPosition.column].wordData;
+        // var rightWord = elementToFill.wordData;
+        // leftWord.pairIndex = {row : whichPosition.row, column : whichPosition.column};
+        // rightWord.pairIndex = {row : leftWordPosition.row, column : leftWordPosition.column};
+        var leftElement = arrayToFill[leftWordPosition.row][leftWordPosition.column];
+        var rightElement = elementToFill;
+        leftElement.pairIndex = { row: whichPosition.row, column: whichPosition.column };
+        rightElement.pairIndex = { row: leftWordPosition.row, column: leftWordPosition.column };
+
       }
       handleArray[randomIndex] = handleArray[maxRandomChooseIndex];
       maxRandomChooseIndex--;

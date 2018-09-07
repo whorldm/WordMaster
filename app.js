@@ -1,3 +1,4 @@
+import {randomFill, initBaiduVoiceModule, playVoiceByInputText, testAPI} from "./utils/assistant"
 //app.js
 App({
   onLaunch: function () {
@@ -82,9 +83,11 @@ App({
         }
       }
     })
+
+    testAPI();
   },
   globalData: {
     userInfo: null,
     RemoteAddress: "https://www.luoyunyu.com",
-  }
+  },
 })

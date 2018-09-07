@@ -1,18 +1,11 @@
 //#region 随机填充算法
-var maxLengthOfHandleArray = 100;
 var handleArray = null;
 
 function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
-  console.log(arrayToFill)
-  console.log(arrayRow)
-  console.log(arrayColumn);
-  console.log(allWords)
     var allWordsCount = arrayRow * arrayColumn;
-    if(handleArray == null){
-      handleArray = new Array(maxLengthOfHandleArray);
-      for(var i = 0, l = handleArray.length; i <= l - 1; ++i){
-        handleArray[i] = {row : -1, column : -1};
-      }
+    handleArray = new Array(allWordsCount);
+    for(var i = 0, l = handleArray.length; i <= l - 1; ++i){
+      handleArray[i] = {row : -1, column : -1};
     }
 
     var counterForInitHandleArray = 0;
@@ -37,10 +30,6 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
       }
       else{
         elementToFill.wordData = allWords[Math.floor(counterForAllWords / 2)].right;
-        // var leftWord = arrayToFill[leftWordPosition.row][leftWordPosition.column].wordData;
-        // var rightWord = elementToFill.wordData;
-        // leftWord.pairIndex = {row : whichPosition.row, column : whichPosition.column};
-        // rightWord.pairIndex = {row : leftWordPosition.row, column : leftWordPosition.column};
         var leftElement = arrayToFill[leftWordPosition.row][leftWordPosition.column];
         var rightElement = elementToFill;
         leftElement.pairIndex = { row: whichPosition.row, column: whichPosition.column };

@@ -1,5 +1,5 @@
 var assistant = require("./utils/assistant");
-//app.js
+
 App({
   onLaunch: function () {
     // 获取设备的屏幕宽高
@@ -84,7 +84,8 @@ App({
       }
     })
 
-    assistant.testAPI();
+    // 百度语音模块的初始化
+    assistant.initBaiduVoiceModule();
   },
   globalData: {
     userInfo: null,

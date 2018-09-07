@@ -1,8 +1,9 @@
+<view style='margin: 10rpx auto;text-align: center;'>{{point}}</view>
 <view bindtap="ClickGrid" class="keyWord">
   <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
     <view class="flex-row line">
       <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
-        <text class="flex-column" data-key="{{gridItem.key}}" data-posx="{{index}}" data-posy='{{idx}}'>{{gridItem.value}}</text>
+        <text class="flex-column" data-key="{{gridItem.pairIndex}}" data-posx="{{index}}" data-posy='{{idx}}' data-value="{{gridItem.wordData.value}}">{{gridItem.wordData.value}}</text>
       </block>
     </view>
   </block>

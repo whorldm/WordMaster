@@ -321,12 +321,12 @@ Page({
   onUnload: function () {
     innerAudioContextBg.stop();
     if(gameTimer) {
+      wx.showModal({
+        content: '您已经放弃了战斗!',
+        showCancel: false,
+      })
       clearTimeout(gameTimer);
     }
-    wx.showModal({
-      content: '您已经放弃了战斗!',
-      showCancel: false,
-    })
   }
 })
 

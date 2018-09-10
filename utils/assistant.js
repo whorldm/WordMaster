@@ -97,7 +97,7 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
     var ctp = 1;
     var lan = "zh";    // zh表示中文
     var spd = 5;  // 表示朗读的语速，9代表最快，1是最慢（撩妹请用2，绕口令请用9）
-    var url = "https://tsn.baidu.com/text2audio?tex=" + tex + "&lan=" + lan + "&cuid=" + cuid + "&ctp=" + ctp + "&tok=" + tok + "&spd=" + spd
+    var url = "https://tsn.baidu.com/text2audio?tex=" + tex + "&lan=" + lan + "&cuid=" + cuid + "&ctp=" + ctp + "&tok=" + tok + "&per=" + 4 + "&spd=" + spd
 
     wx.downloadFile({
       url: url,

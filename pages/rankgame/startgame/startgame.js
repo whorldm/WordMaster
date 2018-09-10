@@ -180,7 +180,6 @@ Page({
       let obj = Utils.rebuildArr(this.data.strQuene, word);
       let tmpWord = 'sucessWord['+this.data.sucessWord.length+']';
 
-      
       this.setData(initLocalData({
           showWordCouple: Utils.dealWordCouple(this.data.strQuene, word),
           combox: this.data.combox + 1,

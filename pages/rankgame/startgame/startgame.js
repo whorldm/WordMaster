@@ -1,4 +1,6 @@
 var assistant = require("../../../utils/assistant.js");
+var pagesManager = require("../../../utils/pagesManager.js");
+var robot = require("../../../utils/robot.js");
 
 var allWords = new Array(3);  //存放单词对的容器
 allWords[0] = { left: { value: "apple" }, right: { value: "苹果" } };
@@ -31,7 +33,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    pagesManager.startgame = this;
   },
 
   /**
@@ -40,6 +42,7 @@ Page({
   onShow: function () {
     this.wordRandom();
     setTimer();
+    robot.startToPlayGame(this.data.wordGrid, this.data.row, this.data.col);
   },
 
   /**
@@ -72,6 +75,10 @@ Page({
     let matchWord = e.target.dataset.key;
     let word = e.target.dataset.value;
     
+    this.onChooseWord(X, Y, matchWord, word);
+  },
+
+  onChooseWord : function(X, Y, matchWord, word){
     // 点击了已消除的区域
     if(matchWord === undefined || matchWord === '' || matchWord === null) {
       wx.showToast({
@@ -124,6 +131,7 @@ Page({
       setTimer();  // 重新计时操作事件
       
       if (time === this.data.row * this.data.col / 2) {
+        robot.stopToPlayGame();
         wx.showToast({
           icon: 'none',
           title: '全部消除成功，稍后重开一局',
@@ -132,6 +140,7 @@ Page({
           lastTimes: 0,
           point: 0,
         }), this.wordRandom());
+        robot.startToPlayGame(this.data.wordGrid, this.data.row, this.data.col);
       }
     } else {
       wx.showToast({

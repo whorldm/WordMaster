@@ -7,7 +7,8 @@ Page({
    */
   data: {
     userInfo: {},
-    segmentList: []
+    myLevel: {},  // 我目前的段位信息
+    segmentList: []  // 所有的段位list
   },
 
   /**
@@ -28,6 +29,7 @@ Page({
     request.getData("SEGMENT_LIST",{userId: app.globalData.userId})
     .then(res => {
       this.setData({
+        myLevel: res.list[res.list.length - 1],
         segmentList: res.list
       })
     }).catch(error => {
@@ -38,7 +40,7 @@ Page({
   // 跳转到等待匹配页面
   waitMatch: function () {
     wx.navigateTo({
-      url: '/pages/rankgame/waiting/waiting',
+      url: '/pages/rankgame/waiting/waiting?level='+this.data.myLevel.name+'&star='+this.data.myLevel.star,
     })
   },
   

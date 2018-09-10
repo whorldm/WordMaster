@@ -1,13 +1,17 @@
 <!--index.wxml-->
-<view class="container">
-  <view class='menu'>
-    <button class="line rank" open-type="getUserInfo" bindgetuserinfo="getUserInfo">开始消单词</button>
-    <view class='line change'>
-      <view class="left">
-        <text>好友对战</text>
-        <text>排行</text>
-      </view>
-      <view class="right">挑战擂主</view>
+<!-- <view class='menu'>
+  <button class="line rank" open-type="getUserInfo" bindgetuserinfo="getUserInfo">开始消单词</button>
+  <view class='line change'>
+    <view class="left">
+      <text>好友对战</text>
+      <text>排行</text>
     </view>
+    <view class="right">挑战擂主</view>
   </view>
+</view> -->
+<view class='menu'>
+  <view class="game_start"> 
+    开始消单词
+  </view>
+  <button class="game_start" open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
 </view>

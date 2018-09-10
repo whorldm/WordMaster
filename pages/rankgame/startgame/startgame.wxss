@@ -86,7 +86,7 @@ Page{
   margin: 0 auto;
   text-align: center;
 }
-.showword .combox {
+/* .showword .combox {
   width: 30%;
   height: 80rpx;
   color: #9278ED;
@@ -96,9 +96,9 @@ Page{
   top: 20%;
   left: 0;
   animation: comboxShake 1s ease-in normal forwards;
-}
+} */
 .showword .enAndch{
-  width: 40%;
+  width: 60%;
   height: 80rpx;
   color: #F4C05F;
   font-size: 38rpx;
@@ -108,16 +108,15 @@ Page{
   left: 0;
   right: 0;
   margin: 0 auto;
-  display: flex;
+  text-align: center;
 }
 .shakeText {
   animation: shakeText 0.8s ease-in normal forwards;
 }
 .showword .enAndch text {
-  flex: 1;
-  text-align: center;
-  display: block;
-  margin: 0 auto;
+  width: 30rpx;
+  height: 30rpx;
+  display: inline-block;
 }
 
 /*单词操作区域样式*/

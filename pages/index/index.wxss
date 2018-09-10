@@ -1,8 +1,29 @@
 /**index.wxss**/
+Page,
 .menu {
-  margin-top: 50px;
+  height: 100%;
   width: 100%;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/bg.png');
 }
+.game_start {
+  width: 500rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  color: #ffffff;
+  font-size: 40rpx;
+  text-align: center;
+}
+.menu button {
+  opacity: 0;
+  z-index: 2;
+}
+/*
 .line {
   width: 85%;
   position: relative;
@@ -54,4 +75,4 @@
   bottom: 0;
   margin: 0 auto;
   opacity: 0;
-}
+} */

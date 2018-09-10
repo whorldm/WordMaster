@@ -115,7 +115,7 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
     innerAudioContext.autoplay = true
     innerAudioContext.src = filePath
     innerAudioContext.onPlay(() => {
-      console.log('开始播放')
+      // console.log('开始播放')
     })
     innerAudioContext.onError((res) => {
       console.error(res.errMsg)

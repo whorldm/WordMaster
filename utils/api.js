@@ -11,6 +11,10 @@ const config = {
     interFace: '/user/rank',
     method: 'GET',
   },
+  'PROMPT': {
+    interFace: '/user/prompt',
+    method: 'POST',
+  },
   'GAME': {
     interFace: '/game/join',
     method: 'POST',

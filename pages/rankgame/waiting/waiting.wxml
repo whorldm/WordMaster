@@ -6,9 +6,17 @@
     <view class='match_left'>
       <image class='user_logo' src='{{userInfo.avatarUrl}}'></image>
       <text>{{userInfo.nickName}}</text>
-      <view class='grade'>
+      <!-- 从段位页面进入 -->
+      <!-- <view class='grade'>
         {{userInfo.level}}
         <block wx:for="{{userInfo.star}}" wx:key="index">
+          <image class='user_star' src='../../../img/star.png'></image>
+        </block>
+      </view> -->
+      <!-- 直接从首页进入 -->
+      <view class='grade'>
+        {{myLevel.name}}
+        <block wx:for="{{myLevel.star}}" wx:key="index">
           <image class='user_star' src='../../../img/star.png'></image>
         </block>
       </view>
@@ -26,11 +34,11 @@
         </view>
       </view>
       <view class='float_in' wx:if='{{!isLoading}}'>
-        <image class='user_logo' src='{{userInfo.avatarUrl}}'></image>
-        <text>{{userInfo.nickName}}</text>
+        <image class='user_logo' src='{{matchPerson.avatarUrl}}'></image>
+        <text>{{matchPerson.nickName}}</text>
         <view class='grade'>
-          {{userInfo.level}}
-          <block wx:for="{{userInfo.star}}" wx:key="index">
+          {{matchPerson.level}}
+          <block wx:for="{{matchPerson.star}}" wx:key="index">
             <image class='user_star' src='../../../img/star.png'></image>
           </block>
         </view>

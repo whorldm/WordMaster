@@ -1,5 +1,6 @@
 const app = getApp();
 var request = require("../../../utils/request.js");
+var utils = require("../../../utils/util.js");
 var countTimer = null; // 设置 定时器 初始为null
 
 Page({
@@ -13,6 +14,8 @@ Page({
       level: '无敌学神',
       star: 3
     },  
+    myLevel: {},
+    matchPerson: {},
     isLoading: true,
     progress_txt: '正在匹配...',
     count: 5, // 设置 计数器 初始为0
@@ -21,27 +24,45 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(app);
+  // onLoad: function (options) {
+  //   console.log(options);
+  //   let waitTime = utils.RandomNumBoth(1,5);
+  //   if (app.globalData.userInfo) {
+  //     this.setData({
+  //       userInfo: {
+  //         avatarUrl: app.globalData.userInfo.avatarUrl,
+  //         nickName: app.globalData.userInfo.nickName,
+  //         level: options.level,
+  //         star: options.star
+  //       }
+  //     })
+  //   }
+  // },
+
+  // 直接从首页进入，不经过段位页
+  onLoad: function () {
+    let waitTime = utils.RandomNumBoth(1,5);
     if (app.globalData.userInfo) {
       this.setData({
-        userInfo: app.globalData.userInfo,
+        count: waitTime,
+        userInfo: app.globalData.userInfo
       })
     } else {
       this.setData({
+        count: waitTime,
         userInfo: getCurrentPages()[0].data.userInfo
       })
     }
-    // request.getData("USER",{userId: app.globalData.userId})
-    // .then(res => {
-    //   console.log(res);
-    //   this.setData({
-    //     userInfo:{
-    //     }
-    //   })
-    // }).catch(error => {
-    //   console.error("获取用户信息失败");
-    // })
+    request.getData("SEGMENT_LIST",{userId: app.globalData.userId })
+    .then(res => {
+      this.setData({
+        matchPerson: utils.matchPerson(res.list.length - 1),
+        myLevel: res.list[res.list.length - 1],
+      })
+    })
+    .catch(err => {
+      console.error(err);
+    })
   },
 
   /**
@@ -73,7 +94,7 @@ Page({
   delayJump: function () {
     setTimeout(() => {
       wx.redirectTo({
-        url: '/pages/rankgame/startgame/startgame',
+        url: '/pages/rankgame/startgame/startgame?matchPerson='+this.data.matchPerson.avatarUrl,
       })
     },800)
   },
@@ -85,14 +106,12 @@ Page({
 
   // 监听页面隐藏 清除定时器
   onHide: function () {
-    console.log(111)
     if(countTimer) {
       clearInterval(countTimer);
     }
   },
 
   onUnload: function () {
-    console.log(222)
     if(countTimer) {
       clearInterval(countTimer);
     }

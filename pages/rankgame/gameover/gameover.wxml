@@ -1,53 +1,56 @@
 <view class='resultBox'>
   <view class='content'>
     <view class='header'>
-      <view class='user'>
-        <image src='{{mySelf.logo}}'></image>
-        <text>{{mySelf.score}}</text>
-      </view>
-      <view class='winlogo'>
-        <text>WIN</text>
+      <view wx:if="{{isWin===true}}" class='winlogo'>
+        <text>胜利</text>
         <view class='coin'>
           <image src='../../../img/coin.png'></image> +100
         </view>
       </view>
-      <view class='user'>
-        <image src='{{oppnent.logo}}'></image>
-        <text>{{oppnent.score}}</text>
+      <view wx:if="{{isWin===false}}" class='loselogo'>
+        <text>失败</text>
+      </view>
+    </view>
+    <view class="pkResult">
+      <view class="flex-row">
+        <view class="flex-col"></view>
+        <view class="flex-col">正确</view>
+        <view class="flex-col">错误</view>
+        <view class="flex-col">积分</view>
+      </view>
+      <view class="flex-row">
+        <view class="flex-col"><image class="userimg" src="{{mySelf.avatarUrl}}"></image></view>
+        <view class="flex-col">{{mySelf.rightNum}}</view>
+        <view class="flex-col">{{mySelf.errorNum}}</view>
+        <view class="flex-col">{{mySelf.score}}</view>
+      </view>
+      <view class="flex-row">
+        <view class="flex-col"><image class="userimg" src="{{oppnent.avatarUrl}}"></image></view>
+        <view class="flex-col">{{oppnent.rightNum}}</view>
+        <view class="flex-col">{{oppnent.errorNum}}</view>
+        <view class="flex-col">{{oppnent.score}}</view>
       </view>
     </view>
 
-    <scroll-view scroll-y style='width:88%;height:50%;padding:40rpx 40rpx 30rpx;margin:0 auto;'>
-      <block wx:for="{{wordList}}" wx:for-item="item" wx:key="index">
-        <view class="word_item">
-          <view class='word_text'>
-            <text>{{item.wordC}}</text>
-            <text>{{item.wordE}}</text>
-          </view>
-          <view wx:if="{{item.flag}}" class='word_right'> OK </view> 
-          <view wx:else class='word_error'> X </view> 
-        </view>
-      </block>
-    </scroll-view>
-
     <view class='footer'>
-      <view class='footerItem' bindtap='playAgin'>
-        <view class='circle'>再虐他一次</view>
+      <view class='footerItem' bindtap='goBack'>
+        返回首页
       </view>
       <view class='footerItem' bindtap='changePerson'>
-        <view class='circle'>换个对手</view>
+        <view wx:if="{{isWin===true}}">再虐他一次</view>
+         <view wx:if="{{isWin===false}}">再战一次</view>
       </view>
     </view>
   </view>
-  <view class='tips'>今日{{mySelf.lastTimes}}连胜，已消单词达到{{mySelf.total}}</view>
   <view class='btn_share' bindtap='actionSheetTap'>
-    分享得双倍金币
+     <text wx:if="{{isWin===true}}">晒一晒</text>
+     <text wx:if="{{isWin===false}}">找帮手复仇</text>
   </view>
   <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
     <action-sheet-item>
-      <button open-type='share' id='result'>分享给朋友</button>
+      <button open-type='share' id='shareFriends'>分享给朋友</button>
     </action-sheet-item>
-    <action-sheet-item bindtap="SaveToPicture">生成分享图</action-sheet-item>
+    <!-- <action-sheet-item bindtap="SaveToPicture">生成分享图</action-sheet-item> -->
     <action-sheet-cancel >取消</action-sheet-cancel>
   </action-sheet>
 </view>

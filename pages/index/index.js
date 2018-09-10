@@ -20,9 +20,8 @@ Page({
   // 用户第一次点击的时候获取权限
   getUserInfo: function(e) {
     if (this.data.userId || wx.getStorageSync('userId')) {
-      console.log('已经授权')
       wx.navigateTo({
-        url: '/pages/rankgame/rankhome/rankhome',
+        url: '/pages/rankgame/waiting/waiting',
       })
       return ;
     }
@@ -80,7 +79,7 @@ Page({
               data: res.userId
             })
             wx.navigateTo({
-              url: '/pages/rankgame/rankhome/rankhome',
+              url: '/pages/rankgame/waiting/waiting',
             })
           }).catch(error => {
             wx.showToast({

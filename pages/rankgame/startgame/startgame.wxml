@@ -10,11 +10,11 @@
   </view>
   <view class='vs_info'>
     <view class='vs_left vs_user'>
-      <image src='{{mySelf.logo}}'></image>
-      <view>{{point}}</view>
+      <image src='{{mySelf.avatarUrl}}'></image>
+      <view>{{mySelf.score}}</view>
     </view>
     <view class='vs_right vs_user'>
-      <image src='{{oppnent.logo}}'></image>
+      <image src='{{oppnent.avatarUrl}}'></image>
       <view>{{oppnent.score}}</view>
     </view>
   </view>
@@ -23,7 +23,7 @@
   <view class='showword' wx:if="showWordCouple.length === 2">
     <!-- <view wx:if="{{combox > 1}}" class='combox'>combox  x{{lastTimes}}</view> -->
     <view class="enAndch {{showWordCouple.length === 2 ? 'shakeText':''}}" >
-      <text>{{showWordCouple[0]}}</text> <text>{{showWordCouple[1]}}</text>
+      {{showWordCouple[0]}}<text></text>{{showWordCouple[1]}}
     </view>
   </view>
   <!--键盘区域-->

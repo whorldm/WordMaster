@@ -17,15 +17,18 @@ Page({
       { wordC: '手机', wordE: 'phone', flag: true }
     ],
     mySelf: {  // 保存个人信息
-      logo: '../../../img/1.jpeg',
+      avatarUrl: '../../../img/1.jpeg',
+      rightNum: 23,
+      errorNum: 6,
       score: 240,
-      lastTimes: 3,
-      total: 120
     },
     oppnent: {  //保存对手的信息
-      logo: '../../../img/1.jpeg',
+      avatarUrl: '../../../img/1.jpeg',
+      rightNum: 6,
+      errorNum: 10,
       score: 150
     },
+    isWin: true, //是否赢
     actionSheetHidden: true, //点击分享，弹出底部菜单
   },
 
@@ -33,7 +36,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let result = getCurrentPages()[1];
+    this.setData({
+      isWin: result.data.mySelf.score > result.data.oppnent.score,
+      mySelf: result.data.mySelf,
+      oppnent: result.data.oppnent
+    })
   },
 
   /**
@@ -54,14 +62,18 @@ Page({
     })
   },
 
-  // 再虐他一次
-  playAgin: function(){
-    console.log('触发函数')
+  // 回到首页
+  goBack: function(){
+    wx.navigateTo({
+      url: '/pages/index/index'
+    })
   },
 
   // 换个对手
   changePerson: function(){
-    console.log('触发函数')
+    wx.navigateTo({
+      url: '/pages/rankgame/waiting/waiting'
+    })
   },
 
   // 分享弹出底部菜单
@@ -91,4 +103,14 @@ Page({
   onShareAppMessage: function () {
     this.actionSheetChange();
   },
+
+  // 监听手机的返回事件
+  onUnload: function() {
+    console.log(getCurrentPages());
+    if(getCurrentPages().length > 2) {
+      wx.navigateTo({
+        url: '/pages/index/index'
+      })
+    }
+  }
 })

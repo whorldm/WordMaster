@@ -45,21 +45,14 @@ App({
       success: () => {
         // 当前的session_key未过期
         wx.getStorage({
-          key: 'user_id',
+          key: 'userId',
           success: res => {
-            this.globalData.user_id = res.data;
+            this.globalData.userId = res.data;
           }
         })
       },
       fail: () => {
         // 当前用户已过期
-      }
-    })
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
     
@@ -72,12 +65,17 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              wx.getStorage({
+                key: 'userId',
+                success: res => {
+                  this.globalData.userId = res.data
+                }
+              })
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
+              // if (this.userInfoReadyCallback) {
+              //   this.userInfoReadyCallback(res)
+              // }
             }
           })
         }
@@ -88,6 +86,7 @@ App({
     assistant.initBaiduVoiceModule();
   },
   globalData: {
+    userId: '',
     userInfo: null,
     RemoteAddress: "https://www.luoyunyu.com",
   },

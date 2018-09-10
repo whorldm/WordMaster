@@ -1,3 +1,11 @@
 <view>
-  <button bindtap='LVOne'>新手学渣</button>
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <blcok wx:for="{{segmentList}}" wx:key="index">
+    <view bindtap='waitMatch' class="segmentItem">
+      {{item.name}} {{item.star}}
+    </view>
+  </blcok>
 </view>

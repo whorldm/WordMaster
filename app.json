@@ -1,14 +1,18 @@
 {
   "pages":[
-    "pages/rankgame/startgame/startgame",
     "pages/index/index",
     "pages/rankgame/rankhome/rankhome",
-    "pages/rankgame/waiting/waiting"
+    "pages/rankgame/waiting/waiting",
+    "pages/rankgame/startgame/startgame",
+    "pages/rankgame/gameover/gameover",
+    "pages/usercenter/usercenter",
+    "pages/lexicon/lexicon",
+    "pages/priview/priview"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#392D4E",
+    "navigationBarTitleText": "单词大咖",
+    "navigationBarTextStyle":"white"
   }
 }

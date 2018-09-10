@@ -3,16 +3,46 @@
  */
 
 const config = {
+  'AUTHORIZATION':{
+    interFace: '/user/authorization',
+    method: 'POST',
+  },
   'USER': {
-    interFace: 'user',
+    interFace: '/user/rank',
     method: 'GET',
-    header: {'content-type': 'application / json'}
   },
   'GAME': {
-    interFace: '/game/start',
+    interFace: '/game/join',
     method: 'POST',
-    header: { 'content-type': 'application/x-www-form-urlencoded' }
-  }
+  },
+  'GAME_OVER': {
+    interFace: '/game/settlement',
+    method: 'POST',
+  },
+  'HOST_INFO' : {
+    interFace: '/host/hostInfo',
+    method: 'GET',
+  },
+  'HOST_RANK': {
+    interFace: '/host/hostRank',
+    method: 'GET',
+  },
+  'MY_HOST': {
+    interFace: '/host/myHost',
+    method: 'POST',
+  },
+  'WRONG_BOOK': {
+    interFace: '/wrongbook/list',
+    method: 'GET',
+  },
+  'WORD_LIST': {
+    interFace: '/word/list',
+    method: 'POST',
+  },
+  'SEGMENT_LIST': {
+    interFace: '/segment/listAll',
+    method: 'POST',
+  },
 }
 
 const searchMap = function (key) {
@@ -21,6 +51,7 @@ const searchMap = function (key) {
       return config[e];
     }
   }
+  return 'error';
 }
 
 

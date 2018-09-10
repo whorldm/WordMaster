@@ -33,8 +33,13 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
         var leftElement = arrayToFill[leftWordPosition.row][leftWordPosition.column];
         var rightElement = elementToFill;
         leftElement.pairIndex = { row: whichPosition.row, column: whichPosition.column };
+        leftElement.isChoose = false;
+        leftElement.isClear = false;
+        leftElement.isError = false;
         rightElement.pairIndex = { row: leftWordPosition.row, column: leftWordPosition.column };
-
+        rightElement.isChoose = false;
+        rightElement.isClear = false;
+        rightElement.isError = false;
       }
       handleArray[randomIndex] = handleArray[maxRandomChooseIndex];
       maxRandomChooseIndex--;

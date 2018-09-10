@@ -1,26 +1,137 @@
 Page{
   width: 100%;
   height: 100%;
-
 }
-.keyWord{
-  width: 600rpx;
-  margin: 40rpx auto;
-  background:#fff;
-  border-top: 1rpx solid #ddd;
+.Box {
+  width: 100%;
+  height: 100%;
+  background: #392D4E;
+}
+.vs_area {
+  width: 90%;
+  height: 180rpx;
+  position: relative;
+  top: 20rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+/*对决栏的样式*/
+.vs_info {
+  width: 100%;
+  height: 180rpx;
+  color: #fff;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.vs_user {
+  width: 25%;
+  height: 100%;
+  color: #9278ED;
+  text-align: center;
+}
+.vs_user image {
+  width: 106rpx;
+  height: 106rpx;
+  border-radius: 50%;
+}
+.vs_left{
+  float: left;
+}
+.vs_right{
+  float: right;
 }
 
-.keyWord text{
-  height: 100rpx;
-  line-height: 100rpx;
-  border-right: 1rpx solid #ddd;
-  border-bottom: 1rpx solid #ddd;
+/*对决条的样式*/
+.vs_center {
+  width: 62%;
+  color: #fff;
+  position: absolute;
+  top: 40rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
 }
-
+.vs_center text {
+  display: block;
+  margin: 40rpx auto 0;
+}
 .line {
-  border-left: 1rpx solid #ddd;
+  display: flex;
+}
+.line .left{
+  height: 40rpx;
+  float: left;
+  background-image: linear-gradient(to top, #677aef 0%, #8b79ef 100%);
+}
+.line .right {
+  height: 40rpx;
+  float: right;
+  background-color: #43CFDC;
 }
 
+/*单词显示区域样式*/
+.showword {
+  width: 90%;
+  height: 12%;
+  align-items: center;
+  position: relative;
+  top: 20rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+.showword .combox {
+  width: 30%;
+  height: 80rpx;
+  color: #9278ED;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  position: absolute;
+  top: 20%;
+  left: 0;
+  animation: comboxShake 1s ease-in normal forwards;
+}
+.showword .enAndch{
+  width: 40%;
+  height: 80rpx;
+  color: #F4C05F;
+  font-size: 38rpx;
+  line-height: 80rpx;
+  position: relative;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+}
+.shakeText {
+  animation: shakeText 0.8s ease-in normal forwards;
+}
+.showword .enAndch text {
+  flex: 1;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+/*单词操作区域样式*/
+.keyWord{
+  width: 80%;
+  position: relative;
+  top: 20rpx;
+  left: 0;
+  right: 0;
+  margin: 20rpx auto;
+  border-radius: 10rpx;
+  background: #403C6E;
+  padding: 20rpx;
+}
 .flex-row{
   display: flex;
   flex: 1;
@@ -29,9 +140,49 @@ Page{
   align-items: center;
 }
 .flex-column{
+  height: 120rpx;
+  margin: 10rpx;
+  color: #260063;
+  font-size: 28rpx;
+  line-height: 120rpx;
+  text-align: center;
+  border-radius: 10rpx;
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: stretch;
   align-items: center;
+  background-color: #fff;
+}
+.isClick {  /*点中的效果*/
+  background: #43CFDC;
+}
+.sucessState {  /*答对的效果*/
+  opacity: 0; 
+  /* background: #403C6E; */
+}
+.errorState {  /*答错的效果*/
+  position: relative;
+  background: #FF7248;
+  animation: tremble 0.8s 0s ease both;
+}
+.notice { /*点击提示后的效果*/
+  animation: changeColor 0.5s ease infinite forwards; 
+}
+
+/*提示信息*/
+.help {
+  height: 138rpx;
+  width: 138rpx;
+  position: relative;
+  top: 4%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  line-height: 138rpx;
+  color: #A491CE;
+  font-size: 24rpx;
+  text-align: center;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/imagebtn_circle.png');
+  background-size: cover;
 }

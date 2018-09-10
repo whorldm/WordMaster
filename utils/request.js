@@ -1,5 +1,5 @@
 var getInterface = require('./api.js');
-
+var utils = require('./util.js');
 /**
  * request请求封装
  * API {String}   接口名称
@@ -7,7 +7,7 @@ var getInterface = require('./api.js');
  * message {String} 请求加载提示
  */
 
-var RemoteAddress = "https://www.luoyunyu.com";
+var RemoteAddress = "http://172.20.120.107:8088";
 const getDataFromServerLoading = function (API, data = {},message) {
   wx.showNavigationBarLoading();
   if (message != '') {
@@ -17,18 +17,24 @@ const getDataFromServerLoading = function (API, data = {},message) {
   }
 
   // 请求校验
-  var checkData = {};
+  var checkData = {
+    time: utils.formatTime(new Date())
+  };
   // 合并对象，处理请求参数
   var params = mergeObj(checkData, data);
   // 获取接口类型
-  var config = getInterface(API);
+  var config = getInterface.searchMap(API);
+  if(config === 'error') {
+    console.error('接口错误');
+    return;
+  }
 
   var promise = new Promise(function (resolve, reject) {
     wx.request({
       url: RemoteAddress + config.interFace,
       data: params,
       method: config.method,
-      header: config.header,
+      header: (config.method === 'GET') ? {'content-type': 'application/json'} : {'content-type': 'application/x-www-form-urlencoded'},
       success: function (res) {
         wx.hideNavigationBarLoading()
         if (message != '') {
@@ -36,7 +42,7 @@ const getDataFromServerLoading = function (API, data = {},message) {
         }
 
         if (res.statusCode === 200) {
-          resolve(res)
+          resolve(res.data)
         } else {
           reject(res)
         }
@@ -62,7 +68,7 @@ function mergeObj(o1, o2) {
 
 // 带有动态加载
 const getDataFromServer = (API, data = {}) => {
-  this.getDataFromServer(API, data, "");
+  return getDataFromServerLoading(API, data, "");
 }
 
 

@@ -1,10 +1,48 @@
-<view style='margin: 10rpx auto;text-align: center;'>{{point}}</view>
-<view bindtap="ClickGrid" class="keyWord">
-  <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
-    <view class="flex-row line">
-      <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
-        <text class="flex-column" data-key="{{gridItem.pairIndex}}" data-posx="{{index}}" data-posy='{{idx}}' data-value="{{gridItem.wordData.value}}">{{gridItem.wordData.value}}</text>
-      </block>
+<view class='Box'>
+  <!--顶部的对决信息-->
+  <view class='vs_area'>
+    <view class='vs_center'>
+    <view class='line'>
+      <view class='left' style="flex: {{point+1}}"></view>
+      <view class='right' style="flex: {{oppnent.score+1}}"></view>
     </view>
-  </block>
+    <text>{{gameClock}}</text>
+  </view>
+  <view class='vs_info'>
+    <view class='vs_left vs_user'>
+      <image src='{{mySelf.logo}}'></image>
+      <view>{{point}}</view>
+    </view>
+    <view class='vs_right vs_user'>
+      <image src='{{oppnent.logo}}'></image>
+      <view>{{oppnent.score}}</view>
+    </view>
+  </view>
+  </view>
+  <!--答对显示单词-->
+  <view class='showword' wx:if="showWordCouple.length === 2">
+    <!-- <view wx:if="{{combox > 1}}" class='combox'>combox  x{{lastTimes}}</view> -->
+    <view class="enAndch {{showWordCouple.length === 2 ? 'shakeText':''}}" >
+      <text>{{showWordCouple[0]}}</text> <text>{{showWordCouple[1]}}</text>
+    </view>
+  </view>
+  <!--键盘区域-->
+  <view bindtap="ClickGrid" class="keyWord">
+    <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
+      <view class="flex-row">
+        <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
+          <view class="flex-column {{gridItem.isChoose ? 'isClick':'' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}"
+          data-key="{{gridItem.pairIndex}}"
+          data-posx="{{index}}"
+          data-posy='{{idx}}'
+          data-value="{{gridItem.wordData.value}}">
+            {{gridItem.wordData.value}}
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+  <!--底部提示按钮-->
+  <view class='help' bindtap='getHelp'>提示</view>
 </view>
+

@@ -112,6 +112,7 @@ function chooseWord(){
         word = _wordGrid[wordIndexInWordGrid.row][wordIndexInWordGrid.column];
         firstWord = createWordRecord(wordIndexInWordGrid.row, wordIndexInWordGrid.column, word.pairIndex.row, word.pairIndex.column);
 
+        onChooseWord(wordIndexInWordGrid.row, wordIndexInWordGrid.column);
         //更新处理数组
         var temp = handleArray[firstWordIndexInHandleArray];
         handleArray[firstWordIndexInHandleArray] = handleArray[wordCountNotEliminate - 1];
@@ -137,22 +138,66 @@ function chooseWord(){
             wordIndexInWordGrid = handleArray[chooseWordIndex];
             word = _wordGrid[wordIndexInWordGrid.row][wordIndexInWordGrid.column];
         }
+
+        onChooseWord(wordIndexInWordGrid.row, wordIndexInWordGrid.column);
         //更新处理数组
         if(firstWord._pairIndexRow === wordIndexInWordGrid.row 
             && firstWord._pairIndexCol === wordIndexInWordGrid.column){ //如果选的第二个单词跟第一个匹配
             handleArray[chooseWordIndex] = handleArray[wordCountNotEliminate - 1];
             wordCountNotEliminate--;
+            onEliminateSuccess(firstWord._selfIndexRow, firstWord.selfIndexCol, wordIndexInWordGrid.row, wordIndexInWordGrid.column);
+            if(wordCountNotEliminate === 0){
+                onAllWordBeenEliminated();
+                stopToPlayGame();
+            }
         }
         else{   //如果不匹配，恢复处理数组
             wordCountNotEliminate++;
             var temp = handleArray[firstWordIndexInHandleArray];
             handleArray[firstWordIndexInHandleArray] = handleArray[wordCountNotEliminate - 1];
             handleArray[wordCountNotEliminate - 1] = temp;
+            onEliminateFailed(firstWord._selfIndexRow, firstWord.selfIndexCol, wordIndexInWordGrid.row, wordIndexInWordGrid.column);
         }
         //清除单词选择记录
         firstWord = null;
     }
-    pagesManager.startgame.onChooseWord(wordIndexInWordGrid.column, wordIndexInWordGrid.row, word.pairIndex, word.wordData.value);
+}
+
+/**
+ * @description 当消除单词对成功时的回调
+ * @param {*} firstWordRowInWordGrid    单词对中第一个点击的单词在单词矩阵中的行坐标
+ * @param {*} firstWordColumnInWordGrid 单词对中第一个点击的单词在单词矩阵中的列坐标
+ * @param {*} secondWordRowInWordGrid   单词对中第二个点击的单词在单词矩阵中的行坐标
+ * @param {*} secondWordColumnInWordGrid    单词对中第二个点击的单词在单词矩阵中的列坐标
+ */
+function onEliminateSuccess(firstWordRowInWordGrid, firstWordColumnInWordGrid, secondWordRowInWordGrid, secondWordColumnInWordGrid){
+    console.log("onEliminateSuccess:" + _wordGrid[firstWordRowInWordGrid][firstWordColumnInWordGrid].wordData.value + "__" + _wordGrid[secondWordRowInWordGrid][secondWordColumnInWordGrid].wordData.value);
+}
+
+/**
+ * @description 当消除单词对失败时的回调
+ * @param {*} firstWordRowInWordGrid    单词对中第一个点击的单词在单词矩阵中的行坐标
+ * @param {*} firstWordColumnInWordGrid 单词对中第一个点击的单词在单词矩阵中的列坐标
+ * @param {*} secondWordRowInWordGrid   单词对中第二个点击的单词在单词矩阵中的行坐标
+ * @param {*} secondWordColumnInWordGrid    单词对中第二个点击的单词在单词矩阵中的列坐标
+ */
+function onEliminateFailed(firstWordRowInWordGrid, firstWordColumnInWordGrid, secondWordRowInWordGrid, secondWordColumnInWordGrid){
+    console.log("onEliminateFailed:" + _wordGrid[firstWordRowInWordGrid][firstWordColumnInWordGrid].wordData.value + "__" + _wordGrid[secondWordRowInWordGrid][secondWordColumnInWordGrid].wordData.value);
+}
+
+function onAllWordBeenEliminated(){
+    console.log("onAllWordBeenEliminated");
+}
+
+
+/**
+ *@description 当选择任意单词时回调
+ *
+ * @param {*} chooseWordRowInWordGrid
+ * @param {*} chooseWordColumnInWordGrid
+ */
+function onChooseWord(chooseWordRowInWordGrid, chooseWordColumnInWordGrid){
+    console.log("onChooseWord:" + _wordGrid[chooseWordRowInWordGrid][chooseWordColumnInWordGrid].wordData.value);
 }
 
 function updateTimeCounter(){

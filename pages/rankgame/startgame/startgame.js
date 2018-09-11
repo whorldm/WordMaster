@@ -1,6 +1,6 @@
 var assistant = require("../../../utils/assistant.js");
 var pagesManager = require("../../../utils/pagesManager.js");
-// var robot = require("../../../utils/robot.js");
+var robot = require("../../../utils/robot.js");
 var Utils = require("../../../utils/util.js");
 var request = require("../../../utils/request.js");
 var app = getApp();
@@ -88,7 +88,7 @@ Page({
     request.getData("WORD_LIST",{userId: app.globalData.userId})
     .then(res => {
       assistant.randomFill(arrayToFill, this.data.row, this.data.col, res.list);
-      // robot.startToPlayGame(arrayToFill, this.data.row, this.data.col);
+      robot.startToPlayGame(arrayToFill, this.data.row, this.data.col);
       this.setData({
         wordGrid: arrayToFill
       })
@@ -184,7 +184,6 @@ Page({
 
       //比赛未结束且当前棋盘全部消除成功后更换一局
       if (times === this.data.row * this.data.col / 2) {
-        // robot.stopToPlayGame();
         this.setData(initLocalData({
           sucessTimes: 0,
         }), this.wordRandom());
@@ -262,7 +261,7 @@ Page({
 
   // 比赛结束
   GameOver: function () {
-    // robot.stopToPlayGame();
+    robot.stopToPlayGame();
     innerAudioContextBg.stop();
     // 并统计最终的结果
     let params = {
@@ -289,7 +288,7 @@ Page({
 
   // 监听用户的返回事件,即用户比赛中途退出
   onUnload: function () {
-    // robot.stopToPlayGame();
+    robot.stopToPlayGame();
     innerAudioContextBg.stop();
     if(gameTimer) {
       wx.showModal({

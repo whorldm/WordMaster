@@ -19,7 +19,8 @@ Page({
   data: {
     row: 4,  //根据单词对总数以及策划规则算出的二维数组行数
     col: 3,  //根据单词对总数以及策划规则算出的二维数组列数
-    gameFlag: true, // 游戏是否开始的标志
+    isFlip: false, // 是否实现翻牌效果
+    fastFlag: false, // 两人对决，谁的答题速度快开始的标志
     total_second: 60, //比赛时间
     gameClock: '01:00', //游戏倒计时一分钟
     isClickFlag: false,  //表示用户是否点击选中单词
@@ -28,7 +29,6 @@ Page({
     sucessTimes: 0,  //消除成功的总次数，以判断是否消除完全
     showWordCouple: [], // 显示单词对
     strQuene: '',   //存放单词队的字符串，用于读音 
-    combox: 1, //连续消除成功的次数，用以计算combox系数
     operateSecond: 1, //用户一次操作成功的时间，不同时间对应不同积分 
     wordGrid: [],   //模拟随机生成后的数据
     sucessWord: [], //当前用户答对的单词
@@ -37,12 +37,17 @@ Page({
       avatarUrl: '../../../img/1.jpeg',
       rightNum: 0,
       errorNum: 0,
-      score: 0
+      combox: 0,
+      roundTime: 1, //表示用户目前处于第几盘
+      score: 0,  //用户当前积分
+      coin: 100  //用户的持有金币
     },
     oppnent: {  //保存对手的信息
       avatarUrl: '../../../img/1.jpeg',
       rightNum: 0,
       errorNum: 0,
+      combox: 0,
+      roundTime: 1,
       score: 0
     },
   },
@@ -54,8 +59,23 @@ Page({
     pagesManager.startgame = this;
     if(options.matchPerson) {
       this.setData({
-        ['mySelf.avatarUrl']: app.globalData.userInfo.avatarUrl,
-        ['oppnent.avatarUrl']: options.matchPerson,
+        mySelf: {  
+          avatarUrl: app.globalData.userInfo.avatarUrl,
+          rightNum: 0,
+          errorNum: 0,
+          combox: 0,
+          roundTime: 1, 
+          score: 0,  
+          coin: 100  
+        },
+        oppnent: {  
+          avatarUrl: options.matchPerson,
+          rightNum: 0,
+          errorNum: 0,
+          combox: 0,
+          roundTime: 1,
+          score: 0
+        },
       })
     }
   },
@@ -64,10 +84,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.RobotRandom();
     this.wordRandom();  // 随机生成单词
+    this.getUserAsset();
     this.playBgMusic(); //  开始播放音乐
     CountOneMinte(this);
     setTimer(this);  // 设置记录操作时间的计时器
+  },
+
+  /**
+   * 获取用户的当前金币
+   */
+  getUserAsset: function () {
+    request.getData("USER_ASSET",{userId: app.globalData.userId})
+    .then(res => {
+      this.setData({
+        ['mySelf.coin']: res.myAsset.coin
+      })
+    })
+    .catch(err => {
+      console.error("获取用户的持有金币失败！")
+    })
   },
 
   /**
@@ -84,7 +121,6 @@ Page({
     request.getData("WORD_LIST")
     .then(res => {
       assistant.randomFill(arrayToFill, this.data.row, this.data.col, res.list);
-      robot.startToPlayGame(arrayToFill, this.data.row, this.data.col);
       this.setData({
         wordGrid: arrayToFill
       })
@@ -98,7 +134,7 @@ Page({
    * 判断用户的点击操作
    */
   ClickGrid: function (e) {
-    if(!this.data.gameFlag) {
+    if (this.data.total_second <= 0) {
       wx.showToast({
         title: '比赛结束',
       })
@@ -157,17 +193,16 @@ Page({
       let second = 'wordGrid['+Y+']['+X+']';
        //计算个人的得分以及当前棋盘所消除单词对总数
       let times = this.data.sucessTimes + 1;
-      let _score = Number(this.data.mySelf.score) + Math.round(100 * (this.data.combox *0.1 + 1) * Utils.judeGreed(this.data.operateSecond));
-      let test = 'oppnent.score';  //模拟测试对手修改数据//////////////
+      let _score = Number(this.data.mySelf.score) + Math.round(100 * (this.data.mySelf.combox * 0.1 + 1) * Utils.judeGreed(this.data.operateSecond));
       //保存已答对的单词
       let obj = Utils.rebuildArr(this.data.strQuene, word);
       let tmpWord = 'sucessWord['+this.data.sucessWord.length+']';
 
       this.setData(initLocalData({
           showWordCouple: Utils.dealWordCouple(this.data.strQuene, word),
-          combox: this.data.combox + 1,
+          ['mySelf.combox']: this.data.mySelf.combox + 1,
           ['mySelf.score']: _score,
-          [test]: this.data.oppnent.score + 100, //////////////////
+          ['mySelf.rightNum']: this.data.mySelf.rightNum + 1,
           [first]: { isClear: true, isError: false},
           [second]: { isClear: true, isError: false },
           [tmpWord]: obj,
@@ -188,10 +223,27 @@ Page({
 
       //比赛未结束且当前棋盘全部消除成功后更换一局
       if (times === this.data.row * this.data.col / 2) {
-        robot.stopToPlayGame();
-        this.setData(initLocalData({
+        // 判断当前用户还是机器人的答题速度快
+        let _fastFlag = (this.data.mySelf.roundTime + 1) > this.data.oppnent.roundTime;
+        let _score;
+        if (_fastFlag) {
+          _score = this.data.mySelf.score + 200;
+        } else {
+          _score = this.data.mySelf.score + 100;
+        }
+        this.setData({
+          isFlip: true,
           sucessTimes: 0,
-        }), this.wordRandom());
+          fastFlag: _fastFlag,
+          ['mySelf.score']: _score,
+          ['mySelf.roundTime']: this.data.mySelf.roundTime + 1,
+        },this.wordRandom())
+
+        setTimeout(()=> {
+          this.setData(initLocalData({
+            isFlip: false
+          }));
+        },1000)
       }
 
     } else {
@@ -211,6 +263,7 @@ Page({
         [tmpWord]: obj,
         [first]: true ,
         [second]: true,
+        ['mySelf.errorNum']: this.data.mySelf.errorNum + 1,
       }))
 
       // 700ms后将答错的单词方块状态初始化
@@ -226,14 +279,22 @@ Page({
 
   // 获取提示信息
   getHelp: function () {
+    if(this.data.mySelf.coin < 20) {
+      wx.showToast({
+        icon:'none',
+        title: '金币数量不足'
+      });
+      return ;
+    }
     // 以选择一个单词，提示相应的
     let matchPosition = this.data.matchWord.split(',');
     if (this.data.isClickFlag) {
       let other = "wordGrid[" + matchPosition[1] + "][" + matchPosition[0]+"].isNotice";
       this.setData({
+        ['mySelf.coin']: this.data.mySelf.coin - 20,
         [other]: true
       })
-      this.delCoinNum();
+      // this.delCoinNum();
      return; 
     }
     // 未选中单词，提示一对
@@ -244,10 +305,11 @@ Page({
           let tempA = "wordGrid[" + i + "][" + j + "].isNotice";
           let tempB = "wordGrid[" + temp[j].pairIndex.row + "][" + temp[j].pairIndex.column + "].isNotice";
           this.setData({
+            ['mySelf.coin']: this.data.mySelf.coin - 20,
             [tempA]:true,
             [tempB]:true,
           })
-          this.delCoinNum();
+          // this.delCoinNum();
           return;
         }
       }
@@ -276,9 +338,6 @@ Page({
       wrongbookEntityList: this.data.errorWord,
       rightbookEntitiyList: this.data.sucessWord,
     }
-    // wx.navigateTo({
-    //   url: '/pages/rankgame/gameover/gameover',
-    // })
     request.getData('GAME_OVER', params).then(res => {
       if(res.code === 0) {
         wx.navigateTo({
@@ -286,6 +345,7 @@ Page({
         })
       }
     }).catch(error => {
+      console.log(error);
       wx.showModal({
         content: '服务器内部错误，稍后回到首页',
         showCancel: false,
@@ -303,12 +363,65 @@ Page({
     if(gameTimer) {
       clearTimeout(gameTimer);
     }
-    if(this.data.total_second > 0) {
-      wx.showModal({
-        content: '您已经放弃了战斗!',
-        showCancel: false,
-      })
+    // if(this.data.total_second > 0) {
+    //   wx.showModal({
+    //     content: '您已经放弃了战斗!',
+    //     showCancel: false,
+    //   })
+    // }
+  },
+
+  //备份单词对，供机器人使用
+  RobotRandom: function () {
+    let robotArray = new Array(this.data.row);
+    for (let i = 0, l1 = robotArray.length; i <= l1 - 1; ++i) {
+      robotArray[i] = new Array(this.data.col);
+      for (let j = 0, l2 = robotArray[i].length; j <= l2 - 1; ++j) {
+        robotArray[i][j] = {};
+      }
     }
+    request.getData("WORD_LIST")
+      .then(res => {
+        assistant.randomFill(robotArray, this.data.row, this.data.col, res.list);
+        robot.startToPlayGame(robotArray, this.data.row, this.data.col);
+      })
+      .catch(err => {
+        console.error("获取单词失败！")
+      })
+  },
+  
+  // 模拟机器人操作成功后
+  RobotSucess: function () {
+    let _combox = this.data.oppnent.combox + 1;
+    let _score = this.data.oppnent.score + Math.round(100 * (_combox * 0.1 + 1) * 1);
+    this.setData({
+      ['oppnent.combox']: _combox,
+      ['oppnent.score']: _score,
+      ['oppnent.rightNum']: this.data.oppnent.rightNum + 1,
+    })
+  },
+
+  // 模拟机器人操作失败
+  RobotError: function (){
+    this.setData({
+      ['oppnent.combox']: 0,
+      ['oppnent.errorNum']: this.data.oppnent.errorNum + 1,
+    })
+  },
+
+  // 模拟机器人全部操作成功
+  RobotAllClear: function () {
+    let _fastFlag = (this.data.mySelf.roundTime + 1) > this.data.oppnent.roundTime;
+    let _score;
+    if (_fastFlag) {
+      _score = this.data.oppnent.score + 200;
+    } else {
+      _score = this.data.oppnent.score + 100;
+    }
+    this.setData({
+      ['oppnent.score']: _score,
+      ['oppnent.roundTime']: this.data.oppnent.roundTime + 1,
+    }, this.RobotRandom());
   },
 
   // 播放背景音乐
@@ -371,12 +484,11 @@ function CountOneMinte(that) {
   let temp = that.data.total_second - 1;
   that.setData({
     total_second: temp,
-    gameClock: '00:' + Utils.fill_zero_prefix(temp)
+    gameClock: Utils.dateFormat(temp)
   })
   if (temp <= 0) {
     that.setData({
       gameClock: "00:00",
-      gameFlag: false
     });
     clearTimeout(gameTimer);
     that.GameOver();

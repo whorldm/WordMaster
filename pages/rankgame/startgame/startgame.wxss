@@ -6,6 +6,7 @@ Page{
   width: 100%;
   height: 100%;
   background: #392D4E;
+  perspective: 500; 
 }
 .vs_area {
   width: 90%;
@@ -121,9 +122,71 @@ Page{
   height: 30rpx;
   display: inline-block;
 }
-
-/*单词操作区域样式*/
+/**中间可供翻转的区域**/
+.flipArea {
+  width: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+/*单词操作区域样式   正面*/
 .keyWord{
+  width: 80%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 20rpx auto;
+  border-radius: 10rpx;
+  background: #403C6E;
+  padding: 20rpx;
+  transition: all 1s ease;
+  backface-visibility: hidden;
+}
+.front{
+  z-index: 10;
+  transform:rotate3d(0,1,0,0deg);
+}
+.back{
+  z-index: 8;
+  transform:rotate3d(0,1,0,-180deg);
+}
+.card-flipped .front{
+  transform:rotate3d(0,1,0,180deg);
+  z-index: 8;
+}
+.card-flipped .back{
+  transform:rotate3d(0,1,0,0deg);
+  z-index: 10;
+}
+
+
+.flex-row{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.flex-column{
+  height: 120rpx;
+  margin: 10rpx;
+  color: #260063;
+  font-size: 28rpx;
+  line-height: 120rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  background-color: #fff;
+}
+/*单词操作区域样式   正面*/
+/* .keyWord{
   width: 80%;
   position: relative;
   top: 20rpx;
@@ -155,10 +218,7 @@ Page{
   justify-content: stretch;
   align-items: center;
   background-color: #fff;
-}
-.flex-column:hover {
-  transform:rotateY(180deg);
-}
+} */
 .isClick {  /*点中的效果*/
   background: #43CFDC;
 }
@@ -172,15 +232,41 @@ Page{
   animation: tremble 0.8s 0s ease both;
 }
 .notice { /*点击提示后的效果*/
-  animation: changeColor 0.5s ease infinite forwards; 
+  animation: changeColor 2s ease forwards; 
 }
+
+/**用户消除玩一局后，翻牌显示对应的奖励    背面**/
+.reward {
+  height: 560rpx;
+  color: #FFF;
+  font-size: 30rpx;
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+}
+.reward_item {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.reward_item text {
+  font-size: 36rpx;
+  line-height: 100rpx;
+  display: block
+}
+
 
 /*提示信息*/
 .help {
   height: 138rpx;
   width: 138rpx;
   position: relative;
-  top: 4%;
+  top: 56%;
   left: 0;
   right: 0;
   margin: 0 auto;

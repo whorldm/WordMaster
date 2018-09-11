@@ -5,59 +5,53 @@
 const config = {
   'AUTHORIZATION':{
     interFace: '/user/authorization',
-    method: 'POST',
-    header: {'content-type': 'application/x-www-form-urlencoded'}
+    method: 'POST'
   },
   'USER': {
     interFace: '/user/rank',
-    method: 'GET',
-    header: {'content-type': 'application/json'}
+    method: 'GET'
   },
   'PROMPT': {
     interFace: '/user/prompt',
-    method: 'POST',
-    header: {'content-type': 'application/x-www-form-urlencoded'}
+    method: 'POST'
+  },
+  'USER_ASSET': {
+    interFace: '/user/myAsset',
+    method: 'GET'
   },
   'GAME': {
     interFace: '/game/join',
-    method: 'POST',
-    header: {'content-type': 'application/x-www-form-urlencoded'}
+    method: 'POST'
   },
   'GAME_OVER': {
     interFace: '/game/settlement',
-    method: 'POST',
-    header: {'content-type': 'application/json'}
+    method: 'POST'
   },
   'HOST_INFO' : {
     interFace: '/host/hostInfo',
-    method: 'GET',
-    header: {'content-type': 'application/json'}
+    method: 'GET'
   },
   'HOST_RANK': {
     interFace: '/host/hostRank',
-    method: 'GET',
-    header: {'content-type': 'application/json'}
+    method: 'GET'
   },
   'MY_HOST': {
     interFace: '/host/myHost',
-    method: 'POST',
-    header: {'content-type': 'application/x-www-form-urlencoded'}
+    method: 'POST'
   },
   'WRONG_BOOK': {
     interFace: '/wrongbook/list',
-    method: 'GET',
-    header: {'content-type': 'application/json'}
+    method: 'GET'
   },
   'WORD_LIST': {
     interFace: '/word/list',
-    method: 'GET',
-    header: {'content-type': 'application/json'}
+    method: 'GET'
   },
   'SEGMENT_LIST': {
     interFace: '/segment/listAll',
-    method: 'GET',
-    header: {'content-type': 'application/x-www-form-urlencoded'}
+    method: 'GET'
   },
+
 }
 
 const searchMap = function (key) {

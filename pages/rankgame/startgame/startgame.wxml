@@ -27,23 +27,42 @@
     </view>
   </view>
 
-  <!--键盘区域-->
-  <view bindtap="ClickGrid" class="keyWord">
-    <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
-      <view class="flex-row">
-        <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
-          <view class="flex-column {{gridItem.isChoose ? 'isClick':'' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}"
-          data-key="{{gridItem.pairIndex}}"
-          data-posx="{{index}}"
-          data-posy='{{idx}}'
-          data-value="{{gridItem.wordData.value}}">
-            {{gridItem.wordData.value}}
-          </view>
-        </block>
-      </view>
-    </block>
-  </view>
+  <view class="flipArea {{isFlip? 'card-flipped':''}}">
+    <!--键盘区域-->
+    <view bindtap="ClickGrid" class="keyWord front">
+      <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
+        <view class="flex-row">
+          <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
+            <view class="flex-column {{gridItem.isChoose ? 'isClick':'' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}"
+            data-key="{{gridItem.pairIndex}}"
+            data-posx="{{index}}"
+            data-posy='{{idx}}'
+            data-value="{{gridItem.wordData.value}}">
+              {{gridItem.wordData.value}}
+            </view>
+            <view class='colcumn_back'></view>
+          </block>
+        </view>
+      </block>
+    </view>
 
+    <!--完成一局后的奖励-->
+    <view class="keyWord back">
+      <view hidden='{{!fastFlag}}' class="reward">
+        <view class='reward_item'>
+          优先完成，再接再厉
+          <text>积分 +200</text>
+        </view>
+      </view>
+      <view hidden='{{fastFlag}}' class='reward'>
+        <view class='reward_item'>
+          手速慢了，奋起直追
+          <text>积分 +100</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
   <!--底部提示按钮-->
   <view class='help' bindtap='getHelp'>提示</view>
 </view>

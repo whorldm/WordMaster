@@ -8,14 +8,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    wordList: [
-      { wordC: '苹果', wordE: 'apple', flag: true },
-      { wordC: '香蕉', wordE: 'banana', flag: true },
-      { wordC: '环境', wordE: 'envirnment', flag: false },
-      { wordC: '树', wordE: 'tree', flag: true },
-      { wordC: '铅笔', wordE: 'pencil', flag: false },
-      { wordC: '手机', wordE: 'phone', flag: true }
-    ],
     mySelf: {  // 保存个人信息
       avatarUrl: '../../../img/1.jpeg',
       rightNum: 23,
@@ -36,18 +28,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let result = getCurrentPages()[1];
-    this.setData({
-      isWin: result.data.mySelf.score > result.data.oppnent.score,
-      mySelf: result.data.mySelf,
-      oppnent: result.data.oppnent
-    })
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 目前从本地获取数据
+    let result = getCurrentPages()[1];
+    console.log(getCurrentPages());
+    this.setData({
+      isWin: result.data.mySelf.score > result.data.oppnent.score,
+      mySelf: result.data.mySelf,
+      oppnent: result.data.oppnent
+    })
     // this.getTheResult();
   },
   // 从服务器获取上一次的所有结果
@@ -64,16 +59,22 @@ Page({
 
   // 回到首页
   goBack: function(){
-    wx.navigateTo({
-      url: '/pages/index/index'
+    wx.navigateBack({
+      delta: 10
     })
   },
 
   // 换个对手
-  changePerson: function(){
-    wx.navigateTo({
-      url: '/pages/rankgame/waiting/waiting'
-    })
+  changePerson: function(e){
+    if(this.data.isWin) {
+      wx.navigateTo({
+        url: '/pages/rankgame/waiting/waiting'
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/rankgame/startgame/startgame?matchPerson='+this.data.oppnent.avatarUrl
+      })
+    }
   },
 
   // 分享弹出底部菜单
@@ -106,10 +107,9 @@ Page({
 
   // 监听手机的返回事件
   onUnload: function() {
-    console.log(getCurrentPages());
     if(getCurrentPages().length > 2) {
-      wx.navigateTo({
-        url: '/pages/index/index'
+      wx.navigateBack({
+        delta: 10
       })
     }
   }

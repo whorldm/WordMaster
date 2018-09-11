@@ -1,6 +1,6 @@
 const app = getApp();
 var request = require("../../../utils/request.js");
-var utils = require("../../../utils/util.js");
+var match = require("../../../utils/match.js");
 var countTimer = null; // 设置 定时器 初始为null
 
 Page({
@@ -26,7 +26,7 @@ Page({
    */
   // onLoad: function (options) {
   //   console.log(options);
-  //   let waitTime = utils.RandomNumBoth(1,5);
+  //   let waitTime = match.RandomNumBoth(1,5);
   //   if (app.globalData.userInfo) {
   //     this.setData({
   //       userInfo: {
@@ -41,7 +41,7 @@ Page({
 
   // 直接从首页进入，不经过段位页
   onLoad: function () {
-    let waitTime = utils.RandomNumBoth(1,5);
+    let waitTime = match.RandomNumBoth(1,5);
     if (app.globalData.userInfo) {
       this.setData({
         count: waitTime,
@@ -56,7 +56,7 @@ Page({
     request.getData("SEGMENT_LIST",{userId: app.globalData.userId })
     .then(res => {
       this.setData({
-        matchPerson: utils.matchPerson(res.list.length - 1),
+        matchPerson: match.matchPerson(res.list.length - 1),
         myLevel: res.list[res.list.length - 1],
       })
     })
@@ -94,7 +94,7 @@ Page({
   delayJump: function () {
     setTimeout(() => {
       wx.redirectTo({
-        url: '/pages/rankgame/startgame/startgame',
+        url: '/pages/rankgame/startgame/startgame?matchPerson=' + this.data.matchPerson.avatarUrl,
       })
     },800)
   },

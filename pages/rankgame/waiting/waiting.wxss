@@ -14,7 +14,7 @@ Page{
   margin: 0 auto;
   text-align: center;
   z-index: -1;
-  animation: fadeVS 0.5s ease-in normal forwards; 
+  animation: fadeVS 0.8s ease-in normal forwards; 
 }
 .bg_vs text {
   display: block;
@@ -49,7 +49,10 @@ Page{
   display: block;
   margin: 0 auto;
 }
-.float_in {
+.float_left {
+  animation: bounceInLeft 0.5s ease normal forwards;
+}
+.float_right {
   animation: bounceInRight 0.5s ease normal forwards;
 }
 

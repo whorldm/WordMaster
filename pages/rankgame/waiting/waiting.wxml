@@ -3,7 +3,7 @@
     <view class='bg_vs' wx:if="{{!isLoading}}">
       <text>VS</text>
     </view>
-    <view class='match_left'>
+    <view class="match_left {{isLoading ? '':'float_left'}}">
       <image class='user_logo' src='{{userInfo.avatarUrl}}'></image>
       <text>{{userInfo.nickName}}</text>
       <!-- 从段位页面进入 -->
@@ -33,7 +33,7 @@
           <view class="small_p p1"></view>
         </view>
       </view>
-      <view class='float_in' wx:if='{{!isLoading}}'>
+      <view class='float_right' wx:if='{{!isLoading}}'>
         <image class='user_logo' src='{{matchPerson.avatarUrl}}'></image>
         <text>{{matchPerson.nickName}}</text>
         <view class='grade'>

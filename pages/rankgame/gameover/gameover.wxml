@@ -37,8 +37,8 @@
         返回首页
       </view>
       <view class='footerItem' bindtap='changePerson'>
-        <view wx:if="{{isWin===true}}">再虐他一次</view>
-         <view wx:if="{{isWin===false}}">再战一次</view>
+        <view wx:if="{{isWin===true}}" data-isChange="{{isWin}}">蹂躏下一个</view>
+        <view wx:if="{{isWin===false}}" data-isChange="{{isWin}}">再战一次</view>
       </view>
     </view>
   </view>

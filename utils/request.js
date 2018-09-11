@@ -30,12 +30,10 @@ const getDataFromServerLoading = function (API, data = {},message) {
   }
 
   var promise = new Promise(function (resolve, reject) {
-    console.log(config);
     wx.request({
       url: RemoteAddress + config.interFace,
       data: params,
       method: config.method,
-      // header: config.header || ((config.method === 'GET') ? {'content-type': 'application/json'} : {'content-type': 'application/x-www-form-urlencoded'}),
       header: {'content-type': 'application/json'},
       success: function (res) {
         wx.hideNavigationBarLoading()

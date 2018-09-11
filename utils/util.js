@@ -33,6 +33,13 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+// 计算倒计时
+function dateFormat(second) {
+  var hr = fill_zero_prefix(Math.floor(second / 3600)); // 小时位
+  var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60));  // 分钟位
+  var sec = fill_zero_prefix((second - hr * 3600 - min * 60));  // 秒位
+  return  min + ":" + sec + " ";
+}
 // 位数不足补零
 function fill_zero_prefix(num) {
   return num < 10 ? "0" + num : num
@@ -56,13 +63,33 @@ function dealWordCouple(str1, str2) {
   let reg = /^[a-zA-Z]/;
   let temp = [];
   if (reg.test(str1)) {
+    temp.push(str2);
     temp.push(str1);
-    temp.push(str2);
   } else {
-    temp.push(str2);
-    temp.push(str1);  
+    temp.push(str1);
+    temp.push(str2); 
   }
   return temp;  
+}
+
+function deepCopy(Obj) {
+  var newObj;   
+  if (Obj instanceof Array) {
+      newObj = [];  // 创建一个空的数组
+      var i = Obj.length;
+      while (i--) {
+          newObj[i] = deepCopy(Obj[i]);
+      }
+      return newObj;
+  } else if (Obj instanceof Object){
+      newObj = {};  // 创建一个空对象
+      for (var k in Obj) {  // 为这个对象添加新的属性
+          newObj[k] = deepCopy(Obj[k]);
+      }
+      return newObj;
+  }else{
+      return Obj;
+  }
 }
 
 // 重构回传给后台的数组结构
@@ -79,74 +106,13 @@ function rebuildArr(str1,str2) {
   return obj;  
 }
 
-
-var userList = [
-  [{
-      nickName: '不知梦',
-      avatarUrl: '../../../img/1.jpeg',
-      star: 1,
-      level: '新手学渣'
-    },{
-      nickName: '漏曦',
-      avatarUrl: '../../../img/2.jpeg',
-      star: 1,
-      level: '新手学渣'
-  }],
-  [{
-      nickName: '鬼蜮',
-      avatarUrl: '../../../img/3.jpeg',
-      star: 1,
-      level: '不屈学弱'
-      },{
-      nickName: '空心菜',
-      avatarUrl: '../../../img/4.jpeg',
-      star: 2,
-      level: '不屈学弱'
-  }],
-  [{
-      nickName: '一纸荒凉',
-      avatarUrl: '../../../img/5.jpeg',
-      star: 2,
-      level: '奋进学酥'
-    },{
-      nickName: '凉凉😢',
-      avatarUrl: '../../../img/6.jpeg',
-      star: 3,
-      level: '奋进学酥'
-  }],
-  [{
-      nickName: '飞鱼',
-      avatarUrl: '../../../img/7.jpeg',
-      star: 2,
-      level: '划水学民'
-    },{
-      nickName: 'Sadness',
-      avatarUrl: '../../../img/5.jpeg',
-      star: 3,
-      level: '划水学民'
-  }]
-]
-
-function RandomNumBoth(Min,Max){
-  var Range = Max - Min;
-  var Rand = Math.random();
-  var num = Min + Math.round(Rand * Range);
-  return num;
-}
-
-function matchPerson(level) {
-  let matchLevel = RandomNumBoth(level, level+2);
-  let flag = RandomNumBoth(0, 1);
-  return userList[matchLevel][flag];
-}
-
 module.exports = {
   judeGreed,
+  deepCopy,
   formatTime,
+  dateFormat,
   checkParams,
   fill_zero_prefix,
   dealWordCouple,
-  rebuildArr,
-  matchPerson,
-  RandomNumBoth
+  rebuildArr
 }

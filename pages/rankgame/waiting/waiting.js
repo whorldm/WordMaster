@@ -94,7 +94,7 @@ Page({
   delayJump: function () {
     setTimeout(() => {
       wx.redirectTo({
-        url: '/pages/rankgame/startgame/startgame?matchPerson='+this.data.matchPerson.avatarUrl,
+        url: '/pages/rankgame/startgame/startgame',
       })
     },800)
   },

@@ -73,6 +73,9 @@ Page{
   float: right;
   background-color: #43CFDC;
 }
+.lastFive {
+  color: red;
+}
 
 /*单词显示区域样式*/
 .showword {
@@ -152,6 +155,9 @@ Page{
   justify-content: stretch;
   align-items: center;
   background-color: #fff;
+}
+.flex-column:hover {
+  transform:rotateY(180deg);
 }
 .isClick {  /*点中的效果*/
   background: #43CFDC;

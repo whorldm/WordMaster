@@ -41,9 +41,9 @@ function fill_zero_prefix(num) {
 // 根据用户的操作时间判断得分等级
 function judeGreed(second) {
   let temp = 1;
-  if (second <= 3) {
+  if (Number(second) <= 3) {
     temp = 1.1;
-  } else if (second <= 7) {
+  } else if (Number(second) <= 7) {
     temp = 1;
   } else {
     temp = 0.9;

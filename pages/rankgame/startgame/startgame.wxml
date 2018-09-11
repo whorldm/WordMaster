@@ -2,22 +2,22 @@
   <!--顶部的对决信息-->
   <view class='vs_area'>
     <view class='vs_center'>
-    <view class='line'>
-      <view class='left' style="flex: {{point+1}}"></view>
-      <view class='right' style="flex: {{oppnent.score+1}}"></view>
+      <view class='line'>
+        <view class='left' style="flex: {{mySelf.score + 1}}"></view>
+        <view class='right' style="flex: {{oppnent.score + 1}}"></view>
+      </view>
+      <text class="{{total_second <= 5 ? 'lastFive':''}}">{{gameClock}}</text>
     </view>
-    <text>{{gameClock}}</text>
-  </view>
-  <view class='vs_info'>
-    <view class='vs_left vs_user'>
-      <image src='{{mySelf.avatarUrl}}'></image>
-      <view>{{mySelf.score}}</view>
+    <view class='vs_info'>
+      <view class='vs_left vs_user'>
+        <image src='{{mySelf.avatarUrl}}'></image>
+        <view>{{mySelf.score}}</view>
+      </view>
+      <view class='vs_right vs_user'>
+        <image src='{{oppnent.avatarUrl}}'></image>
+        <view>{{oppnent.score}}</view>
+      </view>
     </view>
-    <view class='vs_right vs_user'>
-      <image src='{{oppnent.avatarUrl}}'></image>
-      <view>{{oppnent.score}}</view>
-    </view>
-  </view>
   </view>
   <!--答对显示单词-->
   <view class='showword' wx:if="showWordCouple.length === 2">
@@ -26,6 +26,7 @@
       {{showWordCouple[0]}}<text></text>{{showWordCouple[1]}}
     </view>
   </view>
+
   <!--键盘区域-->
   <view bindtap="ClickGrid" class="keyWord">
     <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
@@ -42,6 +43,7 @@
       </view>
     </block>
   </view>
+
   <!--底部提示按钮-->
   <view class='help' bindtap='getHelp'>提示</view>
 </view>

@@ -30,18 +30,20 @@ const getDataFromServerLoading = function (API, data = {},message) {
   }
 
   var promise = new Promise(function (resolve, reject) {
+    console.log(config);
     wx.request({
       url: RemoteAddress + config.interFace,
       data: params,
       method: config.method,
-      header: (config.method === 'GET') ? {'content-type': 'application/json'} : {'content-type': 'application/x-www-form-urlencoded'},
+      // header: config.header || ((config.method === 'GET') ? {'content-type': 'application/json'} : {'content-type': 'application/x-www-form-urlencoded'}),
+      header: {'content-type': 'application/json'},
       success: function (res) {
         wx.hideNavigationBarLoading()
         if (message != '') {
           wx.hideLoading();
         }
 
-        if (res.statusCode === 200) {
+        if (res.statusCode === 200 && res.data.code === 0) {
           resolve(res.data)
         } else {
           reject(res)

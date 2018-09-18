@@ -45,10 +45,22 @@ var userList = [
     }]
   ]
   
+  var showTimes = 0; 
+  var lastNum = 0;
+
   function RandomNumBoth(Min,Max){
     var Range = Max - Min;
     var Rand = Math.random();
-    var num = Min + Math.round(Rand * Range);
+    let temp = Math.round(Rand * Range);
+    if(lastNum === temp){
+      showTimes ++;
+    }
+    if (showTimes > 2) {
+      showTimes = 0;
+      temp = Max;
+    }
+    lastNum = temp;
+    var num = Min + temp;
     return num;
   }
   

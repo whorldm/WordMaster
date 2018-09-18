@@ -1,0 +1,49 @@
+/* components/ErrorWord/ErrorWord.wxss */
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background: rgba(139, 129, 129);
+  animation: bgColor 0.2s 0s linear forwards;
+}
+
+.error_text_top {
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 46%;
+  text-align:center;
+  margin:0 auto;
+  color: #fff;
+  font-family:Arial;
+  font-size:80rpx; 
+  font-weight:bold;
+  text-shadow:0 0 16rpx #FD9595, 0 0 16rpx #FF3328;
+  animation: showErrorTextTop 0.8s 0s linear forwards;
+}
+@keyframes showErrorTextTop{
+  0% {transform: translate3d(0,-200px,0); opacity: 0;}
+  100% {transform: translate3d(0,0px,0); opacity: 1;}
+}
+
+.error_text_bottom {
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 46%;
+  text-align:center;
+  margin:0 auto;
+  color: #fff;
+  font-family:Arial;
+  font-size:80rpx; 
+  font-weight:bold;
+  text-shadow:0 0 16rpx #FD9595, 0 0 16rpx #FF3328;
+  animation: showErrorTextBottom 0.8s 0s linear forwards;
+}
+@keyframes showErrorTextBottom{
+  0% {transform: translate3d(0,200px,0); opacity: 0;}
+  100% {transform: translate3d(0,0px,0); opacity: 1;}
+}

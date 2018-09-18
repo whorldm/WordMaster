@@ -1,6 +1,7 @@
 var Utils = require("../../../utils/util.js");
 var request = require("../../../utils/request.js");
 const app = getApp();
+var innerAudioContextResult = null ;
 
 Page({
 
@@ -28,7 +29,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    innerAudioContextResult = wx.createInnerAudioContext();
   },
 
   /**
@@ -36,12 +37,13 @@ Page({
    */
   onShow: function () {
     // 目前从本地获取数据
-    let result = getCurrentPages()[1];
-    console.log(getCurrentPages());
+    let _mySelf = wx.getStorageSync('mySelf');
+    let _oppnent = wx.getStorageSync('oppnent');
+    this.playBgMusic(_mySelf.score > _oppnent.score)
     this.setData({
-      isWin: result.data.mySelf.score > result.data.oppnent.score,
-      mySelf: result.data.mySelf,
-      oppnent: result.data.oppnent
+      isWin: _mySelf.score > _oppnent.score,
+      mySelf: _mySelf,
+      oppnent: _oppnent
     })
     // this.getTheResult();
   },
@@ -56,23 +58,36 @@ Page({
       })
     })
   },
-
+  // 播放背景音乐
+  playBgMusic(flag){
+    // if (flag) {
+    //   innerAudioContextResult.src = 'http://pepuwoffw.bkt.clouddn.com/win.mp3';
+    // } else {
+    //   innerAudioContextResult.src = 'http://pepuwoffw.bkt.clouddn.com/lose.mp3';
+    // }
+    innerAudioContextResult.src = 'http://pepuwoffw.bkt.clouddn.com/success.mp3'
+    innerAudioContextResult.play();
+    innerAudioContextResult.onEnded(res => {
+      innerAudioContextResult.destroy();
+    })
+  },
   // 回到首页
   goBack: function(){
+    let len = getCurrentPages().length;
     wx.navigateBack({
-      delta: 10
+      delta: len - 1
     })
   },
 
   // 换个对手
   changePerson: function(e){
-    if(this.data.isWin) {
-      wx.navigateTo({
+    if(this.data.isWin) {  //表示用户赢了  挑战下一个
+      wx.redirectTo({
         url: '/pages/rankgame/waiting/waiting'
       })
-    } else {
-      wx.navigateTo({
-        url: '/pages/rankgame/startgame/startgame?matchPerson='+this.data.oppnent.avatarUrl
+    } else {  // 用户输了，在战一次
+      wx.redirectTo({
+        url: '/pages/rankgame/startgame/startgame?matchPerson=' + this.data.oppnent.avatarUrl
       })
     }
   },
@@ -104,13 +119,4 @@ Page({
   onShareAppMessage: function () {
     this.actionSheetChange();
   },
-
-  // 监听手机的返回事件
-  onUnload: function() {
-    if(getCurrentPages().length > 2) {
-      wx.navigateBack({
-        delta: 10
-      })
-    }
-  }
 })

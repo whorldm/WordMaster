@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "SuccessShow": "/components/SuccessWord/SuccessWord",
+    "ErrorShow": "/components/ErrorWord/ErrorWord",
+    "ComboxShow": "/components/ShowCombox/ShowCombox"
+  }
+}

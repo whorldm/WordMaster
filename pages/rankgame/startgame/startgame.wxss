@@ -7,6 +7,7 @@ Page{
   height: 100%;
   background: #392D4E;
   perspective: 500; 
+  font-family: 'Bitstream';
 }
 .vs_area {
   width: 90%;
@@ -45,6 +46,11 @@ Page{
 .vs_right{
   float: right;
 }
+/* 展示加分的动效 */
+.addPoint {
+  opacity: 0;
+  animation: addPoint 1s ease-in-out forwards;
+}
 
 /*对决条的样式*/
 .vs_center {
@@ -80,15 +86,16 @@ Page{
 
 /*单词显示区域样式*/
 .showword {
-  width: 90%;
-  height: 12%;
-  align-items: center;
+  width: 500rpx;
+  height: 200rpx;
   position: relative;
   top: 20rpx;
   left: 0;
   right: 0;
-  margin: 0 auto;
-  text-align: center;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /* .showword .combox {
   width: 30%;
@@ -102,90 +109,80 @@ Page{
   animation: comboxShake 1s ease-in normal forwards;
 } */
 .showword .enAndch{
-  width: 60%;
-  height: 80rpx;
+  flex: 1;
   color: #F4C05F;
   font-size: 38rpx;
-  line-height: 80rpx;
-  position: relative;
-  top: 20%;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
   text-align: center;
+}
+.showword .left {
+  animation: bounceInLeft 1s ease-in;
+}
+.showword .right {
+  animation: bounceInRight 1s ease-in;
 }
 .shakeText {
   animation: shakeText 0.8s ease-in normal forwards;
 }
-.showword .enAndch text {
-  width: 30rpx;
-  height: 30rpx;
-  display: inline-block;
+.showword .showState {
+  width: 500rpx;
+  height: 300rpx;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  animation: Stamp 1s ease-in forwards;
 }
+
+/* 实现盖章效果 */
+@keyframes Stamp {
+  0% {opacity: 0;transform: translateZ(3000px) scale(1.5);}
+  25% {opacity: 0.5;transform: translateZ(20px) scale(1.3);}
+  50% {opacity: 0.8;transform: translateZ(10px) scale(1.2);}
+  75% {opacity: 1;transform: translateZ(5px) scale(1.1);}
+  100% {opacity: 1;transform: translateZ(0) scale(1);}
+}
+
+
 /**中间可供翻转的区域**/
 .flipArea {
-  width: 100%;
-  transform-style: preserve-3d;
+  width: 640rpx;
+  height: 570rpx;
+  border-radius: 10rpx;
+  background: #403C6E;
   position: relative;
   top: 0;
   left: 0;
   right: 0;
-  margin: 0 auto;
+  margin: auto;
+  padding: 20rpx;
 }
 /*单词操作区域样式   正面*/
 .keyWord{
-  width: 80%;
+  width: 640rpx;
   position: absolute;
   left: 0;
   right: 0;
-  margin: 20rpx auto;
-  border-radius: 10rpx;
-  background: #403C6E;
-  padding: 20rpx;
-  transition: all 1s ease;
-  backface-visibility: hidden;
+  margin: auto;
 }
 .front{
-  z-index: 10;
-  transform:rotate3d(0,1,0,0deg);
+  z-index: 1;
+  animation: bounceInRight 1s ease forwards;
 }
 .back{
-  z-index: 8;
-  transform:rotate3d(0,1,0,-180deg);
+  opacity: 0;
 }
-.card-flipped .front{
-  transform:rotate3d(0,1,0,180deg);
-  z-index: 8;
+.fronted{
+  opacity: 0;
 }
-.card-flipped .back{
-  transform:rotate3d(0,1,0,0deg);
-  z-index: 10;
+.backed{
+  z-index: 1;
+  opacity: 1;
+  animation:  showResult 1s ease forwards;
 }
 
-
-.flex-row{
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.flex-column{
-  height: 120rpx;
-  margin: 10rpx;
-  color: #260063;
-  font-size: 28rpx;
-  line-height: 120rpx;
-  text-align: center;
-  border-radius: 10rpx;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: stretch;
-  align-items: center;
-  background-color: #fff;
-}
-/*单词操作区域样式   正面*/
+/*单词操作区域样式  备份*/
 /* .keyWord{
   width: 80%;
   position: relative;
@@ -196,7 +193,7 @@ Page{
   border-radius: 10rpx;
   background: #403C6E;
   padding: 20rpx;
-}
+} */
 .flex-row{
   display: flex;
   flex: 1;
@@ -218,13 +215,16 @@ Page{
   justify-content: stretch;
   align-items: center;
   background-color: #fff;
-} */
+}
 .isClick {  /*点中的效果*/
   background: #43CFDC;
 }
 .sucessState {  /*答对的效果*/
-  opacity: 0; 
+  /* opacity: 0;  */
   /* background: #403C6E; */
+  /* background-image: url('http://peqmyh7ue.bkt.clouddn.com/bg_disappear.gif');
+  background-size: cover; */
+  animation: disappear  0s 0.6s ease forwards;
 }
 .errorState {  /*答错的效果*/
   position: relative;
@@ -232,7 +232,7 @@ Page{
   animation: tremble 0.8s 0s ease both;
 }
 .notice { /*点击提示后的效果*/
-  animation: changeColor 2s ease forwards; 
+  animation: changeColor 0.8s ease-in-out 2 none; 
 }
 
 /**用户消除玩一局后，翻牌显示对应的奖励    背面**/
@@ -246,13 +246,19 @@ Page{
   right: 0;
   top: 0;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .reward_item {
   position: absolute;
-  top: 40%;
   left: 0;
   right: 0;
-  margin: 0 auto;
+  margin: auto;
+}
+.reward_item view {
+  font-size: 46rpx;
+  line-height: 100rpx;
 }
 .reward_item text {
   font-size: 36rpx;
@@ -266,7 +272,7 @@ Page{
   height: 138rpx;
   width: 138rpx;
   position: relative;
-  top: 56%;
+  top: 6%;
   left: 0;
   right: 0;
   margin: 0 auto;

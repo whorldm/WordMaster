@@ -25,10 +25,10 @@
   }
 }
 /* 从左边飞入 */
-@keyframes bounceInLeft {  
+@keyframes bounceInLeft { 
   from, 60%, 75%, 90%, to {animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);}
   0% {opacity: 0;transform: translate3d(-3000px, 0, 0);}
-  60% {opacity: 1;transform: translate3d(25px, 0, 0);}
+  60% {opacity: 1;transform: translate3d(60px, 0, 0);}
   75% {transform: translate3d(-10px, 0, 0);}
   90% {transform: translate3d(5px, 0, 0);}
   100% {opacity: 1;transform: none;}
@@ -37,7 +37,7 @@
 @keyframes bounceInRight {
   from, 60%, 75%, 90%, to {animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);}
   0% {opacity: 0;transform: translate3d(3000px, 0, 0);}
-  60% {opacity: 1;transform: translate3d(-25px, 0, 0);}
+  60% {opacity: 1;transform: translate3d(-60px, 0, 0);}
   75% {transform: translate3d(10px, 0, 0);}
   90% {transform: translate3d(-5px, 0, 0);}
   100% {opacity: 1;transform: none;}
@@ -52,7 +52,7 @@
   80% {transform: scale(1.2,1.2);opacity: 0.5;}
   100% {transform: scale(1,1);opacity: 0;}
 }
-/* 金币出现效果 */
+/* 连击系数出现效果 */
 @keyframes comboxShake{
   from, 60%, 75%, 90%, to {animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);}
   0% {opacity: 0;transform: translate3d(-3000px, 0, 0);}
@@ -76,7 +76,7 @@
   75% {opacity:0.25;}
   100% {opacity: 0;}
 }
-/*错误的抖动*/
+/*错误的抖动提示效果*/
 @keyframes tremble {
   0%{transform:scale(1);}
   10%,20%{transform:scale(1) rotate(-2deg);}
@@ -84,8 +84,37 @@
   40%,60%,80%{transform:scale(1.1) rotate(-2deg);}
   100%{transform:scale(1) rotate(0);}
 }
-/*提示效果*/
+/*提示效果--变色和抖动*/
 @keyframes changeColor {
   from {background: #FFF}
   to {background: #43CFDC}
+  10%,20%{transform:scale(1) rotate(-2deg);}
+  30%,50%,70%,90%{transform:scale(1.1) rotate(2deg);}
+  40%,60%,80%{transform:scale(1.1) rotate(-2deg);}
+}
+
+/*提示加分效果--从积分下方飞入*/
+@keyframes addPoint {
+  0% {opacity: 0;transform: translate3d(0 ,3000px, 0);}
+  40% {opacity: 0.5;transform: translate3d(0, 25px, 0);}
+  60% {opacity: 1;transform: translate3d(0, 20px, 0);}
+  75% {opacity: 1;transform: translate3d(0, 15px, 0);}
+  90% {opacity: 0.5;transform: translate3d(0, 5px, 0);}
+  100% {opacity: 0;transform: translate3d(0, 0px, 0);}
+}
+
+/*结果页显示结果title动效*/
+@keyframes showResult {
+  from, to {animation-timing-function: cubic-bezier(0.0, 0.25, 0.50, 1.0);}
+  0% {opacity: 0;transform: translate3d(0, 0, 3000px) scale(2);}
+  /* 40% {opacity: 0.3;transform: translate3d(0, 0, 2000px) scale(1.2);} */
+  50% {opacity: 0.5;transform: translate3d(0, 0,2000px) scale(1.5);}
+  /* 80% {transform: translate3d(0, 0, -3000px) scale(1.1);} */
+  100% {opacity: 1;transform: translate3d(0, 0, 0) scale(1);}
+}
+
+/*消失*/
+@keyframes disappear {
+  from {opacity: 1; }
+  to {opacity: 0;}
 }

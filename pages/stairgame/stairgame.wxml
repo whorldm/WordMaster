@@ -1,0 +1,77 @@
+<view class='Box'>
+  <!--顶部的比赛情况信息-->
+  <view class='header'>
+    <view class='title'>[小学]考试关卡</view>
+    <view class='process_area'>
+      <view class='area_star'>
+        <view class='star_one'>
+          <image src='../../img/game/star.png'></image>
+        </view>
+        <view class='star_two'>
+          <image src='../../img/game/star.png'></image>
+        </view>
+        <view class='star_three'>
+          <image src='../../img/game/star.png'></image>
+        </view>
+      </view>
+      <view class='area_line'>
+        <view class='area_inline' style='flex:{{mySelf.score / 100}};'></view>
+      </view>
+    </view>
+  </view>
+  
+  <!--显示积分-->
+  <view class='grade'>
+    <view class='score'>{{mySelf.score}}</view>
+    <view class='point'></view>
+  </view>
+
+  <!--显示通过条件以及单词量-->
+  <view class='condition_area'>
+    <view class='condition' wx:if="{{isSpecial}}">耗时：{{gameClock}}</view>
+    
+    <view class='word_num'>
+      <image class="{{showWordCouple.length > 1 ? 'lighten':''}}" src='../../img/game/word_num.png'></image>
+      我的词量：{{mySelf.totalNum}}
+    </view>
+  </view>
+
+  <!--键盘区域-->
+  <view class='keyboard'>
+    <view bindtap="ClickGrid" class='word_area'>
+      <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
+        <view class="flex-row">
+          <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
+            <view class="flex-column">
+              <view class="word_item {{gridItem.isChoose ? 'word_click':'word_common' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}"
+              data-key="{{gridItem.pairIndex}}"
+              data-posx="{{index}}"
+              data-posy='{{idx}}'
+              data-value="{{gridItem.wordData.value}}"> 
+                {{gridItem.wordData.value}}
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!--错误提示的弹出框-->
+  <ErrorShow id='errorShow' wx:if="{{isError}}" random="{{error_Type}}"></ErrorShow>
+  <!--正确的弹出框-->
+  <SuccessShow id="SuccessShow" wx:if="{{isRight}}" random="{{right_Type}}" showWord="{{showWordCouple}}"></SuccessShow>
+  <!--combox的显示-->
+  <ComboxShow id="ComboxShow" wx:if="{{isRight}}" combox="{{mySelf.combox}}"></ComboxShow>
+
+  <!--底部提示按钮-->
+  <view class='help' bindtap='getHelp'>提示</view>
+
+  <view class='showModal' wx:if="{{showModal}}">
+    <view class='countDown'>
+      <view class='countDown_bg'></view>
+      <image src='{{countURL}}'></image>
+    </view>
+  </view>
+</view>
+

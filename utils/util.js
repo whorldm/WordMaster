@@ -62,12 +62,12 @@ function judeGreed(second) {
 function dealWordCouple(str1, str2) {
   let reg = /^[a-zA-Z]/;
   let temp = [];
-  if (reg.test(str1)) {
+  if (reg.test(str2)) {
+    temp.push(str1);
+    temp.push(str2);
+  } else {
     temp.push(str2);
     temp.push(str1);
-  } else {
-    temp.push(str1);
-    temp.push(str2); 
   }
   return temp;  
 }

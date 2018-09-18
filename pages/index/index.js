@@ -17,11 +17,18 @@ Page({
     }
   },
 
+  onShow: function(){
+    
+  },
+
   // 用户第一次点击的时候获取权限
   getUserInfo: function(e) {
     if (this.data.userId || wx.getStorageSync('userId')) {
+      // wx.navigateTo({
+      //   url: '/pages/rankgame/waiting/waiting',
+      // })
       wx.navigateTo({
-        url: '/pages/rankgame/waiting/waiting',
+        url: "/pages/stairgame/stairgame",
       })
       return ;
     }
@@ -78,9 +85,13 @@ Page({
               key: 'userId',
               data: res.userId
             })
+            // wx.navigateTo({
+            //   url: '/pages/rankgame/waiting/waiting',
+            // })
             wx.navigateTo({
-              url: '/pages/rankgame/waiting/waiting',
+              url: "/pages/stairgame/stairgame",
             })
+            
           }).catch(error => {
             wx.showToast({
               title: '获取userId失败',

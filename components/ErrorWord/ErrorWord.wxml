@@ -1,0 +1,6 @@
+<!--components/ErrorWord/ErrorWord.wxml-->
+<view class='mask'>
+  <view class="{{random === 0 ? 'error_text_top':'error_text_bottom'}}">
+    {{errorList[random]}}
+  </view>
+</view>

@@ -41,7 +41,7 @@ Page({
 
   // 直接从首页进入，不经过段位页
   onLoad: function () {
-    let waitTime = match.RandomNumBoth(1,5);
+    let waitTime = match.RandomNumBoth(1,3);
     if (app.globalData.userInfo) {
       this.setData({
         count: waitTime,
@@ -53,23 +53,32 @@ Page({
         userInfo: getCurrentPages()[0].data.userInfo
       })
     }
-    request.getData("SEGMENT_LIST",{userId: app.globalData.userId })
-    .then(res => {
-      this.setData({
-        matchPerson: match.matchPerson(res.list.length - 1),
-        myLevel: res.list[res.list.length - 1],
-      })
-    })
-    .catch(err => {
-      console.error(err);
-    })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.countInterval();
+    console.log(getCurrentPages());
+    request.getData("SEGMENT_LIST", { userId: app.globalData.userId })
+    .then(res => {
+      this.setData({
+        matchPerson: match.matchPerson(res.list.length - 1),
+        myLevel: res.list[res.list.length - 1],
+      })
+      this.countInterval();
+    })
+    .catch(err => {
+      wx.showModal({
+        content: '匹配失败，请稍后重试',
+        success: res => {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      })
+      console.error(err);
+    })
   },
 
   // 倒计时进行匹配对手

@@ -14,7 +14,7 @@ Page{
   margin: 0 auto;
   text-align: center;
   z-index: -1;
-  animation: fadeVS 0.8s ease-in normal forwards; 
+  animation: fadeVS 1s 0.2s ease-out forwards; 
 }
 .bg_vs text {
   display: block;
@@ -157,10 +157,12 @@ Page{
   }
   50% {
     opacity: 0.5; 
+    z-index: 3;
     color: #647AEF; 
   }
   75% {
     opacity:0.75;
+    z-index: 1;
     color: #9079EF;
   }
   100% {

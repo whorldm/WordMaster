@@ -18,6 +18,7 @@ Page,
   color: #ffffff;
   font-size: 40rpx;
   text-align: center;
+  font-family: 'Bitstream'
 }
 .menu button {
   opacity: 0;

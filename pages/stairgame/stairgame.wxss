@@ -1,0 +1,274 @@
+Page{
+  width: 100%;
+  height: 100%;
+}
+.Box {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_bg_game.png');
+}
+.header {
+  width: 90%;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.header .title{
+  color: #30729A;
+  font-size: 50rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+/*等级星星的样式*/
+.process_area {
+  width: 360rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.area_star {
+  width: 360rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.star_one {
+  flex: 3;
+  height: 40rpx;
+  text-align: right;
+}
+.star_two {
+  flex: 1;
+  height: 40rpx;
+  text-align: right;
+}
+.star_three {
+  flex: 1;
+  height: 40rpx;
+  text-align: right;
+}
+.area_star image{
+  width: 40rpx;
+  height: 40rpx;
+}
+/*进度条样式*/
+.area_line {
+  width: 360rpx;
+  height: 32rpx;
+  border-radius: 16rpx;
+  background-color: #307F76;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.area_inline {
+  margin: 0 8rpx;
+  width: 342rpx;
+  height: 20rpx;
+  border-radius: 8rpx;
+  background-color: #39A698;
+}
+/*积分的样式*/
+.grade {
+  width: 340rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 180rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.grade .score {
+  flex: 1.5;
+  color: #F7FF2A;
+  font-size: 34rpx;
+  text-align: right;
+  line-height: 40rpx;
+}
+.grade .point {
+  flex: 1;
+  color: #FFF;
+  padding: 0 8px;
+  font-size: 30rpx;
+  text-align: left;
+  line-height: 40rpx;
+}
+/*时间已经词量样式*/
+.condition_area {
+  width: 640rpx;
+  height: 82rpx;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 26rpx auto;
+  font-size: 30rpx;
+}
+.condition {
+  float: left;
+  width: 240rpx;
+  height: 82rpx;
+  font-size: 36rpx;
+  color: #30729A;
+  display: flex;
+  align-items: flex-end;
+}
+.word_num {
+  float: right;
+  width: 200rpx;
+  color:  #2F756B;
+  text-align: center;
+}
+.word_num image {
+  width: 56rpx;
+  height: 40rpx;
+  display: block;
+  margin: 0 auto;
+}
+.lighten {
+  background-color: #FCD433;
+}
+/*公告栏及键盘区域样式*/
+.keyboard {
+  width: 660rpx;
+  height: 600rpx;
+  border-radius: 30rpx;
+  background: rgba(199, 199, 199, 0.2);
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  padding: 20rpx 0;
+  line-height: 90rpx;
+  font-size: 50rpx;
+  color: #FFF;
+  text-align: center;
+}
+/*键盘的区域*/
+.word_area {
+  width: 100%;
+  height: 570rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.flex-row{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 18rpx auto;
+}
+.flex-column{
+  flex: 1;
+  text-overflow: ellipsis;
+}
+.word_item {
+  width: 176rpx;
+  height: 128rpx;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 30rpx;
+  line-height: 128rpx;
+}
+.word_common {  /*为选中的效果*/
+  color: #815450;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_common.png');
+}
+.word_click {  /*点击选中的效果*/
+  color: #2EAE55;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_success.png');
+}
+.errorState {  /*答错的效果*/
+  color: #FF3328;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_error.png');
+  animation: tremble 0.8s 0s ease both;
+}
+.sucessState { /*答对的效果*/
+  animation: disappear  0.3s ease forwards;
+}
+.notice { /*点击提示后的效果*/
+  background-size: cover;
+  animation: newTremble 0.8s ease-in-out; 
+}
+@keyframes newTremble {
+  0%{background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_success.png');transform:scale(1);}
+  10%,20%{transform:scale(1) rotate(-2deg);}
+  30%,50%,70%,90%{transform:scale(1.1) rotate(2deg);}
+  40%,60%,80%{transform:scale(1.1) rotate(-2deg);}
+  100%{background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_common.png');transform:scale(1) rotate(0);}
+}
+
+/*提示信息*/
+.help {
+  height: 80rpx;
+  width: 360rpx;
+  margin: 60rpx auto 0;
+  line-height: 80rpx;
+  color: #815450;
+  font-size: 30rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/help.png');
+}
+
+/**遮罩倒计时**/
+.showModal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.countDown {
+  width: 214rpx;
+  height: 214rpx;
+  position: relative;
+  top: 40%;
+  right: 0;
+  left: 0;
+  margin: auto;
+  z-index: 1000;
+}
+.countDown_bg {
+  width: 214rpx;
+  height: 214rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-size: cover;
+  background-image: url('http://pepuwoffw.bkt.clouddn.com/bg_count.png');
+  animation: rotate 1s 0s ease-in-out 3 alternate;
+}
+.countDown image{
+  display: block;
+  width: 136rpx;
+  height: 126rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
+@keyframes rotate {
+  0% {transform: rotate(360deg);}
+  /* 50% {transform: rotate(0deg);} */
+  100% {transform: rotate(0deg);}
+}

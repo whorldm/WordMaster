@@ -3,8 +3,8 @@
   <view class='vs_area'>
     <view class='vs_center'>
       <view class='line'>
-        <view class='left' style="flex: {{mySelf.score + 1}}"></view>
-        <view class='right' style="flex: {{oppnent.score + 1}}"></view>
+        <view class='left' style="flex: {{mySelf.score + 10}}"></view>
+        <view class='right' style="flex: {{oppnent.score + 10}}"></view>
       </view>
       <text class="{{total_second <= 5 ? 'lastFive':''}}">{{gameClock}}</text>
     </view>
@@ -12,24 +12,28 @@
       <view class='vs_left vs_user'>
         <image src='{{mySelf.avatarUrl}}'></image>
         <view>{{mySelf.score}}</view>
+        <view class="{{pointClass1}}" style='opacity: 0;'> +{{addPoint1}} </view>
       </view>
       <view class='vs_right vs_user'>
         <image src='{{oppnent.avatarUrl}}'></image>
         <view>{{oppnent.score}}</view>
+        <!-- <view class="{{pointClass2}}" style='opacity: 0;'> +{{addPoint2}} </view> -->
       </view>
     </view>
   </view>
   <!--答对显示单词-->
-  <view class='showword' wx:if="showWordCouple.length === 2">
-    <!-- <view wx:if="{{combox > 1}}" class='combox'>combox  x{{lastTimes}}</view> -->
-    <view class="enAndch {{showWordCouple.length === 2 ? 'shakeText':''}}" >
-      {{showWordCouple[0]}}<text></text>{{showWordCouple[1]}}
-    </view>
+  <view class='showword'>
+    <view class="enAndch {{firstStr?'left':''}}">{{firstStr}}</view>
+    <view class="enAndch {{secondStr?'right':''}}">{{secondStr}}</view>
+    <!-- <view class='showState'>
+      <image src='../../../img/correct.jpg'></image>
+      <image src='../../../img.wrong.jpg'></image>
+    </view> -->
   </view>
 
-  <view class="flipArea {{isFlip? 'card-flipped':''}}">
+  <view class="flipArea">
     <!--键盘区域-->
-    <view bindtap="ClickGrid" class="keyWord front">
+    <view bindtap="ClickGrid" class="keyWord {{frontClass}}">
       <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
         <view class="flex-row">
           <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
@@ -39,6 +43,7 @@
             data-posy='{{idx}}'
             data-value="{{gridItem.wordData.value}}">
               {{gridItem.wordData.value}}
+               <image style='width:180rpx;height:120rpx;' wx:if="{{gridItem.isClear}}" src='../../../img/bg_disappear.gif'></image>
             </view>
             <view class='colcumn_back'></view>
           </block>
@@ -47,9 +52,10 @@
     </view>
 
     <!--完成一局后的奖励-->
-    <view class="keyWord back">
+    <view class="keyWord {{backClass}}">
       <view hidden='{{!fastFlag}}' class="reward">
         <view class='reward_item'>
+          <view>Round {{mySelf.roundTime}}</view>
           优先完成，再接再厉
           <text>积分 +200</text>
         </view>

@@ -1,18 +1,20 @@
 {
-  "pages":[
+  "pages": [ 
     "pages/index/index",
     "pages/rankgame/rankhome/rankhome",
     "pages/rankgame/waiting/waiting",
     "pages/rankgame/startgame/startgame",
     "pages/rankgame/gameover/gameover",
     "pages/usercenter/usercenter",
+    "pages/stairgame/stairgame",
     "pages/lexicon/lexicon",
-    "pages/priview/priview"
+    "pages/priview/priview",
+    "pages/stairover/stairover"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#392D4E",
     "navigationBarTitleText": "单词大咖",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

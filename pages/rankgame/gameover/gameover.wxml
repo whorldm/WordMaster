@@ -20,9 +20,9 @@
       </view>
       <view class="flex-row">
         <view class="flex-col"><image class="userimg" src="{{mySelf.avatarUrl}}"></image></view>
-        <view class="flex-col">{{mySelf.rightNum}}</view>
-        <view class="flex-col">{{mySelf.errorNum}}</view>
-        <view class="flex-col">{{mySelf.score}}</view>
+        <view class="flex-col my">{{mySelf.rightNum}}</view>
+        <view class="flex-col my">{{mySelf.errorNum}}</view>
+        <view class="flex-col my">{{mySelf.score}}</view>
       </view>
       <view class="flex-row">
         <view class="flex-col"><image class="userimg" src="{{oppnent.avatarUrl}}"></image></view>
@@ -42,7 +42,13 @@
       </view>
     </view>
   </view>
-  <view class='btn_share' bindtap='actionSheetTap'>
+
+  <button open-type='share' class='btn_share'>
+    <text wx:if="{{isWin===true}}">晒一晒</text>
+    <text wx:if="{{isWin===false}}">找帮手复仇</text>
+  </button>
+
+  <!-- <view class='btn_share' bindtap='actionSheetTap'>
      <text wx:if="{{isWin===true}}">晒一晒</text>
      <text wx:if="{{isWin===false}}">找帮手复仇</text>
   </view>
@@ -50,7 +56,7 @@
     <action-sheet-item>
       <button open-type='share' id='shareFriends'>分享给朋友</button>
     </action-sheet-item>
-    <!-- <action-sheet-item bindtap="SaveToPicture">生成分享图</action-sheet-item> -->
+    <action-sheet-item bindtap="SaveToPicture">生成分享图</action-sheet-item>
     <action-sheet-cancel >取消</action-sheet-cancel>
-  </action-sheet>
+  </action-sheet> -->
 </view>

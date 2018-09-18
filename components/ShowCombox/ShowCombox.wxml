@@ -1,0 +1,5 @@
+<view class="combox_area">
+  <view class='jumpCenter'>
+    {{comboxList[combox-1]}}
+  </view>
+</view>

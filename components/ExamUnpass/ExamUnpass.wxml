@@ -1,0 +1,49 @@
+<view class='game_result'>
+  <view class='result_light'>
+    <!--称号的显示区域-->
+    <view class='bg_title'>
+      <image class='result_title' src='../../img/result/unpass.png'></image>
+    </view>
+    
+    <!--星星的显示区域-->
+    <view class='result_star'>
+      <view class='result_star_one'>
+        <image src='../../img/result/dark_star.png'></image>
+      </view>
+      <view class='result_star_two'>
+        <image src='../../img/result/dark_star.png'></image>
+      </view>
+      <view class='result_star_three'>
+        <image src='../../img/result/dark_star.png'></image>
+      </view>
+    </view>
+
+    <!--文字的显示区域-->
+    <view class='content_area'>
+      <view class='wordNum'>
+        正确单词<text style='color: #4BD26B;'>{{rightNum}}</text>个 
+        错误<text style='color: #FF5A5A;'>{{errorNum}}</text>个
+      </view>
+      <view class='greed_title'>很遗憾<text>{{greedTitle}}</text></view>
+      <view class='greed_line'>英语考试未通过，特准留级。</view>
+    </view>
+
+    <!--按钮的区域-->
+    <view class='btn_area'>
+      <view class='btnItem_next' bindtap='goNextGame'>
+        含泪补考
+      </view>
+      <view class='btnItem_share'>
+        找好友来帮忙
+        <button open-type='share' class='btn_share'>
+        </button>
+      </view>
+    </view>
+
+    <!--奖励的区域-->
+    <view class='reward_area'>
+      奖学金：<image src='../../img/result/coin.png'></image> + 0
+    </view>
+
+  </view>
+</view>

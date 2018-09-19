@@ -6,6 +6,9 @@ Page({
   data: {
     userId: '',    
     userInfo: {},
+    levelName: '', //用户的等级的名称
+    levelId: '', //用户的等级的ID
+    levelList: [] //用户的等级信息
   },
 
   onLoad: function () {
@@ -18,7 +21,26 @@ Page({
   },
 
   onShow: function(){
-    
+  
+  },
+
+  getUserLevel: function() {
+    request.getData("LEVEL_LIST", { userId: app.globalData.userId })
+    .then(res => {
+      let temp = res.list[res.list.length - 1];
+      if(temp.isTest === 1) {
+        wx.navigateTo({
+          url: "/pages/examgame/examgame?levelId=" + temp.levelId + '&levelName=' + temp.levelName,
+        })
+      } else {
+        wx.navigateTo({
+          url: "/pages/stairgame/stairgame?levelId=" + temp.levelId + '&levelName=' + temp.levelName,
+        })
+      }
+    })
+    .catch(err => {
+      console.error("获取用户的等级信息失败！")
+    })
   },
 
   // 用户第一次点击的时候获取权限
@@ -27,9 +49,7 @@ Page({
       // wx.navigateTo({
       //   url: '/pages/rankgame/waiting/waiting',
       // })
-      wx.navigateTo({
-        url: "/pages/stairgame/stairgame",
-      })
+      this.getUserLevel();
       return ;
     }
 
@@ -85,13 +105,13 @@ Page({
               key: 'userId',
               data: res.userId
             })
+
             // wx.navigateTo({
             //   url: '/pages/rankgame/waiting/waiting',
             // })
-            wx.navigateTo({
-              url: "/pages/stairgame/stairgame",
-            })
-            
+
+            this.getUserLevel();
+    
           }).catch(error => {
             wx.showToast({
               title: '获取userId失败',

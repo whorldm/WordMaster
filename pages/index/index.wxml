@@ -11,7 +11,7 @@
 </view> -->
 <view class='menu'>
   <view class="game_start"> 
-    开始消单词
+    开始考试
   </view>
   <button class="game_start" open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
 </view>

@@ -134,8 +134,46 @@ Page{
 .lighten {
   background-color: #FCD433;
 }
+
+
 /*公告栏及键盘区域样式*/
+.keyword_area {
+  width: 660rpx;
+  height: 600rpx;
+  border-radius: 30rpx;
+  background: rgba(199, 199, 199, 0.2);
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  padding: 20rpx 0;
+}
 .keyboard {
+  width: 620rpx;
+  height: 600rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+/*显示回合提示文字*/
+.show_round_text {
+  color: #000;
+  width: 300rpx;
+  height: 300rpx;
+  font-size: 60rpx;
+  background: red;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+/* .keyboard {
   width: 660rpx;
   height: 600rpx;
   border-radius: 30rpx;
@@ -150,7 +188,7 @@ Page{
   font-size: 50rpx;
   color: #FFF;
   text-align: center;
-}
+} */
 /*键盘的区域*/
 .word_area {
   width: 100%;

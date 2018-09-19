@@ -1,0 +1,49 @@
+<view class='game_result'>
+  <view class='result_light'>
+    <!--称号的显示区域-->
+    <view class='bg_title'>
+      <image class='result_title' src='../../img/result/common_unpass.png'></image>
+    </view>
+
+    <!--文字的显示区域-->
+    <view class='content_area'>
+      <view class='greed_title'>{{greedTitle}}</view>
+      <!--本局积分的显示样式-->
+      <view class='greed_table'>
+        <view class='greed_table_row'>
+          <view style='flex:2;'></view>
+          <view style='flex:1;'>正确</view>
+          <view style='flex:1;'>错误</view>
+          <view style='flex:1;'>得分</view>
+        </view>
+        <view class='greed_table_row'>
+          <view class='user_head'>
+            <image src="{{mySelf.avatarUrl}}"></image>
+            {{mySelf.nickName}}
+          </view>
+          <view style='flex:1;color:#FFBA00;'>{{mySelf.rightNum}}</view>
+          <view style='flex:1;color:#FF5730;'>{{mySelf.errorNum}}</view>
+          <view style='flex:1;'>{{mySelf.score}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!--按钮的区域-->
+    <view class='btn_area'>
+      <view class='btnItem_next' bindtap='goNextGame'>
+        再试一次
+      </view>
+      <view class='btnItem_share'>
+        找好友来帮忙
+        <button open-type='share' class='btn_share'>
+        </button>
+      </view>
+    </view>
+
+    <!--奖励的区域-->
+    <view class='reward_area'>
+      奖学金：<image src='../../img/result/coin.png'></image> + 0
+    </view>
+
+  </view>
+</view>

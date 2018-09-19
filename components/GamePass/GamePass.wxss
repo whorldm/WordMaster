@@ -1,0 +1,250 @@
+.game_result {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_bg_pass.png')
+}
+
+/*中间内容的背景图*/
+.result_light {
+  /* width: 550rpx; */
+  width: 100%;
+  height: 778rpx;
+  position: absolute;
+  top: 14%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+/*title图背景*/
+.bg_title {
+  width: 488rpx;
+  height: 104rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/common_bg_title_pass.png')
+}
+/*title的动效显示*/
+.result_title {
+  width: 488rpx;
+  height: 104rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 100rpx;
+  margin: auto;
+  text-align: center;
+  font-size: 70rpx;
+  line-height: 104rpx;
+  font-weight: bolder;
+}
+.result_title text {  /*文字的渐变色*/
+  opacity: 0;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #EEECC9, #F8A100);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.title_one {
+  animation: drop 250ms 0.4s ease forwards;
+}
+.title_two {
+  animation: drop 250ms 0.6s ease forwards;
+}
+.title_three {
+  animation: drop 250ms 0.9s ease forwards;
+}
+.title_four {
+  animation: drop 250ms 1.3s ease forwards;
+}
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 3000px) scale(3);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/*星星显示动效样式*/
+.star_area {
+  width: 500rpx;
+  height: 90rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.result_star {
+  width: 80%;
+  height: 90rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.result_star_one,
+.result_star_two,
+.result_star_three{
+  width: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.result_star_one image,
+.result_star_two image,
+.result_star_three image{
+  width: 98rpx;
+  height: 90rpx;
+}
+/*星星飞入覆盖*/
+.light_star_one {
+  opacity: 0;
+  animation: drop 200ms 1.6s ease forwards;
+}
+.light_star_two {
+  opacity: 0;
+  animation: drop 200ms 1.8s ease forwards;
+}
+.light_star_three {
+  opacity: 0;
+  animation: drop 200ms 2s ease forwards;
+}
+
+/**文字显示区域样式**/
+.content_area {
+  width: 100%;
+  position: relative;
+  top: 30rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  letter-spacing: 2rpx;
+}
+.greed_title {
+  color: #FFF;
+  font-size: 40rpx;
+  line-height: 80rpx;
+  font-weight: lighter;
+}
+.greed_line {
+  color: #FFF;
+  font-size: 40rpx;
+  line-height: 60rpx;
+}
+/*表格展示列表的样式*/
+.greed_table {
+  width: 90%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 50rpx auto 0;
+}
+.greed_table_row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  font-size: 40rpx;
+  color: #FFF;
+  margin: 10rpx auto;
+}
+.user_head {
+  flex:2;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user_head image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+
+/**按钮区域显示*/
+.btn_area {
+  width: 560rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: 12%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btnItem_next {
+  width: 240rpx;
+  height: 72rpx;
+  color: #815450;
+  font-size: 30rpx;
+  line-height: 72rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_next.png');
+}
+.btnItem_share {
+  width: 240rpx;
+  height: 72rpx;
+  color: #CC4E32;
+  font-size: 30rpx;
+  line-height: 72rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_reward.png');
+}
+.btn_share {
+  opacity: 0;
+  width: 240rpx;
+  height: 72rpx;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: auto;
+}
+
+/*奖励显示区域样式*/
+.reward_area {
+  width: 560rpx;
+  color: #FFF;
+  font-size: 40rpx;
+  line-height: 80rpx;
+  text-align: center;
+  position: relative;
+  top: 16%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.reward_area image{
+  width: 48rpx;
+  height: 46rpx;
+  display: inline-block;
+  margin: 0 auto;
+}

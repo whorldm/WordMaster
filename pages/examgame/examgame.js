@@ -5,8 +5,10 @@ var match = require("../../utils/match.js");
 var app = getApp();
 
 var startTimer = null;  // 开赛前的倒计时
+var gameTimer = null;  // 比赛倒计时的计时器
+
 var innerAudioContextBg = null;  // 播放背景音乐的实例
-   
+
 Page({
   /**
    * 页面的初始数据
@@ -16,6 +18,8 @@ Page({
     row: 4,  //根据单词对总数以及策划规则算出的二维数组行数
     col: 3,  //根据单词对总数以及策划规则算出的二维数组列数
     isGameOver: false, //表示比赛是否结束
+    total_second: 60, //比赛时间
+    gameClock: '01:00', //游戏倒计时一分钟
     isClickFlag: false,  //表示用户是否点击选中单词
     firstClick: '',  //第一次点击单词的坐标
     matchWord: '',  //选中一个单词后，与之匹配单词的坐标
@@ -23,58 +27,61 @@ Page({
     showWordCouple: [], //显示单词对
     firstStr: '',   //存放第一次点击的字符串
     secondStr: '',  //存放第一次点击的字符串
+    totalWord: [],  //存储考试的所有单词
     wordGrid: [],   //模拟随机生成后的数据
-    sucessWord: [], //当前用户答对的单词
+    sucessWord: [], //当前用户单局答对的单词
     errorWord: [], //当前用户答错的单词
     isRight: false,  //是否消除正确
     isError: false,  //是否消除错误
     right_Type: 0,  //错误情况的提示类型
     error_Type: 0,  //正确情况的提示类型
     mySelf: {  // 保存当前用户的个人信息
-      nickName: '侧耳倾听',
-      avatarUrl: '../../img/1.jpeg',
-      rightNum: 0,
-      errorNum: 0,
-      totalNum: 100,
-      combox: 0,
-      roundTime: 0, //表示用户目前处于第几盘
+      avatarUrl: '../../../img/1.jpeg',
+      rightNum: 0,  //用户当前答错的单词数量
+      errorNum: 0,  //用户当前答对的单词数量
+      totalNum: 0,  //当前用户的词量
+      combox: 0,   //用户的连消次数
+      roundTime: 1, //表示用户目前处于第几盘
       score: 0,  //用户当前积分
       coin: 100  //用户的持有金币
     },
-    starNum: '',  //星星的数量
-    levelId: '',  //用户的当前等级Id
-    levelName: '', //用户的当前等级名称
-    countURL: '', //开赛倒计时切换数字URL
+    totalRound: 1, //总共需要经历几轮
+    passStandard: 100, //通过考试的标准
+    levelId: '', //当前等级的ID
+    levelName: '小学毕业考试', //当前等级的名称
+    countURL: '', // 开赛倒计时切换数字URL
     nextLevel: {}, //比赛结束后的下一关
   },
 
 // ### 生命周期函数 code start ### 
   onLoad: function (options) {
-    console.log('普通关')
+    console.log('考试关')
     // 实例化播放器
     innerAudioContextBg = wx.createInnerAudioContext();
-    if(options.levelId && options.levelName) {
+    // 获取当前等级信息
+    if (options.levelId && options.levelName) {
       this.setData({
-        ['mySelf.nickName']: app.globalData.userInfo.nickName,
-        ['mySelf.avatarUrl']: app.globalData.userInfo.avatarUrl,
         levelId: options.levelId,
-        levelName: options.levelName
+        levelName: options.levelName,
       })
     }
   },
   onShow: function () {
-    this.wordRandom();  // 用户随机生成单词
+    this.getTotalWord();  // 用户随机生成单词
     this.getUserAsset();  // 获取用户的资产
     CountInThree(this);  //开赛倒计时
   },
   onUnload: function () {
     innerAudioContextBg.destroy();
+    if (gameTimer) {
+      clearTimeout(gameTimer);
+    }
     if (startTimer) {
       clearTimeout(startTimer);
     }
-    if (this.data.sucessTimes < (this.data.col * this.data.row / 2)) {
+    if ((this.data.mySelf.roundTime < this.data.totalRound) && this.data.total_second > 0) {
       wx.showModal({
-        content: '您已经放弃了战斗!',
+        content: '您已经放弃了考试!',
         showCancel: false,
       })
     }
@@ -100,8 +107,38 @@ Page({
       })
   },
 
+  // 获取考试的全部单词量
+  getTotalWord: function () {
+    let params = {};
+    params.userId = app.globalData.userId;
+    params.levelId = this.data.levelId;
+    request.getData("WORD_LIST", params)
+    .then(res => {
+      let arrayToFill = new Array(this.data.row); //存放单词数据的二维数组
+      for (let i = 0, l1 = arrayToFill.length; i <= l1 - 1; ++i) {
+        arrayToFill[i] = new Array(this.data.col);
+        for (let j = 0, l2 = arrayToFill[i].length; j <= l2 - 1; ++j) {
+          arrayToFill[i][j] = {};
+        }
+      }
+      console.log('全部考试的单词')
+      console.log(res.list)
+      let tempWord = res.list.slice(0, 6);
+      assistant.randomFill(arrayToFill, this.data.row, this.data.col, tempWord);
+      this.setData({
+        wordGrid: arrayToFill,
+        totalWord: res.list,
+        totalRound: res.list.length / 6,
+        passStandard: (res.list.length / 6) * 100
+      })
+    })
+    .catch(err => {
+      console.error("获取单词失败！")
+    })
+  },
   // 将单词对随机生成二维数组
   wordRandom: function () {
+    console.log('/////////');
     let arrayToFill = new Array(this.data.row); //存放单词数据的二维数组
     for (let i = 0, l1 = arrayToFill.length; i <= l1 - 1; ++i) {
       arrayToFill[i] = new Array(this.data.col);
@@ -109,18 +146,12 @@ Page({
         arrayToFill[i][j] = {};
       }
     }
-    let params = {};
-    params.userId = app.globalData.userId;
-    params.levelId = this.data.levelId;
-    request.getData("WORD_LIST",params)
-    .then(res => {
-      assistant.randomFill(arrayToFill, this.data.row, this.data.col, res.list);
-      this.setData({
-        wordGrid: arrayToFill
-      })
-    })
-    .catch(err => {
-      console.error("获取单词失败！")
+    let tempWord = this.data.totalWord.slice(this.data.mySelf.roundTime * 6, this.data.mySelf.roundTime * 6 + 6);
+    console.log('截取第几轮单词' + this.data.mySelf.roundTime);
+    console.log(tempWord);
+    assistant.randomFill(arrayToFill, this.data.row, this.data.col, tempWord);
+    this.setData({
+      wordGrid: arrayToFill
     })
   },
 
@@ -154,6 +185,13 @@ Page({
     let matchWord = e.target.dataset.key;
     let word = e.target.dataset.value;
 
+    if (this.data.total_second <= 0) { // 当前比赛是否结束
+      wx.showToast({
+        icon: 'none',
+        title: '比赛结束',
+      })
+      return;
+    }
     // 点击了已消除的区域
     if (matchWord === undefined || matchWord === '' || matchWord === null) {
       return;
@@ -235,11 +273,20 @@ Page({
         })
       }, 1000)
 
-      //全部消除成功后比赛结束
-      if (times === (this.data.row*this.data.col/2)) {
-        this.GameOver(_score);
+      //比赛时间未结束，更换一局
+      if (times === 6 && this.data.total_second > 0) {  
+        //考试的单词全部消除成功，比赛结束
+        if (!this.data.isGameOver && this.data.mySelf.roundTime === this.data.totalWord.length / 6) {
+          this.GameOver(_score);
+        } else {
+          this.setData(initLocalData({
+            sucessTimes: 0,
+            ['mySelf.combox']: 0,
+            ['mySelf.roundTime']: this.data.mySelf.roundTime + 1
+          }), this.wordRandom());          
+        }
       }
-
+    
     } else {
       // 错误后，将对应方块的isError变为true，以便使用错误提示的CSS
       let first = 'wordGrid[' + lastPosition[1] + '][' + lastPosition[0] + '].isError';
@@ -252,8 +299,8 @@ Page({
       let obj = Utils.rebuildArr(this.data.firstStr, this.data.wordGrid[matchPosition[1]][matchPosition[0]].wordData.value);
       let tmpWord = 'errorWord[' + this.data.errorWord.length + ']';
       // 播放错误的读音
-      let errorType = match.RandomNumBoth(0, 1); 
-      
+      let errorType = match.RandomNumBoth(0, 1);
+
       this.setData(initLocalData({
         secondStr: word,
         [tmpWord]: obj,
@@ -264,15 +311,15 @@ Page({
         isError: true,
         error_Type: errorType
       }));
-      
+
       setTimeout(() => {
         if (this.data.isError) {
           this.ErrorWord = this.selectComponent('#errorShow');
           this.ErrorWord.playErrorMusic(errorType);
         }
       }, 500);
-      
-     
+
+
       // 700ms后将答错的单词方块状态初始化
       setTimeout(() => {
         this.setData({
@@ -288,17 +335,17 @@ Page({
   },
 
   // 比赛结束
-  GameOver: function (score) {
-    // 暂停播放背景音乐以及销毁实例
+  GameOver: function (_score) {
+    // 销毁背景音乐的实例
     innerAudioContextBg.stop();
     if (innerAudioContextBg) {
       innerAudioContextBg.destroy();
     }
+
     // 并统计最终的结果
-    let starNum = judeTheStar(score);
     let params = {
       coin: this.data.mySelf.coin,
-      star: starNum,
+      star: _score < this.data.passStandard ? 0 : 3,
       level: this.data.levelId,
       userId: app.globalData.userId,
       wrongNum: this.data.errorWord.length,
@@ -306,14 +353,13 @@ Page({
       wrongbookEntityList: this.data.errorWord,
       rightbookEntityList: this.data.sucessWord,
     }
-
-    request.getData('GAME_OVER', params).then(res => {
+    request.getData('GAME_OVER', params)
+    .then(res => {
       if (res.code === 0) {
         this.setData({
           nextLevel: res.nextLevel,
           isGameOver: true,
-          starNum: starNum,
-          isPass: score >= 60
+          isPass: _score >= this.data.passStandard
         });
       }
     }).catch(error => {
@@ -325,7 +371,6 @@ Page({
         }
       })
     })
-
   },
 // ### 用户点击操作 code end ###
 
@@ -371,8 +416,8 @@ Page({
   // 向后请求减少金币
   delCoinNum: function () {
     let params = {};
-    params.userId = app.globalData.userId,
-    params.levelId = this.data.levelId
+    params.userId = app.globalData.userId;
+    params.levelId = this.data.levelId;
     request.getData("PROMPT", params)
       .then(res => {
         console.log('提示成功')
@@ -410,7 +455,7 @@ Page({
     }, 1000)
   },
   // 播放点击音效
-  playClick: function() {
+  playClick: function () {
     let innerAudioContextClick = wx.createInnerAudioContext();
     innerAudioContextClick.src = 'http://pepuwoffw.bkt.clouddn.com/click.mp3';
     innerAudioContextClick.play();
@@ -436,18 +481,27 @@ function initLocalData(obj = {}) {
   return obj;
 }
 
-function judeTheStar(score) {
-  let star = 0; 
-  if (score < 60) {
-    star = 0;
-  } else if (score < 80) {
-    star = 1;
-  } else if (score < 100) {
-    star = 2;
-  } else if (score === 100){
-    star = 3;
+// 比赛倒计时（一分钟）
+function CountOneMinte(that) {
+  clearTimeout(gameTimer);
+  let temp = that.data.total_second - 1;
+  that.setData({
+    total_second: temp,
+    gameClock: Utils.dateFormat(temp)
+  })
+  if (temp <= 0) {
+    that.setData({
+      gameClock: "00:00",
+    });
+    clearTimeout(gameTimer);
+    if(!that.data.isGameOver) {
+      that.GameOver(that.data.mySelf.score);
+    }
+    return;
   }
-  return star;
+  gameTimer = setTimeout(function () {
+    CountOneMinte(that);
+  }, 1000)
 }
 
 var count_to_start = 3,
@@ -463,6 +517,7 @@ function CountInThree(that) {
     that.setData({
       showModal: false
     })
+    CountOneMinte(that);  // 比赛倒计时开始
     that.playBgMusic();  // 开始播放音乐
     return;
   }

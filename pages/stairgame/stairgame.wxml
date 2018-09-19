@@ -1,7 +1,7 @@
 <view class='Box'>
   <!--顶部的比赛情况信息-->
   <view class='header'>
-    <view class='title'>[小学]考试关卡</view>
+    <view class='title'>[{{levelName}}]</view>
     <view class='process_area'>
       <view class='area_star'>
         <view class='star_one'>
@@ -28,8 +28,6 @@
 
   <!--显示通过条件以及单词量-->
   <view class='condition_area'>
-    <view class='condition' wx:if="{{isSpecial}}">耗时：{{gameClock}}</view>
-    
     <view class='word_num'>
       <image class="{{showWordCouple.length > 1 ? 'lighten':''}}" src='../../img/game/word_num.png'></image>
       我的词量：{{mySelf.totalNum}}
@@ -58,11 +56,34 @@
   </view>
 
   <!--错误提示的弹出框-->
-  <ErrorShow id='errorShow' wx:if="{{isError}}" random="{{error_Type}}"></ErrorShow>
+  <ErrorShow id='errorShow' 
+    wx:if="{{isError}}"
+    random="{{error_Type}}">
+  </ErrorShow>
   <!--正确的弹出框-->
-  <SuccessShow id="SuccessShow" wx:if="{{isRight}}" random="{{right_Type}}" showWord="{{showWordCouple}}"></SuccessShow>
+  <SuccessShow id="SuccessShow" 
+    wx:if="{{isRight}}" 
+    random="{{right_Type}}" 
+    showWord="{{showWordCouple}}">
+  </SuccessShow>
   <!--combox的显示-->
-  <ComboxShow id="ComboxShow" wx:if="{{isRight}}" combox="{{mySelf.combox}}"></ComboxShow>
+  <ComboxShow id="ComboxShow" 
+    wx:if="{{isRight}}" 
+    combox="{{mySelf.combox}}">
+  </ComboxShow>
+  <!--普通关通过的显示-->
+  <GamePass id="GamePass" wx:if="{{isGameOver && isPass}}"
+    mySelf="{{mySelf}}" 
+    starNum="{{starNum}}"
+    greedTitle="{{levelName}}" 
+    bind:myNextGame="goNextGame">
+  </GamePass>
+  <!--普通关未通过的显示-->
+  <GameUnpass id="GameUnpass" wx:if="{{isGameOver && !isPass}}"
+    mySelf="{{mySelf}}"
+    greedTitle="{{levelName}}"
+    bind:myNextGame="goNextGame">
+  </GameUnpass>
 
   <!--底部提示按钮-->
   <view class='help' bindtap='getHelp'>提示</view>

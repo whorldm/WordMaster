@@ -51,6 +51,10 @@ const config = {
     interFace: '/segment/listAll',
     method: 'GET'
   },
+  'LEVEL_LIST': {
+    interFace: '/passRecord/listAll',
+    method: 'GET'
+  }
 
 }
 

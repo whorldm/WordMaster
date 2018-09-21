@@ -1,0 +1,212 @@
+/**ranking.wxss**/
+
+Page,
+.Box {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bg.png');
+  font-family: 'Bitstream Vera Serif Bold';
+}
+.topbar{
+  width: 100%;
+  height: 120rpx;
+}
+.topbar .word_master {
+  width: 500rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  position: absolute;
+  top: 30rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  color: #947025;
+  font-size: 50rpx;
+  text-align: center;
+  
+}
+.ranking_navs{
+  width: 70%;
+  height: 60rpx;
+  margin: 0 auto;
+  color: #964B00;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;/*水平居中*/
+  text-align: center;
+}
+.ranking_navs .nav{
+  width: 33%;
+  height: 100%;
+  background-size: cover;
+  position: relative;
+}
+.nav .nav_title{
+  position: absolute;
+  top: 20%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.score_rank{
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_score_rank.png') no-repeat;
+}
+.world_rank{
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_world_rank.png') no-repeat;
+}
+.friends_rank{
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_friends_rank.png') no-repeat;
+}
+.ranking_lists{
+  width: 100%;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+.paperclip{
+  width: 70rpx;
+  height: 100rpx;
+  position: absolute;
+  z-index: 5;
+  top: 15%;
+  right: 4%;
+}
+.bottom3{
+  width: 90%; 
+  height: 100%;
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bottom3.png') no-repeat;
+  background-size: cover;
+  margin: auto;
+}
+.bottom2{
+  width: 90%;
+  height: 99%;
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bottom2.png') no-repeat;
+  background-size: cover;
+  margin: auto;  
+  position: absolute;
+  z-index: 1;
+}
+.bottom1{
+  width: 93%;
+  height: 97%;
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bottom1.png') no-repeat;
+  background-size: cover;
+  margin: auto;  
+  position: absolute;
+  z-index: 2;
+  left: 2%;
+  padding: 14rpx 10rpx;
+}
+
+/*list-item中的css样式*/
+.lists_topbar{
+  width: 100%;
+  height: 70rpx;
+  font-size: 40rpx;
+  display: flex;
+  align-items:center;
+  color:#A9B29E;
+}
+
+.ranking_title{
+  padding-left: 10%;
+  width: 40%;
+}
+.dgree_title{
+  width: 20%;
+  text-align: center;
+}
+.number_title{
+  width: 22%;
+  text-align: right;
+}
+.list-items{
+  width: 100%;
+  font-size: 30rpx;
+}
+.list-item{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_level4_7bottom.png');
+  background-size: cover;
+  color:#A9B29E;
+}
+.my_rank{
+  width: 100%;
+  height: 100rpx;
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_mybottom.png');
+  background-size: cover;
+  color:#A9B29E;
+}
+.level1bottom{
+  width: 100%;
+  height: 100rpx;
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_level1bottom.png');
+  background-size: cover;
+  color: #FFCD36;
+}
+.level2bottom{
+  width: 100%;
+  height: 100rpx;
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_level2bottom.png');
+  background-size: cover;
+  color: #84B8B4;
+}
+.level3bottom{
+  width: 100%;
+  height: 100rpx;
+  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_level3bottom.png');
+  background-size: cover;
+  color: #BE9658;
+}
+.befores{
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+.ranking{
+  width: 95rpx;
+  height: 70rpx;
+}
+.ranking_num{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 15%;
+  text-align: center;
+}
+.ranking_img{
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+.ranking_img2{
+  width:80%;
+  height:90%;
+  padding-left:10%;
+}
+.ranking_img3{
+  width: 60%;
+  height: 85%;
+  padding-left: 20%;
+}
+.headimage{
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 5rpx;
+  margin-right: 10rpx;
+  display: block;
+  border-radius: 40rpx;
+}
+.number{
+  width: 20%;
+  text-align: right;
+}
+.degree{
+  width: 18%;
+  text-align: center;
+}

@@ -1,0 +1,80 @@
+<view class='box'>
+  <view class='topbar'>
+    <view class='word_master'>
+      单词大咖
+    </view>
+  </view>
+
+  <view class='ranking_navs'>
+    <image class='paperclip' src='http://peqmyh7ue.bkt.clouddn.com/ranking_paperclip.png'></image>
+    <view class='score_rank nav'>
+      <text bindtap="getScoreRank" class='nav_title'>连消排行</text>
+    </view>
+    <view class='friends_rank nav'>
+      <text bindtap="getFriendsRank" class='nav_title'>好友排行</text>
+    </view>
+    <view class='world_rank nav'>
+      <text bindtap="getWorldRank" class='nav_title'>世界排行</text>
+    </view>
+  </view>
+
+  <view class='ranking_lists ' style="height: {{listsHeight}}rpx">
+    <view class='bottom3'>
+      <view class='bottom2'>
+        <view class='bottom1'>
+          <view class='lists_topbar'>
+            <text class='ranking_title topbar_item'>名次</text>
+            <text class='dgree_title topbar_item'>学位</text>
+            <text class='number_title topbar_item'>词量</text>
+          </view>
+
+          <view class='list-items'>
+            <view class='list-item my_rank' wx:if="{{myRanks != '' }}">
+              <view class='befores'>
+                <view class='ranking'>
+                  <view wx:if="{{myRanks.myRank == 0 || myRanks.myRank > 3}}" class='ranking_num'>
+                    {{myRanks.myRank}}
+                  </view>
+                  <image wx:if="{{myRanks.myRank == 1}}" class='ranking_img' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level1.png'></image>
+                  <image wx:if="{{myRanks.myRank == 2}}" class='ranking_img ranking_img2' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level2.png'></image>
+                  <image wx:if="{{myRanks.myRank == 3}}" class='ranking_img ranking_img3' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level3.png'></image>
+
+                </view>
+                <image class='headimage' src='{{myRanks.weiPic}}'>
+                </image>
+                <text class='name'>{{myRanks.nickname}}</text>
+              </view>
+
+              <view class='degree'>{{myRanks.levelName}}</view>
+              <view class="number">{{myRanks.right}}</view>
+            </view>
+            <scroll-view scroll-y class='rank_list' style='height:{{scrollHeight}}rpx;'>
+              <block wx:for="{{levelList}}" wx:for-item="item" wx:key="{{item.userId}}">
+                <view class="list-item  {{index == 0?'level1bottom':''}}  {{index == 1?'level2bottom':''}} {{index == 2?'level3bottom':''}}">
+                  <view class='befores'>
+                    <view class='ranking'>
+                      <view wx:if="{{index > 2}}" class='ranking_num'>
+                        {{index+1}}
+                      </view>
+                      <image wx:if="{{index == 0}}" class='ranking_img' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level1.png'></image>
+                      <image wx:if="{{index == 1}}" class='ranking_img ranking_img2' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level2.png'></image>
+                      <image wx:if="{{index == 2}}" class='ranking_img ranking_img3' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level3.png'></image>
+
+                    </view>
+                    <image class='headimage' src='{{item.weiPic}}'>
+                    </image>
+                    <text class='name'>{{item.nickname}}</text>
+                  </view>
+                  <view class='degree'>{{item.levelName}}</view>
+                  <view class='number'>{{item.right}}</view>
+                </view>
+              </block>
+            </scroll-view>
+
+          </view>
+
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

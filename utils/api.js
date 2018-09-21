@@ -62,6 +62,14 @@ const config = {
   'MY_RINKING': {
     interFace: '/user/myRank',
     method: 'GET'
+  },
+  'RINKING_WORLD_LIST': {
+    interFace: '/user/rank',
+    method: 'GET'
+  },
+  'MY_RINKING':{
+    interFace: '/user/myRank',
+    method: 'GET'
   }
 }
 

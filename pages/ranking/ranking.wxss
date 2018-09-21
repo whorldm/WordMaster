@@ -6,7 +6,7 @@ Page,
   width: 100%;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bg.png');
-  font-family: 'YouYuan';
+  /* font-family: 'youyuan'; */
 }
 .topbar{
   width: 100%;
@@ -178,7 +178,7 @@ Page,
   position: relative;
   top: 15%;
   text-align: center;
-  font-family:'Zaozi';
+  font-family:'zaozi';
   color: #964B00;
 }
 .ranking_img{

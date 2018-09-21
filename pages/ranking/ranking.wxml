@@ -1,4 +1,4 @@
-<view class='box'>
+<view class='box' >
   <!--topbar标题  -->
   <view class='topbar'>
     <view class='word_master'>
@@ -9,13 +9,13 @@
   <view class='ranking_navs'>
     <image class='paperclip' src='http://peqmyh7ue.bkt.clouddn.com/ranking_paperclip.png'></image>
     <view class='score_rank nav'>
-      <text bindtap="getScoreRank" class='nav_title'>连消排行</text>
+      <text bindtap="getWorldRank" class='nav_title'>世界排行</text>
     </view>
     <view class='friends_rank nav'>
-      <text bindtap="getFriendsRank" class='nav_title'>好友排行</text>
+      <text bindtap="getScoreRank" class='nav_title'>连消排行</text>
     </view>
     <view class='world_rank nav'>
-      <text bindtap="getWorldRank" class='nav_title'>世界排行</text>
+      <text bindtap="getFriendsRank" class='nav_title'>好友排行</text>
     </view>
   </view>
   <!-- 排行榜 -->

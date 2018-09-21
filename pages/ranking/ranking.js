@@ -16,7 +16,7 @@ Page({
   },
 
   onLoad: function () {
-    //this.getWorldRank();
+    this.getWorldRank();
     //this.loadFontFace();
     if (app.globalData.userInfo) {
       this.setData({
@@ -24,8 +24,8 @@ Page({
         userInfo: app.globalData.userInfo,
       })
     }
-    utils.loadFont();
-    utils.loadYouyuanFont();
+    //utils.loadFont();
+    //utils.loadYouyuanFont();
   },
   //获取连消排行
   getScoreRank: function() {

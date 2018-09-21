@@ -23,7 +23,7 @@ Page{
 }
 /*等级星星的样式*/
 .process_area {
-  width: 360rpx;
+  width: 260rpx;
   position: relative;
   top: 0;
   left: 0;
@@ -31,7 +31,7 @@ Page{
   margin: 0 auto;
 }
 .area_star {
-  width: 360rpx;
+  width: 260rpx;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +57,7 @@ Page{
 }
 /*进度条样式*/
 .area_line {
-  width: 360rpx;
+  width: 260rpx;
   height: 32rpx;
   border-radius: 16rpx;
   background-color: #307F76;
@@ -67,7 +67,7 @@ Page{
 }
 .area_inline {
   margin: 0 8rpx;
-  width: 342rpx;
+  width: 242rpx;
   height: 20rpx;
   border-radius: 8rpx;
   background-color: #39A698;
@@ -384,7 +384,7 @@ Page{
 
 /*通过结果页的弹出方式*/
 #ExamPass {
-  animation: slowDown 0.5s 0.5s linear forwards;
+  animation: slowDown 0.5s 5s linear forwards;
 }
 @keyframes slowDown {
   form{transform: translate3d(0,-3000px,0);}
@@ -392,7 +392,7 @@ Page{
 }
 /*未通过结果页的弹出方式*/
 #ExamUnpass {
-  animation: slowUp 0.5s 0.5s linear forwards;
+  animation: slowUp 0.5s 5s linear forwards;
 }
 @keyframes slowUp {
   form{transform: translate3d(0,3000px,0);}

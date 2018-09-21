@@ -110,29 +110,33 @@ function rebuildArr(str1,str2,id) {
 
 // 动态加载字体
 function loadFont() {
-  wx.loadFontFace({
-    family: 'Zaozi',
-    source: 'url("http://pfc6zcsy2.bkt.clouddn.com/font/title.otf")',
-    success: function (res) {
-      console.log("字体加载成功") //  loaded
-    },
-    fail: function (res) {
-      console.log("字体加载失败") //  error
-    }
-  });
+  if (wx.canIUse('loadFontFace')) {
+    wx.loadFontFace({
+      family: 'Zaozi',
+      source: 'url("http://pfc6zcsy2.bkt.clouddn.com/font/title.otf")',
+      success: function (res) {
+        console.log("字体加载成功") //  loaded
+      },
+      fail: function (res) {
+        console.log("字体加载失败") //  error
+      }
+    });
+  }
 }
 // 动态幼圆字体
 function loadYouyuanFont() {
-  wx.loadFontFace({
-    family: 'YouYuan',
-    source: 'url("http://pfc6zcsy2.bkt.clouddn.com/幼圆.TTF")',
-    success: function (res) {
-      console.log("字体加载成功") //  loaded
-    },
-    fail: function (res) {
-      console.log("字体加载失败") //  error
-    }
-  });
+  if (wx.canIUse('loadFontFace')) {
+    wx.loadFontFace({
+      family: 'YouYuan',
+      source: 'url("http://pfc6zcsy2.bkt.clouddn.com/幼圆.TTF")',
+      success: function (res) {
+        console.log("字体加载成功") //  loaded
+      },
+      fail: function (res) {
+        console.log("字体加载失败") //  error
+      }
+    });
+  }
 }
 // 开赛倒计时
 var startTimer = null;  // 开赛前的倒计时

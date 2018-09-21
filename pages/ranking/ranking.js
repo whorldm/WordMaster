@@ -26,6 +26,7 @@ Page({
     }
     //utils.loadFont();
     //utils.loadYouyuanFont();
+
   },
   //获取连消排行
   getScoreRank: function() {

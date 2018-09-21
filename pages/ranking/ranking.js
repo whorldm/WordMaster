@@ -13,7 +13,6 @@ Page({
     levelType: 'score',//当前类型的排行
     listsHeight: '1000',//整个list的高度
     scrollHeight: '800',//滑动部分list排行榜的高度
-    fontFamily: 'Bitstream Vera Serif Bold',
   },
 
   onLoad: function () {
@@ -28,7 +27,9 @@ Page({
     utils.loadFont();
     utils.loadYouyuanFont();
   },
+  //获取连消排行
   getScoreRank: function() {
+    //初始化levelList myRanks
     this.setData({
         levelList: {}, 
         myRanks: ''
@@ -48,6 +49,7 @@ Page({
     //   console.log(err);
     // })
   },
+  //获取好友排行
   getFriendsRank: function () {
     this.setData({
       levelList: {},
@@ -67,12 +69,14 @@ Page({
     //     console.log(err);
     //   })
   },
-
+  //获取世界排行
   getWorldRank: function () {
+    //获取自己在世界的排行
     this.getMyRank();
     request.getData("RINKING_WORLD_LIST")
       .then(res => {
         let lists = res.worldRank;
+        //中文解码，URL解码，nickname截取6个字符，
         lists.forEach(function(item,index){
           item.nickname = decodeURI(item.nickname);
           if((item.nickname).length>6){
@@ -86,8 +90,7 @@ Page({
           }
         });
         this.setData({
-          levelList: lists,
-          levelType: 'world'
+          levelList: lists
         });
       })
       .catch(err => {
@@ -95,6 +98,7 @@ Page({
         console.log(err);
       })
   },
+  //获取我的排名情况
   getMyRank: function () {
     request.getData("MY_RINKING", { userId: app.globalData.userId})
     .then(res => {
@@ -111,8 +115,7 @@ Page({
           }
           
         this.setData({
-          myRanks: JSON.parse(JSON.stringify(item)),
-          levelType: 'world'
+          myRanks: JSON.parse(JSON.stringify(item))
         });
       })
       .catch(err => {

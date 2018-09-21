@@ -1,10 +1,11 @@
 <view class='box'>
+  <!--topbar标题  -->
   <view class='topbar'>
     <view class='word_master'>
       单词大咖
     </view>
   </view>
-
+  <!--排行的导航栏  -->
   <view class='ranking_navs'>
     <image class='paperclip' src='http://peqmyh7ue.bkt.clouddn.com/ranking_paperclip.png'></image>
     <view class='score_rank nav'>
@@ -17,18 +18,20 @@
       <text bindtap="getWorldRank" class='nav_title'>世界排行</text>
     </view>
   </view>
-
+  <!-- 排行榜 -->
   <view class='ranking_lists ' style="height: {{listsHeight}}rpx">
     <view class='bottom3'>
       <view class='bottom2'>
         <view class='bottom1'>
+          <!--topbar  -->
           <view class='lists_topbar'>
             <text class='ranking_title topbar_item'>名次</text>
             <text class='dgree_title topbar_item'>学位</text>
             <text class='number_title topbar_item'>词量</text>
           </view>
-
+          <!-- 排行列表 -->
           <view class='list-items'>
+            <!-- 我自己的排名 -->
             <view class='list-item my_rank' wx:if="{{myRanks != '' }}">
               <view class='befores'>
                 <view class='ranking'>
@@ -48,8 +51,10 @@
               <view class='degree'>{{myRanks.levelName}}</view>
               <view class="number">{{myRanks.right}}</view>
             </view>
+            <!-- 滑动加载列表 -->
             <scroll-view scroll-y class='rank_list' style='height:{{scrollHeight}}rpx;'>
               <block wx:for="{{levelList}}" wx:for-item="item" wx:key="{{item.userId}}">
+                <!-- 排行列表-->
                 <view class="list-item  {{index == 0?'level1bottom':''}}  {{index == 1?'level2bottom':''}} {{index == 2?'level3bottom':''}}">
                   <view class='befores'>
                     <view class='ranking'>

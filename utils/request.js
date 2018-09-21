@@ -7,10 +7,8 @@ var utils = require('./util.js');
  * message {String} 请求加载提示
  */
 
-<<<<<<< HEAD
+
 // var RemoteAddress = "http://172.20.120.107:8088";
-=======
->>>>>>> ee01eb831224595ffac8f0418e8d314a8e93f803
 var RemoteAddress = "http://172.20.160.7:8088";
 const getDataFromServerLoading = function (API, data = {},message) {
   wx.showNavigationBarLoading();

@@ -8,7 +8,8 @@
     "pages/lexicon/lexicon",
     "pages/priview/priview",
     "pages/examgame/examgame",
-    "pages/stairgame/stairgame"
+    "pages/stairgame/stairgame",
+    "pages/ranking/ranking"
   ],
   "window": {
     "backgroundTextStyle": "light",

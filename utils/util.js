@@ -199,6 +199,7 @@ module.exports = {
   dealWordCouple,
   rebuildArr,
   loadFont,
+  loadYouyuanFont,
   CountInThree,
   CountOneMinte
 }

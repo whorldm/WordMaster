@@ -6,7 +6,7 @@ Page,
   width: 100%;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bg.png');
-  font-family: 'Bitstream Vera Serif Bold';
+  font-family: 'YouYuan';
 }
 .topbar{
   width: 100%;
@@ -178,6 +178,8 @@ Page,
   position: relative;
   top: 15%;
   text-align: center;
+  font-family:'Zaozi';
+  color: #964B00;
 }
 .ranking_img{
   width: 100%;

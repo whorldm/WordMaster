@@ -18,13 +18,15 @@ Page({
 
   onLoad: function () {
     //this.getWorldRank();
-    this.loadFontFace();
+    //this.loadFontFace();
     if (app.globalData.userInfo) {
       this.setData({
         userId: app.globalData.userId,
         userInfo: app.globalData.userInfo,
       })
     }
+    utils.loadFont();
+    utils.loadYouyuanFont();
   },
   getScoreRank: function() {
     // request.getData("RINKING_SCORE_LIST", { userId: app.globalData.userId })
@@ -112,21 +114,21 @@ Page({
   },
 
   //字体下载
-  loadFontFace: function () {
-    const self = this
-    wx.loadFontFace({
-      family: this.data.fontFamily,
-      source: 'url("http://pfc6zcsy2.bkt.clouddn.com/幼圆.TTF")',
-      success(res) {
-        console.log(res.status)
-        self.setData({ loaded: true })
-      },
-      fail: function (res) {
-        console.log(res.status)
-      },
-      complete: function (res) {
-        console.log(res.status)
-      }
-    });
-  },
+  // loadFontFace: function () {
+  //   const self = this
+  //   wx.loadFontFace({
+  //     family: this.data.fontFamily,
+  //     source: 'url("http://pfc6zcsy2.bkt.clouddn.com/幼圆.TTF")',
+  //     success(res) {
+  //       console.log(res.status)
+  //       self.setData({ loaded: true })
+  //     },
+  //     fail: function (res) {
+  //       console.log(res.status)
+  //     },
+  //     complete: function (res) {
+  //       console.log(res.status)
+  //     }
+  //   });
+  // },
 })

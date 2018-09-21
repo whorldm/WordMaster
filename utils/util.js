@@ -121,7 +121,19 @@ function loadFont() {
     }
   });
 }
-
+// 动态幼圆字体
+function loadYouyuanFont() {
+  wx.loadFontFace({
+    family: 'YouYuan',
+    source: 'url("http://pfc6zcsy2.bkt.clouddn.com/幼圆.TTF")',
+    success: function (res) {
+      console.log("字体加载成功") //  loaded
+    },
+    fail: function (res) {
+      console.log("字体加载失败") //  error
+    }
+  });
+}
 // 开赛倒计时
 var startTimer = null;  // 开赛前的倒计时
 var urlList = [

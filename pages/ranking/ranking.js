@@ -27,35 +27,35 @@ Page({
     }
   },
   getScoreRank: function() {
-    request.getData("RINKING_SCORE_LIST", { userId: app.globalData.userId })
-    .then(res => {
-      let lists = res.list;
+    // request.getData("RINKING_SCORE_LIST", { userId: app.globalData.userId })
+    // .then(res => {
+    //   let lists = res.list;
     
-      this.setData({
-        levelList: lists, 
-        levelType: 'score',
-        levelNum: this.levelNum + lists
-      });
-    })
-    .catch(err => {
-      console.error("获取数据失败！")
-      console.log(err);
-    })
+    //   this.setData({
+    //     levelList: lists, 
+    //     levelType: 'score',
+    //     levelNum: this.levelNum + lists
+    //   });
+    // })
+    // .catch(err => {
+    //   console.error("获取数据失败！")
+    //   console.log(err);
+    // })
   },
   getFriendsRank: function () {
-    request.getDataLoading("FRIENDS_SCORE_LIST", { userId: app.globalData.userId })
-      .then(res => {
-        let lists = res.list;
+    // request.getDataLoading("FRIENDS_SCORE_LIST", { userId: app.globalData.userId })
+    //   .then(res => {
+    //     let lists = res.list;
       
-        this.setData({
-          levelList: lists,
-          levelType: 'friends',
-        });
-      })
-      .catch(err => {
-        console.error("获取数据失败！");
-        console.log(err);
-      })
+    //     this.setData({
+    //       levelList: lists,
+    //       levelType: 'friends',
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.error("获取数据失败！");
+    //     console.log(err);
+    //   })
   },
 
   getWorldRank: function () {

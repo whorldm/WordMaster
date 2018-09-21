@@ -29,6 +29,10 @@ Page({
     utils.loadYouyuanFont();
   },
   getScoreRank: function() {
+    this.setData({
+        levelList: {}, 
+        myRanks: ''
+      });
     // request.getData("RINKING_SCORE_LIST", { userId: app.globalData.userId })
     // .then(res => {
     //   let lists = res.list;
@@ -45,6 +49,10 @@ Page({
     // })
   },
   getFriendsRank: function () {
+    this.setData({
+      levelList: {},
+      myRanks: ''
+    });
     // request.getDataLoading("FRIENDS_SCORE_LIST", { userId: app.globalData.userId })
     //   .then(res => {
     //     let lists = res.list;

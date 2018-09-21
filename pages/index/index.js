@@ -25,25 +25,6 @@ Page({
   
   },
 
-  getUserLevel: function() {
-    request.getData("LEVEL_LIST", { userId: app.globalData.userId })
-    .then(res => {
-      let temp = res.list[res.list.length - 1];
-      if(temp.isTest === 1) {
-        wx.navigateTo({
-          url: "/pages/examgame/examgame?levelId=" + temp.id + '&levelName=' + temp.levelName,
-        })
-      } else {
-        wx.navigateTo({
-          url: "/pages/stairgame/stairgame?levelId=" + temp.id + '&levelName=' + temp.levelName,
-        })
-      }
-    })
-    .catch(err => {
-      console.error("获取用户的等级信息失败！")
-    })
-  },
-
   // 用户第一次点击的时候获取权限
   getUserInfo: function(e) {
     if (this.data.userId || wx.getStorageSync('userId')) {
@@ -88,6 +69,7 @@ Page({
     }
   },
 
+  // 新用户首次登陆授权
   userLogin: function (userData) {
     wx.login({
       success: res => {
@@ -120,6 +102,26 @@ Page({
         }
       }
     })
+  },
+
+  // 获取用户的等级
+  getUserLevel: function () {
+    request.getData("LEVEL_LIST", { userId: app.globalData.userId })
+      .then(res => {
+        let temp = res.list[res.list.length - 1];
+        if (temp.isTest === 1) {
+          wx.navigateTo({
+            url: "/pages/examgame/examgame?levelId=" + temp.id + '&levelName=' + temp.levelName,
+          })
+        } else {
+          wx.navigateTo({
+            url: "/pages/stairgame/stairgame?levelId=" + temp.id + '&levelName=' + temp.levelName,
+          })
+        }
+      })
+      .catch(err => {
+        console.error("获取用户的等级信息失败！")
+      })
   },
 
   // 查看排名

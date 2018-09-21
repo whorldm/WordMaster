@@ -6,6 +6,55 @@ Page,
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/home/bg.png');
 }
+/*顶部左侧按钮*/
+.header_left {
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  color: #9AA1C7;
+  display: flex;
+}
+.header_left image {
+  width: 48rpx;
+  height: 46rpx;
+}
+/*顶部右侧按钮*/
+.header_right {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  height: 200rpx;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+} 
+.right_item {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  color: #6AA9CA;
+}
+.right_item image{
+  width: 46rpx;
+  height: 50rpx;
+} 
+
+/**中间圆圈的样式**/
+.center {
+  width: 540rpx;
+  height: 540rpx;
+  position: relative;
+  top: 10%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/home/center.png');
+}
+
+/**开始按钮的样式**/
 .btn_start {
   width: 400rpx;
   height: 130rpx;
@@ -16,7 +65,7 @@ Page,
   letter-spacing: 6rpx;
   text-align: center;
   position: absolute;
-  top: 50%;
+  top: 90%;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -39,11 +88,11 @@ Page,
 /**底部的入口链接**/
 .foot_nav {
   width: 100%;
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
-  bottom: 12%;
-  margin: 0 auto;
+  top: 24%;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,9 +115,21 @@ Page,
   align-items: center;
   justify-content: center;
 }
-.foot_item image {
+.rank_logo image{
   width: 110rpx;
   height: 110rpx;
+  display: block;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.vs_logo image,
+.pk_logo image{
+  width: 100rpx;
+  height: 124rpx;
   display: block;
   position: relative;
   left: 0;

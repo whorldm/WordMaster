@@ -25,7 +25,7 @@ Page({
       })
     }
     utils.loadFont();
-    utils.loadYouyuanFont();
+    // utils.loadYouyuanFont();
   },
   //获取连消排行
   getScoreRank: function() {

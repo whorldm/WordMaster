@@ -398,13 +398,20 @@ Page({
     request.getData('GAME_OVER', params)
     .then(res => {
       if (res.code === 0) {
-        this.setData({
-          backClass: 'back',
-          nextLevel: res.nextLevel,
-          isGameOver: true,
-          starNum: starNum,
-          isPass: _score >= this.data.passStandard
-        });
+        if(this.data.backClass === 'backed'){
+          this.setData({
+            backClass: 'back',
+            nextLevel: res.nextLevel,
+            isGameOver: true,
+            starNum: starNum
+          });
+        } else {
+          this.setData({
+            nextLevel: res.nextLevel,
+            isGameOver: true,
+            starNum: starNum
+          });
+        }
       }
     }).catch(error => {
       wx.showModal({

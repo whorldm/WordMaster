@@ -1,7 +1,8 @@
 <view class='Box'>
   <!--顶部的比赛情况信息-->
   <view class='header'>
-    <view class='title'>[{{levelName}}]</view>
+    <view class='title' wx:if="{{levelId>9}}">[{{levelId}}关] {{levelName}}</view>
+    <view class='title' wx:else>[0{{levelId}}关] {{levelName}}</view>
     <view class='process_area'>
       <view class='area_star'>
         <view class='star_one'>
@@ -28,8 +29,13 @@
 
   <!--显示通过条件以及单词量-->
   <view class='condition_area'>
+    <view class="condition">倒计时：
+      <text class="{{total_second <= 10 ? 'lastTen': ''}}">{{gameClock}}</text>
+    </view>
+
     <view class='word_num'>
-      <image class="{{showWordCouple.length > 1 ? 'lighten':''}}" src='../../img/game/word_num.png'></image>
+      <image wx:if="{{showWordCouple.length > 1}}" src='../../img/game/light_book.png'></image>
+      <image wx:else src='../../img/game/word_num.png'></image>
       我的词量：{{mySelf.totalNum}}
     </view>
   </view>
@@ -40,7 +46,11 @@
       <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
         <view class="flex-row">
           <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
-            <view class="flex-column">
+            <view class="flex-column"
+              data-key="{{gridItem.pairIndex}}"
+              data-posx="{{index}}"
+              data-posy='{{idx}}'
+              data-value="{{gridItem.wordData.value}}">
               <view class="word_item {{gridItem.isChoose ? 'word_click':'word_common' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}"
               data-key="{{gridItem.pairIndex}}"
               data-posx="{{index}}"
@@ -72,21 +82,30 @@
     combox="{{mySelf.combox}}">
   </ComboxShow>
   <!--普通关通过的显示-->
-  <GamePass id="GamePass" wx:if="{{isGameOver && isPass}}"
-    mySelf="{{mySelf}}" 
-    starNum="{{starNum}}"
-    greedTitle="{{levelName}}" 
-    bind:myNextGame="goNextGame">
-  </GamePass>
+  <GamePass wx:if="{{isGameOver && isPass}}"
+      mySelf="{{mySelf}}" 
+      starNum="{{starNum}}"
+      levelId="{{levelId}}"
+      greedTitle="{{levelName}}" 
+      bind:myNextGame="goNextGame">
+    </GamePass>
   <!--普通关未通过的显示-->
-  <GameUnpass id="GameUnpass" wx:if="{{isGameOver && !isPass}}"
-    mySelf="{{mySelf}}"
-    greedTitle="{{levelName}}"
-    bind:myNextGame="goNextGame">
-  </GameUnpass>
+  <GameUnpass wx:if="{{isGameOver && !isPass}}"
+      mySelf="{{mySelf}}"
+      levelId="{{levelId}}"
+      greedTitle="{{levelName}}"
+      bind:myNextGame="goNextGame">
+    </GameUnpass>
 
   <!--底部提示按钮-->
   <view class='help' bindtap='getHelp'>提示</view>
+  <view class='coin_area'>
+    <view class='my_coin'>
+      <image src='../../img/coin.png'></image>
+      X {{mySelf.coin}}
+    </view>
+     <view class='del_coin' wx:if="{{isDelCoin}}"> -20 </view>
+  </view>
 
   <view class='showModal' wx:if="{{showModal}}">
     <view class='countDown'>

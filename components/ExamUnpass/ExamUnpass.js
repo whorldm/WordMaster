@@ -10,6 +10,9 @@ Component({
     errorNum: {
       type: Number
     },
+    levelId: {
+      type: Number
+    },
     greedTitle: {
       type: String,
       default: '小学二年级'

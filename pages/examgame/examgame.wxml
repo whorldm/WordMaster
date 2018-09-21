@@ -1,7 +1,8 @@
 <view class='Box'>
   <!--顶部的比赛情况信息-->
   <view class='header'>
-    <view class='title'>[{{levelName}}]</view>
+     <view class='title' wx:if="{{levelId>9}}">[{{levelId}}关] {{levelName}}</view>
+    <view class='title' wx:else>[0{{levelId}}关] {{levelName}}</view>
     <view class='process_area'>
       <view class='area_star'>
         <view class='star_one'>
@@ -28,10 +29,13 @@
 
   <!--显示通过条件以及单词量-->
   <view class='condition_area'>
-    <view class='condition'>耗时：{{gameClock}}</view>
+    <view class="condition">倒计时：
+      <text class="{{total_second <= 10 ? 'lastTen': ''}}">{{gameClock}}</text>
+    </view>
     
     <view class='word_num'>
-      <image class="{{showWordCouple.length > 1 ? 'lighten':''}}" src='../../img/game/word_num.png'></image>
+      <image wx:if="{{showWordCouple.length > 1}}" src='../../img/game/light_book.png'></image>
+      <image wx:else src='../../img/game/word_num.png'></image>
       我的词量：{{mySelf.totalNum}}
     </view>
   </view>
@@ -43,7 +47,11 @@
         <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
           <view class="flex-row">
             <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
-              <view class="flex-column">
+              <view class="flex-column"
+                data-key="{{gridItem.pairIndex}}"
+                data-posx="{{index}}"
+                data-posy='{{idx}}'
+                data-value="{{gridItem.wordData.value}}">
                 <view class="word_item {{gridItem.isChoose ? 'word_click':'word_common' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}"
                 data-key="{{gridItem.pairIndex}}"
                 data-posx="{{index}}"
@@ -58,41 +66,60 @@
       </view>
     </view>
 
-    <!-- <view class='keyboard'>
+    <view class='keyboard {{backClass}}'>
       <view class='show_round_text'>
-        Round {{mySelf.roundTime + 1}}
+        第<text>{{mySelf.roundTime}}</text>组
       </view>
-    </view> -->
+    </view>
   </view>
 
   <!--错误提示的弹出框-->
-  <ErrorShow id='errorShow' wx:if="{{isError}}" random="{{error_Type}}"></ErrorShow>
+  <ErrorShow id='errorShow' wx:if="{{isError}}" 
+    random="{{error_Type}}">
+  </ErrorShow>
   <!--正确的弹出框-->
-  <SuccessShow id="SuccessShow" wx:if="{{isRight}}" random="{{right_Type}}" showWord="{{showWordCouple}}"></SuccessShow>
+  <SuccessShow id="SuccessShow" wx:if="{{isRight}}"
+    random="{{right_Type}}" showWord="{{showWordCouple}}">
+  </SuccessShow>
   <!--combox的显示-->
-  <ComboxShow id="ComboxShow" wx:if="{{isRight}}" combox="{{mySelf.combox}}"></ComboxShow>
+  <ComboxShow id="ComboxShow" wx:if="{{isRight}}" 
+    combox="{{mySelf.combox}}">
+  </ComboxShow>
   <!--考试通过的显示-->
   <ExamPass id="ExamPass" 
-    wx:if="{{isGameOver && mySelf.score >= passStandard}}"
+    wx:if="{{isGameOver && starNum >= 2}}"
     rightNum="{{mySelf.rightNum}}"
     errorNum="{{mySelf.errorNum}}"
     greedTitle="{{levelName}}"
+    levelId="{{levelId}}"
+    starNum = "{{starNum}}"
     bind:myNextGame="goNextGame">
   </ExamPass>
-
   <!--考试未通过的显示-->
   <ExamUnpass id="ExamUnpass"
-    wx:if="{{isGameOver && mySelf.score < passStandard}}"
+    wx:if="{{isGameOver && starNum === 0}}"
     rightNum="{{mySelf.rightNum}}"
     errorNum="{{mySelf.errorNum}}"
     greedTitle="{{levelName}}"
+    levelId="{{levelId}}"
     bind:myNextGame="goNextGame">
   </ExamUnpass>
 
   <!--底部提示按钮-->
   <view class='help' bindtap='getHelp'>提示</view>
+  <view class='coin_area'>
+    <view class='my_coin'>
+      <image src='../../img/coin.png'></image>
+      X {{mySelf.coin}}
+    </view>
+     <view class='del_coin' wx:if="{{isDelCoin}}"> -20 </view>
+  </view>
 
   <view class='showModal' wx:if="{{showModal}}">
+    <view class='exam_notice'>
+      <view>考试马上开始</view>
+      <view>答题时间60S</view>
+    </view>
     <view class='countDown'>
       <view class='countDown_bg'></view>
       <image src='{{countURL}}'></image>

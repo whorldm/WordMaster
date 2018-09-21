@@ -17,13 +17,13 @@ Page{
 }
 .header .title{
   color: #30729A;
-  font-size: 50rpx;
+  font-size: 40rpx;
   line-height: 100rpx;
   text-align: center;
 }
 /*等级星星的样式*/
 .process_area {
-  width: 360rpx;
+  width: 260rpx;
   position: relative;
   top: 0;
   left: 0;
@@ -31,18 +31,18 @@ Page{
   margin: 0 auto;
 }
 .area_star {
-  width: 360rpx;
+  width: 260rpx;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .star_one {
-  flex: 3;
+  flex: 1;
   height: 40rpx;
   text-align: right;
 }
 .star_two {
-  flex: 1;
+  flex: 1.2;
   height: 40rpx;
   text-align: right;
 }
@@ -57,7 +57,7 @@ Page{
 }
 /*进度条样式*/
 .area_line {
-  width: 360rpx;
+  width: 260rpx;
   height: 32rpx;
   border-radius: 16rpx;
   background-color: #307F76;
@@ -67,7 +67,7 @@ Page{
 }
 .area_inline {
   margin: 0 8rpx;
-  width: 342rpx;
+  width: 242rpx;
   height: 20rpx;
   border-radius: 8rpx;
   background-color: #39A698;
@@ -112,12 +112,17 @@ Page{
 }
 .condition {
   float: left;
-  width: 240rpx;
+  width: 300rpx;
   height: 82rpx;
+  line-height: 50rpx;
   font-size: 36rpx;
-  color: #30729A;
+  color: #F0EEC5;
   display: flex;
   align-items: flex-end;
+}
+.lastTen {
+  color: #FF3328;
+  font-size: 50rpx;
 }
 .word_num {
   float: right;
@@ -131,9 +136,8 @@ Page{
   display: block;
   margin: 0 auto;
 }
-.lighten {
-  background-color: #FCD433;
-}
+
+
 /*公告栏及键盘区域样式*/
 .keyboard {
   width: 660rpx;
@@ -223,6 +227,36 @@ Page{
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/help.png');
 }
+.coin_area {
+  width: 400rpx;
+  margin: 20rpx auto;
+  color: #F0EDCC;
+  font-size: 34rpx;
+}
+.my_coin {
+  width: 280rpx;
+  float: left;
+  display: flex;
+  justify-content: flex-end;
+}
+.my_coin image {
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  margin: 0 10rpx;
+}
+.del_coin {
+  width: 100rpx;
+  float: right;
+  color: #FFF;
+  text-align: left;
+  animation: delCoin 0.8s 0s linear forwards;
+}
+@keyframes delCoin{
+  0%{transform: translate3d(0, -60px,0);opacity: 0;}
+  20%{transform: translate3d(0, -50px,0) scale(1.2);opacity: 1;}
+  100%{transform: translate3d(0, 0px,0);opacity: 0;}
+}
 
 /**遮罩倒计时**/
 .showModal {
@@ -254,7 +288,7 @@ Page{
   margin: auto;
   background-size: cover;
   background-image: url('http://pepuwoffw.bkt.clouddn.com/bg_count.png');
-  animation: rotate 1s 0s ease-in-out 3 alternate;
+  animation: rotate 3s 0s linear;
 }
 .countDown image{
   display: block;
@@ -268,23 +302,23 @@ Page{
   margin: auto;
 }
 @keyframes rotate {
-  0% {transform: rotate(360deg);}
-  100% {transform: rotate(0deg);}
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(1600deg);}
 }
 
 /*通过结果页的弹出方式*/
-#ExamPass {
-  animation: slowDown 0.4s 0s linear forwards;
+/* #GamePass {
+  animation: slowDown 0.5s 2s linear forwards;
 }
 @keyframes slowDown {
   form{transform: translate3d(0,-3000px,0);}
   to{transform: translate3d(0,0px,0);}
-}
+} */
 /*未通过结果页的弹出方式*/
-#ExamUnpass {
-  animation: slowUp 0.4s 0s linear forwards;
+/* #GameUnpass {
+  animation: slowUp 0.5s 2s linear forwards;
 }
 @keyframes slowUp {
   form{transform: translate3d(0,3000px,0);}
   to{transform: translate3d(0,0px,0);}
-}
+} */

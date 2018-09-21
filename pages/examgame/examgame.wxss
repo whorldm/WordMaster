@@ -17,7 +17,7 @@ Page{
 }
 .header .title{
   color: #30729A;
-  font-size: 50rpx;
+  font-size: 40rpx;
   line-height: 100rpx;
   text-align: center;
 }
@@ -37,12 +37,12 @@ Page{
   justify-content: center;
 }
 .star_one {
-  flex: 3;
+  flex: 1;
   height: 40rpx;
   text-align: right;
 }
 .star_two {
-  flex: 1;
+  flex: 1.2;
   height: 40rpx;
   text-align: right;
 }
@@ -112,12 +112,17 @@ Page{
 }
 .condition {
   float: left;
-  width: 240rpx;
+  width: 300rpx;
   height: 82rpx;
+  line-height: 50rpx;
   font-size: 36rpx;
-  color: #30729A;
+  color: #F0EEC5;
   display: flex;
   align-items: flex-end;
+}
+.lastTen {
+  color: #FF3328;
+  font-size: 50rpx;
 }
 .word_num {
   float: right;
@@ -130,9 +135,6 @@ Page{
   height: 40rpx;
   display: block;
   margin: 0 auto;
-}
-.lighten {
-  background-color: #FCD433;
 }
 
 
@@ -159,19 +161,44 @@ Page{
   bottom: 0;
   margin: auto;
 }
+/* .front {
+  z-index: 1; 
+  animation: bounceInRight 1s ease forwards;
+} */
+.back{
+  z-index: -1;
+  opacity: 0;
+}
+/* .fronted{
+  z-index: -1;
+  opacity: 0;
+} */
+.backed{
+  z-index: 1;
+  opacity: 1;
+  animation:  showResult 1s ease forwards;
+}
 /*显示回合提示文字*/
 .show_round_text {
-  color: #000;
-  width: 300rpx;
-  height: 300rpx;
-  font-size: 60rpx;
-  background: red;
+  color: #F0EEC5;
+  width: 400rpx;
+  height: 100rpx;
+  font-size: 50rpx;
+  text-align: center;
+  line-height: 100rpx;
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   margin: auto;
+}
+.show_round_text text {
+  display: inline-block;
+  margin: 0 8px;
+  color: #FCD433;
+  font-size: 60rpx;
+  font-family: 'Zaozi';
 }
 /* .keyboard {
   width: 660rpx;
@@ -261,6 +288,36 @@ Page{
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/help.png');
 }
+.coin_area {
+  width: 400rpx;
+  margin: 20rpx auto;
+  color: #F0EDCC;
+  font-size: 34rpx;
+}
+.my_coin {
+  width: 280rpx;
+  float: left;
+  display: flex;
+  justify-content: flex-end;
+}
+.my_coin image {
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  margin: 0 10rpx;
+}
+.del_coin {
+  width: 100rpx;
+  float: right;
+  color: #FFF;
+  text-align: left;
+  animation: delCoin 0.8s 0s linear forwards;
+}
+@keyframes delCoin{
+  0%{transform: translate3d(0, -60px,0);opacity: 0;}
+  20%{transform: translate3d(0, -50px,0) scale(1.2);opacity: 1;}
+  100%{transform: translate3d(0, 0px,0);opacity: 0;}
+}
 
 /**遮罩倒计时**/
 .showModal {
@@ -272,11 +329,26 @@ Page{
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
+.exam_notice{
+  width: 100%;
+  text-align: center;
+  font-size: 50rpx;
+  font-family: 'Zaozi';
+  letter-spacing: 2rpx;
+  line-height: 80rpx;
+  color: #FFD548;
+  position: relative;
+  top: 34%;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+
 .countDown {
   width: 214rpx;
   height: 214rpx;
   position: relative;
-  top: 40%;
+  top: 38%;
   right: 0;
   left: 0;
   margin: auto;
@@ -292,7 +364,7 @@ Page{
   margin: auto;
   background-size: cover;
   background-image: url('http://pepuwoffw.bkt.clouddn.com/bg_count.png');
-  animation: rotate 1s 0s ease-in-out 3 alternate;
+  animation: rotate 3s 0s linear;
 }
 .countDown image{
   display: block;
@@ -306,13 +378,13 @@ Page{
   margin: auto;
 }
 @keyframes rotate {
-  0% {transform: rotate(360deg);}
-  100% {transform: rotate(0deg);}
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(1600deg);}
 }
 
 /*通过结果页的弹出方式*/
 #ExamPass {
-  animation: slowDown 0.4s 0s linear forwards;
+  animation: slowDown 0.5s 0.5s linear forwards;
 }
 @keyframes slowDown {
   form{transform: translate3d(0,-3000px,0);}
@@ -320,7 +392,7 @@ Page{
 }
 /*未通过结果页的弹出方式*/
 #ExamUnpass {
-  animation: slowUp 0.4s 0s linear forwards;
+  animation: slowUp 0.5s 0.5s linear forwards;
 }
 @keyframes slowUp {
   form{transform: translate3d(0,3000px,0);}

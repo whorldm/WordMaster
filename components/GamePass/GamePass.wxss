@@ -10,6 +10,11 @@
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_bg_pass.png')
 }
+.mask {
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.5);
+}
 
 /*中间内容的背景图*/
 .result_light {
@@ -47,6 +52,7 @@
   margin: auto;
   text-align: center;
   font-size: 70rpx;
+  font-family: 'Zaozi';
   line-height: 104rpx;
   font-weight: bolder;
 }
@@ -134,7 +140,7 @@
 .content_area {
   width: 100%;
   position: relative;
-  top: 30rpx;
+  top: 6%;
   left: 0;
   right: 0;
   margin: auto;
@@ -142,15 +148,9 @@
   letter-spacing: 2rpx;
 }
 .greed_title {
-  color: #FFF;
+  color: #F0EDCC;
   font-size: 40rpx;
   line-height: 80rpx;
-  font-weight: lighter;
-}
-.greed_line {
-  color: #FFF;
-  font-size: 40rpx;
-  line-height: 60rpx;
 }
 /*表格展示列表的样式*/
 .greed_table {
@@ -160,16 +160,17 @@
   left: 0;
   right: 0;
   margin: 50rpx auto 0;
+  border-radius: 20rpx;
+  background: rgba(205, 206, 207,0.1);
 }
 .greed_table_row {
   width: 100%;
+  height: 100rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: lighter;
   font-size: 40rpx;
-  color: #FFF;
-  margin: 10rpx auto;
+  color: #F0EDCC;
 }
 .user_head {
   flex:2;
@@ -188,40 +189,40 @@
 
 /**按钮区域显示*/
 .btn_area {
-  width: 560rpx;
+  width: 84%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  top: 12%;
+  top: 14%;
   left: 0;
   right: 0;
   margin: 0 auto;
 }
 .btnItem_next {
-  width: 240rpx;
-  height: 72rpx;
+  width: 290rpx;
+  height: 90rpx;
   color: #815450;
   font-size: 30rpx;
-  line-height: 72rpx;
+  line-height: 90rpx;
   text-align: center;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_next.png');
 }
 .btnItem_share {
-  width: 240rpx;
-  height: 72rpx;
+  width: 290rpx;
+  height: 90rpx;
   color: #CC4E32;
   font-size: 30rpx;
-  line-height: 72rpx;
+  line-height: 90rpx;
   text-align: center;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_reward.png');
 }
 .btn_share {
   opacity: 0;
-  width: 240rpx;
-  height: 72rpx;
+  width: 290rpx;
+  height: 90rpx;
   z-index: 200;
   position: absolute;
   top: 0;
@@ -237,7 +238,7 @@
   line-height: 80rpx;
   text-align: center;
   position: relative;
-  top: 16%;
+  top: 20%;
   left: 0;
   right: 0;
   margin: 0 auto;

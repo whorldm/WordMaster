@@ -11,10 +11,16 @@
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_bg_pass.png')
 }
+.mask {
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.5);
+}
 
 /*背景光感图*/
 .result_light {
-  width: 550rpx;
+  /* width: 550rpx; */
+  width: 100%;
   height: 778rpx;
   position: absolute;
   top: 14%;
@@ -57,7 +63,7 @@
   opacity: 0;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_text_light.png');
-  animation: fadeIn 0.3s 1.1s ease forwards;
+  animation: fadeIn 0.3s 2.1s ease forwards;
 }
 /*title的动效显示*/
 .result_title {
@@ -70,6 +76,7 @@
   margin: 0 auto;
   text-align: center;
   font-size: 80rpx;
+  font-family: 'Zaozi';
   line-height: 120rpx;
   font-weight: bolder;
 }
@@ -153,7 +160,7 @@
 
 /**文字显示区域样式**/
 .content_area {
-  width: 520rpx;
+  width: 600rpx;
   position: relative;
   top: 30rpx;
   left: 0;
@@ -168,25 +175,25 @@
   line-height: 60rpx;
 }
 .greed_title {
-  color: #FFF;
+  color: #F0EEC5;
   font-size: 40rpx;
   line-height: 80rpx;
   margin-top: 20rpx;
 }
 .greed_title text {
-  color: #FFF;
-  font-size: 60rpx;
+  color: #F0EEC5;
+  font-size: 30rpx;
   display: inline-block;
   margin: auto 10rpx;
 }
 .greed_line {
-  color: #FFF;
-  font-size: 40rpx;
-  line-height: 60rpx;
+  color: #F0EEC5;
+  font-size: 60rpx;
+  line-height: 80rpx;
 }
 
 /**按钮区域显示*/
-.btn_area {
+/* .btn_area {
   width: 560rpx;
   display: flex;
   align-items: center;
@@ -199,20 +206,20 @@
 }
 .btnItem_next {
   width: 240rpx;
-  height: 72rpx;
+  height: 78rpx;
   color: #815450;
   font-size: 30rpx;
-  line-height: 72rpx;
+  line-height: 78rpx;
   text-align: center;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_next.png');
 }
 .btnItem_share {
   width: 240rpx;
-  height: 72rpx;
+  height: 78rpx;
   color: #CC4E32;
   font-size: 30rpx;
-  line-height: 72rpx;
+  line-height: 78rpx;
   text-align: center;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_reward.png');
@@ -220,7 +227,49 @@
 .btn_share {
   opacity: 0;
   width: 240rpx;
-  height: 72rpx;
+  height: 78rpx;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: auto;
+} */
+
+.btn_area {
+  width: 84%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: 14%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btnItem_next {
+  width: 290rpx;
+  height: 90rpx;
+  color: #815450;
+  font-size: 30rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_next.png');
+}
+.btnItem_share {
+  width: 290rpx;
+  height: 90rpx;
+  color: #CC4E32;
+  font-size: 30rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_reward.png');
+}
+.btn_share {
+  opacity: 0;
+  width: 290rpx;
+  height: 90rpx;
   z-index: 200;
   position: absolute;
   top: 0;
@@ -236,7 +285,7 @@
   line-height: 80rpx;
   text-align: center;
   position: relative;
-  top: 12%;
+  top: 20%;
   left: 0;
   right: 0;
   margin: 0 auto;

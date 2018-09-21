@@ -7,6 +7,9 @@ Component({
     mySelf: {
       type: Object
     },
+    levelId: {
+      type: Number
+    },
     greedTitle: {
       type: String,
       default: '小学二年级  第二课时'

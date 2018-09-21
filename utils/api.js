@@ -52,10 +52,17 @@ const config = {
     method: 'GET'
   },
   'LEVEL_LIST': {
-    interFace: '/passRecord/listAll',
+    interFace: '/user/listLevel',
+    method: 'GET'
+  },
+  'RINKING_WORLD_LIST': {
+    interFace: '/user/rank',
+    method: 'GET'
+  },
+  'MY_RINKING': {
+    interFace: '/user/myRank',
     method: 'GET'
   }
-
 }
 
 const searchMap = function (key) {

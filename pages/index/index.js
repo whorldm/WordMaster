@@ -18,6 +18,7 @@ Page({
         userInfo: app.globalData.userInfo,
       })
     }
+    utils.loadFont();
   },
 
   onShow: function(){
@@ -30,11 +31,11 @@ Page({
       let temp = res.list[res.list.length - 1];
       if(temp.isTest === 1) {
         wx.navigateTo({
-          url: "/pages/examgame/examgame?levelId=" + temp.levelId + '&levelName=' + temp.levelName,
+          url: "/pages/examgame/examgame?levelId=" + temp.id + '&levelName=' + temp.levelName,
         })
       } else {
         wx.navigateTo({
-          url: "/pages/stairgame/stairgame?levelId=" + temp.levelId + '&levelName=' + temp.levelName,
+          url: "/pages/stairgame/stairgame?levelId=" + temp.id + '&levelName=' + temp.levelName,
         })
       }
     })
@@ -46,9 +47,6 @@ Page({
   // 用户第一次点击的时候获取权限
   getUserInfo: function(e) {
     if (this.data.userId || wx.getStorageSync('userId')) {
-      // wx.navigateTo({
-      //   url: '/pages/rankgame/waiting/waiting',
-      // })
       this.getUserLevel();
       return ;
     }
@@ -106,10 +104,6 @@ Page({
               data: res.userId
             })
 
-            // wx.navigateTo({
-            //   url: '/pages/rankgame/waiting/waiting',
-            // })
-
             this.getUserLevel();
     
           }).catch(error => {
@@ -125,6 +119,21 @@ Page({
           });
         }
       }
+    })
+  },
+
+  // 查看排名
+  navToRank: function() {
+    wx.navigateTo({
+      url: '/pages/ranking/ranking',
+    })
+  },
+
+  // 未开启状态
+  wait: function() {
+    wx.showModal({
+      showCancel: false,
+      content: '尚未开启，敬请期待'
     })
   }
 })

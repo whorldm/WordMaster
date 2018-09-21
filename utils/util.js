@@ -72,6 +72,7 @@ function dealWordCouple(str1, str2) {
   return temp;  
 }
 
+// 深拷贝数组
 function deepCopy(Obj) {
   var newObj;   
   if (Obj instanceof Array) {
@@ -93,9 +94,10 @@ function deepCopy(Obj) {
 }
 
 // 重构回传给后台的数组结构
-function rebuildArr(str1,str2) {
+function rebuildArr(str1,str2,id) {
   let reg = /^[a-zA-Z]/;
   let obj = {};
+  obj.userId = id;
   if (reg.test(str1)) {
     obj.wordE = str1;
     obj.wordC = str2;
@@ -106,6 +108,75 @@ function rebuildArr(str1,str2) {
   return obj;  
 }
 
+// 动态加载字体
+function loadFont() {
+  wx.loadFontFace({
+    family: 'Zaozi',
+    source: 'url("http://pfc6zcsy2.bkt.clouddn.com/font/title.otf")',
+    success: function (res) {
+      console.log("字体加载成功") //  loaded
+    },
+    fail: function (res) {
+      console.log("字体加载失败") //  error
+    }
+  });
+}
+
+// 开赛倒计时
+var startTimer = null;  // 开赛前的倒计时
+var urlList = [
+  '../../img/countdown/number1.png',
+  '../../img/countdown/number2.png',
+  '../../img/countdown/number3.png'
+];
+function CountInThree(that) {
+  clearTimeout(startTimer);
+  let temp = that.data.count_to_start - 1;
+
+  if (temp < 0) {
+    that.setData({
+      showModal: false
+    })
+    CountOneMinte(that);
+    that.playBgMusic();  // 开始播放音乐
+    return;
+  }
+  that.setData({
+    count_to_start: temp,
+    countURL: urlList[temp]
+  })
+
+  startTimer = setTimeout(function () {
+    CountInThree(that);
+  }, 1000)
+}
+
+// 比赛倒计时
+var gameTimer = null;  // 比赛倒计时的计时器
+function CountOneMinte(that) {
+  clearTimeout(gameTimer);
+  let temp = that.data.total_second - 1;
+  that.setData({
+    total_second: temp,
+    gameClock: dateFormat(temp)
+  })
+  if (temp <= 0) {
+    that.setData({
+      gameClock: "00:00",
+    });
+    clearTimeout(gameTimer);
+    if (!that.data.isGameOver) {
+      that.GameOver(that.data.mySelf.score);
+    } else {
+      console.log('结束  消除全部内容')
+    }
+    return;
+  }
+  gameTimer = setTimeout(function () {
+    CountOneMinte(that);
+  }, 1000)
+}
+
 module.exports = {
   judeGreed,
   deepCopy,
@@ -114,5 +185,8 @@ module.exports = {
   checkParams,
   fill_zero_prefix,
   dealWordCouple,
-  rebuildArr
+  rebuildArr,
+  loadFont,
+  CountInThree,
+  CountOneMinte
 }

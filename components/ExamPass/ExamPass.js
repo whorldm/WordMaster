@@ -9,6 +9,12 @@ Component({
     errorNum: {
       type: Number
     },
+    starNum: {
+      type: Number
+    },
+    levelId: {
+      type: Number
+    },
     greedTitle: {
       type: String,
       default: '小学二年级'
@@ -19,7 +25,11 @@ Component({
    * 组件的初始数据
    */
   data: {
-    
+    titleList: [
+      ['考', '试', '失', '败'],
+      ['考', '试', '通', '过'],
+      ['完', '美', '通', '过']
+    ]
   },
 
   /**
@@ -27,7 +37,6 @@ Component({
    */
   methods: {
     goNextGame: function () {
-      console.log('继续深造')
       this.triggerEvent('myNextGame')
     }
   }

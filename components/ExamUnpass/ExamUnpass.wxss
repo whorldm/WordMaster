@@ -11,10 +11,16 @@
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_bg_unpass.png')
 }
+.mask {
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.5);
+}
 
 /*背景光感图*/
 .result_light {
-  width: 550rpx;
+  /* width: 550rpx; */
+  width: 100%;
   height: 778rpx;
   position: absolute;
   top: 14%;
@@ -32,31 +38,45 @@
   left: 0;
   right: 0;
   margin: auto;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_bg_exam_unpass_01.png')
 }
 /*title的动效显示*/
 .result_title {
-  width: 284rpx;
-  height: 92rpx;
+  width: 500rpx;
+  height: 120rpx;
   position: absolute;
-  top: 20%;
+  top: 24%;
   left: 0;
   right: 0;
   margin: 0 auto;
-  animation: slowDown 1s 0s linear forwards;
+  text-align: center;
+  font-size: 80rpx;
+  font-family: 'Zaozi';
+  line-height: 120rpx;
+  font-weight: bolder;
+  animation: slowDown 2s 0s linear forwards;
+}
+.result_title text {  /*文字的渐变色*/
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #9FC2CB, #40686A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 @keyframes slowDown {
   0% {
     opacity: 0;
-    transform: translate3d(0, -1000px, 0) scale(1);
+    transform: translate3d(0, -200px, 0) scale(1);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
   }
 }
+
 /*星星显示样式*/
 .result_star {
-  position: absolute;
+  position: relative;
   top: 200rpx;
   left: 0;
   right: 0;
@@ -94,7 +114,7 @@
 .content_area {
   width: 520rpx;
   position: relative;
-  top: 30rpx;
+  top: 6%;
   left: 0;
   right: 0;
   margin: auto;
@@ -114,18 +134,18 @@
 }
 .greed_title text {
   color: #5E878B;
-  font-size: 60rpx;
+  font-size: 30rpx;
   display: inline-block;
   margin: auto 10rpx;
 }
 .greed_line {
   color: #5E878B;
-  font-size: 36rpx;
-  line-height: 60rpx;
+  font-size: 60rpx;
+  line-height: 80rpx;
 }
 
 /**按钮区域显示*/
-.btn_area {
+/* .btn_area {
   width: 560rpx;
   display: flex;
   align-items: center;
@@ -138,20 +158,20 @@
 }
 .btnItem_next {
   width: 240rpx;
-  height: 72rpx;
+  height: 78rpx;
   color: #815450;
   font-size: 30rpx;
-  line-height: 72rpx;
+  line-height: 78rpx;
   text-align: center;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_next.png');
 }
 .btnItem_share {
   width: 240rpx;
-  height: 72rpx;
+  height: 78rpx;
   color: #CC4E32;
   font-size: 30rpx;
-  line-height: 72rpx;
+  line-height: 78rpx;
   text-align: center;
   background-size: cover;
   background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_reward.png');
@@ -160,6 +180,47 @@
   opacity: 0;
   width: 240rpx;
   height: 72rpx;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: auto;
+} */
+.btn_area {
+  width: 84%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: 14%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btnItem_next {
+  width: 290rpx;
+  height: 90rpx;
+  color: #815450;
+  font-size: 30rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_next.png');
+}
+.btnItem_share {
+  width: 290rpx;
+  height: 90rpx;
+  color: #CC4E32;
+  font-size: 30rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/result_btn_reward.png');
+}
+.btn_share {
+  opacity: 0;
+  width: 290rpx;
+  height: 90rpx;
   z-index: 200;
   position: absolute;
   top: 0;
@@ -175,7 +236,7 @@
   line-height: 80rpx;
   text-align: center;
   position: relative;
-  top: 12%;
+  top: 20%;
   left: 0;
   right: 0;
   margin: 0 auto;

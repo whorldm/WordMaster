@@ -1,4 +1,4 @@
-<view class='mask'>
+<!-- <view class='mask'> -->
   <view class='text-fly-y' wx:if="{{random === 0}}">
     <view class='text-fly-x'>
       <view class='item text-left'>{{showWord[0]}}</view>
@@ -11,5 +11,5 @@
       <view class='item jumpCenter'>{{showWord[0]}} {{showWord[1]}}</view>
     </view>
   </view>
-</view>
+<!-- </view> -->
 

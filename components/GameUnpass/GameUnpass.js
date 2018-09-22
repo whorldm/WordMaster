@@ -28,19 +28,7 @@ Component({
    */
   methods: {
     goNextGame: function () {
-      console.log('继续深造')
-      this.triggerEvent('myNextGame')
-    },
-    shareToFriend: function () {
-      console.log('分享 子组件传递给父组件触发')
-      this.triggerEvent('myShare')
-    },
-    onShareAppMessage: function () {
-      console.log('分享 子组件触发')
-      return {
-        title: '单词大咖',
-        path: '/pages/index/index'
-      }
-    },
+      this.triggerEvent('myNextGame');
+    }
   }
 })

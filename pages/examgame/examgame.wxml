@@ -29,10 +29,11 @@
 
   <!--显示通过条件以及单词量-->
   <view class='condition_area'>
-    <view class="condition">倒计时：
+    <view class="condition">
+      倒计时：
       <text class="{{total_second <= 10 ? 'lastTen': ''}}">{{gameClock}}</text>
     </view>
-    
+    <view class='exam_content'>({{mySelf.roundTime}}/{{totalRound}})</view>
     <view class='word_num'>
       <image wx:if="{{showWordCouple.length > 1}}" src='../../img/game/light_book.png'></image>
       <image wx:else src='../../img/game/word_num.png'></image>
@@ -117,7 +118,7 @@
       <image src='../../img/coin.png'></image>
       X {{mySelf.coin}}
     </view>
-     <view class='del_coin' wx:if="{{isDelCoin}}"> -20 </view>
+     <view class='del_coin' wx:if="{{isDelCoin}}"> -{{delCoinNum}} </view>
   </view>
 
   <view class='showModal' wx:if="{{showModal}}">

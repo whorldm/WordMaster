@@ -1,7 +1,7 @@
 //#region 随机填充算法
-var handleArray = null;
+  var handleArray = null;
 
-function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
+  function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
     var allWordsCount = arrayRow * arrayColumn;
     handleArray = new Array(allWordsCount);
     for(var i = 0, l = handleArray.length; i <= l - 1; ++i){
@@ -45,57 +45,8 @@ function randomFill(arrayToFill, arrayRow, arrayColumn, allWords){
       counterForAllWords++;
     }
   }
+  
 //#endregion 随机填充算法
-
-
-//#code start 新版随机填充算法（将中英文上下分开显示）
-var tempArray = null;
-
-function newRandomFill(arrayToFill, arrayRow, arrayColumn, allWords) {
-  let allWordsCount = arrayRow * arrayColumn;
-  tempArray = new Array(allWordsCount);
-  for (let i = 0, l = tempArray.length; i <= l - 1; ++i) {
-    tempArray[i] = { row: -1, column: -1 };
-  }
-
-  let counterForInitTempArray = 0;
-  for (let i = 0, l1 = arrayRow; i <= l1 - 1; ++i) {
-    for (let j = 0, l2 = arrayColumn; j <= l2 - 1; ++j) {
-      tempArray[counterForInitTempArray].row = i;
-      tempArray[counterForInitTempArray].column = j;
-      counterForInitTempArray++;
-    }
-  }
-
-  let maxRandomChooseIndex = allWordsCount - 1;
-  let counterForAllWords = 0;
-  let leftWordPosition;
-  for (let i = 0, l = allWordsCount; i <= l - 1; ++i) {
-    let randomIndex = Math.round(maxRandomChooseIndex * Math.random());
-    let whichPosition = tempArray[randomIndex];
-    let elementToFill = arrayToFill[whichPosition.row][whichPosition.column];
-    if (counterForAllWords % 2 === 0) { //left
-      elementToFill.wordData = allWords[Math.floor(counterForAllWords / 2)].left;
-      leftWordPosition = whichPosition;
-    } else {
-      elementToFill.wordData = allWords[Math.floor(counterForAllWords / 2)].right;
-      var leftElement = arrayToFill[leftWordPosition.row][leftWordPosition.column];
-      var rightElement = elementToFill;
-      leftElement.pairIndex = { row: whichPosition.row, column: whichPosition.column };
-      leftElement.isChoose = false;
-      leftElement.isClear = false;
-      leftElement.isError = false;
-      rightElement.pairIndex = { row: leftWordPosition.row, column: leftWordPosition.column };
-      rightElement.isChoose = false;
-      rightElement.isClear = false;
-      rightElement.isError = false;
-    }
-    tempArray[randomIndex] = tempArray[maxRandomChooseIndex];
-    maxRandomChooseIndex--;
-    counterForAllWords++;
-  }
-}
-//#code end 新版随机填充算法（将中英文上下分开显示）
 
 
 //#region 百度语音合成
@@ -157,68 +108,44 @@ function newRandomFill(arrayToFill, arrayRow, arrayColumn, allWords) {
       success: onDownloadSuccess,
       fail: res => {
         console.error(res)
-      },
-      complete: res => {
-        // console.log('开始下载第' + (vedioList.length) +'个读音');
       }
     })
   }
 
-
-function onDownloadSuccess(res) {
- // console.log('下载结束')
-  vedioList.push(res.tempFilePath);
-  if(vedioIndex <= vedioList.length){
-    play();
+  // v1.2
+  function onDownloadSuccess(res) {
+    vedioList.unshift(res.tempFilePath);
+    if(vedioList.length > 0){
+      play();
+    }
   }
-}
-function play() {
-  if (canPlayNext && vedioList.length > 0) {
-    canPlayNext = false;
-    if (vedioIndex < vedioList.length) {
-     // console.log('开始播放第'+vedioIndex+'个读音');
+  function play() {
+    if (canPlayNext && vedioList.length > 0) {
+      canPlayNext = false;
       const innerAudioContext = wx.createInnerAudioContext()
-      innerAudioContext.src = vedioList[vedioIndex]
+      innerAudioContext.src = vedioList.pop()
       innerAudioContext.play()
+      innerAudioContext.onPlay(()=>{
+        // console.log('开始播放')
+      })
+      //当前读音已播放完毕，接着播放下一个
       innerAudioContext.onEnded(() => {
         // console.log('播放结束')
         canPlayNext = true;
-        vedioIndex++
+        innerAudioContext.destroy();
         play()
-      innerAudioContext.destroy()
       })
+      //播放错误，销毁该实例
       innerAudioContext.onError((res) => {
         console.log(res.errMsg)
         console.log(res.errCode)
-        //播放错误，销毁该实例
         innerAudioContext.destroy();
       })
-    } else {
-      canPlayNext = true;
-      vedioIndex = 0;
-      vedioList = [];
     }
   }
-}
 
-  // function onDownloadSuccess(res){
-  //   filePath = res.tempFilePath;
-  //   play();
-  // }
+//#end region 百度语音合成
 
-  // function play() {
-  //   const innerAudioContext = wx.createInnerAudioContext()
-  //   innerAudioContext.autoplay = true
-  //   innerAudioContext.src = filePath
-  //   innerAudioContext.onPlay(() => {
-  //     // console.log('开始播放')
-  //   })
-  //   innerAudioContext.onError((res) => {
-  //     console.error(res.errMsg)
-  //     console.error(res.errCode)
-  //   })
-  // }
-  //#endregion 百度语音合成
 
   function testAPI(){
     //测试百度语音合成
@@ -254,7 +181,6 @@ function play() {
   }
   
   module.exports = {
-    newRandomFill,
     randomFill, 
     initBaiduVoiceModule, 
     playVoiceByInputText, 

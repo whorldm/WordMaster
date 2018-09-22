@@ -67,7 +67,7 @@
           继续学习
         </view>
         <view class='btnItem_share'>
-          晒一晒得奖学金
+          晒一晒
           <button open-type='share' class='btn_share'>
           </button>
         </view>

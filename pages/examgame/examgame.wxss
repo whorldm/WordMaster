@@ -124,6 +124,16 @@ Page{
   color: #FF3328;
   font-size: 50rpx;
 }
+.exam_content {
+  float: left;
+  width: 80rpx;
+  height: 82rpx;
+  line-height: 50rpx;
+  font-size: 36rpx;
+  color: #F0EEC5;
+  display: flex;
+  align-items: flex-end;
+}
 .word_num {
   float: right;
   width: 230rpx;
@@ -248,7 +258,7 @@ Page{
 .word_common {  /*为选中的效果*/
   color: #815450;
   background-size: cover;
-  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_common.png');
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/word_common.png');
 }
 .word_click {  /*点击选中的效果*/
   color: #2EAE55;

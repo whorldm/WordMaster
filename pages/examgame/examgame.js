@@ -5,6 +5,8 @@ var match = require("../../utils/match.js");
 var music = require("../../utils/music.js");
 var app = getApp();
 
+var lastClickTime = 0; //上次点击的时间戳
+var currentClickTime = 0; //本次点击的时间戳
 var startTimer = null;  // 开赛前的倒计时
 var gameTimer = null;  // 比赛倒计时的计时器
 
@@ -56,6 +58,7 @@ Page({
     starNum: 0,  //星星的数量（判断是否通过考试）
     backClass: 'back', // 每回合切换提示的标志量
     isRevive: true,  //因时间到了而结束比赛时，是否复活
+    delCoinNum: 50, //减少的金币数量
   },
 
 // ### 生命周期函数 code start ### 
@@ -77,7 +80,8 @@ Page({
     CountInThree(this);  //开赛倒计时
   },
   onShow: function () {
-    
+    lastClickTime = 0;
+    currentClickTime = 0;
   },
   onUnload: function () {
     innerAudioContextBg.destroy();
@@ -141,7 +145,6 @@ Page({
           arrayToFill[i][j] = {};
         }
       }
-      console.log(res.list);
       let tempWord = res.list.slice(0, 6);
       assistant.randomFill(arrayToFill, this.data.row, this.data.col, tempWord);
       this.setData({
@@ -166,7 +169,6 @@ Page({
       }
     }
     let tempWord = this.data.totalWord.slice((this.data.mySelf.roundTime-1) * 6, this.data.mySelf.roundTime * 6);
-    console.log(tempWord);
     assistant.randomFill(arrayToFill, this.data.row, this.data.col, tempWord);
     this.setData({
       wordGrid: arrayToFill
@@ -192,11 +194,11 @@ Page({
   goNextGame: function (obj) {
     if (this.data.nextLevel.isTest === 1) {
       wx.redirectTo({
-        url: '/pages/examgame/examgame?levelId=' + this.data.nextLevel.id + '&levelName=' + this.data.nextLevel.levelName,
+        url: '/pages/examgame/examgame?levelId=' + this.data.nextLevel.levelId + '&levelName=' + this.data.nextLevel.levelName,
       })
     } else {
       wx.redirectTo({
-        url: '/pages/stairgame/stairgame?levelId=' + this.data.nextLevel.id + '&levelName=' + this.data.nextLevel.levelName,
+        url: '/pages/stairgame/stairgame?levelId=' + this.data.nextLevel.levelId + '&levelName=' + this.data.nextLevel.levelName,
       })
     }
   },
@@ -204,6 +206,21 @@ Page({
 // ### 用户点击操作 code start ###
   // 判断用户的点击操作
   ClickGrid: function (e) {
+    // 防止误操作
+    currentClickTime = e.timeStamp;
+    if (!this.data.isClickFlag) {
+      if (currentClickTime > lastClickTime + 200) {
+        lastClickTime = currentClickTime;
+      } else {
+        return;
+      }
+    } else {
+      if (currentClickTime > lastClickTime + 50) {
+        lastClickTime = currentClickTime;
+      } else {
+        return;
+      }
+    }
     // 直接通过传入二维数组的序号来获取单词的位置
     let X = e.target.dataset.posx;
     let Y = e.target.dataset.posy;
@@ -230,8 +247,6 @@ Page({
   onChooseWord: function (X, Y, matchWord, word) {
     // 第一次点击选中单词
     if (!this.data.isClickFlag) {
-      // 播放读音
-      // assistant.playVoiceByInputText(word);
       // 设置选择的标志量
       let chooseFlag = "wordGrid[" + Y + "][" + X + "].isChoose";
       let noticeFlag = "wordGrid[" + Y + "][" + X + "].isNotice";
@@ -275,6 +290,8 @@ Page({
       this.setData(initLocalData({
         secondStr: word,
         showWordCouple: Utils.dealWordCouple(this.data.firstStr, word),
+        ['mySelf.score']: _score,
+        ['mySelf.totalNum']: this.data.mySelf.totalNum + 1,
         ['mySelf.combox']: this.data.mySelf.combox + 1,
         ['mySelf.rightNum']: this.data.mySelf.rightNum + 1,
         [first]: { isClear: true, isError: false },
@@ -286,23 +303,25 @@ Page({
       }))
 
       // 1s后隐藏单词以及combox动效
-      setTimeout(() => {
-        this.setData({
-          firstStr: '',
-          secondStr: '',
-          ['mySelf.score']: _score,
-          ['mySelf.totalNum']: this.data.mySelf.totalNum + 1,
-          showWordCouple: [],
-          isRight: false,
-        })
-      }, 1000)
+      // setTimeout(() => {
+      //   this.setData({
+      //     firstStr: '',
+      //     secondStr: '',
+      //     ['mySelf.score']: _score,
+      //     ['mySelf.totalNum']: this.data.mySelf.totalNum + 1,
+      //     showWordCouple: [],
+      //     isRight: false,
+      //   })
+      // }, 1200)
 
       //比赛时间未结束，更换一局
       if (times === 6 && this.data.total_second > 0) {  
         //考试的单词全部消除成功，比赛结束
         if (this.data.mySelf.roundTime === this.data.totalWord.length / 6) {
           if (!this.data.isGameOver) {
-            this.GameOver(_score);
+            setTimeout(() => {
+              this.GameOver(_score);
+            }, 500)
           } else {
             console.log('比赛已经结束')
           }
@@ -316,7 +335,6 @@ Page({
           let flag = 0;
           let showTimer = setInterval(() => {
             flag += 800;
-            console.log(flag);
             if(flag === 800) {
               this.setData({
                 backClass: 'backed'
@@ -345,8 +363,11 @@ Page({
       let tmpWord = 'errorWord[' + this.data.errorWord.length + ']';
       // 播放错误的读音
       let errorType = match.RandomNumBoth(0, 1);
+      // 提示相应的正确单词
+      let other = "wordGrid[" + matchPosition[1] + "][" + matchPosition[0] + "].isNotice";
 
       this.setData(initLocalData({
+        [other]: true,
         secondStr: word,
         [tmpWord]: obj,
         [first]: true,
@@ -357,6 +378,7 @@ Page({
         error_Type: errorType
       }));
 
+      // 500ms后播放错误读音
       setTimeout(() => {
         if (this.data.isError) {
           this.ErrorWord = this.selectComponent('#errorShow');
@@ -368,6 +390,7 @@ Page({
       // 700ms后将答错的单词方块状态初始化
       setTimeout(() => {
         this.setData({
+          [other]: false,
           firstStr: '',
           secondStr: '',
           [chooseFlag]: false,
@@ -440,7 +463,7 @@ Page({
 // ### 获取提示 code start ###
   // 获取提示信息
   getHelp: function () {
-    if (this.data.mySelf.coin < 20) {
+    if (this.data.mySelf.coin < this.data.delCoinNum) {
       wx.showToast({
         icon: 'none',
         title: '金币数量不足'
@@ -459,7 +482,7 @@ Page({
       setTimeout(() => {
         this.setData({
           isDelCoin: false,
-          ['mySelf.coin']: this.data.mySelf.coin - 20,
+          ['mySelf.coin']: this.data.mySelf.coin - this.data.delCoinNum,
           [other]: false
         })
       }, 1000)
@@ -481,7 +504,7 @@ Page({
           setTimeout(()=>{
             this.setData({
               isDelCoin: false,
-              ['mySelf.coin']: this.data.mySelf.coin - 20,
+              ['mySelf.coin']: this.data.mySelf.coin - this.data.delCoinNum,
               [tempA]: false,
               [tempB]: false,
             })
@@ -532,6 +555,7 @@ function initLocalData(obj = {}) {
   return obj;
 }
 function judeTheStar(score, standard) {
+  console.log(score, standard);
   if (score === standard) {
     return 3;
   }

@@ -6,7 +6,7 @@
   top: 0;
   z-index: 100;
   background: rgba(139, 129, 129);
-  animation: bgColor 0.2s linear forwards;
+  animation: bgColor 0.1s linear forwards;
 }
 .item{
   text-align:center;
@@ -41,8 +41,8 @@
 }
 
 @keyframes bgColor{
-  from {background-color: rgba(0, 0, 0, 0)}
-  to {background-color: rgba(0, 0, 0, 0.1)}
+  from {background-color: rgba(0, 0, 0, 0.1)}
+  to {background-color: rgba(0, 0, 0, 0.1);display: none;}
 }
 @keyframes left{
   from, 60%, 75%, 90%, to {animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);}

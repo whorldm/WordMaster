@@ -23,7 +23,10 @@ Page({
   },
 
   onShow: function(){
-  
+    // 每次页面显示的时候重置点击的标志量
+    this.setData({
+      canClick: true
+    })
   },
 
   // 用户第一次点击的时候获取权限
@@ -114,19 +117,16 @@ Page({
 
   // 获取用户的等级
   getUserLevel: function () {
-    this.setData({
-      canClick: true
-    })
-    request.getData("LEVEL_LIST", { userId: app.globalData.userId })
+    request.getDataLoading("LEVEL_LIST", { userId: app.globalData.userId },"正在加载...")
       .then(res => {
         let temp = res.list[res.list.length - 1];
         if (temp.isTest === 1) {
           wx.navigateTo({
-            url: "/pages/examgame/examgame?levelId=" + temp.id + '&levelName=' + temp.levelName,
+            url: "/pages/examgame/examgame?levelId=" + temp.levelId + '&levelName=' + temp.levelName,
           })
         } else {
           wx.navigateTo({
-            url: "/pages/stairgame/stairgame?levelId=" + temp.id + '&levelName=' + temp.levelName,
+            url: "/pages/stairgame/stairgame?levelId=" + temp.levelId + '&levelName=' + temp.levelName,
           })
         }
       })

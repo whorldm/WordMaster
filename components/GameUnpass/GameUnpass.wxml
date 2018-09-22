@@ -29,8 +29,19 @@
         </view>
       </view>
 
+      <!--进入到无尽模式-->
+      <view class='btn_area' wx:if="{{levelId> 55}}">
+        <view class='btnItem_next' bindtap='goNextGame'>
+          重头再来
+        </view>
+        <view class='btnItem_share'>
+          分享复活
+          <button open-type='share' class='btn_share'>
+          </button>
+        </view>
+      </view>
       <!--按钮的区域-->
-      <view class='btn_area'>
+      <view class='btn_area' wx:else>
         <view class='btnItem_next' bindtap='goNextGame'>
           再试一次
         </view>

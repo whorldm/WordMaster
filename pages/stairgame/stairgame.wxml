@@ -46,7 +46,7 @@
       <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
         <view class="flex-row">
           <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
-            <view class="flex-column"
+            <view class="flex-column" animation="{{animationData}}"
               data-key="{{gridItem.pairIndex}}"
               data-posx="{{index}}"
               data-posy='{{idx}}'
@@ -91,11 +91,12 @@
     </GamePass>
   <!--普通关未通过的显示-->
   <GameUnpass wx:if="{{isGameOver && !isPass}}"
-      mySelf="{{mySelf}}"
-      levelId="{{levelId}}"
-      greedTitle="{{levelName}}"
-      bind:myNextGame="goNextGame">
-    </GameUnpass>
+    mySelf="{{mySelf}}"
+    levelId="{{levelId}}"
+    greedTitle="{{levelName}}"
+    bind:myNextGame="goNextGame">
+  </GameUnpass>
+  <!--显示正确的弹框-->
 
   <!--底部提示按钮-->
   <view class='help' bindtap='getHelp'>提示</view>
@@ -104,7 +105,7 @@
       <image src='../../img/coin.png'></image>
       X {{mySelf.coin}}
     </view>
-     <view class='del_coin' wx:if="{{isDelCoin}}"> -20 </view>
+     <view class='del_coin' wx:if="{{isDelCoin}}"> -{{delCoinNum}} </view>
   </view>
 
   <view class='showModal' wx:if="{{showModal}}">

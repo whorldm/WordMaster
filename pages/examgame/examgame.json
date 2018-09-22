@@ -4,6 +4,7 @@
     "ErrorShow": "/components/ErrorWord/ErrorWord",
     "ComboxShow": "/components/ShowCombox/ShowCombox",
     "ExamPass": "/components/ExamPass/ExamPass",
-    "ExamUnpass": "/components/ExamUnpass/ExamUnpass"
+    "ExamUnpass": "/components/ExamUnpass/ExamUnpass",
+    "Revive": "/components/Revive/Revive"
   }
 }

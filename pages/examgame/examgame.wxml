@@ -104,6 +104,11 @@
     levelId="{{levelId}}"
     bind:myNextGame="goNextGame">
   </ExamUnpass>
+  <!--复活弹窗-->
+  <!-- <Revive id="Revive" remainNum="12"
+    wx:if="{{isRevive}}" 
+    bind:noRevive="noRevive">
+  </Revive> -->
 
   <!--底部提示按钮-->
   <view class='help' bindtap='getHelp'>提示</view>

@@ -54,7 +54,8 @@ Page({
     countURL: '', // 开赛倒计时切换数字URL
     nextLevel: {}, //比赛结束后的下一关
     starNum: 0,  //星星的数量（判断是否通过考试）
-    backClass: 'back' // 每回合切换提示的标志量
+    backClass: 'back', // 每回合切换提示的标志量
+    isRevive: true,  //因时间到了而结束比赛时，是否复活
   },
 
 // ### 生命周期函数 code start ### 
@@ -69,7 +70,7 @@ Page({
         levelName: options.levelName,
       })
     }
-    Utils.loadFont();
+    // Utils.loadFont();
     this.getTotalWord();  // 用户随机生成单词
     this.getUserAsset();  // 获取用户的资产
     music.playCountMusic();
@@ -178,6 +179,13 @@ Page({
       title: '单词大咖',
       path: '/pages/index/index'
     }
+  },
+
+  // 因比赛时间截止，用户选择是否分享
+  noRevive: function () {
+    this.setData({
+      isRevive: false
+    }, this.GameOver(this.data.mySelf.score));
   },
 
   // 继续下一关卡
@@ -378,13 +386,11 @@ Page({
     if (innerAudioContextBg) {
       innerAudioContextBg.destroy();
     }
+    if (gameTimer) {
+      clearTimeout(gameTimer);
+    }
     // 并统计最终的结果
     let starNum = judeTheStar(_score,this.data.passStandard);
-    if(starNum >= 2) {
-      music.playPassMusic();
-    } else {
-      music.playUnpassMusic();
-    }
     let params = {
       coin: this.data.mySelf.coin,
       star: starNum,
@@ -395,9 +401,15 @@ Page({
       wrongbookEntityList: this.data.errorWord,
       rightbookEntityList: this.data.sucessWord,
     }
+
     request.getData('GAME_OVER', params)
     .then(res => {
       if (res.code === 0) {
+        if (starNum >= 2) {
+          music.playPassMusic();
+        } else {
+          music.playUnpassMusic();
+        }
         if(this.data.backClass === 'backed'){
           this.setData({
             backClass: 'back',
@@ -539,13 +551,21 @@ function CountOneMinte(that) {
   })
   if (temp <= 0) {
     that.setData({
-      gameClock: "00:00",
-    });
+      gameClock: "00:00"
+    })
     clearTimeout(gameTimer);
     if(!that.data.isGameOver) {
+      // 出现弹窗提示用户是否复活
+      // that.setData({
+      //   gameClock: "00:00",
+      //   isRevive: true
+      // })
       that.GameOver(that.data.mySelf.score);
     } else {
-      console.log('结束  消除全部内容')
+      console.log('消除全部内容，比赛结束')
+      // that.setData({
+      //   gameClock: "00:00",
+      // });
     }
     return;
   }
@@ -555,10 +575,10 @@ function CountOneMinte(that) {
 }
 
 var urlList = [
-    '../../img/countdown/number1.png',
-    '../../img/countdown/number2.png',
-    '../../img/countdown/number3.png'
-  ];
+  '../../img/countdown/number1.png',
+  '../../img/countdown/number2.png',
+  '../../img/countdown/number3.png'
+];
 
 function CountInThree(that) {
   clearTimeout(startTimer);

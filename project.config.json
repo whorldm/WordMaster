@@ -12,7 +12,7 @@
 		"nodeModules": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "2.2.5",
 	"appid": "wxf46379956314290f",
 	"projectname": "WordMaster",
 	"debugOptions": {

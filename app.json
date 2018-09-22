@@ -7,8 +7,8 @@
     "pages/usercenter/usercenter",
     "pages/lexicon/lexicon",
     "pages/priview/priview",
-    "pages/examgame/examgame",
     "pages/stairgame/stairgame",
+    "pages/examgame/examgame",
     "pages/ranking/ranking"
   ],
   "window": {

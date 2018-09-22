@@ -1,5 +1,5 @@
 var assistant = require("./utils/assistant");
-
+var utils = require("./utils/util.js");
 App({
   onLaunch: function () {
     // 获取设备的屏幕宽高

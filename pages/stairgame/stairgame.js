@@ -66,7 +66,7 @@ Page({
         levelName: options.levelName
       })
     }
-    Utils.loadFont();
+    // Utils.loadFont();
     this.wordRandom();  // 用户随机生成单词
     this.getUserAsset();  // 获取用户的资产
     music.playCountMusic();
@@ -322,11 +322,6 @@ Page({
     }
     // 并统计最终的结果
     let starNum = judeTheStar(score);
-    if (starNum >= 1) {
-      music.playPassMusic();
-    } else {
-      music.playUnpassMusic();
-    }
     let params = {
       coin: this.data.mySelf.coin,
       star: starNum,
@@ -340,6 +335,11 @@ Page({
 
     request.getData('GAME_OVER', params).then(res => {
       if (res.code === 0) {
+        if (starNum >= 1) {
+          music.playPassMusic();
+        } else {
+          music.playUnpassMusic();
+        }
         this.setData({
           nextLevel: res.nextLevel,
           isGameOver: true,
@@ -434,7 +434,7 @@ Page({
   // 播放背景音乐
   playBgMusic: function () {
     innerAudioContextBg.loop = true;
-    innerAudioContextBg.volume = 0.2;
+    innerAudioContextBg.volume = 0.8;
     innerAudioContextBg.src = music.getMusicSource(0,'BG_GAME_MUSIC');
     innerAudioContextBg.play();
   }

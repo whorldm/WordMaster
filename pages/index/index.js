@@ -4,6 +4,7 @@ var utils = require("../../utils/util.js");
 
 Page({
   data: {
+    canClick: true, //是否可以点击
     userId: '',    
     userInfo: {},
     levelName: '', //用户的等级的名称
@@ -18,7 +19,7 @@ Page({
         userInfo: app.globalData.userInfo,
       })
     }
-    utils.loadFont();
+    // utils.loadFont();
   },
 
   onShow: function(){
@@ -27,6 +28,13 @@ Page({
 
   // 用户第一次点击的时候获取权限
   getUserInfo: function(e) {
+    if(!this.data.canClick) {
+      return;
+    }
+    // 禁止用户进行多次点击
+    this.setData({
+      canClick: false
+    })
     if (this.data.userId || wx.getStorageSync('userId')) {
       this.getUserLevel();
       return ;
@@ -106,6 +114,9 @@ Page({
 
   // 获取用户的等级
   getUserLevel: function () {
+    this.setData({
+      canClick: true
+    })
     request.getData("LEVEL_LIST", { userId: app.globalData.userId })
       .then(res => {
         let temp = res.list[res.list.length - 1];

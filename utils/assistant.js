@@ -147,6 +147,58 @@
 //#end region 百度语音合成
 
 
+
+//#有道读音
+var ydVedioList = [], ydVedioIndex = 0, ydPlayNext = true;
+function playVoiceByYouDao(str){
+  var url = "http://dict.youdao.com/dictvoice?audio=" + str;
+  wx.downloadFile({
+    url: url,
+    success: youDaoDownload,
+    fail: res => {
+      console.error(res)
+    },
+    complete: res => {
+      // console.log('开始下载第' + (vedioList.length) +'个读音');
+    }
+  })
+}
+function youDaoDownload(res) {
+  // console.log('下载结束')
+  ydVedioList.push(res.tempFilePath);
+  if (ydVedioIndex <= ydVedioList.length) {
+    ydplay(ydVedioList, ydVedioIndex);
+  }
+}
+
+function ydplay(list ,index) {
+  if (ydPlayNext && list.length > 0) {
+    ydPlayNext = false;
+    if (index < list.length) {
+      // console.log('开始播放第'+index+'个读音');
+      const innerAudioContext = wx.createInnerAudioContext()
+      innerAudioContext.src = list[index]
+      innerAudioContext.play()
+      innerAudioContext.onEnded(() => {
+        // console.log('播放结束')
+        ydPlayNext = true;
+        index++
+        play()
+        innerAudioContext.destroy()
+      })
+      innerAudioContext.onError((res) => {
+        console.log(res.errMsg)
+        console.log(res.errCode)
+        //播放错误，销毁该实例
+        innerAudioContext.destroy();
+      })
+    } else {
+      ydPlayNext = true;
+      vedioInindexdex = 0;
+      list = [];
+    }
+  }
+}
   function testAPI(){
     //测试百度语音合成
     initBaiduVoiceModule(); //初始化百度语音模块，此方法是异步方法，应该在游戏开始时调用而不是第一次播放声音之前
@@ -184,5 +236,6 @@
     randomFill, 
     initBaiduVoiceModule, 
     playVoiceByInputText, 
+    playVoiceByYouDao,
     testAPI  
   }

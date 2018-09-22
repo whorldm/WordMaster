@@ -114,12 +114,16 @@ Page,
   width: 40%;
 }
 .dgree_title{
-  width: 20%;
+  width: 30%;
   text-align: center;
 }
 .number_title{
-  width: 22%;
-  text-align: right;
+  width: 20%;
+  text-align: center;
+}
+.today_title{
+  width: 50%;
+  text-align: center;
 }
 .list-items{
   width: 100%;
@@ -141,6 +145,9 @@ Page,
   background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_mybottom.png');
   background-size: cover;
   color:#A9B29E;
+  /* width: 98%;
+  border: 2px solid #d12618;
+  border-radius: 10rpx; */
 }
 .level1bottom{
   width: 100%;
@@ -206,9 +213,26 @@ Page,
 }
 .number{
   width: 20%;
-  text-align: right;
+  text-align: center;
 }
 .degree{
-  width: 18%;
+  width: 30%;
   text-align: center;
+}
+.today{
+  width: 50%;
+  text-align: center;
+}
+.nav_chooesd{
+  width: 45% !important;
+  box-shadow: 0 0 40rpx #6c6c6c;
+  border-top-left-radius: 15rpx;
+  border-top-right-radius: 15rpx;
+}
+/* 清除scroll-view的滚动条 */
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+
 }

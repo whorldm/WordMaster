@@ -59,18 +59,19 @@ const config = {
     interFace: '/user/rank',
     method: 'GET'
   },
-  'MY_RINKING': {
-    interFace: '/user/myRank',
+  
+  'TODAY_RINKING_LIST': {
+    interFace: '/user/todayRank',
     method: 'GET'
   },
-  'RINKING_WORLD_LIST': {
-    interFace: '/user/rank',
-    method: 'GET'
-  },
-  'MY_RINKING':{
-    interFace: '/user/myRank',
-    method: 'GET'
-  }
+  // 'TODAY_RANKING': {
+  //   interFace: '/user/myTodayRank',
+  //   method: 'GET'
+  // },
+  // 'WORLD_RINKING': {
+  //   interFace: '/user/myRank',
+  //   method: 'GET'
+  // }
 }
 
 const searchMap = function (key) {

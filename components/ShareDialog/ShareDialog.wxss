@@ -1,0 +1,74 @@
+/* components/ShareDialog/ShareDialog.wxss */
+.share_add_coin {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(36, 74, 71, 0.9);
+}
+.coin_cage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10%;
+  margin: 0 auto;
+  width: 640rpx;
+  height: 657rpx;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/invite_cage.png');
+}
+.icon_close {
+  width: 150rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  font-family: 'Zaozi';
+  font-size: 50rpx;
+  color: #FFF;
+}
+.share_add_coin text {
+  color: #FFFEA1;
+  display: block;
+  font-size: 36rpx;
+  font-family: 'Zaozi';
+  text-align: center;
+  position: absolute;
+  top: 54%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btn_invite {
+  position: absolute;
+  top: 62%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 376rpx;
+  height: 120rpx;
+  color: #FFFEA1;
+  font-size: 50rpx;
+  text-align: center;
+  line-height: 120rpx;
+  font-family: 'Zaozi';
+  letter-spacing: 6rpx;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_btn_invite.png');
+}
+.btn_invite button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 376rpx;
+  height: 120rpx;
+  opacity: 0;
+  z-index: 200;
+}

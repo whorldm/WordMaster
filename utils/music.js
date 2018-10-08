@@ -1,21 +1,29 @@
 var version = 0; // 音效的版本
 var musicList = [{
   // 通关背景音效
-  "BG_GAME_MUSIC": "http://pepuwoffw.bkt.clouddn.com/bg_game_01.mp3",
+  // "BG_GAME_MUSIC": "http://pepuwoffw.bkt.clouddn.com/bg_game_01.mp3",
+  "BG_GAME_MUSIC": "http://cdn.tik.com/wordmaster/sounds/bg_game_01.mp3",
   // 考试背景音效
-  "BG_EXAM_MUSIC": "http://pepuwoffw.bkt.clouddn.com/bg_exam_01.mp3",
+  // "BG_EXAM_MUSIC": "http://pepuwoffw.bkt.clouddn.com/bg_exam_01.mp3",
+  "BG_EXAM_MUSIC": "http://cdn.tik.com/wordmaster/sounds/bg_exam_01.mp3",
   // 倒计时音效
-  "COUNT_THREE": "http://pepuwoffw.bkt.clouddn.com/count_three_01.mp3",
+  // "COUNT_THREE": "http://pepuwoffw.bkt.clouddn.com/count_three_01.mp3",
+  "COUNT_THREE": "http://cdn.tik.com/wordmaster/sounds/count_three_01.mp3",
   // 点击的音效
-  "CLICK_MUSIC": "http://pepuwoffw.bkt.clouddn.com/click.mp3",
+  // "CLICK_MUSIC": "http://pepuwoffw.bkt.clouddn.com/click.mp3",
+  "CLICK_MUSIC": "http://cdn.tik.com/wordmaster/sounds/click.mp3",
   // 消除成功的音效
-  "SUCCESS_MUSIC": "http://pepuwoffw.bkt.clouddn.com/success1.mp3",
+  // "SUCCESS_MUSIC": "http://pepuwoffw.bkt.clouddn.com/success1.mp3",
+  "SUCCESS_MUSIC": "http://cdn.tik.com/wordmaster/sounds/success1.mp3",
   // 消除错误的音效
-  "ERROR_MUSIC": "http://pepuwoffw.bkt.clouddn.com/error.wav",
+  // "ERROR_MUSIC": "http://pepuwoffw.bkt.clouddn.com/error.wav",
+  "ERROR_MUSIC": "http://cdn.tik.com/wordmaster/sounds/error.wav",
   // 通过的音效
-  "PASS_MUSIC": "http://pepuwoffw.bkt.clouddn.com/pass_01.mp3",
+  // "PASS_MUSIC": "http://pepuwoffw.bkt.clouddn.com/pass_01.mp3",
+  "PASS_MUSIC": "http://cdn.tik.com/wordmaster/sounds/pass_01.mp3",
   // 未通过的音效
-  "UNPASS_MUSIC": "http://pepuwoffw.bkt.clouddn.com/unpass_01.mp3",
+  // "UNPASS_MUSIC": "http://pepuwoffw.bkt.clouddn.com/unpass_01.mp3",
+  "UNPASS_MUSIC": "http://cdn.tik.com/wordmaster/sounds/unpass_01.mp3",
 }]
 
 
@@ -28,9 +36,9 @@ function playSuccessMusic () {
   let innerAudioContextSuccess = wx.createInnerAudioContext();
   innerAudioContextSuccess.src = getMusicSource(version,'SUCCESS_MUSIC');
   innerAudioContextSuccess.play();
-  setTimeout(() => {
+  innerAudioContextSuccess.onEnded(() => {
     innerAudioContextSuccess.destroy();
-  }, 1000)
+  })
 }
 // 播放失败音效
 function playErrorMusic () {

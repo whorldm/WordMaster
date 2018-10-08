@@ -1,0 +1,290 @@
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/bg_header_unpass.png');
+}
+/*头部样式*/
+.header {
+  width: 605rpx;
+  height: 483rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/new_bg_header_unpass.png')
+}
+/*title的动效显示*/
+.result_title {
+  width: 488rpx;
+  height: 100rpx;
+  position: relative;
+  top: 10%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  padding-left: 20rpx;
+  text-align: center;
+  font-size: 54rpx;
+  font-family: 'Zaozi';
+  line-height: 110rpx;
+  letter-spacing: 6rpx;
+}
+.result_title text {  /*文字的渐变色*/
+  opacity: 0;
+  display: inline-block;
+  color: #FFF;
+  text-shadow: -1px -1px #000, -1px 1px #000, 1px -1px #000, 1px 1px #000;
+}
+.title_one {
+  animation: drop 250ms 0.4s ease forwards;
+}
+.title_two {
+  animation: drop 250ms 0.6s ease forwards;
+}
+.title_three {
+  animation: drop 250ms 0.9s ease forwards;
+}
+.title_four {
+  animation: drop 250ms 1.3s ease forwards;
+}
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 3000px) scale(3);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+/*星星显示动效样式*/
+.star_area {
+  width: 440rpx;
+  height: 160rpx;
+  position: relative;
+  top: 15%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.result_star {
+  width: 80%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.result_star_one,
+.result_star_three{
+  width: 100rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.result_star_two{
+  width: 120rpx;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.result_star_one image,
+.result_star_three image{
+  width: 100rpx;
+  height: 97rpx;
+}
+.result_star_two image{
+  width: 120rpx;
+  height: 113rpx;
+}
+
+/**文字显示区域样式**/
+.content_area {
+  width: 100%;
+  position: relative;
+  top: 17%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 36rpx;
+  letter-spacing: 2rpx;
+  color: #FFF;
+}
+.line_one{
+  line-height: 60rpx;
+}
+.line_one text {
+  color: #FFD800;
+  font-size: 42rpx;
+  font-family: Arial;
+  display: inline-block;
+  margin: 0 8rpx;
+}
+.line_two{
+  font-size: 42rpx;
+  line-height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.line_two image {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: inline-block;
+  margin:  0 20rpx;
+}
+.line_two text{
+  color: #FFD800;
+  font-size: 32rpx;
+  font-family: Arial;
+}
+/**卡片滑动区域**/
+.dialog_area {
+  width: 70%;
+  height: 42%;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 0 20rpx;
+  border: 1px solid #69BAB8;
+  border-radius: 20rpx;
+  background: rgba(0, 0, 0, 0.1);
+}
+/**最后一击**/
+.dialog_area .last_title {
+  color: #D4DBFF;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 60rpx;
+  pointer-events: none;
+}
+.last_word {
+  width: 80%;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0 auto;
+  color: #ffd800;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.last_word text{
+  flex: 1;
+  display: block;
+}
+.bd_line {
+  width: 368rpx;
+  height: 4rpx;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 2rpx auto;
+  display: block;
+  opacity: 0.5;
+}
+/*中间可滑动区域*/
+.word_content {
+  height: 63%;
+  width: 80%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+}
+.word_item {
+  width: 100%;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.word_item .word_ch,
+.word_item .word_en{
+  flex: 1;
+  font-size: 36rpx;
+  line-height: 46rpx;
+  text-align: center;
+}
+.word_wrong {
+  color: #DE4A02;
+}
+.word_right {
+  color: #D4DBFF;
+}
+
+/**底部按钮样式**/
+.btn_area {
+  width: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btnItem_next {
+  width: 335rpx;
+  height: 158rpx;
+  /* padding-right: 20rpx; */
+  color: #815450;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_new_btn_next.png');
+}
+.btnItem_share {
+  width: 335rpx;
+  height: 158rpx;
+  color: #CC4E32;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/new_btn_share.png');
+}
+.btn_share {
+  opacity: 0;
+  width: 323rpx;
+  height: 158rpx;
+  padding: 0;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+}

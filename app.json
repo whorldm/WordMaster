@@ -1,15 +1,14 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/rankgame/waiting/waiting",
-    "pages/rankgame/startgame/startgame",
-    "pages/rankgame/gameover/gameover",
-    "pages/usercenter/usercenter",
-    "pages/lexicon/lexicon",
-    "pages/priview/priview",
+    "pages/homepage/homepage",
+    "pages/gamelevel/gamelevel",
     "pages/stairgame/stairgame",
     "pages/examgame/examgame",
-    "pages/ranking/ranking"
+    "pages/ranking/ranking",
+    "pages/priview/priview",
+    "pages/chooselevel/chooselevel",
+    "pages/startgame/startgame",
+    "pages/waiting/waiting"
   ],
   "window": {
     "backgroundTextStyle": "light",

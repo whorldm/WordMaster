@@ -1,0 +1,274 @@
+/**index.wxss**/
+.Box {
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/home_bg.png');
+}
+
+/*顶部右侧按钮*/
+.header_right {
+  position: absolute;
+  right: 30rpx;
+  top: 20rpx;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+} 
+.right_item {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  color: #6AA9CA;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin-bottom: 30rpx;
+}
+.right_one image {
+  width: 48rpx;
+  height: 46rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+}
+.right_two image{
+  width: 46rpx;
+  height: 50rpx;
+} 
+.right_three image {
+  width: 57rpx;
+  height: 41rpx;
+}
+
+/**中间圆圈的样式**/
+.center {
+  width: 680rpx;
+  height: 540rpx;
+  position: relative;
+  top: 16%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.swiper {
+  width: 540rpx;
+  height: 540rpx;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.swiper_item {
+  width: 540rpx;
+  height: 540rpx;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/index_build_bottom.png')
+}
+.lock{
+  width:540rpx;
+  height:540rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  border-radius: 270rpx;
+  background: url('http://cdn.tik.com/wordmaster/image/index_build_lock.png');
+  background-size:cover;
+}
+.slide_image {
+  width: 512rpx;
+  height: 512rpx;
+  display: block;
+  position: relative;
+  top: 15%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+/* 左右箭头 */
+.left_nav {
+  width: 50rpx;
+  height: 200rpx;
+  position: absolute;
+  left: 0;
+  top: 40%;
+  margin: 0;
+}
+.right_nav {
+  width: 50rpx;
+  height: 200rpx;
+  position: absolute;
+  right: 0;
+  top: 40%;
+  margin: 0;
+}
+.left_nav image,
+.right_nav image {
+  width: 36rpx;
+  height: 76rpx;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* 等级名称 */
+.level_title {
+  color: #0083AE;
+  text-align: center;
+  font-size: 40rpx;
+  font-family: 'Zaozi';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4%;
+  margin: 0 auto;
+}
+
+/**开始按钮的样式**/
+.start_area {
+  width: 100%;
+  position: absolute;
+  top: 90%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+.btn_start {
+  width: 410rpx;
+  height: 130rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 130rpx;
+  color: #FFFEA1;
+  font-size: 50rpx;
+  font-family: 'Zaozi';
+  letter-spacing: 6rpx;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_btn_invite.png');
+}
+.form_id {
+  width: 410rpx;
+  height: 130rpx;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: 0;
+}
+.start_area text {
+  color: #346786;
+  display: block;
+  text-align: center;
+  position: relative;
+  top:130rpx;
+  left: 0;
+  right: 0;
+  margin: 10rpx auto;
+}
+
+/*底部的入口链接*/
+.foot_nav {
+  width: 100%;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 32%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.foot_item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.foot_item image{
+  width: 114rpx;
+  height: 115rpx;
+  display: block;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.logo_name {
+  color: #437999;
+  font-size: 36rpx;
+  margin: 10rpx auto;
+}
+
+.sports_port {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.sports_port image{
+  width: 114rpx;
+  height: 115rpx;
+  border-radius: 50%;
+  border: 4px solid #FFFEA1;
+  box-shadow: 0 2px 2px #437999;
+  display: block;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.sports_name {
+  color: #FFFEA1;
+  /* color: #644221; */
+  font-size: 36rpx;
+  margin: 10rpx auto;
+}
+
+/*悬浮按钮样式*/
+.float_btn {
+  height: 100rpx;
+  width: 100rpx;
+  position: fixed;
+  z-index: 100;
+  bottom: 50rpx;
+  right: 20rpx;
+}
+.float_btn image {
+  height: 84rpx;
+  width: 84rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.float_btn button{
+  height: 100rpx;
+  width: 100rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  opacity: 0;
+  z-index: 10;
+}

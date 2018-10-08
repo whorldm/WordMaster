@@ -3,7 +3,7 @@
     "SuccessShow": "/components/SuccessWord/SuccessWord",
     "ErrorShow": "/components/ErrorWord/ErrorWord",
     "ComboxShow": "/components/ShowCombox/ShowCombox",
-    "GamePass": "/components/GamePass/GamePass",
-    "GameUnpass": "/components/GameUnpass/GameUnpass"
+    "RevivePass": "/components/RevivePass/RevivePass",
+    "ReviveUnpass": "/components/ReviveUnpass/ReviveUnpass"
   }
 }

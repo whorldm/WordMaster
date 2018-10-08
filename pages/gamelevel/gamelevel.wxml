@@ -1,0 +1,78 @@
+<view class='Box'>
+  <!-- 右侧的图标 -->
+  <view class='header_right'>
+    <!-- <view class='right_item right_one'>
+      <image src='../../img/home/coin.png'></image>
+      {{coinNum/1000}}K
+    </view> -->
+    <!-- <view class='right_item right_two'>
+      <image src='../../img/home/certificate.png'></image>
+      证书
+    </view>
+    <view class='right_item right_three'>
+      <image src='../../img/home/book.png'></image>
+      词库
+    </view> -->
+  </view>
+
+  <!--中间center-->
+  <view class='center'>
+    <!-- 左右箭头 -->
+    <view wx:if="{{currentIndex > 0}}" class='left_nav' data-direct="left" bindtap="changSwiper">
+      <image src='../../img/home/left_nav.png'></image>
+    </view>
+    <view wx:if="{{currentIndex < maxLevelIdList.length - 1}}" class='right_nav' data-direct="right" bindtap="changSwiper">
+      <image src='../../img/home/right_nav.png'></image>
+    </view>
+
+    <!-- 中间滑动区域 -->
+    <swiper current="{{currentIndex}}" class='swiper' bindchange="swiperChange">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item class="swiper_item" bindtap='getUserLevel'>
+          <text class='level_title'>{{stageLevelList[currentIndex].name}}</text>
+          <image src="{{item}}" class="slide_image" />
+          <view class='lock' wx:if="{{nextBigLevel.levelId < maxLevelIdList[currentIndex].game}}"></view>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <!--开始按钮-->
+    <view class='start_area'>
+      <form bindsubmit="getUserLevel" class='btn_start' report-submit="true">
+        开始
+        <button formType="submit" class='form_id'></button>
+      </form>
+
+      <text wx:if="{{nextBigLevel.levelId >= maxLevelIdList[currentIndex].game && nextBigLevel.levelId <= maxLevelIdList[currentIndex].exam}}">[第{{nextBigLevel.levelId}}关]{{nextBigLevel.levelName}}</text>
+      <text wx:if="{{nextBigLevel.levelId > maxLevelIdList[currentIndex].exam}}">已毕业</text>
+    </view>
+  </view>
+
+  <!--底部的菜单-->
+  <view class='foot_nav'>
+    <view class='foot_item' bindtap='navToRank'>
+      <image src='../../img/home/rank_logo.png'></image>
+      <view class='logo_name'>排行榜</view>
+    </view>
+
+    <!-- <view class='foot_item' bindtap='navToSports'>
+      <image src='../../img/home/vs.png'></image>
+      <view class='logo_name'>竞技场</view>
+    </view> -->
+    <view class='sports_port' bindtap='navToSports'>
+      <image src='../../img/home/vs.png'></image>
+      <view class='sports_name'>竞技场已开放</view>
+    </view>
+
+    <view class='foot_item' bindtap='wait'>
+      <image src='../../img/home/pk.png'></image>
+      <view class='logo_name'>连消赛</view>
+    </view>
+  </view>
+
+  <!-- 客服按钮 -->
+  <view class='float_btn' catchtouchmove='menuMainMove' style='top:{{pos.top}}px;left:{{pos.left}}px;'>
+    <button open-type='contact'></button>
+    <image src='../../img/home/contact.png'></image>
+  </view>
+</view>

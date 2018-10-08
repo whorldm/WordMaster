@@ -1,12 +1,7 @@
-Page{
-  width: 100%;
-  height: 100%;
-}
 .Box {
-  width: 100%;
-  height: 100%;
+  overflow-y: scroll;
   background-size: cover;
-  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_bg_game.png');
+  background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_bg_game.png');
 }
 .header {
   width: 90%;
@@ -87,7 +82,7 @@ Page{
 .grade .score {
   flex: 1.5;
   color: #F7FF2A;
-  font-size: 34rpx;
+  font-size: 36rpx;
   text-align: right;
   line-height: 40rpx;
 }
@@ -101,47 +96,51 @@ Page{
 }
 /*时间已经词量样式*/
 .condition_area {
-  width: 640rpx;
-  height: 82rpx;
+  /* width: 640rpx; */
+  width: 96%;
+  height: 100rpx;
   position: relative;
   left: 0;
   right: 0;
   top: 0;
-  margin: 26rpx auto;
+  margin: 0rpx auto 26rpx;
   font-size: 30rpx;
+  color: #2F756B;
 }
 .condition {
   float: left;
-  width: 300rpx;
-  height: 82rpx;
-  line-height: 50rpx;
-  font-size: 36rpx;
-  color: #F0EEC5;
-  display: flex;
-  align-items: flex-end;
+  width: 180rpx;
+  text-align: center;
+  font-family: 'Zaozi';
 }
-.lastTen {
+.condition .lastTen {
   color: #FF3328;
-  font-size: 50rpx;
+}
+.condition image{
+  width: 40rpx;
+  height: 48rpx;
+  display: block;
+  margin: 4rpx auto;
 }
 .word_num {
   float: right;
   width: 230rpx;
   color:  #2F756B;
+  /* font-family: 'Zaozi'; */
+  font-size: 30rpx;
   text-align: center;
 }
 .word_num image {
   width: 56rpx;
   height: 40rpx;
   display: block;
-  margin: 0 auto;
+  margin: 8rpx auto;
 }
-
 
 /*公告栏及键盘区域样式*/
 .keyboard {
   width: 660rpx;
-  height: 600rpx;
+  height: 610rpx;
   border-radius: 30rpx;
   background: rgba(199, 199, 199, 0.2);
   position: relative;
@@ -163,7 +162,8 @@ Page{
   top: 0;
   left: 0;
   right: 0;
-  margin: 0 auto;
+  margin: auto;
+  font-weight: bold;
 }
 .flex-row{
   width: 100%;
@@ -172,32 +172,29 @@ Page{
   justify-content: space-between;
   margin: 18rpx auto;
 }
-.flex-column{
-  flex: 1;
-  text-overflow: ellipsis;
-}
 .word_item {
-  width: 176rpx;
-  height: 128rpx;
-  margin: 0 auto;
+  flex: 1;
+  width: 178rpx;
+  height: 134rpx;
+  margin: auto 20rpx;
   text-align: center;
   font-size: 30rpx;
-  line-height: 128rpx;
+  line-height: 134rpx;
 }
 .word_common {  /*为选中的效果*/
   color: #815450;
   background-size: cover;
-  background-image: url('http://peqmyh7ue.bkt.clouddn.com/word_common.png');
+  background-image: url('http://cdn.tik.com/wordmaster/image/word_common.png');
 }
 .word_click {  /*点击选中的效果*/
   color: #2EAE55;
   background-size: cover;
-  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_success.png');
+  background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_word_success.png');
 }
 .errorState {  /*答错的效果*/
   color: #FF3328;
   background-size: cover;
-  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_error.png');
+  background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_word_error.png');
   animation: tremble 0.8s 0s ease both;
 }
 .sucessState { /*答对的效果*/
@@ -208,35 +205,45 @@ Page{
   animation: newTremble 0.8s ease-in-out; 
 }
 @keyframes newTremble {
-  0%{background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_success.png');transform:scale(1);}
+  0%{background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_word_success.png');transform:scale(1);}
   10%,20%{transform:scale(1) rotate(-2deg);}
   30%,50%,70%,90%{transform:scale(1.1) rotate(2deg);}
   40%,60%,80%{transform:scale(1.1) rotate(-2deg);}
-  100%{background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_common.png');transform:scale(1) rotate(0);}
+  100%{background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_word_common.png');transform:scale(1) rotate(0);}
 }
 
 /*提示信息*/
 .help {
   height: 80rpx;
   width: 360rpx;
-  margin: 60rpx auto 0;
+  position: relative;
+  top: 4%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   line-height: 80rpx;
   color: #815450;
   font-size: 30rpx;
+  font-weight: bold;
   text-align: center;
   background-size: cover;
-  background-image: url('http://peqmyh7ue.bkt.clouddn.com/help.png');
+  background-image: url('http://cdn.tik.com/wordmaster/image/help.png');
 }
 .coin_area {
   width: 400rpx;
-  margin: 20rpx auto;
   color: #F0EDCC;
   font-size: 34rpx;
+  position: relative;
+  top: 5%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 .my_coin {
   width: 280rpx;
   float: left;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
 }
 .my_coin image {
@@ -270,7 +277,7 @@ Page{
 }
 .countDown {
   width: 214rpx;
-  height: 214rpx;
+  height: 212rpx;
   position: relative;
   top: 40%;
   right: 0;
@@ -278,47 +285,98 @@ Page{
   margin: auto;
   z-index: 1000;
 }
-.countDown_bg {
-  width: 214rpx;
-  height: 214rpx;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  background-size: cover;
-  background-image: url('http://pepuwoffw.bkt.clouddn.com/bg_count.png');
-  animation: rotate 3s 0s linear;
-}
 .countDown image{
   display: block;
-  width: 136rpx;
-  height: 126rpx;
+  width: 214rpx;
+  height: 212rpx;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  margin: auto;
+  margin: auto; 
+  animation: rotateBig 0.5s 0.2s ease-in forwards,
+             rotateSmall 0.5s 0.8s ease-in forwards;
 }
-@keyframes rotate {
-  0% {transform: rotate(0deg);}
-  100% {transform: rotate(1600deg);}
+@keyframes rotateBig {
+  0% {transform: scale(1);}
+  100% {transform: scale(1.5);}
+}
+@keyframes rotateSmall {
+  0% {transform:  scale(1.5)}
+  100% {transform: scale(0)}
 }
 
-/*通过结果页的弹出方式*/
-/* #GamePass {
-  animation: slowDown 0.5s 2s linear forwards;
+/* 金币不足时的提示 */
+.share_add_coin {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(36, 74, 71, 0.9);
 }
-@keyframes slowDown {
-  form{transform: translate3d(0,-3000px,0);}
-  to{transform: translate3d(0,0px,0);}
-} */
-/*未通过结果页的弹出方式*/
-/* #GameUnpass {
-  animation: slowUp 0.5s 2s linear forwards;
+.coin_cage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10%;
+  margin: 0 auto;
+  width: 640rpx;
+  height: 657rpx;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/invite_cage.png');
 }
-@keyframes slowUp {
-  form{transform: translate3d(0,3000px,0);}
-  to{transform: translate3d(0,0px,0);}
-} */
+.icon_close {
+  width: 150rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  font-family: 'Zaozi';
+  font-size: 50rpx;
+  color: #FFF;
+}
+.share_add_coin text {
+  color: #FFFEA1;
+  display: block;
+  font-size: 36rpx;
+  font-family: 'Zaozi';
+  text-align: center;
+  position: absolute;
+  top: 54%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btn_invite {
+  position: absolute;
+  top: 62%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 376rpx;
+  height: 120rpx;
+  color: #FFFEA1;
+  font-size: 50rpx;
+  text-align: center;
+  line-height: 120rpx;
+  font-family: 'Zaozi';
+  letter-spacing: 6rpx;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_btn_invite.png');
+}
+.btn_invite button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 376rpx;
+  height: 120rpx;
+  opacity: 0;
+  z-index: 200;
+}

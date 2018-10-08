@@ -15,6 +15,10 @@ const config = {
     interFace: '/user/prompt',
     method: 'POST'
   },
+  'CHANGE_COIN': {
+    interFace: '/user/changeCoin',
+    method: 'GET'
+  },
   'USER_ASSET': {
     interFace: '/user/myAsset',
     method: 'GET'
@@ -55,23 +59,62 @@ const config = {
     interFace: '/user/listLevel',
     method: 'GET'
   },
+  'HOME_LEVEL_LIST': {
+    interFace: '/user/homeLevel',
+    method: 'GET'
+  },
   'RINKING_WORLD_LIST': {
     interFace: '/user/rank',
     method: 'GET'
   },
-  
   'TODAY_RINKING_LIST': {
     interFace: '/user/todayRank',
     method: 'GET'
   },
-  // 'TODAY_RANKING': {
-  //   interFace: '/user/myTodayRank',
-  //   method: 'GET'
-  // },
-  // 'WORLD_RINKING': {
-  //   interFace: '/user/myRank',
-  //   method: 'GET'
-  // }
+  'WORLD_RINKING': {
+    interFace: '/user/myRank',
+    method: 'GET'
+  },
+  'MY_TODAY_RANK': {
+    interFace: '/user/myTodayRank',
+    method: 'GET'
+  },
+  'WORD_JUMPTO': {
+    interFace: '/word/jumpTo',
+    method: 'POST'
+  },
+  'JUMP_SETTLEMENT': {
+    interFace: '/game/jumpSettlement',
+    method: 'POST'
+  },
+  'BATTLE_START': {
+    interFace: '/battle/start',
+    method: 'POST'
+  },
+  'BATTLE_END': {
+    interFace: '/battle/end',
+    method: 'POST'
+  },
+  'BATTLE_JOIN': {
+    interFace: '/battle/join',
+    method: 'POST'
+  },
+  'BATTLE_HOME': {
+    interFace: '/battle/index',
+    method: 'GET'
+  },
+  'BATTLE_WORD': {
+    interFace: '/word/battleWord',
+    method: 'GET'
+  },
+  'BATTLE_TIME': {
+    interFace: '/battle/battleTime',
+    method: 'POST'
+  },
+  'INSERT_FORMID': {
+    interFace: '/word/insertFormId',
+    method: 'GET'
+  },
 }
 
 const searchMap = function (key) {

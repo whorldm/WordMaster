@@ -1,0 +1,339 @@
+.Box {
+  overflow-y: scroll;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_bg_game.png');
+}
+.head_title {
+  color: #E3DBBD;
+  font-size: 44rpx;
+  letter-spacing: 4rpx;
+  font-family: 'Zaozi';
+  line-height: 100rpx;
+  text-align: center;
+}
+/* 顶部的个人信息 */
+.userinfo_area {
+  width: 90%;
+  height: 180rpx;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.user_logo {
+  width: 140rpx;
+  height: 140rpx;
+  z-index: 2;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  margin: 0 auto;
+  border: 2px solid #FFF;
+}
+.userinfo_detail {
+  width: 508rpx;
+  height: 120rpx;
+  position: absolute;
+  left: 30rpx;
+  margin: 0 auto;
+}
+.userinfo_content {
+  width: 368rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+.userinfo_detail_bg {
+  width: 508rpx;
+  height: 120rpx;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_home_bg_header.png');
+}
+.userinfo_detail .userinfo_name {
+  color: #901518;
+  text-align: left;
+  font-size: 26rpx;
+  display: inline-block;
+  position: relative;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+.area_line {
+  width: 320rpx;
+  height: 26rpx;
+  border-radius: 13rpx;
+  border: 2px solid #AE9864;
+  background-color: #6A2A00;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  display: -webkit-box;
+  display: -webkit-flex;
+  -webkit-box-pack: justify;
+  -webkit-box-align: center;
+  -webkit-justify-content: flex-start;
+}
+.area_line .process {
+  width: 320rpx;
+  color: #FFF;
+  z-index: 20;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  text-align: center;
+  display: block;
+  position: absolute;
+  left: 0;
+  margin: auto 0;
+}
+.area_line .xt {
+  width: 14rpx;
+  height: 54rpx;
+  position: relative;
+  left: -5rpx;
+  top: 0;
+  bottom: 0;
+}
+.area_inline {
+  width: 320rpx;
+  height: 26rpx;
+  border-top-left-radius: 8rpx;
+  border-bottom-left-radius: 8rpx;
+  background: -webkit-linear-gradient(top, #FFC627 50%, #FFA800 50%);
+}
+.userinfo_detail .under_text {
+  padding-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.userinfo_detail .under_text text{
+  flex: 1;
+  text-align: left;
+  color:#416092;
+  font-size: 26rpx;
+}
+/* 等级样式 */
+.level_titel {
+  width: 130rpx;
+  height: 130rpx;
+  position: absolute;
+  right: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_bg_circle.png');
+}
+.level_titel text {
+  color: #2A4259;
+  font-size: 28rpx;
+  display: block;
+  font-family: 'Zaozi';
+  text-align: center;
+  margin-top: 36rpx;
+}
+.level_titel view {
+  display: flex;
+  justify-content: center;
+}
+.level_titel image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 顶部的等级选择样式 */
+.level_area {
+  width: 90%;
+  height: 200rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.level_item {
+  flex: 1;
+  color: #21343E;
+  text-align: center;
+}
+.level_item view{
+  width: 80%;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.level_item image {
+  width: 114rpx;
+  height: 126rpx;
+  display: block;
+  margin: 0 auto;
+}
+.level_choosed image {
+  width: 160rpx;
+  height: 164rpx;
+}
+
+.your_choose {
+  color: #FFFFEA;
+  text-align: center;
+  font-size: 30rpx;
+  position: relative;
+  top: 10rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto 10rpx;
+}
+
+/* 竞技场的入口样式 */
+.sportsType {
+  width: 90%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.sports_port {
+  width: 600rpx;
+  height: 112rpx;
+  margin: 20rpx;
+  position: relative;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_home_bg_type.png');
+}
+.sports_port image {
+  width: 121rpx;
+  height: 70rpx;
+  position: absolute;
+  left: 30rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.sports_name {
+  color: #0C5F8A;
+  font-size: 38rpx;
+  line-height:  112rpx;
+  font-family: 'Zaozi';
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.person_num {
+  color: #0C5F8A;
+  font-size: 32rpx;
+  line-height:  112rpx;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  right: 30rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.sports_ban {
+  width: 588rpx;
+  height: 104rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
+  border-radius: 10rpx;
+  background: rgba(0, 0, 0, 0.4)
+}
+.sports_ban .person_num,
+.sports_ban .sports_name,
+.sports_ban image{
+  opacity: 0.5;
+}
+
+/* 底部分享增加金币样式 */
+.btn_bottom {
+  position: relative;
+  top: 20rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 90%;
+}
+.add_area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add_coin {
+  width: 210rpx;
+  height: 60rpx;
+  position: relative;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_add_coin.png');
+}
+.add_coin text {
+  width: 150rpx;
+  color: #FFFC00;
+  display: inline-block;
+  margin-left: 50rpx;
+  line-height: 60rpx;
+  text-align: center;
+}
+.add_area image {
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  margin: 10rpx;
+}
+/* 邀请按钮样式 */
+.btn_invite {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 15rpx auto;
+  width: 283rpx;
+  height: 90rpx;
+  color: #FFFEA1;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 90rpx;
+  font-family: 'Zaozi';
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_btn_invite.png');
+}
+.btn_invite button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 276rpx;
+  height: 88rpx;
+  opacity: 0;
+  z-index: 200;
+}

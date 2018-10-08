@@ -1,0 +1,105 @@
+<view class='Box'>
+  <!-- 个人信息 -->
+  <view class='head_title'>词鸡竞技场</view>
+  <view class='userinfo_area'>
+    <image class="user_logo" src='{{userInfo.avatarUrl}}'></image>
+
+    <view class='userinfo_detail'>
+      <view class='userinfo_content'>
+        <text class='userinfo_name'>{{userInfo.nickName}}</text>
+        <view class='area_line'>
+          <text class='process'>{{battleInfo.integral}} / {{battleInfo.totalIntegral}}</text>
+          <view class='area_inline' style='flex:{{battleInfo.integral / battleInfo.totalIntegral}}; -webkit-flex:{{battleInfo.integral / battleInfo.totalIntegral}};'>
+          </view>
+          <image class='xt' wx:if="{{battleInfo.integral < battleInfo.totalIntegral && battleInfo.integral !== 0}}" src='../../img/xt-2.png'></image>
+        </view>
+        <view class='under_text'>
+          <text>金币: {{battleInfo.coin}}</text>
+          <text>竞技排名: {{battleInfo.rank}}</text>
+        </view>
+      </view>
+      <view class='userinfo_detail_bg'></view>
+    </view>
+
+    <view class='level_titel'>
+      <text>{{battleInfo.name}}</text>
+      <view>
+        <block wx:for="{{battleInfo.star}}" wx:key="{{item}}">
+          <image src='../../img/result/new_light_star.png'></image>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 顶部选择等级 -->
+  <view class='level_area'>
+    <view class="level_item {{sportsLevel === 1 ? 'level_choosed':''}}">
+      <view data-level='1' catchtap='chooseLvel'>
+        <image wx:if="{{sportsLevel === 1}}" src='http://cdn.tik.com/wordmaster/image/sports_primary_choosed.png'>
+        </image>
+        <image wx:else src='http://cdn.tik.com/wordmaster/image/sports_primary_common.png'>
+        </image>
+      </view>
+    </view>
+    <view class="level_item {{sportsLevel === 2 ? 'level_choosed':''}}">
+      <view data-level='2' catchtap='chooseLvel'>
+        <image wx:if="{{sportsLevel === 2}}" src='http://cdn.tik.com/wordmaster/image/sports_middle_choosed.png'>
+        </image>
+        <image wx:else src='http://cdn.tik.com/wordmaster/image/sports_middle_common.png'>
+        </image>
+      </view>
+    </view>
+    <view class="level_item {{sportsLevel === 3 ? 'level_choosed':''}}">
+      <view data-level='3' catchtap='chooseLvel'>
+        <image wx:if="{{sportsLevel === 3}}" src='http://cdn.tik.com/wordmaster/image/sports_high_choosed.png'>
+        </image>
+        <image wx:else src='http://cdn.tik.com/wordmaster/image/sports_high_common.png'>
+        </image>
+      </view>
+    </view>
+  </view>
+  <view class='your_choose'>
+    当前等级-{{levelList[sportsLevel]}}
+  </view>
+
+  <!-- 单人竞技赛 -->
+  <view class='sportsType'>
+    <view class='sports_port' bindtap='oneCompare'>
+      <image src='http://cdn.tik.com/wordmaster/image/sports_home_bg_one.png'></image>
+      <view class='sports_name'>单人模式</view>
+      <view class='person_num'>(30人）</view>
+    </view>
+    <view class='sports_port' bindtap='wait'>
+      <view class='sports_ban'>
+        <image src='http://cdn.tik.com/wordmaster/image/sports_home_bg_one.png'></image>
+        <view class='sports_name'>淘汰模式</view>
+        <view class='person_num'>(50人）</view>
+      </view>
+    </view>
+    <view class='sports_port' bindtap='wait'>
+      <view class='sports_ban'>
+        <image src='http://cdn.tik.com/wordmaster/image/sports_home_bg_one.png'></image>
+        <view class='sports_name'>双人模式</view>
+        <view class='person_num'>(30组）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮样式 -->
+  <view class='btn_bottom'>
+    <view class='add_area'>
+      <view class='add_coin'>
+        <text>{{battleInfo.coin}}</text>
+      </view>
+      <image bindtap='addScore' src='../../img/sports/add.png'></image>
+    </view>
+    <view class='btn_invite'>
+      邀请好友
+      <button open-type='share'></button>
+    </view>
+  </view>
+
+  <!-- 分享增加金币的弹框 -->
+  <ShareDialog wx:if="{{isShareDialog}}" bind:closeCoinDialog="closeCoinDialog">
+  </ShareDialog>
+</view>

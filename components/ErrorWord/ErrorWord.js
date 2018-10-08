@@ -24,13 +24,13 @@ Component({
     playErrorMusic(num) {
       let innerAudioContextError = wx.createInnerAudioContext();
       if(num === 0){
-        innerAudioContextError.src = 'http://pepuwoffw.bkt.clouddn.com/oh_on.mp3';
+        innerAudioContextError.src = 'http://cdn.tik.com/wordmaster/sounds/oh_on.mp3';
       }
       if(num === 1) {
-        innerAudioContextError.src = 'http://pepuwoffw.bkt.clouddn.com/error.wav';
+        innerAudioContextError.src = 'http://cdn.tik.com/wordmaster/sounds/error.wav';
       }
       if(num === 2){
-        innerAudioContextError.src = 'http://pepuwoffw.bkt.clouddn.com/try_again.mp3';
+        innerAudioContextError.src = 'http://cdn.tik.com/wordmaster/sounds/try_again.mp3';
       }
       
       innerAudioContextError.play();

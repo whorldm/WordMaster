@@ -1,0 +1,10 @@
+<!--components/ShareDialog/ShareDialog.wxml-->
+<view class='share_add_coin'>
+  <view class='icon_close' bindtap='closeCoinDialog'> X </view>
+  <view class='coin_cage'></view>
+  <text>邀请好友来词鸡，立得500金！</text>
+  <view class='btn_invite'>
+    立刻邀请
+    <button open-type='share'></button>
+  </view>
+</view>

@@ -1,0 +1,76 @@
+<view class='mask'>
+  <!--Header-->
+  <view class='header'>
+    <!--星星的显示区域-->
+    <view class='star_area'>
+      <view class='result_star'>
+        <view class='result_star_one'>
+          <image src='../../img/result/new_dark_star.png'></image>
+        </view>
+        <view class='result_star_two'>
+          <image src='../../img/result/new_dark_star.png'></image>
+        </view>
+        <view class='result_star_three'>
+          <image src='../../img/result/new_dark_star.png'></image>
+        </view>
+      </view>
+    </view>
+    
+    <!--称号显示区域-->
+    <view class='result_title'>
+      <text class='title_one'>{{titleList[isTest][0]}}</text>
+      <text class='title_two'>{{titleList[isTest][1]}}</text>
+      <text class='title_three'>{{titleList[isTest][2]}}</text>
+    </view>
+    <!--文字的显示区域-->
+    <view class='content_area'>
+      <view class='line_one'>
+        今日已消单词:
+        <text>{{todayRankList.wordNum}}</text>
+      </view>
+      <view class='line_two'>
+        未能超越自己
+      </view>
+    </view>
+  </view>
+
+  <!-- 卡片滑动区域 -->
+  <view class='dialog_area'>
+    <view class='last_title'>最后一击:</view>
+    <view class="last_word">
+      <text>{{lastWord[0]}}</text>
+      <text>{{lastWord[1]}}</text>
+    </view>
+    <image class='bd_line' src='../../img/result/bd_line.png'></image>
+    <view class='last_title'>已消单词: </view>
+    <scroll-view scroll-y class='word_content'>
+      <block wx:for="{{wrongArray}}" wx:key="{{index}}">
+        <view class='word_item word_wrong' wx:if="{{!item.isRepeat}}">
+          <view class='word_ch'>{{item.wordC}}</view>
+          <view class='word_en'>{{item.wordE}}</view>
+        </view>
+      </block>
+      <block wx:for="{{rightArray}}" wx:key="{{index}}">
+        <view class='word_item word_right' wx:if="{{!item.isRepeat}}">
+          <view class='word_ch'>{{item.wordC}}</view>
+          <view class='word_en'>{{item.wordE}}</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <!--按钮的区域-->
+  <view class='btn_area'>
+    <view class='btnItem_share'>
+      考考好友
+      <button open-type='share' class='btn_share'>
+      </button>
+    </view>
+    <view class='btnItem_next' bindtap='goNextGame' wx:if="{{isTest === 0}}">
+      再试一次
+    </view>
+    <view class='btnItem_next' bindtap='goNextGame' wx:if="{{isTest === 1}}">
+      含泪补考
+    </view>
+  </view>
+</view>

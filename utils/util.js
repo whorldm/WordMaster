@@ -36,9 +36,9 @@ const formatNumber = n => {
 // 计算倒计时
 function dateFormat(second) {
   var hr = fill_zero_prefix(Math.floor(second / 3600)); // 小时位
-  var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60));  // 分钟位
-  var sec = fill_zero_prefix((second - hr * 3600 - min * 60));  // 秒位
-  return  min + ":" + sec + " ";
+  var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60)); // 分钟位
+  var sec = fill_zero_prefix((second - hr * 3600 - min * 60)); // 秒位
+  return min + ":" + sec + " ";
 }
 // 位数不足补零
 function fill_zero_prefix(num) {
@@ -69,35 +69,36 @@ function dealWordCouple(str1, str2) {
     temp.push(str2);
     temp.push(str1);
   }
-  return temp;  
+  return temp;
 }
 
 // 深拷贝数组
 function deepCopy(Obj) {
-  var newObj;   
+  var newObj;
   if (Obj instanceof Array) {
-      newObj = [];  // 创建一个空的数组
-      var i = Obj.length;
-      while (i--) {
-          newObj[i] = deepCopy(Obj[i]);
-      }
-      return newObj;
-  } else if (Obj instanceof Object){
-      newObj = {};  // 创建一个空对象
-      for (var k in Obj) {  // 为这个对象添加新的属性
-          newObj[k] = deepCopy(Obj[k]);
-      }
-      return newObj;
-  }else{
-      return Obj;
+    newObj = []; // 创建一个空的数组
+    var i = Obj.length;
+    while (i--) {
+      newObj[i] = deepCopy(Obj[i]);
+    }
+    return newObj;
+  } else if (Obj instanceof Object) {
+    newObj = {}; // 创建一个空对象
+    for (var k in Obj) { // 为这个对象添加新的属性
+      newObj[k] = deepCopy(Obj[k]);
+    }
+    return newObj;
+  } else {
+    return Obj;
   }
 }
 
 // 重构回传给后台的数组结构
-function rebuildArr(str1,str2,id) {
+function rebuildArr(str1, str2, id, target) {
   let reg = /^[a-zA-Z]/;
   let obj = {};
   obj.userId = id;
+  obj.isRepeat = false;
   if (reg.test(str1)) {
     obj.wordE = str1;
     obj.wordC = str2;
@@ -105,105 +106,128 @@ function rebuildArr(str1,str2,id) {
     obj.wordE = str2;
     obj.wordC = str1;
   }
-  return obj;  
+  for (let i = 0; i < target.length; i++) {
+    if (obj.wordE === target[i].wordE) {
+      obj.isRepeat = true;
+      break;
+    }
+  }
+  return obj;
 }
 
 // 动态加载字体
 function loadFont() {
+  wx.getSystemInfo({
+    success: res => {
+      if (res.model.indexOf('iPhone') > -1) {
+        console.log('下载iphone')
+        loadIphoneFont();
+      } else {
+        console.log('下载Andoid')
+        loadAndoidFont()
+      }
+    }
+  })
+}
+
+// 下载iphone字体包
+function loadIphoneFont() {
   if (wx.canIUse('loadFontFace')) {
     wx.loadFontFace({
       family: 'Zaozi',
-      source: 'url("http://pfc6zcsy2.bkt.clouddn.com/font/title.otf")',
+      source: 'url("https://tp5.rock520.com/static/css/XinQingNianTi.ttf")',
       success: function (res) {
+        console.log(res)
         console.log("字体加载成功") //  loaded
       },
       fail: function (res) {
         console.log("字体加载失败") //  error
       }
     });
+  } else {
+    console.log('不支持下载字体')
   }
 }
-// 动态幼圆字体
-function loadYouyuanFont() {
+// 下载安卓字体包
+function loadAndoidFont() {
   if (wx.canIUse('loadFontFace')) {
     wx.loadFontFace({
-      family: 'YouYuan',
-      source: 'url("http://pfc6zcsy2.bkt.clouddn.com/幼圆.TTF")',
+      family: 'Zaozi',
+      source: 'url("http://pfc6zcsy2.bkt.clouddn.com/font/XinQingNianTi.ttf")',
       success: function (res) {
+        console.log(res)
         console.log("字体加载成功") //  loaded
       },
       fail: function (res) {
         console.log("字体加载失败") //  error
       }
     });
+  } else {
+    console.log('不支持下载字体')
   }
 }
-// 开赛倒计时
-var startTimer = null;  // 开赛前的倒计时
-var urlList = [
-  '../../img/countdown/number1.png',
-  '../../img/countdown/number2.png',
-  '../../img/countdown/number3.png'
-];
-function CountInThree(that) {
-  clearTimeout(startTimer);
-  let temp = that.data.count_to_start - 1;
 
-  if (temp < 0) {
-    that.setData({
-      showModal: false
-    })
-    CountOneMinte(that);
-    that.playBgMusic();  // 开始播放音乐
-    return;
+// 分享文案
+var shareMsgLst = [
+  "最好玩的单词游戏，我菜鸟英语也能上瘾",
+  "震惊！单词游戏毒到爆肝，居然停不下来",
+  "「老师@你」国庆假期不许玩游戏！要玩就玩单词大咖！",
+  "我朋友做的游戏，请帮忙转发一下，提点意见，谢谢🙏"
+]
+
+var shareImgList = [
+  'http://cdn.tik.com/wordmaster/image/share_share_logo_one.png',
+  'http://cdn.tik.com/wordmaster/image/share_share_logo_two.png',
+  'http://cdn.tik.com/wordmaster/image/share_share_logo_three.png'
+]
+
+function shareMsg(isGameOver) {
+  let titelIndex;
+  if (isGameOver) {
+    titelIndex = RandomNum(0, 2);
+  } else {
+    titelIndex = RandomNum(0, 3);
   }
-  that.setData({
-    count_to_start: temp,
-    countURL: urlList[temp]
-  })
+  let imgIndex = RandomNum(1, 2);
 
-  startTimer = setTimeout(function () {
-    CountInThree(that);
-  }, 1000)
-}
-
-// 比赛倒计时
-var gameTimer = null;  // 比赛倒计时的计时器
-function CountOneMinte(that) {
-  clearTimeout(gameTimer);
-  let temp = that.data.total_second - 1;
-  that.setData({
-    total_second: temp,
-    gameClock: dateFormat(temp)
-  })
-  if (temp <= 0) {
-    that.setData({
-      gameClock: "00:00",
-    });
-    clearTimeout(gameTimer);
-    if (!that.data.isGameOver) {
-      that.GameOver(that.data.mySelf.score);
-    } else {
-      console.log('结束  消除全部内容')
-    }
-    return;
+  return {
+    title: shareMsgLst[titelIndex],
+    path: '/pages/homepage/homepage',
+    imageUrl: shareImgList[imgIndex]
   }
-  gameTimer = setTimeout(function () {
-    CountOneMinte(that);
-  }, 1000)
 }
 
-module.exports = {
-  judeGreed,
-  deepCopy,
-  formatTime,
-  dateFormat,
-  checkParams,
-  fill_zero_prefix,
-  dealWordCouple,
-  rebuildArr,
-  loadFont,
-  loadYouyuanFont,
-  CountInThree,
-  CountOneMinte
+function RandomNum(Min, Max) {
+  return parseInt(Math.random() * (Max - Min + 1) + Min, 10);
 }
+
+// 节流抖动函数
+function throttle(fn, gapTime) {
+  if (gapTime == null || gapTime == undefined) {
+    gapTime = 1500
+  }
+  let _lastTime = null // 返回新的函数    
+  return function () {        
+    let _nowTime = + new Date()        
+    if (_nowTime - _lastTime > gapTime || !_lastTime) {            
+      fn.apply(this, arguments)   //将this和参数传给原函数            
+      _lastTime = _nowTime        
+    }    
+  }
+}
+
+
+  module.exports = {
+    judeGreed,
+    deepCopy,
+    formatTime,
+    dateFormat,
+    checkParams,
+    fill_zero_prefix,
+    dealWordCouple,
+    rebuildArr,
+    loadFont,
+    RandomNum,
+    shareMsg,
+    throttle
+  }

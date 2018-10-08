@@ -1,114 +1,64 @@
 /**ranking.wxss**/
-
-Page,
 .Box {
-  height: 100%;
-  width: 100%;
   background-size: cover;
-  background-image: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bg.png');
-  /* font-family: 'youyuan'; */
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_under_bg.png');
 }
-.topbar{
-  width: 100%;
-  height: 120rpx;
-}
-.topbar .word_master {
-  width: 500rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  position: absolute;
-  top: 30rpx;
+
+/* 排行列表显示 */
+.ranking_lists{
+  width: 86%;
+  height: 76%;
+  position: relative;
+  top: 50rpx;
   left: 0;
   right: 0;
+  bottom: 0;
   margin: 0 auto;
-  color: #947025;
-  font-size: 50rpx;
-  text-align: center;
-  
+  padding: 0 25rpx;
+  border-radius: 30rpx;
+  border: 2px solid #BDC872;
+  background: rgba(0, 0, 0, 0.1)
 }
+
+/* 导航标签的显示 */
 .ranking_navs{
-  width: 70%;
-  height: 60rpx;
+  width: 100%;
+  height: 100rpx;
   margin: 0 auto;
   color: #964B00;
   font-size: 30rpx;
   display: flex;
+  align-items: center;
   justify-content: center;/*水平居中*/
+}
+.navs_item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav_title {
+  width: 226rpx;
+  height: 70rpx;
   text-align: center;
-}
-.ranking_navs .nav{
-  width: 33%;
-  height: 100%;
+  line-height: 70rpx;
   background-size: cover;
-  position: relative;
+  background-image: url('http://cdn.tik.com/wordmaster/image/ranking_btn_bg_title.png');
 }
-.nav .nav_title{
-  position: absolute;
-  top: 20%;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.score_rank{
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_score_rank.png') no-repeat;
-}
-.world_rank{
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_world_rank.png') no-repeat;
-}
-.friends_rank{
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_friends_rank.png') no-repeat;
-}
-.ranking_lists{
-  width: 100%;
-  margin-bottom: 30rpx;
-  position: relative;
-}
-.paperclip{
-  width: 70rpx;
-  height: 100rpx;
-  position: absolute;
-  z-index: 5;
-  top: 15%;
-  right: 4%;
-}
-.bottom3{
-  width: 90%; 
-  height: 100%;
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bottom3.png') no-repeat;
-  background-size: cover;
-  margin: auto;
-}
-.bottom2{
-  width: 90%;
-  height: 99%;
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bottom2.png') no-repeat;
-  background-size: cover;
-  margin: auto;  
-  position: absolute;
-  z-index: 1;
-}
-.bottom1{
-  width: 93%;
-  height: 97%;
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_bottom1.png') no-repeat;
-  background-size: cover;
-  margin: auto;  
-  position: absolute;
-  z-index: 2;
-  left: 2%;
-  padding: 14rpx 10rpx;
+.nav_chooesd{
+  background-image: url('http://cdn.tik.com/wordmaster/image/ranking_btn_bg_title_onchoosed.png');
 }
 
-/*list-item中的css样式*/
+/*排行内容的title样式*/
 .lists_topbar{
   width: 100%;
-  height: 70rpx;
-  font-size: 40rpx;
+  height: 50rpx;
+  font-size: 30rpx;
   display: flex;
   align-items:center;
-  color:#A9B29E;
+  color:#815450;
+  font-weight: bold;
 }
-
 .ranking_title{
   padding-left: 10%;
   width: 40%;
@@ -125,51 +75,52 @@ Page,
   width: 50%;
   text-align: center;
 }
-.list-items{
+
+/* 可滑动区域的样式 */
+.rank_list {
   width: 100%;
+  height: 68%;
   font-size: 30rpx;
 }
 .list-item{
   width: 100%;
   height: 100rpx;
+  color:#83836E;
   display: flex;
   align-items: center;
-  margin-bottom: 15rpx;
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_level4_7bottom.png');
-  background-size: cover;
-  color:#A9B29E;
-}
-.my_rank{
-  width: 100%;
-  height: 100rpx;
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_mybottom.png');
-  background-size: cover;
-  color:#A9B29E;
-  /* width: 98%;
-  border: 2px solid #d12618;
-  border-radius: 10rpx; */
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+  background: rgba(230, 229, 214, 0.4);
 }
 .level1bottom{
-  width: 100%;
-  height: 100rpx;
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_level1bottom.png');
-  background-size: cover;
-  color: #FFCD36;
+  color: #FFF6C4;
+  background: rgba(239, 230, 195, 0.4);
 }
 .level2bottom{
-  width: 100%;
-  height: 100rpx;
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_level2bottom.png');
-  background-size: cover;
-  color: #84B8B4;
+  color: #12606A;
+  background: rgba(215, 226, 226, 0.4) 
 }
 .level3bottom{
-  width: 100%;
-  height: 100rpx;
-  background: url('http://peqmyh7ue.bkt.clouddn.com/ranking_level3bottom.png');
-  background-size: cover;
-  color: #BE9658;
+  color: #8C5210;
+  background: rgba(239, 203, 184, 0.4);
 }
+/* 我的排名那一栏 */
+.my_rank{
+  width: 98%;
+  height: 110rpx;
+  color:#C32E00;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0 auto;
+  font-size: 32rpx;
+  border-radius: 20rpx;
+  border: 3px solid #FFD200;
+  background: #F3FF92;
+}
+/* 排名列表前半部分的样式 */
 .befores{
   display: flex;
   align-items: center;
@@ -182,8 +133,7 @@ Page,
 .ranking_num{
   width: 100%;
   height: 100%;
-  position: relative;
-  top: 15%;
+  line-height: 70rpx;
   text-align: center;
   font-family:'zaozi';
   color: #964B00;
@@ -206,11 +156,18 @@ Page,
 .headimage{
   width: 80rpx;
   height: 80rpx;
-  margin-left: 5rpx;
-  margin-right: 10rpx;
-  display: block;
-  border-radius: 40rpx;
+  margin: auto 5rpx;
+  display: inline-block;
+  border-radius: 50%;
 }
+.name {
+  display: inline-block;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+/* 排名列表后半部分的样式列表 */
 .number{
   width: 20%;
   text-align: center;
@@ -223,16 +180,56 @@ Page,
   width: 50%;
   text-align: center;
 }
-.nav_chooesd{
-  width: 45% !important;
-  box-shadow: 0 0 40rpx #6c6c6c;
-  border-top-left-radius: 15rpx;
-  border-top-right-radius: 15rpx;
-}
+
+
 /* 清除scroll-view的滚动条 */
 ::-webkit-scrollbar{
   width: 0;
   height: 0;
   color: transparent;
+}
 
+
+/* 底部分享按钮样式 */
+.btn_area {
+  width: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: 6%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btnItem_next {
+  width: 335rpx;
+  height: 158rpx;
+  color: #815450;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_new_btn_next.png');
+}
+.btnItem_share {
+  width: 335rpx;
+  height: 158rpx;
+  color: #CC4E32;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/new_btn_share.png');
+}
+.btn_share {
+  opacity: 0;
+  width: 323rpx;
+  height: 158rpx;
+  padding: 0;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
 }

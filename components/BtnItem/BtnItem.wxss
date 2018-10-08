@@ -1,0 +1,39 @@
+/* components/BtnItem/BtnItem.wxss */
+.btn_item {
+  width: 176rpx;
+  height: 128rpx;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 30rpx;
+  line-height: 128rpx;
+}
+.item_common {  /*为选中的效果*/
+  color: #815450;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/word_common.png');
+}
+.item_click {  /*点击选中的效果*/
+  color: #2EAE55;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_success.png');
+}
+.errorState {  /*答错的效果*/
+  color: #FF3328;
+  background-size: cover;
+  background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_error.png');
+  animation: tremble 0.8s 0s ease both;
+}
+.sucessState { /*答对的效果*/
+  animation: disappear  0.3s ease forwards;
+}
+.notice { /*点击提示后的效果*/
+  background-size: cover;
+  animation: newTremble 0.8s ease-in-out; 
+}
+@keyframes newTremble {
+  0%{background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_success.png');transform:scale(1);}
+  10%,20%{transform:scale(1) rotate(-2deg);}
+  30%,50%,70%,90%{transform:scale(1.1) rotate(2deg);}
+  40%,60%,80%{transform:scale(1.1) rotate(-2deg);}
+  100%{background-image: url('http://peqmyh7ue.bkt.clouddn.com/stairgame_word_common.png');transform:scale(1) rotate(0);}
+}

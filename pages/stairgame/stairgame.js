@@ -30,12 +30,10 @@ Page({
     wordGrid: [],   //模拟随机生成后的数据
     sucessWord: [], //当前用户答对的单词
     errorWord: [], //当前用户答错的单词
-    isRight: false,  //是否消除正确
     isError: false,  //是否消除错误
-    right_Type: 0,  //错误情况的提示类型
     error_Type: 0,  //正确情况的提示类型
     mySelf: {  // 保存当前用户的个人信息
-      nickName: '侧耳倾听',
+      nickName: '匿名',
       avatarUrl: '../../img/1.jpeg',
       rightNum: 0,
       errorNum: 0,
@@ -48,62 +46,101 @@ Page({
     starNum: 2,  //星星的数量
     levelId: '',  //用户的当前等级Id
     levelName: '', //用户的当前等级名称
-    countURL: '', //开赛倒计时切换数字URL
+    countURL: '../../img/countdown/new_count_two.png', //开赛倒计时切换数字URL
     nextLevel: {}, //比赛结束后的下一关
-    count_to_start: 3,
-    total_second: 120, //比赛时间
-    gameClock: '02:00', //游戏倒计时一分钟
+    count_to_start: 1,
+    total_second: 60, //比赛时间
+    gameClock: '01:00', //游戏倒计时一分钟
     delCoinNum: 50, //减少的金币数量
+    todayRankList: {
+      wordNum: 0,
+    }, //结束页面的排名和单词信息
+    isJump: 0,
+    formId: 0, //模版消息
+    APIList: [
+      {
+        wordAPI: 'WORD_LIST',
+        overAPI: 'GAME_OVER'
+      },
+      {
+        wordAPI: 'WORD_JUMPTO', 
+        overAPI: 'JUMP_SETTLEMENT'
+      }
+    ]
   },
 
 // ### 生命周期函数 code start ### 
   onLoad: function (options) {
-    console.log('普通关')
+    // 检查网络状态
+    wx.getNetworkType({
+      success: (res) => {
+        if (res.networkType === 'none') {
+          wx.showModal({
+            showCancel: false,
+            content: '请检查是否连接网络',
+            success: () => {
+              wx.navigateBack()
+            }
+          })
+        }
+      }
+    })
     // 实例化播放器
     innerAudioContextBg = wx.createInnerAudioContext();
-    if(options.levelId && options.levelName) {
+    if (options.levelId && options.levelName) {
       this.setData({
-        ['mySelf.nickName']: app.globalData.userInfo.nickName,
-        ['mySelf.avatarUrl']: app.globalData.userInfo.avatarUrl,
+        ['mySelf.nickName']: app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName : '匿名',
+        ['mySelf.avatarUrl']: app.globalData.userInfo.avatarUrl ? app.globalData.userInfo.avatarUrl:'../../img/1.jpeg',
         levelId: options.levelId,
-        levelName: options.levelName
+        levelName: options.levelName,
+        formId: options.formId || 0, // 模版消息
+        isJump: options.isJump || 0  // 表示是否是跳级，调用不同的API
       })
     }
-    // Utils.loadFont();
+
     this.wordRandom();  // 用户随机生成单词
     this.getUserAsset();  // 获取用户的资产
-    music.playCountMusic();
-    CountInThree(this);  //开赛倒计时
   },
 
   onShow: function () {
+    // 初始化记录用户的操作时间变量
     lastClickTime = 0; 
     currentClickTime = 0;
-    // 创建动画
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: 'ease',
-    })
-    this.animation = animation;
+
+    // 为了防止用户在分享好友后，重新触发改方法
+    if(!this.data.isGameOver) {
+      // CountInThree(this);  //开赛倒计时
+       // music.playCountMusic();
+      setTimeout(() => {
+        this.playBgMusic();
+        CountOneMinte(this);
+        this.setData({
+          showModal: false
+        }, this.newPersonShow())
+      }, 1200)
+    }
+    // 初始化百度读音的模块（防止用户切换后回来无法播放读音）
+    assistant.initBaiduVoiceModule();
+    // 初始化组件
+    this.ComboxShow = this.selectComponent("#ComboxShow");
+    this.SuccessShow = this.selectComponent("#SuccessShow");
   },
 
   onUnload: function () {
-    innerAudioContextBg.destroy();
+    innerAudioContextBg.stop();
+    if (innerAudioContextBg) {
+      innerAudioContextBg.destroy();
+    }
     if (gameTimer) {
       clearTimeout(gameTimer);
     }
     if (startTimer) {
       clearTimeout(startTimer);
     }
-    if (this.data.sucessTimes < (this.data.col * this.data.row / 2)) {
+    if (this.data.total_second > 0 && this.data.sucessTimes < (this.data.col * this.data.row / 2)) {
       wx.showModal({
         content: '您已经放弃了战斗!',
         showCancel: false,
-      })
-    }
-    if (getCurrentPages().length === 1) {
-      wx.navigateTo({
-        url: '/pages/index/index',
       })
     }
   },
@@ -113,13 +150,24 @@ Page({
   getUserAsset: function () {
     request.getData("USER_ASSET", { userId: app.globalData.userId })
       .then(res => {
-        this.setData({
-          ['mySelf.coin']: res.myAsset.coin,
-          ['mySelf.totalNum']: res.myAsset.right
-        })
+        if (res.code === 0) {
+          this.setData({
+            ['mySelf.coin']: res.myAsset.coin,
+            ['mySelf.totalNum']: res.myAsset.right
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '获取金币失败',
+          })
+        }
       })
       .catch(err => {
-        console.error("获取用户的持有金币失败！")
+        console.error(error)
+        wx.showToast({
+          icon: 'none',
+          title: '获取金币失败～～',
+        })
       })
   },
 
@@ -135,8 +183,10 @@ Page({
     let params = {};
     params.userId = app.globalData.userId;
     params.levelId = this.data.levelId;
+    params.formId = this.data.formId;
     params.isTest = 0;
-    request.getData("WORD_LIST",params)
+    
+    request.getDataLoading(this.data.APIList[this.data.isJump].wordAPI, params, '正在获取数据...')
     .then(res => {
       if(res.list.length > 0) {
         assistant.randomFill(arrayToFill, this.data.row, this.data.col, res.list);
@@ -145,8 +195,7 @@ Page({
         })
       } else {
         wx.showModal({
-          title: '警告',
-          content: '获取单词失败！',
+          content: '网络开了小差，请稍后重试',
           showCancel: false,
           success: ()=>{
             wx.navigateBack()
@@ -155,15 +204,26 @@ Page({
       }
     })
     .catch(err => {
-      console.error("获取单词失败！")
+      wx.showModal({
+        content: '网络开了小差，请稍后重试～～',
+        showCancel: false,
+        success: () => {
+          wx.navigateBack()
+        }
+      })
     })
   },
 
   // 分享给好友
   onShareAppMessage: function () {
-    return {
-      title: '单词大咖',
-      path: '/pages/index/index'
+    if (this.data.isPass) {
+      let obj = Utils.shareMsg(true);
+      return {
+        title: obj.title,
+        path: '/pages/homepage/homepage',
+      }
+    } else {
+      return Utils.shareMsg(false);
     }
   },
 
@@ -172,11 +232,11 @@ Page({
     // 通关模式
     if (this.data.nextLevel.isTest === 1) {
       wx.redirectTo({
-        url: '/pages/examgame/examgame?levelId=' + this.data.nextLevel.levelId + '&levelName=' + this.data.nextLevel.levelName,
+        url: '/pages/examgame/examgame?levelId=' + this.data.nextLevel.levelId + '&levelName=' + this.data.nextLevel.levelName + '&isJump=' + this.data.isJump,
       })
     } else {
       wx.redirectTo({
-        url: '/pages/stairgame/stairgame?levelId=' + this.data.nextLevel.levelId + '&levelName=' + this.data.nextLevel.levelName,
+        url: '/pages/stairgame/stairgame?levelId=' + this.data.nextLevel.levelId + '&levelName=' + this.data.nextLevel.levelName + '&isJump=' + this.data.isJump,
       })
     }
   },
@@ -187,13 +247,13 @@ Page({
     // 防止用户误操作
     currentClickTime = e.timeStamp;
     if (!this.data.isClickFlag) {
-      if (currentClickTime > lastClickTime + 200) {
+      if (currentClickTime > lastClickTime + 100) {
         lastClickTime = currentClickTime;
       } else {
         return;
       }
     } else {
-      if (currentClickTime > lastClickTime + 50) {
+      if (currentClickTime > lastClickTime + 10) {
         lastClickTime = currentClickTime;
       } else {
         return;
@@ -209,10 +269,10 @@ Page({
     if (matchWord === undefined || matchWord === '' || matchWord === null) {
       return;
     }
-    // 播放点击音效
-    music.playClickMusic();
     // 判断点击的逻辑
     this.onChooseWord(X, Y, matchWord, word);
+    // 播放点击音效
+    music.playClickMusic();
   },
 
   // 选择单词
@@ -246,9 +306,6 @@ Page({
     // 第二次选择单词，判断是否正确
     let lastPosition = this.data.firstClick.split(','); // 上次点击方块的位置
     if (this.data.matchWord === X + ',' + Y) {
-      //播放音乐与单词读音
-      music.playSuccessMusic();
-      assistant.playVoiceByInputText(Utils.dealWordCouple(this.data.firstStr, word).join('。'));
       // 答对后将对应的单词块的数据清空以及重置状态位
       let first = 'wordGrid[' + lastPosition[1] + '][' + lastPosition[0] + ']';
       let second = 'wordGrid[' + Y + '][' + X + ']';
@@ -256,10 +313,9 @@ Page({
       let times = this.data.sucessTimes + 1;
       let _score = Number(this.data.mySelf.score) + 5 * ((this.data.mySelf.combox + 1) > 5 ? 5 : (this.data.mySelf.combox + 1));
       //保存已答对的单词
-      let obj = Utils.rebuildArr(this.data.firstStr, word, app.globalData.userId);
+      let obj = Utils.rebuildArr(this.data.firstStr, word, app.globalData.userId, this.data.errorWord);
       let tmpWord = 'sucessWord[' + this.data.sucessWord.length + ']';
 
-      console.log(this.data.isRight);
       this.setData(initLocalData({
         secondStr: word,
         showWordCouple: Utils.dealWordCouple(this.data.firstStr, word),
@@ -270,24 +326,18 @@ Page({
         [first]: { isClear: true, isError: false },
         [second]: { isClear: true, isError: false },
         [tmpWord]: obj,
-        sucessTimes: times,
-        isRight: true,
-        right_Type: match.RandomNumBoth(0, 1)
+        sucessTimes: times
       }))
-      
-      setTimeout(()=>{
-        this.setData({
-          isRight: false,
-        })
-      },1000)
+
+      // 播放字幕推动的动态效果
+      this.SuccessShow.onRoll();
+      // 播放字幕推动的动态效果
+      this.ComboxShow.onRoll();
 
       //全部消除成功且时间没有结束，比赛结束
       if (times === 6 && !this.data.isGameOver) {
-        setTimeout(()=>{
-          this.GameOver(_score);
-        },500)
-      }
-
+        this.GameOver(_score);
+      } 
     } else {
       // 错误后，将对应方块的isError变为true，以便使用错误提示的CSS
       let first = 'wordGrid[' + lastPosition[1] + '][' + lastPosition[0] + '].isError';
@@ -296,12 +346,15 @@ Page({
       let chooseFlag = 'wordGrid[' + lastPosition[1] + '][' + lastPosition[0] + '].isChoose';
       // 将答错的单词保存导错题本
       let matchPosition = this.data.matchWord.split(',');
-      let obj = Utils.rebuildArr(this.data.firstStr, this.data.wordGrid[matchPosition[1]][matchPosition[0]].wordData.value, app.globalData.userId);
+      let obj = Utils.rebuildArr(this.data.firstStr, this.data.wordGrid[matchPosition[1]][matchPosition[0]].wordData.value, app.globalData.userId, this.data.errorWord);
       let tmpWord = 'errorWord[' + this.data.errorWord.length + ']';
       // 播放错误的读音（播放类型）
-      let errorType = match.RandomNumBoth(0, 1); 
+      let errorType = Utils.RandomNum(0, 1); 
       // 提示相应的正确单词
       let other = "wordGrid[" + matchPosition[1] + "][" + matchPosition[0] + "].isNotice";
+
+      // 播放字幕推动的动态效果
+      this.ComboxShow.onInit();
       
       this.setData(initLocalData({
         [other]: true,
@@ -323,7 +376,7 @@ Page({
         }
       }, 500);
       
-      // 1000ms后将答错的单词方块状态初始化
+      // 800ms后将答错的单词方块状态初始化
       setTimeout(() => {
         this.setData({
           [other]: false,
@@ -334,7 +387,7 @@ Page({
           [second]: false,
           isError: false
         })
-      }, 1000);
+      }, 800);
     }
   },
 
@@ -344,6 +397,13 @@ Page({
     innerAudioContextBg.stop();
     if (innerAudioContextBg) {
       innerAudioContextBg.destroy();
+    }
+    // 清除倒计时
+    if (gameTimer) {
+      clearTimeout(gameTimer);
+    }
+    if (startTimer) {
+      clearTimeout(startTimer);
     }
     // 并统计最终的结果
     let starNum = judeTheStar(score);
@@ -358,37 +418,89 @@ Page({
       rightbookEntityList: this.data.sucessWord,
     }
 
-    request.getData('GAME_OVER', params).then(res => {
+    request.getDataLoading(this.data.APIList[this.data.isJump].overAPI, params, '正在结算...')
+    .then(res => {
       if (res.code === 0) {
+        // 获取排名信息
         if (starNum >= 1) {
           music.playPassMusic();
         } else {
           music.playUnpassMusic();
         }
-        setTimeout(()=>{
-          this.setData({
-            nextLevel: res.nextLevel,
-            isGameOver: true,
-            starNum: starNum,
-            isPass: score >= 60
-          });
-        },1000)
+        this.setData({
+          nextLevel: res.nextLevel,
+          starNum: starNum,
+          isPass: score >= 60,
+          isGameOver: true,
+          todayRankList: {
+            wordNum: res.rankList[0].todayWords,
+            myRank: res.rankList[0].myRank,
+            loserLogo: decodeURIComponent(res.rankList[1].weiPic),
+            loserName: decodeURIComponent(res.rankList[1].nickname)
+          }
+        });
+      } else {
+        wx.showModal({
+          showCancel: false,
+          content: '小咖不支持离线结算哦～～',
+          success: res => {
+            wx.navigateBack();
+          }
+        })
       }
     }).catch(error => {
-      wx.showModal({
-        content: '服务器内部错误，稍后回到首页',
-        showCancel: false,
-        success: res => {
-          wx.navigateBack();
-        }
-      })
+      console.error(error)
+      this.dealErrorState(starNum, score);
+      // wx.showModal({
+      //   showCancel: false,
+      //   content: '小咖不支持离线结算哦！',
+      //   success: res => {
+      //     wx.navigateBack();
+      //   }
+      // })
     })
+  },
+  // 处理结算出错情况的显示
+  dealErrorState: function(starNum, score){
+    if (starNum >= 1) {
+      music.playPassMusic();
+      this.setData({
+        isGameOver: true,
+        starNum: starNum,
+        isPass: score >= 60,
+        nextLevel: {
+          levelId: Number(this.data.levelId) + 1,
+          levelName: this.data.levelName
+        },
+        todayRankList: {
+          wordNum: this.data.todayRankList.wordNum + this.data.mySelf.rightNum,
+          loserLogo: match.randomPerson().avatarUrl,
+          loserName: match.randomPerson().nickName
+        }
+      });
+    } else {
+      music.playUnpassMusic();
+      this.setData({
+        isGameOver: true,
+        starNum: starNum,
+        isPass: score >= 60,
+        nextLevel: {
+          levelId: Number(this.data.levelId),
+          levelName: this.data.levelName
+        },
+        todayRankList: {
+          wordNum: this.data.todayRankList.wordNum + this.data.mySelf.rightNum,
+          loserLogo: match.randomPerson().avatarUrl,
+          loserName: match.randomPerson().nickName
+        }
+      });
+    }
   },
 // ### 用户点击操作 code end ###
 
 // ### 获取提示 code start ###
   // 获取提示信息
-  getHelp: function () {
+  getHelp: Utils.throttle(function (e) {
     if (this.data.mySelf.coin < this.data.delCoinNum) {
       wx.showToast({
         icon: 'none',
@@ -396,24 +508,21 @@ Page({
       });
       return;
     }
-    
     // 以选择一个单词，提示相应的
     let matchPosition = this.data.matchWord.split(',');
     if (this.data.isClickFlag) {
       let other = "wordGrid[" + matchPosition[1] + "][" + matchPosition[0] + "].isNotice";
       this.setData({
         isDelCoin: true,
-        [other]: true
+        [other]: true,
+        ['mySelf.coin']: this.data.mySelf.coin - this.data.delCoinNum,
       })
       setTimeout(()=>{
         this.setData({
           isDelCoin: false,
-          ['mySelf.coin']: this.data.mySelf.coin - this.data.delCoinNum,
           [other]: false
         })
-      },1000)
-      
-      // this.delCoinNum();
+      },1200)
       return;
     }
     // 未选中单词，提示一对
@@ -426,56 +535,58 @@ Page({
           this.setData({
             isDelCoin: true,
             [tempA]: true,
-            [tempB]: true
+            [tempB]: true,
+            ['mySelf.coin']: this.data.mySelf.coin - this.data.delCoinNum,
           })
           setTimeout(() => {
             this.setData({
               isDelCoin: false,
-              ['mySelf.coin']: this.data.mySelf.coin - this.data.delCoinNum,
               [tempA]: false,
               [tempB]: false,
             })
-          }, 1000)
-          // this.delCoinNum();
+          }, 1200)
+          return;
+        }
+      }
+    }
+  }, 1000),
+
+  // 新用户第一次进来的
+  newPersonShow: function () {
+    if(Number(this.data.levelId) > 1) {
+      return;
+    }
+    for (let i = 0, l1 = this.data.wordGrid.length; i < l1; i++) {
+      let temp = this.data.wordGrid[i]
+      for (let j = 0, l2 = temp.length; j < l2; j++) {
+        if (temp[j].wordData) {
+          let tempA = "wordGrid[" + i + "][" + j + "].isNotice";
+          let tempB = "wordGrid[" + temp[j].pairIndex.row + "][" + temp[j].pairIndex.column + "].isNotice";
+          this.setData({
+            [tempA]: true,
+            [tempB]: true
+          })
+          setTimeout(() => {
+            this.setData({
+              [tempA]: false,
+              [tempB]: false,
+            })
+          }, 1200)
           return;
         }
       }
     }
   },
-  // 向后请求减少金币
-  delCoinNum: function () {
-    let params = {};
-    params.userId = app.globalData.userId,
-    params.levelId = this.data.levelId
-    request.getData("PROMPT", params)
-      .then(res => {
-        console.log('提示成功')
-      })
-      .catch(err => {
-        console.error('后台错误')
-      })
-  },
 // ### 获取提示 code end ###
 
 // ### 音乐播放 code start ###
-  // 播放背景音乐
   playBgMusic: function () {
     innerAudioContextBg.loop = true;
-    innerAudioContextBg.volume = 0.8;
+    innerAudioContextBg.volume = 1;
     innerAudioContextBg.src = music.getMusicSource(0,'BG_GAME_MUSIC');
     innerAudioContextBg.play();
   },
 // ### 音乐播放 code end ###
-
-// ### 动效播放 code start ###
-  rotateAndScale: function () {
-    // 旋转同时放大
-    this.animation.rotate(45).scale(2, 2).step()
-    this.setData({
-      animationData: this.animation.export()
-    })
-  },
-// ### 动效播放 code end ###
 })
 
 
@@ -519,11 +630,7 @@ function CountOneMinte(that) {
       gameClock: "00:00",
     });
     clearTimeout(gameTimer);
-    if(!that.data.isGameOver) {
-      that.GameOver(that.data.mySelf.score);
-    } else {
-      console.log('结束  消除全部内容')
-    }
+    that.GameOver(that.data.mySelf.score);
     return;
   }
   gameTimer = setTimeout(function () {
@@ -532,9 +639,8 @@ function CountOneMinte(that) {
 }
 
 var urlList = [
-    '../../img/countdown/number1.png',
-    '../../img/countdown/number2.png',
-    '../../img/countdown/number3.png'
+    '../../img/countdown/new_count_two.png',
+    '../../img/countdown/new_count_one.png'
   ];
 
 function CountInThree(that) {

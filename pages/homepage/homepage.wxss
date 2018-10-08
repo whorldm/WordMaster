@@ -1,0 +1,69 @@
+/* pages/homepage/homepage.wxss */
+.Box {
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/start_home_bg.png');
+}
+.start_title {
+  width: 605rpx;
+  height: 206rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 7%;
+  bottom: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/home_title.png');
+}
+/* 人物对话框 */
+.person_talk {
+  width: 280rpx;
+  height: 140rpx;
+  position: absolute;
+  right: 10%;
+  top: 25%;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/home_new_talk.png');
+}
+.person_talk view {
+  font-family: 'Zaozi';
+  font-size: 30rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #FF8A00;
+}
+/* 人物和开始按钮 */
+.start_person {
+  width: 457rpx;
+  height: 790rpx;
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/home_person_new.png')
+}
+.start_person view {
+  height: 110rpx;
+  color: #0D608B;
+  font-size: 50rpx;
+  text-align: center;
+  line-height: 110rpx;
+  font-family: 'Zaozi';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50rpx;
+}
+.btn_start {
+  width: 100%;
+  height: 110rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50rpx;
+  opacity: 0;
+  z-index: 10;
+}

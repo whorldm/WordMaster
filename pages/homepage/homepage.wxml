@@ -1,0 +1,11 @@
+<!--pages/homepage/homepage.wxml-->
+<view class='Box'>
+  <view class='start_title'></view>
+  <view class='person_talk'>
+    <view>科技改变学习方法</view>
+  </view>
+  <view class='start_person'>
+    <view>立刻体验</view>
+    <button class='btn_start' open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
+  </view>
+</view>

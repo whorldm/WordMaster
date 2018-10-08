@@ -1,0 +1,82 @@
+<!--pages/sportsgame/waiting/waiting.wxml-->
+<view class='Box'>
+  <view class='title'>词鸡竞技场 --
+    <text>{{levelList[level]}}场</text>
+  </view>
+  <view class='total_num'>参与总人数：{{joinNum}}</view>
+
+  <!-- 公告栏 -->
+  <view class="notice_container">
+    <image class='img_notice' src='../../img/sports/notice.png'></image>
+    <swiper class="notice" vertical="true" autoplay="true" circular="true" interval="2000">
+      <block wx:for="{{msgList}}" wx:key="{{index}}">
+        <swiper-item>
+          <view class="notice_item">{{item}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 房间成员 -->
+  <scroll-view class='scrollX' scroll-x>
+    <block wx:for="{{userList}}" wx:key="{{index}}">
+      <view class='scroll_item'>
+        <image src='{{item.weiPic}}'></image>
+        <text>{{item.nickname}}</text>
+      </view>
+    </block>
+  </scroll-view>
+  <view class='room_info'>
+    <text>当前房间人数</text>
+    <view>{{currentNum}} / {{totalNum}}</view>
+  </view>
+
+  <!-- 道具展示 -->
+  <view class='tool_title'>
+    <view class='title_line'></view>
+    <view class='title_text'>
+      可用道具
+    </view>
+    <view class='title_line'></view>
+  </view>
+  <view class='tool_area'>
+    <view class='tool_item' bindtap='toolChange'>
+      <image  src='http://cdn.tik.com/wordmaster/image/sports_tool_change.png'></image>
+       <view>置换</view>
+    </view>
+    <view class='tool_item'  bindtap='toolNotice'>
+      <image src='http://cdn.tik.com/wordmaster/image/sports_tool_notice.png'></image>
+      <view>提示</view>
+    </view>
+    <view class='tool_item' bindtap='toolDouble'>
+      <image src='http://cdn.tik.com/wordmaster/image/sports_tool_double.png'></image>
+      <view>双倍</view>
+    </view>
+  </view>
+
+  <!-- 底部按钮样式 -->
+  <view class='btn_bottom'>
+    <view class='add_area'>
+      <view class='add_coin'>
+        <text>{{coin}}</text>
+      </view>
+      <image bindtap='addScore' src='../../img/sports/add.png'></image>
+    </view>
+    <view class='btn_invite'>
+      邀请好友
+      <button open-type='share'></button>
+    </view>
+  </view>
+
+  <!-- 遮罩倒计时样式 -->
+  <view class='showModal' wx:if="{{showModal}}">
+    <view class='countDown'>
+      <image src='{{countURL}}'></image>
+    </view>
+  </view>
+
+  <!-- 分享增加金币的弹框 -->
+  <ShareDialog wx:if="{{isShareDialog}}"
+    bind:closeCoinDialog="closeCoinDialog">
+  </ShareDialog>
+</view>

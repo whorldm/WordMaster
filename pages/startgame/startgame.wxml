@@ -1,0 +1,121 @@
+<view class='Box'>
+  <!--顶部的排名信息-->
+  <view class='rank_area'>
+    <view class='rank_one'>
+      <view class='rank_one_logo'>
+        <image src="{{RankList[0].weiPic || '../../img/1.jpeg'}}"></image>
+      </view>
+      <text>{{RankList[0].nickName}}</text>
+      <text>{{RankList[0].integral}}</text>
+    </view>
+    <view class='rank_two'>
+      <view class='rank_two_logo'>
+        <image src="{{RankList[1].weiPic || '../../img/1.jpeg'}}"></image>
+      </view>
+      <text>{{RankList[1].nickName}}</text>
+      <text>{{RankList[1].integral}}</text>
+    </view>
+    <view class='rank_three'>
+      <view class='rank_three_logo'>
+        <image src="{{RankList[2].weiPic || '../../img/1.jpeg'}}"></image>
+      </view>
+      <text>{{RankList[2].nickName}}</text>
+      <text>{{RankList[2].integral}}</text>
+    </view>
+    <view class='rank_four'>
+      <view class='rank_four_logo'>
+        <image src="{{RankList[3].weiPic || '../../img/1.jpeg'}}"></image>
+      </view>
+      <text>{{RankList[3].nickName}}</text>
+      <text>{{RankList[3].integral}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{isDouble}}" class='doubleScore'>双倍积分...</view>
+
+  <!--显示通过条件以及单词量-->
+  <view class='condition_area'>
+    <view class="condition">
+      <image src='../../img/game/clock.png'></image>
+      <text class="{{total_second <= 10 ? 'lastTen': ''}}">{{gameClock}}</text>
+    </view>
+    <view class='score'>得分:{{mySelf.score}}</view>
+    <view class='word_num'>
+      排名: {{mySelf.rank}}
+    </view>
+  </view>
+
+  <!--键盘区域-->
+  <view class='keyword_area'>
+    <view class='keyboard'>
+      <view bindtap="ClickGrid" class='word_area'>
+        <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
+          <view class="flex-row">
+            <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
+              <view class="word_item {{gridItem.isChoose ? 'word_click':'word_common' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}" data-key="{{gridItem.pairIndex}}" data-posx="{{index}}" data-posy='{{idx}}'
+                data-value="{{gridItem.wordData.value}}">
+                {{gridItem.wordData.value}}
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class='keyboard {{backClass}}'>
+      <view class='show_round_text'>
+        第<text>{{mySelf.roundTime}}</text>组
+      </view>
+    </view>
+  </view>
+
+  <!--错误提示的弹出框-->
+  <ErrorShow id='errorShow' wx:if="{{isError}}" random="{{error_Type}}">
+  </ErrorShow>
+  <!--正确的弹出框-->
+  <SuccessShow id="SuccessShow" showWord="{{showWordCouple}}">
+  </SuccessShow>
+  <!--combox的显示-->
+  <ComboxShow id="ComboxShow" combox="{{mySelf.combox}}">
+  </ComboxShow>
+  <!--普通关通过的显示-->
+  <BattlePass id="BattlePass" 
+    wx:if="{{isGameOver}}"  
+    RankList="{{RankList}}"
+    mySelf="{{mySelf}}"
+    percent="{{percent}}"
+    reward="{{reward}}"
+    bind:goNextGame="goNextGame">
+  </BattlePass>
+
+  <!--底部提示按钮-->
+  <view class='tool_area'>
+    <view class='tool_item'  bindtap='toolNotice'>
+      <image src='http://cdn.tik.com/wordmaster/image/sports_tool_notice.png'></image>
+      <text>提示 </text>
+    </view>
+    <view class='tool_item' bindtap='toolChange'>
+      <image src='http://cdn.tik.com/wordmaster/image/sports_tool_change.png'></image>
+      <text>置换</text>
+    </view>
+    <view class='tool_item' bindtap='toolDouble'>
+      <image  src='http://cdn.tik.com/wordmaster/image/sports_tool_double.png'></image>
+       <text style="color: {{isDouble ? '#FFF25F' : '#21343E'}}">双倍</text>
+    </view>
+  </view>
+
+  <!-- 底部的分享按钮 -->
+  <view class='btn_bottom'>
+    <view class='add_area'>
+      <view class='add_coin'>
+        <text>{{mySelf.coin}}</text>
+      </view>
+      <image bindtap='addScore' src='../../img/sports/add.png'></image>
+    </view>
+  </view>
+
+  <!-- 分享增加金币的弹框 -->
+  <ShareDialog wx:if="{{isShareDialog}}"
+    bind:closeCoinDialog="closeCoinDialog">
+  </ShareDialog>
+</view>

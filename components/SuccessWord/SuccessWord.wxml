@@ -1,15 +1,11 @@
-<!-- <view class='mask'> -->
-  <view class='text-fly-y' wx:if="{{random === 0}}">
-    <view class='text-fly-x'>
-      <view class='item text-left'>{{showWord[0]}}</view>
-      <view class='item text-right'>{{showWord[1]}}</view>
-    </view>
+<block wx:for="{{rollList}}" wx:key="index">
+  <view class='text-fly-y' wx:if="{{item.random === 0}}">
+    <view class='item text-left'>{{item.str1}}</view>
+    <view class='item text-right'>{{item.str2}}</view>
   </view>
-
   <view class='text-fly-y' wx:else>
-    <view class='text-fly-x'>
-      <view class='item jumpCenter'>{{showWord[0]}} {{showWord[1]}}</view>
+    <view class='item jumpCenter'>
+      {{item.str1}}  {{item.str2}}
     </view>
   </view>
-<!-- </view> -->
-
+</block>

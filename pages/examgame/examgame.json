@@ -3,8 +3,7 @@
     "SuccessShow": "/components/SuccessWord/SuccessWord",
     "ErrorShow": "/components/ErrorWord/ErrorWord",
     "ComboxShow": "/components/ShowCombox/ShowCombox",
-    "ExamPass": "/components/ExamPass/ExamPass",
-    "ExamUnpass": "/components/ExamUnpass/ExamUnpass",
-    "Revive": "/components/Revive/Revive"
+    "RevivePass": "/components/RevivePass/RevivePass",
+    "ReviveUnpass": "/components/ReviveUnpass/ReviveUnpass"
   }
 }

@@ -1,5 +1,0 @@
-<!--components/Board/Board.wxml-->
-<view class='{{classStyle1}}'>
-  <view class='{{classStyle2}}'>{{rightList[combox]}}</view>
-  <!-- <view wx:else class='fade_right'>{{getError()}}</view> -->
-</view>

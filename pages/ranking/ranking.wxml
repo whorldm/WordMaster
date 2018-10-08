@@ -1,89 +1,99 @@
-<view class='box' >
-  <!--topbar标题  -->
-  <view class='topbar'>
-    <view class='word_master'>
-      单词大咖
-    </view>
-  </view>
-  <!--排行的导航栏  -->
-  <view class='ranking_navs'>
-    <image class='paperclip' src='http://peqmyh7ue.bkt.clouddn.com/ranking_paperclip.png'></image>
-    <view class='score_rank nav {{levelType == "world" ? " nav_chooesd":""}}' >
-      <text bindtap="getRankList" data-type='world' class='nav_title'>世界排行</text>
-    </view>
-    <view class='friends_rank nav {{levelType == "today" ? " nav_chooesd":""}}' >
-      <text bindtap="getRankList" data-type='today' class='nav_title'>今日排行</text>
-    </view>
-    <view class='world_rank nav {{levelType == "friend" ? " nav_chooesd":""}}' >
-      <text bindtap="getRankList" data-type="friend" class='nav_title'>好友排行</text>
-    </view>
-  </view>
+<view class='Box'>
   <!-- 排行榜 -->
-  <view class='ranking_lists ' style="height: {{listsHeight}}rpx">
-    <view class='bottom3'>
-      <view class='bottom2'>
-        <view class='bottom1'>
-          <!--topbar  -->
-          <view class='lists_topbar'>
-            <text class='ranking_title'>名次</text>
-            <text class='dgree_title' wx:if="{{levelType != 'today'}}">{{lists_topbar[0]}}</text>
-            <text class='number_title' wx:if="{{levelType != 'today'}}">{{lists_topbar[1]}}</text>
-            <text class='today_title' wx:if="{{levelType == 'today'}}">{{lists_topbar[0]}}</text>
-          </view>
-          <!-- 整体排行榜单 -->
-          <view class='list-items'>
-            <!-- 滑动加载列表 -->
-            <scroll-view scroll-y class='rank_list' style='height:{{scrollHeight}}rpx;' scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-              <block wx:for="{{levelList}}" wx:for-item="item" wx:key="{{item.userId}}">
-                <!-- 排行列表-->
-                <view  class="list-item  {{index == 0?'level1bottom':''}}  {{index == 1?'level2bottom':''}} {{index == 2?'level3bottom':''}}" id="to_{{index+1}}">
-                  <view class='befores'>
-                    <view class='ranking'>
-                      <view wx:if="{{index > 2}}" class='ranking_num'>
-                        {{index+1}}
-                      </view>
-                      <image wx:if="{{index == 0}}" class='ranking_img' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level1.png'></image>
-                      <image wx:if="{{index == 1}}" class='ranking_img ranking_img2' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level2.png'></image>
-                      <image wx:if="{{index == 2}}" class='ranking_img ranking_img3' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level3.png'></image>
-
-                    </view>
-                    <image class='headimage' src='{{item.weiPic}}'>
-                    </image>
-                    <text class='name'>{{item.nickname}}</text>
-                  </view>
-                  <view class='degree' wx:if="{{levelType == 'world'}}">{{item.levelName}}</view>
-                  <view class='number' wx:if="{{levelType == 'world'}}">{{item.right}}</view>
-                  <view class='today' wx:if="{{levelType == 'today'}}">{{item.todayWords}}</view>
-                </view>
-              </block>
-              
-            </scroll-view>
-            <!-- 我自己的排名 -->
-            <view class='list-item my_rank' bindtap= "jumpTo"wx:if="{{myRanks != '' }}">
-              <view class='befores'>
-                <view class='ranking'>
-                  <view wx:if="{{myRanks.myRank == 0 || myRanks.myRank > 3}}" class='ranking_num'>
-                    {{myRanks.myRank}}
-                  </view>
-                  <image wx:if="{{myRanks.myRank == 1}}" class='ranking_img' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level1.png'></image>
-                  <image wx:if="{{myRanks.myRank == 2}}" class='ranking_img ranking_img2' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level2.png'></image>
-                  <image wx:if="{{myRanks.myRank == 3}}" class='ranking_img ranking_img3' src='http://peqmyh7ue.bkt.clouddn.com/ranking_level3.png'></image>
-
-                </view>
-                <image class='headimage' src='{{myRanks.weiPic}}'>
-                </image>
-                <text class='name'>{{myRanks.nickname}}</text>
-              </view>
-              <view class='degree' wx:if="{{levelType == 'world'}}">{{myRanks.levelName}}</view>
-                  <view class='number' wx:if="{{levelType == 'world'}}">{{myRanks.right}}</view>
-                  <view class='today' wx:if="{{levelType == 'today'}}">{{myRanks.todayWords}}</view>
-
-            </view>
-            <!-- 我的排名 -->
-          </view>
-
+  <view class='ranking_lists'>
+    <!--导航栏  -->
+    <view class='ranking_navs'>
+      <view class='navs_item'>
+        <view bindtap="getRankList" data-type='today' class='nav_title {{levelType == "today" ? "nav_chooesd":""}}'>
+          今日排行
         </view>
       </view>
+
+      <view class='navs_item'>
+        <view bindtap="getRankList" data-type='world' class='nav_title {{levelType == "world" ? "nav_chooesd":""}}'>
+          世界排行
+        </view>
+      </view>
+
+      <!-- <view class='navs_item'>
+        <view bindtap="getRankList" data-type="friend" class='nav_title  {{levelType == "friend" ? "nav_chooesd":""}}'>
+          好友排行
+        </view>
+      </view> -->
+    </view>
+
+    <!--topbar  -->
+    <view class='lists_topbar'>
+      <text class='ranking_title'></text>
+      <text class='dgree_title' wx:if="{{levelType != 'today'}}">{{lists_topbar[0]}}</text>
+      <text class='number_title' wx:if="{{levelType != 'today'}}">{{lists_topbar[1]}}</text>
+      <text class='today_title' wx:if="{{levelType == 'today'}}">{{lists_topbar[0]}}</text>
+    </view>
+
+    <!-- 滑动加载列表 -->
+    <scroll-view scroll-y 
+      class='rank_list' 
+      scroll-into-view="{{toView}}" 
+      scroll-top="{{scrollTop}}">
+      <block wx:for="{{levelList}}" 
+        wx:for-item="item" 
+        wx:key="{{item.userId}}">
+        <view class="list-item  {{index == 0?'level1bottom':''}}  {{index == 1?'level2bottom':''}} {{index == 2?'level3bottom':''}}"
+          id="to_{{index+1}}">
+          <view class='befores'>
+            <view class='ranking'>
+              <view wx:if="{{index > 2}}" class='ranking_num'>
+                {{index+1}}
+              </view>
+              <image wx:if="{{index == 0}}" class='ranking_img' src='http://cdn.tik.com/wordmaster/image/ranking_level1.png'></image>
+              <image wx:if="{{index == 1}}" class='ranking_img ranking_img2' src='http://cdn.tik.com/wordmaster/image/ranking_level2.png'></image>
+              <image wx:if="{{index == 2}}" class='ranking_img ranking_img3' src='http://cdn.tik.com/wordmaster/image/ranking_level3.png'></image>
+
+            </view>
+            <image class='headimage' src="{{item.weiPic !== 'null' ? item.weiPic : '../../img/1.jpeg'}}">
+            </image>
+            <text class='name'>{{item.nickname !== 'null' ? item.nickname : '匿名'}}</text>
+          </view>
+          <view class='degree' wx:if="{{levelType == 'world'}}">{{item.levelName}}</view>
+          <view class='number' wx:if="{{levelType == 'world'}}">{{item.right}}</view>
+          <view class='today' wx:if="{{levelType == 'today'}}">{{item.todayWords}}</view>
+        </view>
+      </block>
+    </scroll-view>
+
+    <!-- 我自己的排名 -->
+    <view class='list-item my_rank' 
+      bindtap="jumpTo" 
+      wx:if="{{myRanks != ''}}">
+      <view class='befores'>
+        <view class='ranking'>
+          <view wx:if="{{myRanks.myRank == 0 || myRanks.myRank > 3}}" class='ranking_num'>
+            {{myRanks.myRank}}
+          </view>
+          <image wx:if="{{myRanks.myRank == 1}}" class='ranking_img' src='http://cdn.tik.com/wordmaster/image/ranking_level1.png'></image>
+          <image wx:if="{{myRanks.myRank == 2}}" class='ranking_img ranking_img2' src='http://cdn.tik.com/wordmaster/image/ranking_level2.png'></image>
+          <image wx:if="{{myRanks.myRank == 3}}" class='ranking_img ranking_img3' src='http://cdn.tik.com/wordmaster/image/ranking_level3.png'></image>
+
+        </view>
+        <image class='headimage' src='{{myRanks.weiPic}}'>
+        </image>
+        <text class='name'>{{myRanks.nickname}}</text>
+      </view>
+      <view class='degree' wx:if="{{levelType == 'world'}}">{{myRanks.levelName}}</view>
+      <view class='number' wx:if="{{levelType == 'world'}}">{{myRanks.right}}</view>
+      <view class='today' wx:if="{{levelType == 'today'}}">{{myRanks.todayWords}}</view>
+    </view>
+  </view>
+
+  <!-- 底部分享按钮 -->
+  <view class='btn_area'>
+    <view class='btnItem_share'>
+      邀请好友
+      <button open-type='share' class='btn_share'>
+      </button>
+    </view>
+    <view class='btnItem_next' bindtap='sharePicture'>
+      生成分享图
     </view>
   </view>
 </view>

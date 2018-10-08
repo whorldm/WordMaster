@@ -49,6 +49,157 @@
 //#endregion 随机填充算法
 
 
+//#region 随机填充算法 (鹏飞版本)
+var handleArrayForLeft = null;
+var handleArrayForRight = null;
+
+function newRandomFillTwo(arrayToFill, arrayRow, arrayColumn, allWords) {
+  var allWordsCount = arrayRow * arrayColumn;
+  handleArrayForLeft = new Array(allWordsCount / 2);
+  handleArrayForRight = new Array(allWordsCount / 2);
+  for (var i = 0, l = allWordsCount / 2; i <= l - 1; ++i) {
+    handleArrayForLeft[i] = { row: -1, column: -1 };
+    handleArrayForRight[i] = { row: -1, column: -1 };
+  }
+
+  var counterForInitHandleArray = 0;
+  var maxLeftCount = allWordsCount / 2;
+  for (var i = 0, l1 = arrayRow; i <= l1 - 1; ++i) {
+    for (var j = 0, l2 = arrayColumn; j <= l2 - 1; ++j) {
+      if (counterForInitHandleArray < maxLeftCount) {
+        handleArrayForLeft[counterForInitHandleArray].row = i;
+        handleArrayForLeft[counterForInitHandleArray].column = j;
+      }
+      else {
+        handleArrayForRight[counterForInitHandleArray - maxLeftCount].row = i;
+        handleArrayForRight[counterForInitHandleArray - maxLeftCount].column = j;
+      }
+      counterForInitHandleArray++;
+    }
+  }
+
+  var maxRandomChooseIndexLeft = allWordsCount / 2 - 1;
+  var maxRandomChooseIndexRight = allWordsCount / 2 - 1;
+  var counterForAllWords = 0;
+  var leftWordPosition;
+  for (var i = 0, l = allWordsCount; i <= l - 1; ++i) {
+    if (counterForAllWords % 2 === 0) { //left
+      var randomIndex = Math.round(maxRandomChooseIndexLeft * Math.random());
+      var whichPosition = handleArrayForLeft[randomIndex];
+      var elementToFill = arrayToFill[whichPosition.row][whichPosition.column];
+      elementToFill.wordData = allWords[Math.floor(counterForAllWords / 2)].left;
+      leftWordPosition = whichPosition;
+      handleArrayForLeft[randomIndex] = handleArrayForLeft[maxRandomChooseIndexLeft];
+      maxRandomChooseIndexLeft--;
+    }
+    else {
+      var randomIndex = Math.round(maxRandomChooseIndexRight * Math.random());
+      var whichPosition = handleArrayForRight[randomIndex];
+      var elementToFill = arrayToFill[whichPosition.row][whichPosition.column];
+      elementToFill.wordData = allWords[Math.floor(counterForAllWords / 2)].right;
+      var leftElement = arrayToFill[leftWordPosition.row][leftWordPosition.column];
+      var rightElement = elementToFill;
+      leftElement.pairIndex = { row: whichPosition.row, column: whichPosition.column };
+      leftElement.isChoose = false;
+      leftElement.isClear = false;
+      leftElement.isError = false;
+      rightElement.pairIndex = { row: leftWordPosition.row, column: leftWordPosition.column };
+      rightElement.isChoose = false;
+      rightElement.isClear = false;
+      rightElement.isError = false;
+      handleArrayForRight[randomIndex] = handleArrayForRight[maxRandomChooseIndexRight];
+      maxRandomChooseIndexRight--;
+    }
+
+    counterForAllWords++;
+  }
+}
+
+//#endregion 随机填充算法
+
+//#region 随机填充算法 (对称排列)
+var tempArray = null;
+
+function newRandomFill(arrayToFill, arrayRow, arrayColumn, allWords) {
+  var allWordsCount = arrayRow * arrayColumn;
+  tempArray = new Array(allWordsCount);
+  for (let i = 0, l = tempArray.length; i <= l - 1; ++i) {
+    tempArray[i] = { row: -1, column: -1 };
+  }
+
+  var counterForInitHandleArray = 0;
+  for (let i = 0, l1 = arrayRow; i <= l1 - 1; ++i) {
+    for (let j = 0, l2 = arrayColumn; j <= l2 - 1; ++j) {
+      tempArray[counterForInitHandleArray].row = i;
+      tempArray[counterForInitHandleArray].column = j;
+      counterForInitHandleArray++;
+    }
+  }
+
+  let en_RandomList = randNum2(-1, 5, 6);  // 0~5的随机序号数组
+  let en_RandomIndex;
+  let en_Position;
+  let en_Element; 
+
+  let ch_RandomList = randNum2(-1, 5, 6);  // 0~5的随机序号数组
+  let ch_RandomIndex;
+  let ch_Position;
+  let ch_Element;
+
+  for (let i = 0; i <= 5; ++i) {
+    en_RandomIndex = en_RandomList[i];
+    ch_RandomIndex = ch_RandomList[i];
+
+    en_Position = tempArray[en_RandomIndex];
+    ch_Position = tempArray[ch_RandomIndex + 6];
+    
+    ch_Element = arrayToFill[ch_Position.row][ch_Position.column];
+    ch_Element.wordData = allWords[ch_RandomIndex].right;
+    ch_Element.pairIndex = en_Position;
+    ch_Element.isChoose = false;
+    ch_Element.isClear = false;
+    ch_Element.isError = false;
+
+    en_Element = arrayToFill[en_Position.row][en_Position.column];
+    en_Element.wordData = allWords[ch_RandomIndex].left;
+    en_Element.pairIndex = ch_Position;
+    en_Element.isChoose = false;
+    en_Element.isClear = false;
+    en_Element.isError = false;
+  }
+}
+
+function randNum2(min, max, num) {
+  if (num > max - min) {
+    console.error('范围太小');
+    return false;
+  }
+
+  var range = max - min,
+    minV = min + 1, //实际上可以取的最小值
+    arr = [],
+    tmp = "";
+
+  function GenerateANum(i) {
+    for (i; i < num; i++) {
+      var rand = Math.random(); //  rand >=0  && rand < 1
+      tmp = Math.floor(rand * range + minV);
+      if (arr.indexOf(tmp) == -1) {
+        arr.push(tmp)
+      } else {
+        GenerateANum(i);
+        break;
+      }
+    }
+  }
+  GenerateANum(0); //默认从0开始
+  return arr;
+}
+
+
+//#endregion 随机填充算法
+
+
 //#region 百度语音合成
   var IMEI, tokenFromBaidu;
   var filePath;
@@ -101,7 +252,7 @@
     var ctp = 1;
     var pit = 8;
     var lan = "zh";    // zh表示中文
-    var url = "https://tsn.baidu.com/text2audio?tex=" + tex + "&lan=" + lan + "&cuid=" + cuid + "&ctp=" + ctp + "&tok=" + tok + "&per=" + 2 + "&spd=" + spd + "&pit=" + pit + "&vol=" + 15;
+    var url = "https://tsn.baidu.com/text2audio?tex=" + tex + "&lan=" + lan + "&cuid=" + cuid + "&ctp=" + ctp + "&tok=" + tok + "&per=" + 0 + "&spd=" + spd + "&pit=" + pit + "&vol=" + 15;
 
     wx.downloadFile({
       url: url,
@@ -202,38 +353,41 @@ function ydplay(list ,index) {
   function testAPI(){
     //测试百度语音合成
     initBaiduVoiceModule(); //初始化百度语音模块，此方法是异步方法，应该在游戏开始时调用而不是第一次播放声音之前
-    setTimeout(playVoiceByInputText, 1000, ["小鸡 chicken run"]); //根据文本播放合成后的声音 
+    setTimeout(playVoiceByInputText, 1000, ["出租车 taxi"]); //根据文本播放合成后的声音 
 
     //测试随机填充算法
-    var arrayToFill = new Array(10); //存放单词数据的二维数组
+    var row = 4;  //根据单词对总数以及策划规则算出的二维数组行数
+    var column = 3; //根据单词对总数以及策划规则算出的二维数组列数
+
+    var arrayToFill = new Array(row); //存放单词数据的二维数组
     for(var i = 0, l1 = arrayToFill.length; i <= l1 - 1; ++i){
-      arrayToFill[i] = new Array(10);
+      arrayToFill[i] = new Array(column);
       for(var j = 0, l2 = arrayToFill[i].length; j <= l2 - 1; ++j){
         arrayToFill[i][j] = {};
       }
     }
 
-    var allWords = new Array(3);  //存放单词对的容器
+    var allWords = new Array();  //存放单词对的容器
     allWords[0] = {left : {value : "apple"}, right : {value : "苹果"}};
     allWords[1] = {left : {value : "banana"}, right : {value : "香蕉"}};
     allWords[2] = {left : {value : "peach"}, right : {value : "桃子"}};
+    allWords[3] = {left : {value : 'phone'}, right : {value : "手机"}};
+    allWords[4] = {left : {value : 'star'}, right : {value : "星星"}};
+    allWords[5] = {left : {value : 'sun'}, right : {value: "太阳"}};
 
-    var row = 3;  //根据单词对总数以及策划规则算出的二维数组行数
-    var column = 2; //根据单词对总数以及策划规则算出的二维数组列数
-
-
-    randomFill(arrayToFill, row, column, allWords); //随机将单词填入二维数组，并记录每个单词对应翻译的数组索引
+    newRandomFill(arrayToFill, row, column, allWords); //随机将单词填入二维数组，并记录每个单词对应翻译的数组索引
     console.log(arrayToFill);
+
     
     for(var i = 0, l1 = row; i <= l1 - 1; ++i){ //打印测试
       for(var j = 0, l2 = column; j <= l2 - 1; ++j){
-        console.log("wordData:" + arrayToFill[i][j].wordData.value + "indexX:" + arrayToFill[i][j].wordData.pairIndex.row + "indexY:" + arrayToFill[i][j].wordData.pairIndex.column) ;
+        console.log("wordData:" + arrayToFill[i][j].wordData.value + "pairIndex:" + arrayToFill[i][j].pairIndex) ;
       }
     }
   }
   
   module.exports = {
-    randomFill, 
+    randomFill: newRandomFill, 
     initBaiduVoiceModule, 
     playVoiceByInputText, 
     playVoiceByYouDao,

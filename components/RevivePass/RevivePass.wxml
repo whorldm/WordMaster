@@ -1,0 +1,95 @@
+<view class='mask'>
+  <!--Header-->
+  <view class='header'>
+    <!--星星的显示区域-->
+    <view class='star_area'>
+      <view class='result_star'>
+        <view class='result_star_one'>
+          <image src='../../img/result/new_dark_star.png'></image>
+        </view>
+        <view class='result_star_two'>
+          <image src='../../img/result/new_dark_star.png'></image>
+        </view>
+        <view class='result_star_three'>
+          <image src='../../img/result/new_dark_star.png'></image>
+        </view>
+      </view>
+      <!--星星飞入动画-->
+      <view class='result_star'>
+        <view class='result_star_one'>
+          <image wx:if="{{starNum > 0}}" class='light_star_one' src='../../img/result/new_light_star.png'></image>
+        </view>
+        <view class='result_star_two'>
+          <image wx:if="{{starNum > 1}}" class='light_star_two' src='../../img/result/new_light_star.png'></image>
+        </view>
+        <view class='result_star_three'>
+          <image wx:if="{{starNum > 2}}" class='light_star_three' src='../../img/result/new_light_star.png'></image>
+        </view>
+      </view>
+    </view>
+    <!--称号显示区域-->
+    <view class='result_title' wx:if="{{isTest === 0}}">
+      <text class='title_one'>{{commonTitleList[starNum-1][0]}}</text>
+      <text class='title_two'>{{commonTitleList[starNum-1][1]}}</text>
+      <text class='title_three'>{{commonTitleList[starNum-1][2]}}</text>
+      <text class='title_four'>{{commonTitleList[starNum-1][3]}}</text>
+    </view>
+    <view class='result_title' wx:if="{{isTest === 1}}">
+      <text class='title_one'>{{examTitleList[starNum-1][0]}}</text>
+      <text class='title_two'>{{examTitleList[starNum-1][1]}}</text>
+      <text class='title_three'>{{examTitleList[starNum-1][2]}}</text>
+      <text class='title_four'>{{examTitleList[starNum-1][3]}}</text>
+    </view>
+    <!--文字的显示区域-->
+    <view class='content_area'>
+      <view class='line_one'>
+        今日已消单词:
+        <text>{{todayRankList.wordNum}}</text>
+      </view>
+      <view class='line_two'>
+        <text class='four_text'>成功超越</text>
+        <view class='loserlogo'>
+          <image src='{{todayRankList.loserLogo}}'></image>
+        </view>
+        <text class='losername'>{{todayRankList.loserName}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 卡片滑动区域 -->
+  <view class='dialog_area'>
+    <view class='last_title'>最后一击:</view>
+    <view class="last_word">
+      <text>{{lastWord[0]}}</text>
+      <text>{{lastWord[1]}}</text>
+    </view>
+    <image class='bd_line' src='../../img/result/bd_line.png'></image>
+    <view class='last_title'>已消单词: </view>
+    <scroll-view scroll-y class='word_content'>
+      <block wx:for="{{wrongArray}}" wx:key="{{index}}">
+        <view class='word_item word_wrong' wx:if="{{!item.isRepeat}}">
+          <view class='word_ch'>{{item.wordC}}</view>
+          <view class='word_en'>{{item.wordE}}</view>
+        </view>
+      </block>
+      <block wx:for="{{rightArray}}" wx:key="{{index}}">
+        <view class='word_item word_right' wx:if="{{!item.isRepeat}}">
+          <view class='word_ch'>{{item.wordC}}</view>
+          <view class='word_en'>{{item.wordE}}</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <!--按钮的区域-->
+  <view class='btn_area'>
+    <view class='btnItem_share'>
+      分享给好友
+      <button open-type='share' class='btn_share'>
+      </button>
+    </view>
+    <view class='btnItem_next' bindtap='goNextGame'>
+      继续学习
+    </view>
+  </view>
+</view>

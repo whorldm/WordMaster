@@ -1,0 +1,403 @@
+/* components/BattlePass/BattlePass.wxss */
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  overflow: scroll;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_bg_game.png');
+}
+.head_title {
+  color: #E3DBBD;
+  font-size: 50rpx;
+  font-family: 'Zaozi';
+  line-height: 100rpx;
+  text-align: center;
+  position: relative;
+}
+.winner {
+  color: #FF9800;
+}
+
+/* 顶部头像区域 */
+.header_area {
+  width: 86%;
+  height: 360rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+.header_area image{
+  width: 134rpx;
+  height: 134rpx;
+  border-radius: 50%;
+  border: 2px solid #F7F9FA;
+}
+/* 第一名的样式 */
+.rank_one{
+  width: 325rpx;
+  position: relative;
+}
+.rank_one view{
+  color: #FFEB8C;
+  font-size: 30rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.rank_one_content {
+  width: 325rpx;
+  height: 331rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_bg_light.png')
+}
+.one_bg_img {
+  width: 258rpx;
+  height: 303rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 2;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_first.png');
+}
+.rank_one_content image{
+  width: 146rpx;
+  height: 146rpx;
+  border-radius: 50%;
+  border: 2px solid #F7F9FA;
+  position: absolute;
+  top: 55rpx;
+  left: 10rpx;
+  right: 0;
+  margin: auto;
+}
+.rank_one_content .nickname{
+  z-index: 3;
+  width: 60%;
+  position: absolute;
+  bottom: 66rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.rank_one_content .user_score{
+  width: 60%;
+  position: absolute;
+  line-height: 34rpx;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+/* 第二名样式 */
+.rank_two {
+  width: 160rpx;
+  height: 200rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0 auto;
+}
+.rank_two_content {
+  width: 144rpx;
+  height: 103rpx;
+  position: absolute;
+  top: 78rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_second.png');
+}
+.rank_two image {
+  width: 110rpx;
+  height: 110rpx;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.rank_two_content .nickname {
+  width: 100%;
+  color: #A2ECFF;
+  position: relative;
+  top: 40rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.rank_two_content .user_score {
+  width: 100%;
+  color: #A2ECFF;
+  position: relative;
+  top: 40rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* 第3名样式 */
+.rank_three {
+  width: 160rpx;
+  height: 200rpx;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+} 
+.rank_three_content {
+  width: 144rpx;
+  height: 103rpx;
+  position: absolute;
+  top: 78rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_third.png');
+}
+.rank_three image {
+  width: 110rpx;
+  height: 110rpx;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.rank_three_content .nickname {
+  width: 100%;
+  color: #A2ECFF;
+  position: relative;
+  top: 40rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.rank_three_content .user_score {
+  width: 100%;
+  color: #A2ECFF;
+  position: relative;
+  top: 40rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+/* 4-6名样式 */
+.middle_area {
+  width: 86%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.middle_item {
+  height: 100rpx;
+  margin: 20rpx auto;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.middle_item .index {
+  flex: 1;
+  font-size: 46rpx;
+  color: #FFC600;
+  text-align: right;
+  padding-right: 10rpx;
+  font-family: 'Zaozi';
+}
+.middle_item .userInfo {
+  flex: 3;
+  font-size: 36rpx;
+  color:#FFF;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.userInfo text{
+  width: 74%;
+  float: left;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.userInfo image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: inline-block;
+  margin: auto 10rpx;
+  border: 2px solid #F7F9FA;
+}
+.middle_item .score {
+  flex: 2;
+  color: #FFF;
+  text-align: center;
+  font-size: 36rpx;
+}
+
+/* 我的排名信息 */
+.my_area {
+  width: 86%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.my_area .title {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.title_line {
+  flex: 0.6;
+  box-sizing: border-box;
+  line-height: 0;
+  background-color: rgb(232, 232, 232);
+  width: 100%;
+  height: 1px;
+}
+.title_text {
+  flex: 1;
+  color: #FCFFAd;
+  font-size: 40rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-family: 'Zaozi';
+}
+.title_text text{
+  color: #FF9800;
+}
+
+.line {
+  color: #FCFFAd;
+  font-size: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10rpx auto;
+}
+.line view {
+  flex: 1;
+  text-align: center;
+}
+
+/* 奖励 */
+.my_coin {
+  color: #FCFFAd;
+  width: 90%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 20rpx auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.my_coin image {
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  margin: 0 10rpx;
+}
+.my_coin text {
+  display: inline-block;
+  margin-left: 20rpx;
+}
+
+/**底部按钮样式**/
+.btn_area {
+  width: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btnItem_next {
+  width: 335rpx;
+  height: 158rpx;
+  color: #815450;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_new_btn_next.png');
+}
+.btnItem_share {
+  width: 335rpx;
+  height: 158rpx;
+  color: #CC4E32;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/new_btn_share.png');
+}
+.btn_share {
+  opacity: 0;
+  width: 323rpx;
+  height: 158rpx;
+  padding: 0;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+}

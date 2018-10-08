@@ -1,0 +1,273 @@
+/* pages/sportsgame/waiting/waiting.wxss */
+.Box {
+  overflow-y: scroll;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_bg_game.png');
+}
+
+.title {
+  color: #21343E;
+  font-size: 44rpx;
+  text-align: center;
+  line-height: 100rpx;
+  /* margin-bottom: 30rpx; */
+}
+.title text {
+  color: #F9FAA3;
+}
+.total_num {
+  width: 90%;
+  color: #21343E;
+  font-size: 30rpx;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: right;
+}
+/* 公告栏 */
+.notice_container{
+  width: 90%;
+  height: 70rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 20rpx;
+  background: rgba(74, 166, 141, 0.2);
+}
+.img_notice {
+  height: 40rpx;
+  width: 50rpx;
+  display: inline-block;
+  position: absolute;
+  left: 20rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.notice {
+  width: 82%;
+  height: 70rpx;
+  float: left;
+  position: absolute;
+  right: 20rpx;
+  margin: auto;
+} 
+.notice_item {
+  color: #E3DBBD;
+  font-size: 30rpx;
+  line-height: 70rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 横向滚动 */
+.scrollX {
+  width: 80%;
+  height: 180rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 40rpx auto;
+  display: flex;
+  flex-flow : row;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.scroll_item {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 8rpx;
+  display: inline-block;
+}
+.scroll_item image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  display: block;
+}
+.scroll_item text {
+  width: 100rpx;
+  color: #000;
+  text-align: center;
+  display: inline-block;
+  font-size: 22rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 房间信息 */
+.room_info {
+  width: 90%;
+  color: #21343E;
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.room_info text {
+  font-size: 30rpx;
+}
+.room_info view {
+  font-size: 60rpx;
+  line-height: 80rpx;
+  font-family: 'Zaozi';
+}
+/*** 展示工具 ***/
+/* 工具栏标题样式 */
+.tool_title {
+  width: 600rpx;
+  height: 40rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 40rpx auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.title_line {
+  flex: 0.6;
+  box-sizing: border-box;
+  line-height: 0;
+  background-color: #104460;
+  width: 100%;
+  height: 1px;
+}
+.title_text {
+  flex: 1;
+  color: #104460;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  text-align: center;
+}
+/* 工具栏图标样式 */
+.tool_area {
+  width: 86%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tool_item {
+  flex: 1;
+}
+.tool_item image{
+  width: 130rpx;
+  height: 130rpx;
+  display: block;
+  margin: auto;
+}
+.tool_item view {
+  color: #21343E;
+  font-size: 26rpx;
+  text-align: center;
+}
+/* 底部分享增加金币样式 */
+.btn_bottom {
+  position: relative;
+  top: 50rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 90%;
+}
+.add_area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add_coin {
+  width: 210rpx;
+  height: 60rpx;
+  position: relative;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_add_coin.png');
+}
+.add_coin text {
+  width: 150rpx;
+  color: #FFFC00;
+  display: inline-block;
+  margin-left: 50rpx;
+  line-height: 60rpx;
+  text-align: center;
+}
+.add_area image {
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  margin: 10rpx;
+}
+/* 邀请按钮样式 */
+.btn_invite {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 15rpx auto;
+  width: 283rpx;
+  height: 90rpx;
+  color: #FFFEA1;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 90rpx;
+  font-family: 'Zaozi';
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_btn_invite.png');
+}
+.btn_invite button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 276rpx;
+  height: 88rpx;
+  opacity: 0;
+  z-index: 200;
+}
+/* 遮罩层样式 */
+.showModal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.countDown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 214rpx;
+  height: 215rpx;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_bg_count.png');
+}
+.countDown image{
+  display: block;
+  width: 125rpx;
+  height: 125rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto; 
+}

@@ -1,2 +1,4 @@
-<!--pages/priview/priview.wxml-->
-<text>pages/priview/priview.wxml</text>
+<view style='width:100%;height:100%;overflow-y:scroll;'>
+  <canvas canvas-id="myCanvas" class='canvas'></canvas>
+  <canvas class='btn_area' bindtap='SaveImg' canvas-id="btnCanvas"></canvas>
+</view>

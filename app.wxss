@@ -1,11 +1,8 @@
 /**app.wxss**/
-@font-face { 
-  font-family: zaozi;       /*这里是说明调用来的字体名字*/ 
-  src: url('http://pfc6zcsy2.bkt.clouddn.com/font/title.otf');   /*这里是字体文件路径*/ 
-}
-@font-face { 
-  font-family: youyuan;       /*这里是说明调用来的字体名字*/ 
-  src: url('http://pfc6zcsy2.bkt.clouddn.com/youyuan.TTF');   /*这里是字体文件路径*/ 
+ @font-face { 
+  font-family: Zaozi;      
+  src: url('http://pfc6zcsy2.bkt.clouddn.com/font/title.otf'),
+       url('https://tp5.rock520.com/static/css/XinQingNianTi.ttf'); 
 }
 .container {
   height: 100%;
@@ -14,6 +11,11 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+}
+Page,
+.Box {
+  width: 100%;
+  height: 100%;
 } 
 
 /**等级星星的样式**/

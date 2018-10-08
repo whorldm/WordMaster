@@ -1,0 +1,102 @@
+<!--components/BattlePass/BattlePass.wxml-->
+<view class='mask'>
+  <view class='head_title winner' wx:if="{{mySelf.rank === 1}}">恭喜，今晚词鸡，大吉大利！</view>
+  <view class='head_title' wx:else>再接再厉,下次词鸡！</view>
+
+  <!-- 前3名用户 -->
+  <view class='header_area'>
+    <view class='rank_two'>
+      <image src='{{RankList[1].weiPic}}'></image>
+      <view class='rank_two_content'>
+        <view class='nickname'>{{RankList[1].nickName}}</view>
+        <view class='user_score'>{{RankList[1].integral}}</view>
+      </view>
+    </view>
+    <view class='rank_one'>
+      <view class='rank_one_content'>
+        <view class='one_bg_img'></view>
+        <image src='{{RankList[0].weiPic}}'></image>
+        <view class='nickname'>{{RankList[0].nickName}}</view>
+        <view class='user_score'>{{RankList[0].integral}}</view>
+      </view>
+    </view>
+    <view class='rank_three'>
+      <image src='{{RankList[2].weiPic}}'></image>
+      <view class='rank_three_content'>
+        <view class='nickname'>{{RankList[2].nickName}}</view>
+        <view class='user_score'>{{RankList[2].integral}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 后三名用户 -->
+  <view class='middle_area'>
+    <view class='middle_item'>
+      <view class='index'>4</view>
+      <view class='userInfo'>
+        <image src='{{RankList[3].weiPic}}'></image>
+        <text>{{RankList[3].nickName}}</text>
+      </view>
+      <view class='score'>{{RankList[3].integral}}</view>
+    </view>
+    <view class='middle_item'>
+      <view class='index'>5</view>
+      <view class='userInfo'>
+        <image src='{{RankList[4].weiPic}}'></image>
+        <text>{{RankList[4].nickName}}</text>
+      </view>
+      <view class='score'>{{RankList[4].integral}}</view>
+    </view>
+    <!-- <view class='middle_item'>
+      <view class='index'>6</view>
+      <view class='userInfo'>
+        <image src='{{RankList[5].weiPic}}'></image>
+        {{RankList[5].nickName}}
+      </view>
+      <view class='score'>{{RankList[5].integral}}</view>
+    </view> -->
+  </view>
+  <!-- 我的排名 -->
+  <view class='my_area'>
+    <view class='title'>
+      <view class='title_line'></view>
+      <view class='title_text' wx:if="{{mySelf.rank <= 3}}">
+        我的排名: <text>{{titleList[mySelf.rank - 1]}}</text>
+      </view>
+      <view class='title_text' wx:else>
+        我的排名: <text>{{mySelf.rank}}</text>
+      </view>
+      <view class='title_line'></view>
+    </view>
+    <view class='my_info'>
+      <view class='line'>
+        <view>消除单词</view>
+        <view>正确率</view>
+        <view>积分</view>
+      </view>
+      <view class='line'>
+        <view>{{mySelf.rightNum}}个</view>
+        <view>{{percent}}%</view>
+        <view>{{mySelf.score}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='my_coin'>
+    <image src='../../img/coin.png'></image>
+    +{{reward.coin - mySelf.coin}}
+    <text>荣誉值 +{{reward.integral}}</text>
+  </view>
+
+  <!--按钮的区域-->
+  <view class='btn_area'>
+    <view class='btnItem_share'>
+      晒一晒战绩
+      <button open-type='share' class='btn_share'>
+      </button>
+    </view>
+    <view class='btnItem_next' bindtap='goNextGame'>
+      再战一次
+    </view>
+  </view>
+
+</view>

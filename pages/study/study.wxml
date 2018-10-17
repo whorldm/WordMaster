@@ -1,0 +1,22 @@
+<!--pages/study/study.wxml-->
+<view class='Box'>
+  <view class='ch_area'>{{worldCh}}</view>
+  <view class='en_area'>
+    <block wx:for="{{letterList}}" wx:key="{{index}}">
+      <view class='en_item' animation="{{item.animation}}">{{item.value}}</view>
+    </block>
+  </view>
+  <view class='show_area' bindtap='ClickLettter'>
+    <block wx:for="{{showLetter}}" wx:for-index="index_x" wx:key="{{index_x}}">
+      <view class='show_line'>
+        <block wx:for="{{item}}" wx:for-item="letterItem" wx:key="{{index}}">
+          <view class="{{letterItem.value ? 'show_item' : 'show_none'}}"
+            data-posX='{{index_x}}'
+            data-posY='{{index}}'
+            data-angle='{{letterItem.angle}}'
+            animation="{{letterItem.animation}}">{{letterItem.value}}</view>
+        </block>
+      </view>
+    </block>
+  </view>
+</view>

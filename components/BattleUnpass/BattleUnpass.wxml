@@ -1,2 +1,38 @@
-<!--components/BattleUnpass/BattleUnpass.wxml-->
-<text>components/BattleUnpass/BattleUnpass.wxml</text>
+<view class='mask'>
+  <!-- 顶部的个人信息 -->
+  <view class='header'>
+    <view class='header_bg'></view>
+    <view class='header_title'>失败啦!</view>
+    <image class='userLogo' src='../../img/1.jpeg'></image>
+    <view class='header_info'>很遗憾你在比赛的第{{_stageNum}}阶段倒数第{{_rankNum}}</view>
+    <view class='header_tip'>被淘汰了！</view>
+  </view>
+
+  <!-- 中间的内容区域 -->
+  <view class='my_area'>
+    <view class='line'>
+      <view>消除单词</view>
+      <view>正确率</view>
+      <view>积分</view>
+    </view>
+    <view class='line line_two'>
+      <view>{{mySelf.rightNum}}</view>
+      <view>{{percent}}%</view>
+      <view>{{mySelf.score}}</view>
+    </view>
+  </view>
+
+  <view class='reward_area'>安慰奖：金币 +100</view>
+
+  <!--按钮的区域-->
+  <view class='btn_area'>
+    <view class='btnItem_share'>
+      找好友复仇
+      <button open-type='share' class='btn_share'>
+      </button>
+    </view>
+    <view class='btnItem_next' bindtap='goNextGame'>
+      再战一次
+    </view>
+  </view>
+</view>

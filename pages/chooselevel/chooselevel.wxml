@@ -9,7 +9,7 @@
         <text class='userinfo_name'>{{userInfo.nickName}}</text>
         <view class='area_line'>
           <text class='process'>{{battleInfo.integral}} / {{battleInfo.totalIntegral}}</text>
-          <view class='area_inline' style='flex:{{battleInfo.integral / battleInfo.totalIntegral}}; -webkit-flex:{{battleInfo.integral / battleInfo.totalIntegral}};'>
+          <view class='area_inline' style='-webkit-flex:{{battleInfo.integral / battleInfo.totalIntegral}}; flex:{{battleInfo.integral / battleInfo.totalIntegral}};'>
           </view>
           <image class='xt' wx:if="{{battleInfo.integral < battleInfo.totalIntegral && battleInfo.integral !== 0}}" src='../../img/xt-2.png'></image>
         </view>

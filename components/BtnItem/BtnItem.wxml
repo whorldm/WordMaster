@@ -1,6 +1,3 @@
-<view class="btn_item {{gridItem.isChoose ? 'item_click':'item_common' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}"
-      data-key="{{gridItem.pairIndex}}"
-      data-posx="{{index}}" data-posy='{{idx}}'
-      data-value="{{gridItem.wordData.value}}">
+<view class="btn_item {{gridItem.isChoose ? 'item_click':'item_common' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}">
     {{gridItem.wordData.value}}
 </view>

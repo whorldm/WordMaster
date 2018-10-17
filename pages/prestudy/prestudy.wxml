@@ -45,10 +45,14 @@
       <block wx:for="{{wordGrid}}" wx:for-index="idx" wx:key="{{idx}}">
         <view class="flex-row">
           <block wx:for="{{item}}" wx:for-item="gridItem" wx:key="{{index}}">
-            <view class="word_item {{gridItem.isChoose ? 'word_click':'word_common' }} {{gridItem.isClear ? 'sucessState':'' }} {{gridItem.isError ? 'errorState':''}} {{gridItem.isNotice ? 'notice': ''}}" data-key="{{gridItem.pairIndex}}" data-posx="{{index}}" data-posy='{{idx}}'
-              data-value="{{gridItem.wordData.value}}">
-              {{gridItem.wordData.value}}
-            </view>
+            <BtnItem 
+              id="{{'id'+index+'_'+idx}}"
+              data-key="{{gridItem.pairIndex}}"
+              data-posx="{{index}}" data-posy='{{idx}}'
+              data-value="{{gridItem.wordData.value}}"
+              gridItem="{{gridItem}}"
+              bind:myevent="updateData">
+            </BtnItem>
           </block>
         </view>
       </block>

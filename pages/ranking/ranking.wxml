@@ -15,19 +15,20 @@
         </view>
       </view>
 
-      <!-- <view class='navs_item'>
-        <view bindtap="getRankList" data-type="friend" class='nav_title  {{levelType == "friend" ? "nav_chooesd":""}}'>
-          好友排行
+      <view class='navs_item'>
+        <view bindtap="getRankList" data-type="battle" class='nav_title  {{levelType == "battle" ? "nav_chooesd":""}}'>
+          竞技排行
         </view>
-      </view> -->
+      </view>
     </view>
 
     <!--topbar  -->
     <view class='lists_topbar'>
       <text class='ranking_title'></text>
-      <text class='dgree_title' wx:if="{{levelType != 'today'}}">{{lists_topbar[0]}}</text>
-      <text class='number_title' wx:if="{{levelType != 'today'}}">{{lists_topbar[1]}}</text>
-      <text class='today_title' wx:if="{{levelType == 'today'}}">{{lists_topbar[0]}}</text>
+      <text class='today_title' wx:if="{{levelType === 'today'}}">{{lists_topbar[0]}}</text>
+      <text class='dgree_title' wx:if="{{levelType === 'world'}}">{{lists_topbar[0]}}</text>
+      <text class='number_title' wx:if="{{levelType === 'world'}}">{{lists_topbar[1]}}</text>
+      <text class='today_title' wx:if="{{levelType === 'battle'}}">{{lists_topbar[0]}}</text>
     </view>
 
     <!-- 滑动加载列表 -->
@@ -57,6 +58,12 @@
           <view class='degree' wx:if="{{levelType == 'world'}}">{{item.levelName}}</view>
           <view class='number' wx:if="{{levelType == 'world'}}">{{item.right}}</view>
           <view class='today' wx:if="{{levelType == 'today'}}">{{item.todayWords}}</view>
+          <view class='battle' wx:if="{{levelType == 'battle'}}">
+            {{item.name}}
+            <block wx:for="{{item.star}}" wx:key="{{item}}">
+              <image src='../../img/result/new_light_star.png'></image>
+            </block>
+          </view>
         </view>
       </block>
     </scroll-view>
@@ -68,20 +75,26 @@
       <view class='befores'>
         <view class='ranking'>
           <view wx:if="{{myRanks.myRank == 0 || myRanks.myRank > 3}}" class='ranking_num'>
-            {{myRanks.myRank}}
+            {{myRanks.myRank > 999 ? "999+" : myRanks.myRank}}
           </view>
           <image wx:if="{{myRanks.myRank == 1}}" class='ranking_img' src='http://cdn.tik.com/wordmaster/image/ranking_level1.png'></image>
           <image wx:if="{{myRanks.myRank == 2}}" class='ranking_img ranking_img2' src='http://cdn.tik.com/wordmaster/image/ranking_level2.png'></image>
           <image wx:if="{{myRanks.myRank == 3}}" class='ranking_img ranking_img3' src='http://cdn.tik.com/wordmaster/image/ranking_level3.png'></image>
 
         </view>
-        <image class='headimage' src='{{myRanks.weiPic}}'>
+        <image class='headimage' src='{{userInfo.avatarUrl || myRanks.weiPic}}'>
         </image>
-        <text class='name'>{{myRanks.nickname}}</text>
+        <text class='name'>{{userInfo.nickName || myRanks.nickname}}</text>
       </view>
       <view class='degree' wx:if="{{levelType == 'world'}}">{{myRanks.levelName}}</view>
       <view class='number' wx:if="{{levelType == 'world'}}">{{myRanks.right}}</view>
       <view class='today' wx:if="{{levelType == 'today'}}">{{myRanks.todayWords}}</view>
+      <view class='battle' wx:if="{{levelType == 'battle'}}">
+            {{myRanks.name}}
+            <block wx:for="{{myRanks.star}}" wx:key="{{item}}">
+              <image src='../../img/result/new_light_star.png'></image>
+            </block>
+          </view>
     </view>
   </view>
 

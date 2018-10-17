@@ -8,6 +8,7 @@ var currentClickTime = 0; //本次点击的事件
 
 Page({
   data: {
+    showContactDialog: false, //客服弹框
     userId: '',
     userInfo: {},
     formId: 0, // 用于发送模版消息
@@ -97,9 +98,10 @@ Page({
     let windowWidth = app.globalData.windowWidth
     let windowHeight = app.globalData.windowHeight
     this.setData({
+      showContactDialog: false,
       pos: {
         top: 40,
-        left: windowWidth - 60 || 315
+        left: windowWidth - 80 || 315
       }
     })
   },
@@ -156,7 +158,6 @@ Page({
     let params  = {};
     params.userId = app.globalData.userId;
     params.formId = formId;
-    console.log(params);
     request.getData("INSERT_FORMID", params)
     .then(res => {
       console.log(res)
@@ -260,8 +261,8 @@ Page({
   },
 
   // 切换到竞技场模式
-  navToSports: function() {
-    // this.wait();
+  navToSports: function(e) {
+    this.sendFormId(e.detail.formId);
     wx.navigateTo({
       url: '/pages/chooselevel/chooselevel',
     })
@@ -280,6 +281,12 @@ Page({
     return utils.shareMsg(false);
   },
 
+  showDialog: function() {
+    this.setData({
+      showContactDialog: !this.data.showContactDialog
+    })
+  },
+
   // 悬浮按钮移动样式
   menuMainMove: function(e) {
     let windowWidth = app.globalData.windowWidth
@@ -288,17 +295,17 @@ Page({
     let clientX = touches.clientX
     let clientY = touches.clientY
     // 边界判断
-    if (clientX > windowWidth - 60) {
-      clientX = windowWidth - 60
+    if (clientX > windowWidth - 80) {
+      clientX = windowWidth - 80
     }
-    if (clientX <= 40) {
-      clientX = 40
+    if (clientX <= 20) {
+      clientX = 20
     }
     if (clientY > windowHeight - 60) {
       clientY = windowHeight - 60
     }
-    if (clientY <= 60) {
-      clientY = 60
+    if (clientY <= 40) {
+      clientY = 40
     }
     let pos = {
       left: clientX,

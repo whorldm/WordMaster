@@ -8,7 +8,9 @@
     "pages/priview/priview",
     "pages/chooselevel/chooselevel",
     "pages/startgame/startgame",
-    "pages/waiting/waiting"
+    "pages/waiting/waiting",
+    "pages/study/study",
+    "pages/prestudy/prestudy"
   ],
   "window": {
     "backgroundTextStyle": "light",

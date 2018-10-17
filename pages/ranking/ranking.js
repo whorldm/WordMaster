@@ -49,19 +49,15 @@ Page({
       levelType = 'today';
     }
     //设置topbar
-    if (levelType == 'world') {
+    if (levelType === 'world') {
       lists_topbar = ['学位', '消灭单词'];
       API = "RINKING_WORLD_LIST";
-    } else if (levelType == 'today') {
+    } else if (levelType === 'today') {
       lists_topbar = ['今日单词'];
       API = "TODAY_RINKING_LIST";
-    } else {
-      lists_topbar = ['学位', '词量'];
-      API = "";
-      this.setData({
-        levelList: [], //排行list
-        myRanks: '', // 我的排名情况
-      });
+    } else if (levelType === 'battle') {
+      lists_topbar = ['等级'];
+      API = "BATTLE_RANK";
     }
     this.setData({
       lists_topbar,
@@ -79,7 +75,7 @@ Page({
           let myRanks;
           let len = 0;
           //中文解码，URL解码，nickname截取4个字符，
-          lists.forEach(function(item, index) {
+          lists.forEach((item, index) => {
             item.nickname = decodeURI(item.nickname);
             len = self.CheckChinese(item.nickname);
             if ((item.nickname).length > len) {
@@ -93,6 +89,9 @@ Page({
             }
           });
           myRanks = JSON.parse(JSON.stringify(lists[lists.length - 1]));
+          if (!myRanks.myRank) {
+            myRanks.myRank = myRanks.rank;
+          }
           //删除最后的数据（自身的排名情况）
           lists.pop();
           this.setData({

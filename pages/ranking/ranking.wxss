@@ -38,10 +38,10 @@
   justify-content: center;
 }
 .nav_title {
-  width: 226rpx;
-  height: 70rpx;
+  width: 190rpx;
+  height: 60rpx;
   text-align: center;
-  line-height: 70rpx;
+  line-height: 60rpx;
   background-size: cover;
   background-image: url('http://cdn.tik.com/wordmaster/image/ranking_btn_bg_title.png');
 }
@@ -179,6 +179,17 @@
 .today{
   width: 50%;
   text-align: center;
+}
+.battle{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.battle image{
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
 }
 
 

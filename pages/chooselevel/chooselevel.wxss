@@ -77,30 +77,31 @@
   border-radius: 13rpx;
   border: 2px solid #AE9864;
   background-color: #6A2A00;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   display: -webkit-box;
   display: -webkit-flex;
-  -webkit-box-pack: justify;
-  -webkit-box-align: center;
+  display: flex;
+  -webkit-align-items: center;
   -webkit-justify-content: flex-start;
+  align-items: center;
+  justify-content: flex-start;
+ 
 }
 .area_line .process {
   width: 320rpx;
   color: #FFF;
-  z-index: 20;
   font-size: 26rpx;
   line-height: 26rpx;
   text-align: center;
-  display: block;
   position: absolute;
   left: 0;
   margin: auto 0;
+  display: block;
+  z-index: 20;
 }
 .area_line .xt {
   width: 14rpx;
   height: 54rpx;
+  display: block;
   position: relative;
   left: -5rpx;
   top: 0;
@@ -109,18 +110,19 @@
 .area_inline {
   width: 320rpx;
   height: 26rpx;
+  display: block;
   border-top-left-radius: 8rpx;
   border-bottom-left-radius: 8rpx;
   background: -webkit-linear-gradient(top, #FFC627 50%, #FFA800 50%);
 }
 .userinfo_detail .under_text {
-  padding-right: 20rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .userinfo_detail .under_text text{
   flex: 1;
+  display: block;
   text-align: left;
   color:#416092;
   font-size: 26rpx;

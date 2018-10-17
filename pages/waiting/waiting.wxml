@@ -1,4 +1,3 @@
-<!--pages/sportsgame/waiting/waiting.wxml-->
 <view class='Box'>
   <view class='title'>词鸡竞技场 --
     <text>{{levelList[level]}}场</text>

@@ -5,6 +5,8 @@
     "ComboxShow": "/components/ShowCombox/ShowCombox",
     "RevivePass": "/components/RevivePass/RevivePass",
     "ReviveUnpass": "/components/ReviveUnpass/ReviveUnpass",
-    "ShareDialog": "/components/ShareDialog/ShareDialog"
+    "ShareDialog": "/components/ShareDialog/ShareDialog",
+    "BattleUnpass": "/components/BattleUnpass/BattleUnpass",
+    "BtnItem": "/components/BtnItem/BtnItem"
   }
 }

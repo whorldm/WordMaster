@@ -443,7 +443,6 @@ Page({
     request.getDataLoading('BATTLE_END', params, '正在结算...')
     .then(res => {
       if (res.code === 0) {
-        console.log(res);
         let temp;
         let rightPercent = ((this.data.mySelf.totalNum - this.data.mySelf.errorNum) / this.data.mySelf.totalNum).toFixed(2);
         for(let i=0,len=res.list.length; i<len; i++) {

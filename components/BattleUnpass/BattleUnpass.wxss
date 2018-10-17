@@ -1,1 +1,154 @@
 /* components/BattleUnpass/BattleUnpass.wxss */
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  overflow: scroll;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/bg_header_unpass.png');
+}
+
+/* 顶部的样式 */
+.header {
+  width: 100%;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 100rpx auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header_bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: -140rpx auto 0;
+  width: 472rpx;
+  height: 349rpx;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/bg_ghost.png');
+}
+.header_title {
+  text-align: center;
+  font-family: 'Zaozi';
+  font-size: 70rpx;
+  color: #EAEFF1;
+  letter-spacing: 4rpx;
+}
+.header .userLogo{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 3px solid #FFF;
+  display: block;
+  margin: 20rpx;
+}
+.header_info {
+  text-align: center;
+  font-size: 40rpx;
+  color: #FFF;
+}
+.header_tip {
+  text-align: center;
+  color: #FFF;
+  font-size: 50rpx;
+  font-family: 'Zaozi';
+  line-height: 100rpx;
+}
+
+/* 中间内容的详细 */
+.my_area {
+  width: 90%;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 20rpx auto;
+  border-radius: 20rpx;
+  background: #4B6287;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.my_area .line {
+  width: 100%;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.my_area .line view{
+  flex: 1;
+  color: #FFF;
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+.line_two view {
+  font-family: 'Zaozi';
+}
+
+/* 安慰奖 */
+.reward_area {
+  color: #FFF;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: lighter;
+}
+
+
+/**底部按钮样式**/
+.btn_area {
+  width: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btnItem_next {
+  width: 335rpx;
+  height: 158rpx;
+  color: #815450;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_new_btn_next.png');
+}
+.btnItem_share {
+  width: 335rpx;
+  height: 158rpx;
+  color: #CC4E32;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/new_btn_share.png');
+}
+.btn_share {
+  opacity: 0;
+  width: 323rpx;
+  height: 158rpx;
+  padding: 0;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+}

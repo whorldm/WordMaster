@@ -59,7 +59,10 @@
       <image src='../../img/home/vs.png'></image>
       <view class='logo_name'>竞技场</view>
     </view> -->
-    <view class='sports_port' bindtap='navToSports'>
+    <view class='sports_port'>
+      <form bindsubmit="navToSports" class='btn_sport' report-submit="true">
+        <button formType="submit" class='btn_sport_form_id'></button>
+      </form>
       <image src='../../img/home/vs.png'></image>
       <view class='sports_name'>竞技场已开放</view>
     </view>
@@ -71,8 +74,22 @@
   </view>
 
   <!-- 客服按钮 -->
-  <view class='float_btn' catchtouchmove='menuMainMove' style='top:{{pos.top}}px;left:{{pos.left}}px;'>
-    <button open-type='contact'></button>
-    <image src='../../img/home/contact.png'></image>
+  <view class='float_btn' catchtouchmove='menuMainMove' style='top:{{pos.top}}px;left:{{pos.left}}px;' bindtap='showDialog'>
+    <image src='../../img/home/contact_logo.png'></image>
+    <text>单词联盟</text>
+  </view>
+
+  <view class='contact_dailog' wx:if="{{showContactDialog}}">
+    <view class='contact_center'>
+      <view class='dialog_close' bindtap='showDialog'>X</view>
+      <view class='dialog_text'>
+        点击<text>⬇</text>加群，回复“1”
+        <view>欢迎加入单词联盟!</view>
+      </view>
+      <view class='contact_btn'>
+        加群
+        <button session-from='{"nickName":"{{userInfo.nickName}}","avatarUrl":"{{userInfo.avatarUrl}}"}' open-type='contact'></button>
+      </view>
+    </view>
   </view>
 </view>

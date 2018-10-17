@@ -104,6 +104,11 @@
     </view>
     <view class='del_coin' wx:if="{{isDelCoin}}"> -{{delCoinNum}} </view>
   </view>
+
+  <!-- 分享增加金币的弹框 -->
+  <ShareDialog wx:if="{{isShareDialog && mySelf.coin < delCoinNum}}"
+    bind:closeCoinDialog="closeCoinDialog">
+  </ShareDialog>
   
   <!-- 开赛前的动画 -->
   <view class='showModal' wx:if="{{showModal}}">

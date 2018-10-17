@@ -1,4 +1,3 @@
-// pages/sportsgame/waiting/waiting.js
 const app = getApp();
 var request = require("../../utils/request.js");
 var utils = require("../../utils/util.js");
@@ -44,6 +43,7 @@ Page({
     request.getDataLoading('BATTLE_JOIN', {
       userId: app.globalData.userId
     }, '正在获取房间信息...').then((res) => {
+      console.log(res)
       // 从服务器获取用户的头像和昵称信息
       let tempUserList = [];
       let tempMsgList = [];

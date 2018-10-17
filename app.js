@@ -41,6 +41,7 @@ App({
       })
     }
 
+    // 检查微信的登录是否过期
     wx.checkSession({
       success: () => {
         wx.getStorage({
@@ -60,24 +61,6 @@ App({
         // 当前用户已过期
       }
     })
-
-    // wx.getSetting({
-    //   success: res => {
-    //     if (res.authSetting['scope.userInfo']) {
-    //       wx.getUserInfo({
-    //         success: res => {
-    //           this.globalData.userInfo = res.userInfo
-    //           wx.getStorage({
-    //             key: 'userId',
-    //             success: res => {
-    //               this.globalData.userId = res.data;
-    //             }
-    //           })
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
 
     // 百度语音模块的初始化
     assistant.initBaiduVoiceModule();

@@ -111,6 +111,10 @@ const config = {
     interFace: '/battle/battleTime',
     method: 'POST'
   },
+  'BATTLE_RANK': {
+    interFace: '/battle/rank',
+    method: 'GET'
+  },
   'INSERT_FORMID': {
     interFace: '/word/insertFormId',
     method: 'GET'

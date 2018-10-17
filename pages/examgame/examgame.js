@@ -18,6 +18,7 @@ Page({
    */
   data: {
     showModal: true,  // 倒计时遮罩
+    isShareDialog: false, //分享的弹框
     row: 4,  //根据单词对总数以及策划规则算出的二维数组行数
     col: 3,  //根据单词对总数以及策划规则算出的二维数组列数
     isShowResult: false, //是否显示结果页面
@@ -252,6 +253,13 @@ Page({
 
   // 分享给好友
   onShareAppMessage: function () {
+    if (this.data.isShareDialog) {
+      this.setData({
+        isShareDialog: false,
+        ['mySelf.coin']: this.data.mySelf.coin + 500
+      })
+      this.changeCoinNum(500);
+    }
     let obj;
     if (this.data.starNum >= 2) {
       obj = Utils.shareMsg(true);
@@ -582,10 +590,9 @@ Page({
   // 获取提示信息
   getHelp: Utils.throttle(function () {
     if (this.data.mySelf.coin < this.data.delCoinNum) {
-      wx.showToast({
-        icon: 'none',
-        title: '金币数量不足'
-      });
+      this.setData({
+        isShareDialog: true
+      })
       return;
     }
     
@@ -604,7 +611,6 @@ Page({
           [other]: false
         })
       }, 1200)
-      // this.delCoinNum();
       return;
     }
     // 未选中单词，提示一对
@@ -627,19 +633,24 @@ Page({
               [tempB]: false,
             })
           }, 1200)
-          // this.delCoinNum();
           return;
         }
       }
     }
   }, 1000),
 
-  // 向后请求减少金币
-  delCoinNum: function () {
+  // 分享增加金币
+  closeCoinDialog: function () {
+    this.setData({
+      isShareDialog: false
+    })
+  },
+  // 向后请求更新金币数量
+  changeCoinNum: function (Num) {
     let params = {};
     params.userId = app.globalData.userId;
-    params.levelId = this.data.levelId;
-    request.getData("PROMPT", params)
+    params.coin = Num;
+    request.getData("CHANGE_COIN", params)
       .then(res => {
         console.log('提示成功')
       })

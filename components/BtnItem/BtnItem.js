@@ -8,12 +8,6 @@ Component({
     gridItem: {  // 按钮的具体信息
       type: Object
     },
-    positionX: {  // x坐标
-      type: Number
-    },
-    positionY: {  // y坐标
-      type: Number
-    }
   },
 
   /**
@@ -45,12 +39,29 @@ Component({
       this.setData({
         ['gridItem.isError']: true
       })
+      setTimeout(()=>{
+        this.setData({
+          ['gridItem.isChoose']: false,
+          ['gridItem.isError']: false
+        })
+        this.triggerEvent('myevent', {
+          firstStr: '',
+          secondStr: '',
+          isError: false
+        })
+      },1000)
     },
     // 提示的状态
     onNotice: function() {
       this.setData({
         ['gridItem.isNotice']: true
       })
+      setTimeout(() => {
+        this.setData({
+          ['gridItem.isNotice']: false
+        })
+        this.triggerEvent('myevent', { isDelCoin: false })
+      }, 1200)
     }
   }
 })

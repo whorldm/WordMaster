@@ -1,0 +1,81 @@
+/* pages/study/study.wxss */
+.Box {
+  overflow-y: scroll;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_bg_game.png');
+}
+.ch_area {
+  width: 500rpx;
+  height: 120rpx;
+  color: #FFF;
+  font-size: 50rpx;
+  font-family: 'Zaozi';
+  letter-spacing: 8rpx;
+  text-align: center;
+  line-height: 120rpx;
+  background: #FF9700;
+  border-radius: 20rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+/* 英文的学习区域样式 */
+.en_area {
+  width: 100%;
+  height: 140rpx;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.en_item {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 8rpx;
+  background: #FCFFAD;
+  font-size: 40rpx;
+  color: #FF9700;
+  text-align: center;
+  line-height: 60rpx;
+  margin: 5rpx;
+}
+.show_area {
+  width: 90%;
+  height: 65%;
+  overflow: hidden;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 20rpx;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.show_line {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.show_item {
+  width: 100rpx;
+  height: 80rpx;
+  border: 1px solid #FF9700;
+  border-radius: 10rpx;
+  background: #FCFFAD;
+  font-size: 50rpx;
+  font-family: 'Zaozi';
+  color: #FF9700;
+  text-align: center;
+  line-height: 80rpx;
+}
+.show_none {
+  width: 100rpx;
+  height: 80rpx;
+  border: 1px solid #FF9700;
+  border-radius: 10rpx;
+  opacity: 0;
+}

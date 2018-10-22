@@ -45,6 +45,16 @@ function fill_zero_prefix(num) {
   return num < 10 ? "0" + num : num
 }
 
+// 计算倒计时的时间差
+function completeTime (endTime) {
+  if (endTime === '') {
+    return -1;
+  }
+  let now = new Date().getTime();
+  let end = new Date(endTime.replace(/\-/g, '/')).getTime();
+  return parseInt((end - now)/1000);
+}
+
 // 根据用户的操作时间判断得分等级
 function judeGreed(second) {
   let temp = 1;
@@ -185,7 +195,7 @@ function shareMsg(isGameOver) {
   if (isGameOver) {
     titelIndex = RandomNum(0, 2);
   } else {
-    titelIndex = RandomNum(0, 3);
+    titelIndex = RandomNum(0, 2);
   }
   let imgIndex = RandomNum(1, 2);
 
@@ -228,5 +238,6 @@ function throttle(fn, gapTime) {
     loadFont,
     RandomNum,
     shareMsg,
-    throttle
+    throttle,
+    completeTime
   }

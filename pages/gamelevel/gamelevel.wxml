@@ -48,28 +48,25 @@
     </view>
   </view>
 
-  <!--底部的菜单-->
-  <view class='foot_nav'>
-    <view class='foot_item' bindtap='navToRank'>
-      <image src='../../img/home/rank_logo.png'></image>
-      <view class='logo_name'>排行榜</view>
-    </view>
-
-    <!-- <view class='foot_item' bindtap='navToSports'>
-      <image src='../../img/home/vs.png'></image>
-      <view class='logo_name'>竞技场</view>
-    </view> -->
-    <view class='sports_port'>
-      <form bindsubmit="navToSports" class='btn_sport' report-submit="true">
-        <button formType="submit" class='btn_sport_form_id'></button>
+  <!-- 底部的按钮 -->
+  <view class="bottom_nav">
+    <view class="nav_item" >
+      <form bindtap='navToRank' class='btn_rank' report-submit="true">
+        <button formType="submit" class='btn_form_id'></button>
       </form>
-      <image src='../../img/home/vs.png'></image>
-      <view class='sports_name'>竞技场已开放</view>
+      <image class="nav_logo_left" src="http://pczh4pjuz.bkt.clouddn.com/wordmaster_homepage_rank_logo.png"></image>
+      <view class="nav_bottom">
+        <text>排行榜</text>
+      </view>
     </view>
-
-    <view class='foot_item' bindtap='wait'>
-      <image src='../../img/home/pk.png'></image>
-      <view class='logo_name'>连消赛</view>
+    <view class="nav_item">
+      <form bindsubmit="navToSports" class='btn_sport' report-submit="true">
+        <button formType="submit" class='btn_form_id'></button>
+      </form>
+      <image class="nav_logo_right" src="http://pczh4pjuz.bkt.clouddn.com/wordmaster_homepage_sports_logo.png"></image>
+      <view class="nav_bottom">
+        <text>多人竞技</text>
+      </view>
     </view>
   </view>
 

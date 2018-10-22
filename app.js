@@ -68,6 +68,7 @@ App({
   globalData: {
     userId: '',
     userInfo: null,
-    RemoteAddress: "https://www.luoyunyu.com",
+    // WSSAddress: "wss://wordmaster.tik.com/websocketRoom/",
+    WSSAddress: "ws://172.20.200.76:8088/websocketRoom/",
   },
 })

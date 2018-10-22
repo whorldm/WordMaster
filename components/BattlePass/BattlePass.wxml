@@ -8,23 +8,23 @@
     <view class='rank_two'>
       <image src='{{RankList[1].weiPic}}'></image>
       <view class='rank_two_content'>
-        <view class='nickname'>{{RankList[1].nickName}}</view>
-        <view class='user_score'>{{RankList[1].integral}}</view>
+        <view class='nickname'>{{RankList[1].nickname || RankList[1].nickName}}</view>
+        <view class='user_score'>{{RankList[1].score || RankList[1].integral}}</view>
       </view>
     </view>
     <view class='rank_one'>
       <view class='rank_one_content'>
         <view class='one_bg_img'></view>
         <image src='{{RankList[0].weiPic}}'></image>
-        <view class='nickname'>{{RankList[0].nickName}}</view>
-        <view class='user_score'>{{RankList[0].integral}}</view>
+        <view class='nickname'>{{RankList[0].nickname || RankList[0].nickName}}</view>
+        <view class='user_score'>{{RankList[0].score || RankList[0].integral}}</view>
       </view>
     </view>
     <view class='rank_three'>
       <image src='{{RankList[2].weiPic}}'></image>
       <view class='rank_three_content'>
-        <view class='nickname'>{{RankList[2].nickName}}</view>
-        <view class='user_score'>{{RankList[2].integral}}</view>
+        <view class='nickname'>{{RankList[2].nickname || RankList[2].nickName}}</view>
+        <view class='user_score'>{{RankList[2].score || RankList[2].integral}}</view>
       </view>
     </view>
   </view>
@@ -34,17 +34,17 @@
       <view class='index'>4</view>
       <view class='userInfo'>
         <image src='{{RankList[3].weiPic}}'></image>
-        <text>{{RankList[3].nickName}}</text>
+        <text>{{RankList[3].nickname || RankList[3].nickName}}</text>
       </view>
-      <view class='score'>{{RankList[3].integral}}</view>
+      <view class='score'>{{RankList[3].score || RankList[3].integral}}</view>
     </view>
     <view class='middle_item'>
       <view class='index'>5</view>
       <view class='userInfo'>
         <image src='{{RankList[4].weiPic}}'></image>
-        <text>{{RankList[4].nickName}}</text>
+        <text>{{RankList[4].nickname || RankList[4].nickName}}</text>
       </view>
-      <view class='score'>{{RankList[4].integral}}</view>
+      <view class='score'>{{RankList[4].score || RankList[4].integral}}</view>
     </view>
     <!-- <view class='middle_item'>
       <view class='index'>6</view>

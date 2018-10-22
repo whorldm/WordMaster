@@ -67,6 +67,13 @@
     </view>
   </view>
 
+  <!-- 遮罩倒计时样式 -->
+  <view class='showModal' wx:if="{{showModal}}">
+    <view class='countDown'>
+      <image src='{{countURL}}'></image>
+    </view>
+  </view>
+
   <!-- 分享增加金币的弹框 -->
   <ShareDialog wx:if="{{isShareDialog}}"
     bind:closeCoinDialog="closeCoinDialog">

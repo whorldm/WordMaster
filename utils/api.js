@@ -3,7 +3,7 @@
  */
 
 const config = {
-  'AUTHORIZATION':{
+  'AUTHORIZATION':{   // 授权登录
     interFace: '/user/authorization',
     method: 'POST'
   },
@@ -15,7 +15,7 @@ const config = {
     interFace: '/user/prompt',
     method: 'POST'
   },
-  'CHANGE_COIN': {
+  'CHANGE_COIN': {   // 分享后增加金币
     interFace: '/user/changeCoin',
     method: 'GET'
   },
@@ -103,19 +103,31 @@ const config = {
     interFace: '/battle/index',
     method: 'GET'
   },
-  'BATTLE_WORD': {
+  'BATTLE_WORD': {  // 获取竞技场的单词
     interFace: '/word/battleWord',
     method: 'GET'
   },
-  'BATTLE_TIME': {
+  'BATTLE_TIME': { 
     interFace: '/battle/battleTime',
     method: 'POST'
   },
-  'BATTLE_RANK': {
+  'BATTLE_RANK': {  // 获取竞技排名
     interFace: '/battle/rank',
     method: 'GET'
   },
-  'INSERT_FORMID': {
+  'ROOM_NUMER': { // 获取分配的房间号
+    interFace: '/room/distribution',
+    method: 'GET'
+  },
+  'CHECK_BATTLE_ROOM': { // 检查用户是否有尚未完结房间
+    interFace: '/room/selectRoomInfo',
+    method: 'GET'
+  },
+  'ROOM_END': { // 房间结算
+    interFace: '/room/end',
+    method: 'POST'
+  },
+  'INSERT_FORMID': {  // 发送formId
     interFace: '/word/insertFormId',
     method: 'GET'
   },

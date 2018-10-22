@@ -1,7 +1,6 @@
 const app = getApp();
 var request = require("../../utils/request.js");
 var utils = require("../../utils/util.js");
-var assistant = require("../../utils/assistant.js");
 
 var lastClickTime = 0; //上次点击的时间戳
 var currentClickTime = 0; //本次点击的事件
@@ -84,6 +83,49 @@ Page({
         userInfo: app.globalData.userInfo,
       })
     }
+    if(app.globalData.shareUser) {
+      this.searchTheRoom();
+    }
+  },
+
+  // 分享进入的用户查询是否会还有尚待参加的比赛
+  searchTheRoom: function () {
+    let params = {};
+    params.userId = app.globalData.shareUser;
+    params.roomNum = app.globalData.shareRoom;
+    request.getData('CHECK_BATTLE_ROOM', params)
+    .then((res) => {
+      if(res.code === 0) {
+        // 已经开赛
+        if(res.roomInfo !== null) {
+          wx.showModal({
+            showCancel: false,
+            content: '您的好友邀请您参加“词鸡竞技场”，快来一决高下吧！',
+            success: (res) => {
+              if(res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/waiting/waiting?level=' + res.roomInfo.level +'&coin='+this.data.coinNum,
+                })
+              }
+            }
+          })
+        } else {
+          wx.showModal({
+            content: '您的好友已开赛，您可以开启新的战场',
+            success: (res) => {
+              if(res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/chooselevel/chooselevel',
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+    })
   },
 
   onShow: function() {
@@ -95,13 +137,11 @@ Page({
     this.getUserAsset();
     this.getHomeLevel();
 
-    let windowWidth = app.globalData.windowWidth
-    let windowHeight = app.globalData.windowHeight
     this.setData({
       showContactDialog: false,
       pos: {
         top: 40,
-        left: windowWidth - 80 || 315
+        left: app.globalData.windowWidth - 80 || 315
       }
     })
   },
@@ -160,7 +200,7 @@ Page({
     params.formId = formId;
     request.getData("INSERT_FORMID", params)
     .then(res => {
-      console.log(res)
+      
     }).catch(err => {
       console.error(err)
     })

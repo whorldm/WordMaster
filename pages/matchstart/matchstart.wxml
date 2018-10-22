@@ -1,3 +1,4 @@
+<!--pages/matchstart/matchstart.wxml-->
 <view class='Box'>
   <!--顶部的排名信息-->
   <view class='rank_area'>
@@ -5,29 +6,29 @@
       <view class='rank_one_logo'>
         <image src="{{RankList[0].weiPic || '../../img/1.jpeg'}}"></image>
       </view>
-      <text>{{RankList[0].nickname}}</text>
-      <text>{{RankList[0].score}}</text>
+      <text>{{RankList[0].nickName}}</text>
+      <text>{{RankList[0].integral}}</text>
     </view>
     <view class='rank_two'>
       <view class='rank_two_logo'>
         <image src="{{RankList[1].weiPic || '../../img/1.jpeg'}}"></image>
       </view>
-      <text>{{RankList[1].nickname}}</text>
-      <text>{{RankList[1].score}}</text>
+      <text>{{RankList[1].nickName}}</text>
+      <text>{{RankList[1].integral}}</text>
     </view>
     <view class='rank_three'>
       <view class='rank_three_logo'>
         <image src="{{RankList[2].weiPic || '../../img/1.jpeg'}}"></image>
       </view>
-      <text>{{RankList[2].nickname}}</text>
-      <text>{{RankList[2].score}}</text>
+      <text>{{RankList[2].nickName}}</text>
+      <text>{{RankList[2].integral}}</text>
     </view>
     <view class='rank_four'>
       <view class='rank_four_logo'>
         <image src="{{RankList[3].weiPic || '../../img/1.jpeg'}}"></image>
       </view>
-      <text>{{RankList[3].nickname}}</text>
-      <text>{{RankList[3].score}}</text>
+      <text>{{RankList[3].nickName}}</text>
+      <text>{{RankList[3].integral}}</text>
     </view>
   </view>
 
@@ -111,13 +112,6 @@
         <text>{{mySelf.coin}}</text>
       </view>
       <image bindtap='addScore' src='../../img/sports/add.png'></image>
-    </view>
-  </view>
-
-  <!-- 遮罩倒计时样式 -->
-  <view class='showModal' wx:if="{{showModal}}">
-    <view class='countDown'>
-      <image src='{{countURL}}'></image>
     </view>
   </view>
 

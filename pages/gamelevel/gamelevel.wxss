@@ -180,8 +180,8 @@
   margin: 10rpx auto;
 }
 
-/*底部的入口链接*/
-.foot_nav {
+/* 底部的入口连接 */
+.bottom_nav {
   width: 100%;
   position: relative;
   left: 0;
@@ -192,73 +192,68 @@
   align-items: center;
   justify-content: center;
 }
-.foot_item {
+.nav_item {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.foot_item image{
-  width: 114rpx;
-  height: 115rpx;
+.nav_content {
+  width: 100%;
+}
+.nav_logo_right {
+  width: 139rpx;
+  height: 130rpx;
   display: block;
-  position: relative;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+  margin: 0 auto;
 }
-.logo_name {
-  color: #437999;
-  font-size: 36rpx;
-  margin: 10rpx auto;
-}
-
-.sports_port {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.sports_port image{
-  width: 114rpx;
-  height: 115rpx;
-  border-radius: 50%;
-  border: 4px solid #FFFEA1;
-  box-shadow: 0 2px 2px #437999;
+.nav_logo_left {
+  width: 108rpx;
+  height: 127rpx;
   display: block;
-  position: relative;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+  margin: 0 auto;
 }
-.sports_name {
-  color: #FFFEA1;
-  /* color: #644221; */
-  font-size: 36rpx;
+.nav_bottom {
+  width: 210rpx;
+  height: 66rpx;
   margin: 10rpx auto;
+  background-size: cover;
+  background-image: url('http://pczh4pjuz.bkt.clouddn.com/wordmaster_homepage_red_line.png')
 }
-
+.nav_bottom text {
+  display: block;
+  font-size: 30rpx;
+  font-family: 'Zaozi';
+  text-align: center;
+  margin: 0 auto;
+  color: #FFF;
+  text-shadow: -1px -1px #000, -1px 1px #000, 1px -1px #000, 1px 1px #000;
+}
 /*竞技场添加formId按钮*/
-.btn_sport {
-  width: 280rpx;
+.nav_item .btn_sport {
+  width: 300rpx;
+  height: 200rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.nav_item .btn_rank {
+  width: 300rpx;
   height: 200rpx;
   position: absolute;
   left: 0;
-  right: 0;
   top: 0;
   bottom: 0;
   margin: auto;
 }
-.btn_sport_form_id {
-  width: 280rpx;
+.nav_item .btn_form_id {
+  width: 300rpx;
   height: 200rpx;
-  z-index: 2;
+  padding: 0;
+  z-index: 200;
   opacity: 0;
 }
 

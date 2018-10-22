@@ -10,7 +10,9 @@
     "pages/startgame/startgame",
     "pages/waiting/waiting",
     "pages/study/study",
-    "pages/prestudy/prestudy"
+    "pages/prestudy/prestudy",
+    "pages/matchwaiting/matchwaiting",
+    "pages/matchstart/matchstart"
   ],
   "window": {
     "backgroundTextStyle": "light",

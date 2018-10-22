@@ -8,7 +8,7 @@ var utils = require('./util.js');
  */
 
 // var RemoteAddress = "https://wordmaster.tik.com";
-var RemoteAddress = "http://172.20.120.79:8088";
+var RemoteAddress = "http://172.20.200.76:8088";
 const getDataFromServerLoading = function (API, data = {},message) {
   wx.showNavigationBarLoading();
   if (message != '') {

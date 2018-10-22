@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "ShareDialog": "/components/ShareDialog/ShareDialog"
+  }
+}

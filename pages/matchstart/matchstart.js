@@ -7,19 +7,13 @@ var app = getApp();
 
 var lastClickTime = 0; //上次点击的时间戳
 var currentClickTime = 0; //本次点击的时间戳
-var startTimer = null;
 var gameTimer = null; // 比赛倒计时的计时器
-
-var SocketTask = null;
+var requestIndex = 0; // 刷新排名的请求次数
 
 var innerAudioContextBg = null; // 播放背景音乐的实例
 
 Page({
   data: {
-    showModal: true, //是否显示倒计时
-    countURL: '',
-    count_to_start: 3,
-    socketOpen: false, //socket连接是否打开
     isShareDialog: false, //是否显示增加金币的弹框
     row: 4, //根据单词对总数以及策划规则算出的二维数组行数
     col: 3, //根据单词对总数以及策划规则算出的二维数组列数
@@ -46,7 +40,7 @@ Page({
       roundTime: 1, //表示用户目前处于第几盘
       score: 0, //用户当前积分
       coin: 100, //用户的持有金币
-      rank: 5,
+      rank: 21,
     },
     totalRound: 1, //总共需要经历几轮
     levelId: 0, //当前等级的ID
@@ -54,7 +48,31 @@ Page({
     starNum: 0, //星星的数量（判断是否通过考试）
     backClass: 'back', // 每回合切换提示的标志量
     delCoinNum: 50, //减少的金币数量
-    RankList: [], //排名信息数组
+    RankList: [{
+        weiPic: '../../img/1.jpeg',
+        nickName: '??????',
+        integral: ''
+    }, {
+        weiPic: '../../img/1.jpeg',
+        nickName: '??????',
+        integral: ''
+    }, {
+        weiPic: '../../img/1.jpeg',
+        nickName: '??????',
+        integral: ''
+    }, {
+        weiPic: '../../img/1.jpeg',
+        nickName: '??????',
+        integral: ''
+    }, {
+        weiPic: '../../img/1.jpeg',
+        nickName: '??????',
+        integral: ''
+    }, {
+        weiPic: '../../img/1.jpeg',
+        nickName: '??????',
+        integral: ''
+    }], //实时的排名信息
     changeTimes: 2, //置换的使用次数
     doubleTimes: 1, //双倍积分的使用次数
     isDouble: false, // 是否为双倍积分
@@ -64,23 +82,16 @@ Page({
 
 // ### 生命周期函数 code start ### 
   onLoad: function(options) {
-    console.log('**startgame****',options);
     // 实例化播放器
     innerAudioContextBg = wx.createInnerAudioContext();
     if (options.levelId && options.levelName) {
-      wx.getStorage({
-        key: 'userRoomList',
-        success: (res) => {
-          this.setData({
-            ['mySelf.nickName']: app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName : '匿名',
-            ['mySelf.avatarUrl']: app.globalData.userInfo.avatarUrl ? app.globalData.userInfo.avatarUrl : '../../img/1.jpeg',
-            levelId: Number(options.levelId),
-            levelName: options.levelName,
-            roomNum: options.roomNum,
-            ['mySelf.coin']: Number(options.coin),
-            RankList: res.data
-          })
-        },
+      this.setData({
+        ['mySelf.nickName']: app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName : '匿名',
+        ['mySelf.avatarUrl']: app.globalData.userInfo.avatarUrl ? app.globalData.userInfo.avatarUrl : '../../img/1.jpeg',
+        levelId: Number(options.levelId),
+        levelName: options.levelName,
+        roomNum: options.roomNum,
+        ['mySelf.coin']: Number(options.coin)
       })
     }
     this.getTotalWord(); // 用户随机生成单词
@@ -90,148 +101,30 @@ Page({
     // 初始化记录用户的操作时间变量
     lastClickTime = 0;
     currentClickTime = 0;
+    requestIndex = 0;
     if (!this.data.isGameOver) {
       this.playBgMusic();
-      CountInThree(this);
-      wx.getStorage({
-        key: 'endTime',
-        success: (res) => {
-          this.setData({
-            total_second: Utils.completeTime(res.data) + 3
-          })
-        },
-      })
-      wx.getStorage({
-        key: 'mySelf',
-        success: (res) => {
-          this.setData({
-            ['mySelf.rightNum']: res.data.rightNum,
-            ['mySelf.errorNum']: res.data.errorNum,
-            ['mySelf.totalNum']: res.data.totalNum,
-            ['mySelf.combox']: res.data.combox,
-            ['mySelf.roundTime']: res.data.roundTime,
-            ['mySelf.score']: res.data.score,
-            ['mySelf.rank']: res.data.rank
-          })
-        },
-      }) 
+      CountThreeMinte(this);
     }
-    this.setData({
-      socketOpen: false
-    })
-    
     // 初始化组件
     this.ComboxShow = this.selectComponent("#ComboxShow");
     this.SuccessShow = this.selectComponent("#SuccessShow");
   },
 
-  // 与后台建立webSocket连接
-  connectWebSocket: function (roomNum) {
-    console.log('房间',roomNum)
-    console.log('------',this.data.socketOpen)
-    if (!this.data.socketOpen) {
-      console.log(SocketTask)
-      if (SocketTask === undefined || SocketTask === null || SocketTask.readyState !== 1) {
-        this.webSocket(roomNum);
-      }
+  onUnload: function() {
+    innerAudioContextBg.stop();
+    if (innerAudioContextBg) {
+      innerAudioContextBg.destroy();
     }
-    SocketTask.onOpen(res => {
-      this.setData({
-        socketOpen: true
-      })
-      console.log('监听 WebSocket 连接打开事件。', res)
-    })
-    SocketTask.onClose(res => {
-      console.log('////', this.data.socketOpen)
-      if (res.code === 1000 && this.data.socketOpen) {
-        console.log('////SocketTask', SocketTask)
-        if (SocketTask && SocketTask.readyState !== 1) {
-          console.log('监听 waiting 页面socket关闭，并尝试重连', res)
-          SocketTask = null;
-          this.webSocket(roomNum);
-        }
-      } else {
-        this.setData({
-          socketOpen: false
-        })
-        SocketTask = null;
-        console.log('监听 startgame 页面socket关闭, 并不尝试连接', res)
-      }
-    })
-    SocketTask.onError(error => {
-      this.setData({
-        socketOpen: false
-      })
-      console.log('监听 WebSocket 错误。错误信息:', error)
-    })
-    SocketTask.onMessage(res => {
-      console.log('监听WebSocket接受到服务器的消息事件。服务器返回的消息', JSON.parse(res.data))
-      let data = JSON.parse(res.data);
-      if (Number(data.code) === 0) {
-        this.updateRank(data);
-      }
-    })
-  },
-  // 创建Socket
-  webSocket: function (roomNum) {
-    console.log('开始连接')
-    console.log(app.globalData.WSSAddress + app.globalData.userId + '_' + roomNum)
-    SocketTask = wx.connectSocket({
-      url: app.globalData.WSSAddress + app.globalData.userId + '_' + roomNum,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        console.log('WebSocket连接创建', res)
-      },
-      fail: (err) => {
-        wx.showModal({
-          showCancel: false,
-          content: '网络异常，请检查网络状态是否良好？',
-          success: () => {
-            wx.navigateBack();
-          }
-        })
-      },
-    })
-  },
-  // 向服务器发送数据
-  sendMessage: function(score){
-    if(SocketTask.readyState !== 1) {
+    if (gameTimer) {
+      clearTimeout(gameTimer);
+    }
+    if (this.data.total_second > 0 && !this.data.isGameOver) {
       wx.showModal({
         showCancel: false,
-        content: '网络崩溃了，请稍后重试～～',
-        success: () => {
-          wx.navigateBack()
-        }
+        content: '您已经放弃了PK竞技场!',
       })
-      return
     }
-    let params = {};
-    params.userId = app.globalData.userId;
-    params.roomNum = this.data.roomNum;
-    params.score = score;
-    SocketTask.send({
-      data: JSON.stringify(params),
-      success: () => {
-        console.log('发送成功！')
-      },
-      fail: (Error) => {
-        console.log('发送失败',Error)
-        console.log(SocketTask)
-        if(SocketTask.readyState !== 1 && this.data.roomNum) {
-          this.webSocket(this.data.roomNum)
-        } else {
-          wx.showModal({
-            showCancel: false,
-            content: '网络崩溃了，请稍后重试～～',
-            success: () => {
-              wx.navigateBack()
-            }
-          })
-        }
-      }
-    });
   },
 // ### 生命周期函数 code end ### 
 
@@ -311,84 +204,6 @@ Page({
       })
       this.changeCoinNum(500);
       return Utils.shareMsg(false);
-    }
-  },
-
-  onHide: function () {
-    console.log('触发隐藏')
-    console.log(SocketTask)
-    if (SocketTask && SocketTask.readyState !== 3) {
-      SocketTask.close({
-        success: (res) => {
-          this.setData({
-            socketOpen: false
-          })
-          console.log('隐藏startgame页面，socket关闭成功', res)
-        },
-        fail: (err) => {
-          this.setData({
-            socketOpen: false
-          })
-          console.log('隐藏startgame页面，socket关闭失败', err)
-        }
-      });
-    }
-  },
-
-  // 监听页面卸载
-  onUnload: function () {
-    innerAudioContextBg.stop();
-    if (innerAudioContextBg) {
-      innerAudioContextBg.destroy();
-    }
-    if (startTimer) {
-      clearTimeout(startTimer);
-    }
-    if (gameTimer) {
-      clearTimeout(gameTimer);
-    }
-    if (!this.data.isGameOver) {
-      if(this.data.RankList.length > 1) {
-        wx.setStorage({
-          key: 'userRoomList',
-          data: this.data.RankList
-        })
-      }
-      wx.setStorage({
-        key: 'mySelf',
-        data: this.data.mySelf
-      })
-    } else {
-      wx.removeStorage({
-        key: 'mySelf',
-      })
-      wx.removeStorage({
-        key: 'userRoomList'
-      })
-    }
-    console.log('startgame 页面执行了Unload函数')
-    console.log(SocketTask)
-    if (SocketTask && SocketTask.readyState !== 3) {
-      SocketTask.close({
-        success: (res) => {
-          this.setData({
-            socketOpen: false
-          })
-          console.log('卸载startgame页面，socket关闭成功', res)
-        },
-        fail: (err) => {
-          this.setData({
-            socketOpen: false
-          })
-          console.log('卸载startgame页面，socket关闭失败', err)
-        }
-      });
-    }
-    if (this.data.total_second > 0 && !this.data.isGameOver) {
-      wx.showModal({
-        showCancel: false,
-        content: '您已经放弃了PK竞技场!',
-      })
     }
   },
 
@@ -492,8 +307,6 @@ Page({
       } else {
         _score = Number(this.data.mySelf.score) + 10 * (this.data.mySelf.combox * 0.1 + 1);
       }
-
-      this.sendMessage(_score)
 
       this.setData(initLocalData({
         secondStr: word,
@@ -614,23 +427,7 @@ Page({
     if (gameTimer) {
       clearTimeout(gameTimer);
     }
-    // 关闭socket连接
-    if(this.data.socketOpen) {
-      SocketTask.close({
-        success: () => {
-          this.setData({
-            socketOpen: false
-          })
-          console.log('比赛结束，socket关闭成功')
-        },
-        fail: (err) => {
-          this.setData({
-            socketOpen: false
-          })
-          console.log('比赛结束，socket关闭失败', err)
-        }
-      });
-    }
+
     // 并统计最终的结果
     let params = {
       coin: this.data.mySelf.coin,
@@ -642,22 +439,33 @@ Page({
       integral: this.data.mySelf.score
     }
 
-    request.getDataLoading('ROOM_END', params, '正在结算...')
+    request.getDataLoading('BATTLE_END', params, '正在结算...')
     .then(res => {
       if (res.code === 0) {
+        let temp;
         let rightPercent = ((this.data.mySelf.totalNum - this.data.mySelf.errorNum) / this.data.mySelf.totalNum).toFixed(2);
-        if (this.data.mySelf.rank === 1) {
+        for(let i=0,len=res.list.length; i<len; i++) {
+          res.list[i].nickName = decodeURIComponent(res.list[i].nickName)
+          res.list[i].weiPic = decodeURIComponent(res.list[i].weiPic)
+          if (res.list[i].userId === app.globalData.userId) {
+            temp = res.list[i].rank
+          }
+        }
+        if (temp === 1) {
           music.playPassMusic();
         } else {
           music.playUnpassMusic();
         }
         this.setData({
           isGameOver: true,
+          ['mySelf.rank']: temp,
+          RankList: res.list,
           reward: res.reward || [],
           percent: rightPercent * 100
         })
       }
     }).catch(error => {
+      console.log(error)
       wx.showModal({
         showCancel: false,
         content: '小咖不支持离线结算哦～～',
@@ -667,26 +475,41 @@ Page({
       })
     })
   },
-  // 更新排名信息
-  updateRank: function (obj) {
-    let tempArr = this.data.RankList;
-    let myRank = this.data.mySelf.rank;
-    for (let i=0,len=tempArr.length; i<len; i++) {
-      if(tempArr[i].userId === Number(obj.userId)) {
-        tempArr[i].score = Number(obj.score);
-        break;
-      }
+  // 每隔一段时间更新排名信息
+  updateRank: function (times) {
+    let params = {
+      coin: this.data.mySelf.coin,
+      level: this.data.levelId,
+      userId: app.globalData.userId,
+      words: this.data.totalNum,
+      roomNum: this.data.roomNum,
+      rank: this.data.mySelf.rank,
+      integral: this.data.mySelf.score,
+      times: times
     }
-    tempArr.sort(compare);
-    for (let i = 0, len = tempArr.length; i < len; i++) {
-      if (tempArr[i].userId === app.globalData.userId) {
-        myRank = i+1;
-        break;
+    request.getData('BATTLE_TIME', params)
+    .then((res) => {
+      if(res.code === 0) {
+        let temp;
+        for (let i = 0, len = res.rank.length; i < len; i++) {
+          if(res.rank[i].userId === app.globalData.userId) {
+            temp = res.rank[i].rank;
+          }
+          res.rank[i].nickName = decodeURIComponent(res.rank[i].nickName)
+          res.rank[i].weiPic = decodeURIComponent(res.rank[i].weiPic)
+        }
+        
+        this.setData({
+          ['mySelf.rank']: temp,
+          RankList: res.rank
+        })
       }
-    }
-    this.setData({
-      RankList: tempArr,
-      ['mySelf.rank']: myRank
+    }).catch((err) => {
+      console.error(err);
+      wx.showToast({
+        icon: 'none',
+        title: '正在努力更新排名...',
+      })
     })
   },
 // ### 用户点击操作 code end ###
@@ -698,9 +521,9 @@ Page({
         icon: 'none',
         title: '金币数量不足'
       });
-      this.addScore();
       return;
     }
+
     // 以选择一个单词，提示相应的
     let matchPosition = this.data.matchWord.split(',');
     if (this.data.isClickFlag) {
@@ -714,7 +537,6 @@ Page({
           [other]: false
         })
       }, 1000)
-      this.changeCoinNum(this.data.delCoinNum);
       return;
     }
     // 未选中单词，提示一对
@@ -735,7 +557,6 @@ Page({
               [tempB]: false,
             })
           }, 1000)
-          this.changeCoinNum(this.data.delCoinNum);
           return;
         }
       }
@@ -747,7 +568,6 @@ Page({
         icon: 'none',
         title: '金币数量不足'
       });
-      this.addScore();
       return;
     }
     if (this.data.changeTimes > 0) {
@@ -757,7 +577,6 @@ Page({
         changeTimes: this.data.changeTimes - 1,
         changeWordIndex: this.data.changeWordIndex + 1,
       })
-      this.changeCoinNum(-200);
       this.wordRandom();
     } else {
       wx.showModal({
@@ -830,39 +649,6 @@ function initLocalData(obj = {}) {
   return obj;
 }
 
-var urlList = [
-  '../../img/countdown/number1.png',
-  '../../img/countdown/number2.png',
-  '../../img/countdown/number3.png'
-];
-
-function CountInThree(that) {
-  clearTimeout(startTimer);
-  let temp = that.data.count_to_start - 1;
-  if (temp < 0) {
-    that.setData({
-      showModal: false
-    })
-    wx.getStorage({
-      key: 'roomNum',
-      success: (res) => {
-        that.connectWebSocket(res.data);
-      },
-    })
-    CountThreeMinte(that);
-    clearTimeout(startTimer);
-    return;
-  }
-  that.setData({
-    count_to_start: temp,
-    countURL: urlList[temp]
-  })
-
-  startTimer = setTimeout(function() {
-    CountInThree(that);
-  }, 1000)
-}
-
 function CountThreeMinte(that) {
   clearTimeout(gameTimer);
   let temp = that.data.total_second - 1;
@@ -870,12 +656,17 @@ function CountThreeMinte(that) {
     total_second: temp,
     gameClock: Utils.dateFormat(temp)
   })
+  if (temp > 0 && temp % 5 === 0) {
+    requestIndex++;
+    that.updateRank(requestIndex);
+  }
   if (temp <= 0) {
     that.setData({
       gameClock: "00:00"
     })
     clearTimeout(gameTimer);
     // 如果已经结算，不再重复结算
+    console.log('isGameOver:' + that.data.isGameOver);
     if (!that.data.isGameOver) {
       that.GameOver();
     }
@@ -885,15 +676,3 @@ function CountThreeMinte(that) {
     CountThreeMinte(that)
   }, 1000)
 }
-
-function compare (obj1, obj2) {
-  var val1 = Number(obj1.score);
-  var val2 = Number(obj2.score);
-  if (val1 < val2) {
-    return 1;
-  } else if (val1 > val2) {
-    return -1;
-  } else {
-    return 0;
-  }
-} 

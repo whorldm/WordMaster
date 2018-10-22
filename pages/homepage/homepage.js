@@ -1,6 +1,5 @@
 // pages/homepage/homepage.js
 var request = require("../../utils/request.js");
-var utils = require("../../utils/util.js");
 var app = getApp();
 
 Page({
@@ -16,6 +15,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('*****hompage*****',options)
+    // 获取分享的用户ID和竞技场的房间号
+    if(options.shareUser && options.shareRoom) {
+      app.globalData.shareUser = options.shareUser;
+      app.globalData.shareRoom = options.shareRoom;
+      app.globalData.shareLevel = options.shareLevel;
+    }
     wx.getNetworkType({
       success: (res) => {
         if (res.networkType === 'none') {

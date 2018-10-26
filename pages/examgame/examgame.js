@@ -611,6 +611,7 @@ Page({
           [other]: false
         })
       }, 1200)
+      this.changeCoinNum(0 - this.data.delCoinNum);
       return;
     }
     // 未选中单词，提示一对
@@ -633,6 +634,7 @@ Page({
               [tempB]: false,
             })
           }, 1200)
+          this.changeCoinNum(0 - this.data.delCoinNum);
           return;
         }
       }
@@ -664,6 +666,7 @@ Page({
   // 播放背景音乐
   playBgMusic: function () {
     innerAudioContextBg.loop = true;
+    innerAudioContextBg.volume = 0.5;
     innerAudioContextBg.src = music.getMusicSource(0, 'BG_EXAM_MUSIC');
     innerAudioContextBg.play();
   }

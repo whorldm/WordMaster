@@ -36,7 +36,6 @@ Page({
         userInfo: app.globalData.userInfo
       })
     }
-
   },
 
   /**
@@ -90,6 +89,13 @@ Page({
         sportsLevel: Number(e.currentTarget.dataset.level)
       })
     }
+  },
+
+  // 1V1 模式
+  fightAginst: function () {
+    wx.navigateTo({
+      url: '/pages/fightwaiting/fightwaiting?level=' + this.data.sportsLevel +'&coin='+this.data.battleInfo.coin + '&isNew=' + this.data.battleInfo.level,
+    })
   },
 
   // 5人邀请赛

@@ -91,34 +91,34 @@ Page({
   // 分享进入的用户查询是否会还有尚待参加的比赛
   searchTheRoom: function () {
     let params = {};
-    params.userId = app.globalData.shareUser;
+    params.userId = app.globalData.userId;
     params.roomNum = app.globalData.shareRoom;
+    params.type = app.globalData.shareType;
     request.getData('CHECK_BATTLE_ROOM', params)
     .then((res) => {
+      console.log('是否有房间：', res)
       if(res.code === 0) {
         // 已经开赛
         if(res.roomInfo !== null) {
           wx.showModal({
             showCancel: false,
             content: '您的好友邀请您参加“词鸡竞技场”，快来一决高下吧！',
-            success: (res) => {
-              if(res.confirm) {
+            success: () => {
+              if(Number(app.globalData.shareType) === 5) {
                 wx.navigateTo({
-                  url: '/pages/waiting/waiting?level=' + res.roomInfo.level +'&coin='+this.data.coinNum,
+                  url: '/pages/waiting/waiting?level=' + res.roomInfo.level +'&coin='+this.data.coinNum+'&roomNum='+app.globalData.shareRoom,
                 })
-              }
+              } 
+              if(Number(app.globalData.shareType) === 1) {
+                wx.navigateTo({
+                  url: '/pages/fightwaiting/fightwaiting?level=' + res.roomInfo.level +'&coin='+this.data.coinNum+'&roomNum='+app.globalData.shareRoom,
+                })
+              } 
             }
           })
         } else {
           wx.showModal({
-            content: '您的好友已开赛，您可以开启新的战场',
-            success: (res) => {
-              if(res.confirm) {
-                wx.navigateTo({
-                  url: '/pages/chooselevel/chooselevel',
-                })
-              }
-            }
+            content: '您的好友已开赛，您可以开启新的战场'
           })
         }
       }

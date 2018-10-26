@@ -7,11 +7,11 @@ var utils = require('./util.js');
  * message {String} 请求加载提示
  */
 
-// var RemoteAddress = "https://wordmaster.tik.com";
-var RemoteAddress = "http://172.20.200.76:8088";
+var RemoteAddress = "https://wordmaster.tik.com";
+// var RemoteAddress = "http://172.20.120.79:8088";
 const getDataFromServerLoading = function (API, data = {},message) {
-  wx.showNavigationBarLoading();
-  if (message != '') {
+  // wx.showNavigationBarLoading();
+  if (message !== '') {
     wx.showLoading({
       title: message,
     })
@@ -37,8 +37,8 @@ const getDataFromServerLoading = function (API, data = {},message) {
       method: config.method,
       header: {'content-type': 'application/json'},
       success: function (res) {
-        wx.hideNavigationBarLoading()
-        if (message != '') {
+        // wx.hideNavigationBarLoading()
+        if (message !== '') {
           wx.hideLoading();
         }
 
@@ -49,7 +49,7 @@ const getDataFromServerLoading = function (API, data = {},message) {
         }
       },
       fail: function (res) {
-        if (message != "") {
+        if (message !== '') {
           wx.hideLoading()
         }
         reject(res)
@@ -69,7 +69,7 @@ function mergeObj(o1, o2) {
 
 // 带有动态加载
 const getDataFromServer = (API, data = {}) => {
-  return getDataFromServerLoading(API, data, "");
+  return getDataFromServerLoading(API, data, '');
 }
 
 

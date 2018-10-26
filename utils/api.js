@@ -131,6 +131,18 @@ const config = {
     interFace: '/word/insertFormId',
     method: 'GET'
   },
+  'MATCH_BEGIN': {  // 用户触发手动匹配
+    interFace: '/room/match',
+    method: 'GET'
+  },
+  'DESTORY_ROOM': {  // 销毁房间
+    interFace: '/room/giveUp',
+    method: 'GET'
+  },
+  'ROOM_START': {  // 1V1销毁房间
+    interFace: '/room/start',
+    method: 'GET'
+  }
 }
 
 const searchMap = function (key) {

@@ -22,6 +22,94 @@
   color: #FF9800;
 }
 
+/* 1V1模式样式 */
+.fight_area {
+  width: 86%;
+  height: 360rpx;
+  color: #FCFFAd;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 50rpx auto;
+  display: flex;
+  justify-content: space-around;
+}
+.fight_left {
+  width: 325rpx;
+  height: 331rpx;
+  float: left;
+  font-size: 30rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/sports_bg_light.png')
+}
+.fight_left image{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 2px solid #F7F9FA;
+  position: absolute;
+  top: 55rpx;
+  left: 10rpx;
+  right: 0;
+  margin: auto;
+}
+.fight_left .nickname{
+  z-index: 3;
+  width: 60%;
+  text-align: center;
+  position: absolute;
+  bottom: 66rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.fight_left .user_score{
+  width: 60%;
+  text-align: center;
+  position: absolute;
+  line-height: 34rpx;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.fight_center {
+  width: 18%;
+  float: left;
+}
+.fight_center text {
+  display: block;
+  color: #FFC600;
+  font-size: 60rpx;
+  line-height: 360rpx;
+  text-align: center;
+  transform: scale(0.8,1.5);
+  font-family: 'Zaozi';
+}
+.fight_right {
+  width: 40%;
+  float: right;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fight_right image{
+  width: 130rpx;
+  height: 130rpx;
+  margin: 10rpx auto;
+  border-radius: 50%;
+  border: 2px solid #F7F9FA;
+}
+
 /* 顶部头像区域 */
 .header_area {
   width: 86%;

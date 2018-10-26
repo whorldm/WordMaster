@@ -18,8 +18,8 @@ Page({
     row: 4, //根据单词对总数以及策划规则算出的二维数组行数
     col: 3, //根据单词对总数以及策划规则算出的二维数组列数
     isGameOver: false, //表示比赛是否结束
-    total_second: 150, //比赛时间
-    gameClock: '02:30', //游戏倒计时一分钟
+    total_second: 90, //比赛时间
+    gameClock: '01:30', //游戏倒计时一分钟
     isClickFlag: false, //表示用户是否点击选中单词
     firstClick: '', //第一次点击单词的坐标
     matchWord: '', //选中一个单词后，与之匹配单词的坐标
@@ -433,12 +433,12 @@ Page({
       coin: this.data.mySelf.coin,
       level: this.data.levelId,
       userId: app.globalData.userId,
-      words: this.data.totalNum,
+      words: this.data.mySelf.totalNum,
       roomNum: this.data.roomNum,
       rank: this.data.mySelf.rank,
       integral: this.data.mySelf.score
     }
-
+    console.log(params)
     request.getDataLoading('BATTLE_END', params, '正在结算...')
     .then(res => {
       if (res.code === 0) {
@@ -481,12 +481,13 @@ Page({
       coin: this.data.mySelf.coin,
       level: this.data.levelId,
       userId: app.globalData.userId,
-      words: this.data.totalNum,
+      words: this.data.mySelf.totalNum,
       roomNum: this.data.roomNum,
       rank: this.data.mySelf.rank,
       integral: this.data.mySelf.score,
       times: times
     }
+    
     request.getData('BATTLE_TIME', params)
     .then((res) => {
       if(res.code === 0) {
@@ -627,6 +628,7 @@ Page({
 
 // ### 音乐播放 code start ###
   playBgMusic: function() {
+    innerAudioContextBg.volume = 0.5;
     innerAudioContextBg.loop = true;
     innerAudioContextBg.src = music.getMusicSource(0, 'BG_EXAM_MUSIC');
     innerAudioContextBg.play();

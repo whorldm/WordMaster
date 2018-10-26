@@ -64,6 +64,11 @@
 
   <!-- 单人竞技赛 -->
   <view class='sportsType'>
+    <view class='sports_port' bindtap='fightAginst'>
+      <image src='http://cdn.tik.com/wordmaster/image/sports_home_bg_one.png'></image>
+      <view class='sports_name'>好友对战</view>
+      <view class='person_num'>(1V1）</view>
+    </view>
     <view class='sports_port' bindtap='oneCompare'>
       <image src='http://cdn.tik.com/wordmaster/image/sports_home_bg_one.png'></image>
       <view class='sports_name'>5人好友赛</view>
@@ -74,13 +79,13 @@
       <view class='sports_name'>30人匹配赛</view>
       <view class='person_num'>(30人）</view>
     </view>
-    <view class='sports_port' bindtap='wait'>
+    <!-- <view class='sports_port' bindtap='wait'>
       <view class='sports_ban'>
         <image src='http://cdn.tik.com/wordmaster/image/sports_home_bg_one.png'></image>
         <view class='sports_name'>淘汰模式</view>
         <view class='person_num'>(50人）</view>
       </view>
-    </view>
+    </view> -->
   </view>
 
   <!-- 底部按钮样式 -->

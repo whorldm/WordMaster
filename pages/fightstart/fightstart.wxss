@@ -1,0 +1,305 @@
+/* pages/testfight/testfight.wxss */
+/* pages/fightstart/fightstart.wxss */
+.Box {
+    overflow-y: scroll;
+    background-size: cover;
+    background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_bg_game.png');
+  }
+  .rank_area {
+    width: 92%;
+    height: 240rpx;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 10rpx auto 20rpx;
+  }
+  .rank_area text {
+    color: #21343E;
+    font-size: 26rpx;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .rank_two {
+    width: 40%;
+    float: left;
+    height: 240rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .rank_two text{
+    color: #FFFC00;
+    font-size: 30rpx;
+  }
+  .rank_four {
+    width: 40%;
+    float: right;
+    height: 240rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .rank_four_logo {
+    width: 139rpx;
+    height: 122rpx;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .rank_two_logo image,
+  .rank_four_logo image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .rank_two_logo{
+    width: 139rpx;
+    height: 122rpx;
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-image: url('http://cdn.tik.com/wordmaster/image/sports_leaf.png');
+  }
+  
+  /*时间已经词量样式*/
+  .condition {
+    float: left;
+    width: 20%;
+    height: 240rpx;
+    font-size: 30rpx;
+    color: #2F756B;
+    text-align: center;
+    font-family: 'Zaozi';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .condition .lastTen {
+    color: #FF3328;
+  }
+  .condition image{
+    width: 40rpx;
+    height: 48rpx;
+    display: block;
+    margin: 4rpx auto;
+  }
+  /* 双倍积分显示 */
+  .doubleScore {
+    position: absolute;
+    top: 180rpx;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    color: #FFF25F;
+    font-size: 40rpx;
+    font-family: 'Zaozi';
+    line-height: 100rpx;
+  }
+  /* .score {
+    width: 300rpx;
+    color: #FFF25F;
+    font-size: 40rpx;
+    font-family: 'Zaozi';
+    line-height: 100rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+  } */
+  
+  /*公告栏及键盘区域样式*/
+  .keyword_area {
+    width: 660rpx;
+    height: 610rpx;
+    border-radius: 30rpx;
+    background: rgba(199, 199, 199, 0.2);
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    padding: 10rpx 0;
+  }
+  .keyboard {
+    width: 660rpx;
+    height: 590rpx;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .back{
+    z-index: -1;
+    opacity: 0;
+  }
+  .backed{
+    z-index: 1;
+    opacity: 1;
+    animation:  showResult 1s ease forwards;
+  }
+  /*显示回合提示文字*/
+  .show_round_text {
+    color: #F0EEC5;
+    width: 400rpx;
+    height: 100rpx;
+    font-size: 50rpx;
+    text-align: center;
+    line-height: 100rpx;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .show_round_text text {
+    display: inline-block;
+    margin: 0 8px;
+    color: #FCD433;
+    font-size: 60rpx;
+    font-family: 'Zaozi';
+  }
+  /*键盘的区域*/
+  .word_area {
+    width: 100%;
+    height: 570rpx;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    font-weight: bold;
+  }
+  .flex-row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto 20rpx;
+  }
+  .word_item {
+    flex: 1;
+    width: 178rpx;
+    height: 134rpx;
+    margin: auto 20rpx;
+    text-align: center;
+    font-size: 30rpx;
+    line-height: 134rpx;
+  }
+  .word_common {  /*为选中的效果*/
+    color: #815450;
+    background-size: cover;
+    background-image: url('http://cdn.tik.com/wordmaster/image/word_common.png');
+  }
+  .word_click {  /*点击选中的效果*/
+    color: #2EAE55;
+    background-size: cover;
+    background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_word_success.png');
+  }
+  .errorState {  /*答错的效果*/
+    color: #FF3328;
+    background-size: cover;
+    background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_word_error.png');
+    animation: tremble 0.8s 0s ease both;
+  }
+  .sucessState { /*答对的效果*/
+    animation: disappear  0.3s ease forwards;
+  }
+  .notice { /*点击提示后的效果*/
+    background-size: cover;
+    animation: newTremble 0.8s ease-in-out; 
+  }
+  @keyframes newTremble {
+    0%{background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_word_success.png');transform:scale(1);}
+    10%,20%{transform:scale(1) rotate(-2deg);}
+    30%,50%,70%,90%{transform:scale(1.1) rotate(2deg);}
+    40%,60%,80%{transform:scale(1.1) rotate(-2deg);}
+    100%{background-image: url('http://cdn.tik.com/wordmaster/image/stairgame_word_common.png');transform:scale(1) rotate(0);}
+  }
+  
+  /* 工具区域 */
+  .tool_area {
+    width: 80%;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 20rpx auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tool_item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .tool_item image {
+    width: 80rpx;
+    height: 80rpx;
+    display: block;
+  }
+  .tool_item text {
+    color: #21343E;
+    font-size: 26rpx;
+  }
+  
+  /*提示信息*/
+  .btn_bottom {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto 30rpx;
+    width: 90%;
+  }
+  .add_area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .add_coin {
+    width: 210rpx;
+    height: 60rpx;
+    position: relative;
+    background-size: cover;
+    background-image: url('http://cdn.tik.com/wordmaster/image/sports_add_coin.png');
+  }
+  .add_coin text {
+    width: 150rpx;
+    color: #FFFC00;
+    display: inline-block;
+    margin-left: 50rpx;
+    line-height: 60rpx;
+    text-align: center;
+  }
+  .add_area image {
+    width: 40rpx;
+    height: 40rpx;
+    display: block;
+    margin: 10rpx;
+  }

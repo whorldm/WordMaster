@@ -530,6 +530,7 @@ Page({
           [other]: false
         })
       },1200)
+      this.changeCoinNum(0 - this.data.delCoinNum);
       return;
     }
     // 未选中单词，提示一对
@@ -552,6 +553,7 @@ Page({
               [tempB]: false,
             })
           }, 1200)
+          this.changeCoinNum(0 - this.data.delCoinNum);
           return;
         }
       }
@@ -609,7 +611,7 @@ Page({
 // ### 音乐播放 code start ###
   playBgMusic: function () {
     innerAudioContextBg.loop = true;
-    innerAudioContextBg.volume = 1;
+    innerAudioContextBg.volume = 0.3;
     innerAudioContextBg.src = music.getMusicSource(0,'BG_GAME_MUSIC');
     innerAudioContextBg.play();
   },

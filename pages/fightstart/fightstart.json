@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "SuccessShow": "/components/SuccessWord/SuccessWord",
+    "ErrorShow": "/components/ErrorWord/ErrorWord",
+    "ComboxShow": "/components/ShowCombox/ShowCombox",
+    "BattlePass": "/components/BattlePass/BattlePass",
+    "ShareDialog": "/components/ShareDialog/ShareDialog"
+  }
+}

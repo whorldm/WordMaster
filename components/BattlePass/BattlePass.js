@@ -15,6 +15,9 @@ Component({
     },
     reward: {
       type: Object
+    },
+    isFight: {
+      type: String
     }
   },
 
@@ -22,6 +25,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    defaultValue: '0',
     titleList: ['冠军','亚军','季军']
   },
 

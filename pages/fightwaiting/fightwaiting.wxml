@@ -1,11 +1,12 @@
+<!--pages/fightwaiting/fightwaiting.wxml-->
 <view class='Box'>
-  <view class='title'>词鸡竞技场 --
-    <text>{{levelList[level]}}场</text>
+  <view class='title'>
+    词鸡竞技场 -- <text>{{levelList[level]}}场</text>
   </view>
-  <view class='total_num'>参与总人数：{{joinNum}}</view>
+  <!-- <view class='total_num'>参与总人数：{{joinNum}}</view> -->
 
   <!-- 公告栏 -->
-  <view class="notice_container">
+  <!-- <view class="notice_container">
     <image class='img_notice' src='../../img/sports/notice.png'></image>
     <swiper class="notice" vertical="true" autoplay="true" circular="true" interval="2000">
       <block wx:for="{{msgList}}" wx:key="{{index}}">
@@ -14,10 +15,10 @@
         </swiper-item>
       </block>
     </swiper>
-  </view>
+  </view> -->
 
   <!-- 房间成员 -->
-  <scroll-view class='scrollX' scroll-x>
+  <!-- <scroll-view class='scrollX' scroll-x>
     <block wx:for="{{userList}}" wx:key="{{index}}">
       <view class='scroll_item'>
         <image src='{{item.weiPic}}'></image>
@@ -28,6 +29,44 @@
   <view class='room_info'>
     <text>当前房间人数</text>
     <view>{{currentNum}} / {{totalNum}}</view>
+  </view> -->
+
+  <!-- 匹配的区域 -->
+  <view class="match_area">
+    <view class='bg_vs' wx:if="{{!isLoading}}">
+      <text>VS</text>
+    </view>
+
+    <view wx:if="{{!isLoading}}" class='oprate_title'>
+      {{isTheOwner ? '您可以开启比赛' : '等待房主开赛'}}
+    </view>
+
+    <view wx:if="{{isLoading}}" class='oprate_title'>
+      赶紧邀请好友来PK吧！
+    </view>
+
+    <view class="match_left {{isLoading ? '':'float_left'}}">
+      <image class='user_logo' src="{{userList[0].weiPic}}"></image>
+      <text>{{userList[0].nickname}}</text>
+    </view>
+
+    <view class="match_loading" hidden='{{!isLoading}}'>
+      <text>等待对手加入...</text>
+    </view>
+
+    <view class='match_right'>
+      <!-- 匹配加载的动画 -->
+      <view class='loading' hidden='{{!isLoading}}'>
+        <view class="small_pian">
+          <view class="small_p p1"></view>
+        </view>
+      </view>
+      <view class='float_right' wx:if='{{!isLoading}}'>
+        <image class='user_logo' src="{{userList[1].weiPic}}"></image>
+        <text>{{userList[1].nickname}}</text>
+      </view>
+    </view>
+
   </view>
 
   <!-- 道具展示 -->
@@ -61,19 +100,12 @@
       </view>
       <image bindtap='addScore' src='../../img/sports/add.png'></image>
     </view>
-    <view class='btn_area' wx:if="{{isTheOwner}}">
-      <view class='btnItem_share'>
-        邀请好友
-        <button open-type='share' class='btn_share'>
-        </button>
-      </view>
-      <view class='btnItem_next' bindtap='beginMatch'>
-        开始匹配
-      </view>
-    </view>
-    <view class='btn_invite' wx:else>
+    <view class='btn_invite' wx:if="{{isLoading}}">
       邀请好友
       <button open-type='share'></button>
+    </view>
+    <view class='new_btn_invite' wx:if="{{!isLoading}}" bindtap='matched'>
+      <text>{{isTheOwner ? '开始对战':'放弃'}}</text>
     </view>
   </view>
 
@@ -81,4 +113,5 @@
   <ShareDialog wx:if="{{isShareDialog}}"
     bind:closeCoinDialog="closeCoinDialog">
   </ShareDialog>
+
 </view>

@@ -35,6 +35,7 @@ function getMusicSource (_version = 0, type) {
 function playSuccessMusic () {
   let innerAudioContextSuccess = wx.createInnerAudioContext();
   innerAudioContextSuccess.src = getMusicSource(version,'SUCCESS_MUSIC');
+  innerAudioContextSuccess.volume = 0.5;
   innerAudioContextSuccess.play();
   innerAudioContextSuccess.onEnded(() => {
     innerAudioContextSuccess.destroy();
@@ -56,7 +57,7 @@ function playClickMusic () {
   innerAudioContextClick.play();
   setTimeout(() => {
     innerAudioContextClick.destroy();
-  }, 800)
+  }, 300)
 }
 // 播放倒计时音效
 function playCountMusic() {

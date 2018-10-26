@@ -68,7 +68,7 @@ App({
   globalData: {
     userId: '',
     userInfo: null,
-    // WSSAddress: "wss://wordmaster.tik.com/websocketRoom/",
-    WSSAddress: "ws://172.20.200.76:8088/websocketRoom/",
+    WSSAddress: "wss://wordmaster.tik.com/websocketRoom/",
+    // WSSAddress: "ws://172.20.120.79:8088/websocketRoom/",
   },
 })

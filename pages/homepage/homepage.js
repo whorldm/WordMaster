@@ -15,12 +15,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('*****hompage*****',options)
     // 获取分享的用户ID和竞技场的房间号
     if(options.shareUser && options.shareRoom) {
       app.globalData.shareUser = options.shareUser;
       app.globalData.shareRoom = options.shareRoom;
       app.globalData.shareLevel = options.shareLevel;
+      app.globalData.shareType = options.shareType;
     }
     wx.getNetworkType({
       success: (res) => {

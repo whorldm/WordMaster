@@ -25,6 +25,50 @@ Page,
   margin: 2rpx;
 }
 
+/* 页面底部按钮共用样式 */
+.btn_area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.btnItem_next {
+  width: 335rpx;
+  height: 158rpx;
+  color: #815450;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_new_btn_next.png');
+}
+.btnItem_share {
+  width: 335rpx;
+  height: 158rpx;
+  color: #CC4E32;
+  font-size: 30rpx;
+  line-height: 158rpx;
+  text-align: center;
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/new_btn_share.png');
+}
+.btn_share {
+  opacity: 0;
+  width: 323rpx;
+  height: 158rpx;
+  padding: 0;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+}
+
 /*小圆点沿着圆环移动*/
 @keyframes run{
   0%{

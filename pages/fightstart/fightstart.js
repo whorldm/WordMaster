@@ -5,12 +5,13 @@ var match = require("../../utils/match.js");
 var music = require("../../utils/music.js");
 var app = getApp();
 
-const webSocket = require('../../utils/socket.js');
+const webSocket = require('../../utils/socket.js'); 
 
 var lastClickTime = 0; //上次点击的时间戳
 var currentClickTime = 0; //本次点击的时间戳
 var startTimer = null;
 var gameTimer = null; // 比赛倒计时的计时器
+
 var innerAudioContextBg = null; // 播放背景音乐的实例
 
 Page({
@@ -44,7 +45,7 @@ Page({
       roundTime: 1, //表示用户目前处于第几盘
       score: 0, //用户当前积分
       coin: 100, //用户的持有金币
-      rank: 5,
+      rank: 1,
     },
     totalRound: 1, //总共需要经历几轮
     levelId: 0, //当前等级的ID
@@ -68,7 +69,6 @@ Page({
       wx.getStorage({
         key: 'userRoomList',
         success: (res) => {
-          console.log('缓存的用户列表',res.data)
           this.setData({
             ['mySelf.nickName']: app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName : '匿名',
             ['mySelf.avatarUrl']: app.globalData.userInfo.avatarUrl ? app.globalData.userInfo.avatarUrl : '../../img/1.jpeg',
@@ -101,18 +101,27 @@ Page({
   },
 
   // socket收到的信息回调
-  onSocketMessageCallback: function (data) {
-    console.log('startgame页面的监听')
-    if (data.message) {
-      // 有人离开房间不做提示
-      return;
-    }
-    // 更新用户信息
-    if (Number(data.code) === 0) {
-      if (data.score && data.userId) {
-        this.updateRank(data);
+  onSocketMessageCallback: function(data) {
+    console.log('fightstart页面的监听')
+      // 有人离开了房间
+      if (data.message) {
+        wx.showModal({
+          showCancel: false,
+          content: '对手已离开房间',
+          success: (res) => {
+            if (res.confirm) {
+              this.GameOver();
+            }
+          }
+        })
+        return;
       }
-    }
+      // 更新用户信息
+      if (Number(data.code) === 0) {
+        if (data.score && data.userId) {
+          this.updateRank(data);
+        }
+      }
   },
 
   // 向服务器发送数据
@@ -123,13 +132,13 @@ Page({
     params.score = score;
     webSocket.sendSocketMessage({
       msg: JSON.stringify(params),
-      success: function () {
+      success: function() {
         console.log('发送成功')
       },
-      fail: function () {
+      fail: function(){
         console.log('发送失败')
-      }
-    }, )
+      }},
+    )
   },
   // ### 生命周期函数 code end ### 
 
@@ -166,7 +175,6 @@ Page({
         })
       })
       .catch(err => {
-        console.error(err)
         wx.showModal({
           showCancel: false,
           content: '网络崩溃了，请返回重试！',
@@ -212,6 +220,7 @@ Page({
     }
   },
 
+
   // 监听页面卸载
   onUnload: function () {
     innerAudioContextBg.stop();
@@ -240,10 +249,10 @@ Page({
   // 销毁房间
   destoryRoom: function () {
     request.getData('DESTORY_ROOM', {
-        type: 5,
-        userId: app.globalData.userId,
-        roomNum: this.data.roomNum
-      })
+      type: 1,
+      userId: app.globalData.userId,
+      roomNum: this.data.roomNum
+    })
       .then((res) => {
         console.log('销毁房间成功')
         console.log(res)
@@ -529,12 +538,10 @@ Page({
         break;
       }
     }
-    tempArr.sort(compare);
-    for (let i = 0, len = tempArr.length; i < len; i++) {
-      if (Number(tempArr[i].userId) === Number(app.globalData.userId)) {
-        myRank = i + 1;
-        break;
-      }
+    if (Number(tempArr[0].score) >= Number(tempArr[1].score)) {
+      myRank = 1;
+    } else {
+      myRank = 2;
     }
     this.setData({
       RankList: tempArr,
@@ -660,8 +667,8 @@ Page({
 
   // ### 音乐播放 code start ###
   playBgMusic: function () {
-    innerAudioContextBg.loop = true;
     innerAudioContextBg.volume = 0.5;
+    innerAudioContextBg.loop = true;
     innerAudioContextBg.src = music.getMusicSource(0, 'BG_EXAM_MUSIC');
     innerAudioContextBg.play();
   }
@@ -700,7 +707,7 @@ function CountInThree(that) {
       key: 'endTime',
       success: (res) => {
         that.setData({
-          total_second: Utils.completeTime(res.data) + 2
+          total_second: Utils.completeTime(res.data) + 3
         }, CountThreeMinte(that))
       },
     })
@@ -750,4 +757,4 @@ function compare(obj1, obj2) {
   } else {
     return 0;
   }
-}
+} 

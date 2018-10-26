@@ -1,4 +1,4 @@
-/* pages/sportsgame/waiting/waiting.wxss */
+/* pages/fightwaiting/fightwaiting.wxss */
 .Box {
   overflow-y: scroll;
   background-size: cover;
@@ -237,4 +237,162 @@
   height: 88rpx;
   opacity: 0;
   z-index: 200;
+}
+.new_btn_invite {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 15rpx auto;
+  width: 283rpx;
+  height: 90rpx;
+  color: #FFFEA1;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 90rpx;
+  font-family: 'Zaozi';
+  background-size: cover;
+  background-image: url('http://cdn.tik.com/wordmaster/image/result_btn_invite.png');
+}
+
+/* title文字样式 */
+.oprate_title {
+  color: #FFFEA1;
+  font-size: 45rpx;
+  text-align: center;
+  font-family: 'Zaozi';
+  position: absolute;
+  top: -100rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+/**背景VS字样的闪现动效*/
+.bg_vs {
+  color: #0C5F8A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0 auto;
+  text-align: center;
+  animation: fadeVS 1s 0.2s ease-out forwards; 
+}
+.bg_vs text {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  top: 60rpx;
+  left: 0rpx;
+  right: 0;
+  font-size: 50rpx;
+  transform: scale(1.1,1.5);
+  font-weight: bolder;
+}
+/*中间匹配的样式*/
+.match_area{
+  width:100%;  
+  position: relative;
+  margin: 150rpx auto 100rpx;
+  display: flex;  
+  justify-content: center;
+}
+.match_left,
+.match_right {
+  flex: 1;
+  text-align: center;
+}
+/*用户头像样式*/
+.user_logo {
+  width: 160rpx;
+  height: 160rpx;
+  border: 2px solid #FFF;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+.float_left {
+  animation: bounceInLeft 0.5s ease normal forwards;
+}
+.float_right {
+  animation: bounceInRight 0.5s ease normal forwards;
+}
+
+/*用户信息样式*/
+.match_left text,
+.match_right text{
+  display: block;
+  margin-top: 20rpx;
+  color: rgb(255, 255, 255);
+  font-size: 32rpx;
+}
+/*中间匹配文字样式*/
+.match_loading {
+  flex: 0.6;
+  color: #0C5F8A;
+  font-size: 28rpx;
+  font-family: 'Zaozi';
+}
+.match_loading text {
+  display: block;
+  position: absolute;
+  text-align: center;
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+/*右侧动态加载样式*/
+.loading{
+  width: 160rpx;
+  height: 160rpx;
+  position:relative;
+  border-radius: 50%;
+  margin: 0 auto;
+  border: 2px solid #9079EF;
+}
+
+.small_pian{
+  width: 160rpx;
+  height:160rpx;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  animation: run 1.5s linear infinite;
+}
+.small_pian .small_p{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  border-radius: 50%;
+}
+.small_pian .p1{
+  background-color: #43CFDC;
+  left: 20rpx;
+}
+
+@keyframes fadeVS {
+  0% {
+    opacity:0;
+  }
+  25% {
+    opacity:0.25;
+  }
+  50% {
+    opacity: 0.5; 
+    color: #647AEF; 
+  }
+  75% {
+    opacity:0.75;
+    color: #9079EF;
+  }
+  100% {
+   opacity: 1;
+  }
 }

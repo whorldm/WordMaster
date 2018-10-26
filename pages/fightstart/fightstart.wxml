@@ -1,49 +1,29 @@
+<!--pages/testfight/testfight.wxml-->
+<!--pages/fightstart/fightstart.wxml-->
 <view class='Box'>
   <!--顶部的排名信息-->
   <view class='rank_area'>
-    <view class='rank_one'>
-      <view class='rank_one_logo'>
+    <view class='rank_two'>
+      <view class="{{mySelf.rank === 1 ? 'rank_two_logo' : 'rank_four_logo'}}">
         <image src="{{RankList[0].weiPic || '../../img/1.jpeg'}}"></image>
       </view>
       <text>{{RankList[0].nickname}}</text>
-      <text>{{RankList[0].score || 0}}</text>
+      <text>{{RankList[0].score}}</text>
     </view>
-    <view class='rank_two'>
-      <view class='rank_two_logo'>
+    <view class="condition">
+      <image src='../../img/game/clock.png'></image>
+      <view class="{{total_second <= 10 ? 'lastTen': ''}}">{{gameClock}}</view>
+    </view>
+    <view class='rank_four'>
+      <view class="{{mySelf.rank === 1 ? 'rank_four_logo' : 'rank_two_logo'}}">
         <image src="{{RankList[1].weiPic || '../../img/1.jpeg'}}"></image>
       </view>
       <text>{{RankList[1].nickname}}</text>
-      <text>{{RankList[1].score || 0}}</text>
-    </view>
-    <view class='rank_three'>
-      <view class='rank_three_logo'>
-        <image src="{{RankList[2].weiPic || '../../img/1.jpeg'}}"></image>
-      </view>
-      <text>{{RankList[2].nickname}}</text>
-      <text>{{RankList[2].score || 0}}</text>
-    </view>
-    <view class='rank_four'>
-      <view class='rank_four_logo'>
-        <image src="{{RankList[3].weiPic || '../../img/1.jpeg'}}"></image>
-      </view>
-      <text>{{RankList[3].nickname}}</text>
-      <text>{{RankList[3].score || 0}}</text>
+      <text>{{RankList[1].score}}</text>
     </view>
   </view>
 
   <view wx:if="{{isDouble}}" class='doubleScore'>双倍积分...</view>
-
-  <!--显示通过条件以及单词量-->
-  <view class='condition_area'>
-    <view class="condition">
-      <image src='../../img/game/clock.png'></image>
-      <text class="{{total_second <= 10 ? 'lastTen': ''}}">{{gameClock}}</text>
-    </view>
-    <view class='score'>得分:{{mySelf.score}}</view>
-    <view class='word_num'>
-      排名: {{mySelf.rank}}
-    </view>
-  </view>
 
   <!--键盘区域-->
   <view class='keyword_area'>
@@ -85,6 +65,7 @@
     mySelf="{{mySelf}}"
     percent="{{percent}}"
     reward="{{reward}}"
+    isFight="true"
     bind:goNextGame="goNextGame">
   </BattlePass>
 
@@ -111,13 +92,6 @@
         <text>{{mySelf.coin}}</text>
       </view>
       <image bindtap='addScore' src='../../img/sports/add.png'></image>
-    </view>
-  </view>
-
-  <!-- 遮罩倒计时样式 -->
-  <view class='showModal' wx:if="{{showModal}}">
-    <view class='countDown'>
-      <image src='{{countURL}}'></image>
     </view>
   </view>
 

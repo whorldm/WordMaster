@@ -9,10 +9,10 @@
     "pages/chooselevel/chooselevel",
     "pages/startgame/startgame",
     "pages/waiting/waiting",
-    "pages/study/study",
-    "pages/prestudy/prestudy",
     "pages/matchwaiting/matchwaiting",
-    "pages/matchstart/matchstart"
+    "pages/matchstart/matchstart",
+    "pages/fightstart/fightstart",
+    "pages/fightwaiting/fightwaiting"
   ],
   "window": {
     "backgroundTextStyle": "light",
